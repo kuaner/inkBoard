@@ -325,6 +325,9 @@ class SenderServer(private val context: Context) {
     }
 
     private fun availableDirectories(): List<String> {
+        // MediaStore on this platform only accepts certain top-level trees for
+        // app inserts (commonly Download / Documents). Do not seed directories
+        // that insert() will reject (e.g. Books).
         val directories = linkedSetOf(
             DEFAULT_DIRECTORY,
             "Download",
@@ -353,9 +356,24 @@ class SenderServer(private val context: Context) {
                 }
             }
         }
-        return directories.sortedWith(
-            compareBy<String> { if (it == DEFAULT_DIRECTORY) 0 else 1 }.thenBy { it }
-        )
+        // Drop trees MediaStore will reject on insert (device error:
+        // "Primary directory Books not allowed … allowed [Download, Documents]").
+        return directories
+            .filterNot { path -> isMediaStoreBlockedPrimary(path) }
+            .sortedWith(
+                compareBy<String> { if (it == DEFAULT_DIRECTORY) 0 else 1 }.thenBy { it }
+            )
+    }
+
+    /** Top-level folders that MediaStore.Files will not accept for app inserts. */
+    private fun isMediaStoreBlockedPrimary(path: String): Boolean {
+        val primary = path.substringBefore('/').trim()
+        return primary.equals("Books", ignoreCase = true) ||
+            primary.equals("Audiobooks", ignoreCase = true) ||
+            primary.equals("Podcasts", ignoreCase = true) ||
+            primary.equals("Ringtones", ignoreCase = true) ||
+            primary.equals("Alarms", ignoreCase = true) ||
+            primary.equals("Notifications", ignoreCase = true)
     }
 
     private fun addDirectoryAndParents(target: MutableSet<String>, value: String?) {
