@@ -23,11 +23,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DeleteSweep
-import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -393,17 +388,17 @@ internal fun AppGlyph(
         return
     }
 
-    val shortcut = app.builtInShortcut ?: return
-    val glyph = when (shortcut) {
-        BuiltInShortcut.CLEAR_BACKGROUND -> Icons.Filled.DeleteSweep
-        BuiltInShortcut.FULL_REFRESH -> Icons.Filled.Refresh
-        BuiltInShortcut.LOCK_SCREEN -> Icons.Filled.Lock
+    val svgPath = when (app.builtInShortcut ?: return) {
+        BuiltInShortcut.CLEAR_BACKGROUND -> "koboyo/svg/trash.svg"
+        BuiltInShortcut.FULL_REFRESH -> "koboyo/svg/refresh-circular-arrow.svg"
+        BuiltInShortcut.LOCK_SCREEN -> "koboyo/svg/lock-closed.svg"
     }
-    Icon(
-        imageVector = glyph,
-        contentDescription = null,
-        tint = if (darkBackground) InkWhite else InkBlack,
-        modifier = Modifier.size(size)
+    MonochromeIcon(
+        drawable = null,
+        size = size,
+        darkBackground = darkBackground,
+        svgPath = svgPath,
+        cacheKey = app.key
     )
 }
 

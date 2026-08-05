@@ -33,9 +33,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DeleteSweep
-import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -159,6 +156,7 @@ internal fun AppDrawer(
                     onLaunch = onLaunch,
                     onAddShortcut = onAddShortcut,
                     onOpenEpd = onOpenEpd,
+                    wide = wide,
                     onPrevious = { onPageChange((activePage - 1).coerceAtLeast(0)) },
                     onNext = { onPageChange((activePage + 1).coerceAtMost(pageCount - 1)) },
                     modifier = Modifier.weight(1f)
@@ -186,6 +184,7 @@ internal fun AppDrawer(
                     onLaunch = onLaunch,
                     onAddShortcut = onAddShortcut,
                     onOpenEpd = onOpenEpd,
+                    wide = wide,
                     onPrevious = { onPageChange((activePage - 1).coerceAtLeast(0)) },
                     onNext = { onPageChange((activePage + 1).coerceAtMost(pageCount - 1)) },
                     modifier = Modifier.weight(1f)
@@ -251,6 +250,7 @@ private fun AppCatalogPanel(
     onLaunch: (AppInfo) -> Unit,
     onAddShortcut: (AppInfo) -> Unit,
     onOpenEpd: ((AppInfo) -> Unit)?,
+    wide: Boolean,
     onPrevious: () -> Unit,
     onNext: () -> Unit,
     modifier: Modifier = Modifier
@@ -292,6 +292,7 @@ private fun AppCatalogPanel(
                                     onLaunch = { onLaunch(app) },
                                     onAddShortcut = { onAddShortcut(app) },
                                     onOpenEpd = onOpenEpd?.let { open -> { open(app) } },
+                                    wide = wide,
                                     modifier = Modifier
                                         .weight(1f)
                                         .fillMaxHeight()
@@ -450,6 +451,7 @@ private fun DrawerAppTile(
     onLaunch: () -> Unit,
     onAddShortcut: () -> Unit,
     onOpenEpd: (() -> Unit)?,
+    wide: Boolean,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -480,30 +482,51 @@ private fun DrawerAppTile(
                 modifier = Modifier.weight(1f)
             )
         }
-        Column(
-            modifier = Modifier
-                .width(58.dp)
-                .fillMaxHeight()
-                .padding(end = 8.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            // Keep the two actions in one narrow vertical rail. The app name
-            // now gets the horizontal space that the old side-by-side actions
-            // consumed, while each target remains a generous 48dp square.
-            DrawerTileAction(
-                text = "+",
-                onClick = onAddShortcut,
-                isAddAction = true,
-                modifier = Modifier.size(48.dp)
-            )
-            if (onOpenEpd != null && app.builtInShortcut == null) {
-                Spacer(Modifier.height(4.dp))
+        if (wide) {
+            Column(
+                modifier = Modifier
+                    .width(58.dp)
+                    .fillMaxHeight()
+                    .padding(end = 8.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
                 DrawerTileAction(
-                    text = "EPD",
-                    onClick = onOpenEpd,
+                    text = "+",
+                    onClick = onAddShortcut,
+                    isAddAction = true,
                     modifier = Modifier.size(48.dp)
                 )
+                if (onOpenEpd != null && app.builtInShortcut == null) {
+                    Spacer(Modifier.height(4.dp))
+                    DrawerTileAction(
+                        text = "EPD",
+                        onClick = onOpenEpd,
+                        modifier = Modifier.size(48.dp)
+                    )
+                }
+            }
+        } else {
+            Row(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .padding(end = 8.dp),
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                DrawerTileAction(
+                    text = "+",
+                    onClick = onAddShortcut,
+                    isAddAction = true,
+                    modifier = Modifier.size(48.dp)
+                )
+                if (onOpenEpd != null && app.builtInShortcut == null) {
+                    DrawerTileAction(
+                        text = "EPD",
+                        onClick = onOpenEpd,
+                        modifier = Modifier.size(48.dp)
+                    )
+                }
             }
         }
     }
