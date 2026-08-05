@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "safety",
+  "count": 50,
+  "entries": [
+    [
+      "defibrillator",
+      "A defibrillator"
+    ],
+    [
+      "flare",
+      "A flare"
+    ],
+    [
+      "harness",
+      "A harness"
+    ],
+    [
+      "torch",
+      "A torch"
+    ],
+    [
+      "tourniquet",
+      "A tourniquet"
+    ],
+    [
+      "whistle",
+      "A whistle"
+    ],
+    [
+      "barrier-tape",
+      "A barrier tape"
+    ],
+    [
+      "beacon-light",
+      "A beacon light"
+    ],
+    [
+      "bleach-symbol",
+      "A bleach symbol"
+    ],
+    [
+      "burn-dressing",
+      "A burn dressing"
+    ],
+    [
+      "chubby-defibrillator",
+      "A chubby defibrillator"
+    ],
+    [
+      "chubby-flare",
+      "A chubby flare"
+    ],
+    [
+      "chubby-harness",
+      "A chubby harness"
+    ],
+    [
+      "chubby-torch",
+      "A chubby torch"
+    ],
+    [
+      "chubby-tourniquet",
+      "A chubby tourniquet"
+    ],
+    [
+      "chubby-whistle",
+      "A chubby whistle"
+    ],
+    [
+      "coastguard-vessel",
+      "A coastguard vessel"
+    ],
+    [
+      "compostable-mark",
+      "A compostable mark"
+    ],
+    [
+      "corrosive-symbol",
+      "A corrosive symbol"
+    ],
+    [
+      "dust-mask",
+      "A dust mask"
+    ],
+    [
+      "ear-defenders",
+      "Ear defenders"
+    ],
+    [
+      "emergency-blanket",
+      "A emergency blanket"
+    ],
+    [
+      "emergency-light",
+      "An emergency light"
+    ],
+    [
+      "emergency-phone",
+      "An emergency phone"
+    ],
+    [
+      "explosive-symbol",
+      "A explosive symbol"
+    ],
+    [
+      "eye-wash",
+      "A eye wash"
+    ],
+    [
+      "fire-blanket",
+      "A fire blanket"
+    ],
+    [
+      "fire-hydrant",
+      "A fire hydrant"
+    ],
+    [
+      "flammable-symbol",
+      "A flammable symbol"
+    ],
+    [
+      "hazard-cone",
+      "A hazard cone"
+    ],
+    [
+      "heat-detector",
+      "A heat detector"
+    ],
+    [
+      "helmet-rescue",
+      "A helmet rescue"
+    ],
+    [
+      "inspection-height",
+      "An inspection of a height"
+    ],
+    [
+      "inspection-laboratory",
+      "An inspection of a laboratory"
+    ],
+    [
+      "inspection-school",
+      "An inspection of a school"
+    ],
+    [
+      "inspection-warehouse",
+      "An inspection of a warehouse"
+    ],
+    [
+      "inspection-workshop",
+      "An inspection of a workshop"
+    ],
+    [
+      "irritant-symbol",
+      "A irritant symbol"
+    ],
+    [
+      "laser-symbol",
+      "A laser symbol"
+    ],
+    [
+      "life-buoy",
+      "A life buoy"
+    ],
+    [
+      "neck-brace",
+      "A neck brace"
+    ],
+    [
+      "oxidising-symbol",
+      "A oxidising symbol"
+    ],
+    [
+      "oxygen-cylinder",
+      "A oxygen cylinder"
+    ],
+    [
+      "panic-button",
+      "A panic button"
+    ],
+    [
+      "radio-emergency",
+      "A radio emergency"
+    ],
+    [
+      "recycle-triangle",
+      "A recycle triangle"
+    ],
+    [
+      "rescue-harness",
+      "A rescue harness"
+    ],
+    [
+      "rescue-helicopter",
+      "A rescue helicopter"
+    ],
+    [
+      "rope-rescue",
+      "A rope rescue"
+    ],
+    [
+      "safety-boots",
+      "Safety boots"
+    ]
+  ]
+}

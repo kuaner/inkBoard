@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "science",
+  "count": 50,
+  "entries": [
+    [
+      "antibody",
+      "An antibody"
+    ],
+    [
+      "asteroid",
+      "An asteroid"
+    ],
+    [
+      "barometer",
+      "A barometer"
+    ],
+    [
+      "battery",
+      "A battery"
+    ],
+    [
+      "beaker",
+      "A beaker"
+    ],
+    [
+      "brain",
+      "A brain"
+    ],
+    [
+      "burette",
+      "A burette"
+    ],
+    [
+      "caldera",
+      "A caldera"
+    ],
+    [
+      "centrifuge",
+      "A centrifuge"
+    ],
+    [
+      "chromosome",
+      "A chromosome"
+    ],
+    [
+      "colloid",
+      "A colloid"
+    ],
+    [
+      "condenser",
+      "A condenser"
+    ],
+    [
+      "corrie",
+      "A corrie"
+    ],
+    [
+      "crucible",
+      "A crucible"
+    ],
+    [
+      "decomposer",
+      "A decomposer"
+    ],
+    [
+      "drumlin",
+      "A drumlin"
+    ],
+    [
+      "electron",
+      "An electron"
+    ],
+    [
+      "incubator",
+      "An incubator"
+    ],
+    [
+      "lightbulb",
+      "A lightbulb"
+    ],
+    [
+      "magnet",
+      "A magnet"
+    ],
+    [
+      "microscope",
+      "A microscope"
+    ],
+    [
+      "mitochondrion",
+      "A mitochondrion"
+    ],
+    [
+      "moraine",
+      "A moraine"
+    ],
+    [
+      "nephron",
+      "A nephron"
+    ],
+    [
+      "neurone",
+      "A neurone"
+    ],
+    [
+      "neutron",
+      "A neutron"
+    ],
+    [
+      "nucleus",
+      "A nucleus"
+    ],
+    [
+      "pendulum",
+      "A pendulum"
+    ],
+    [
+      "pipette",
+      "A pipette"
+    ],
+    [
+      "placebo",
+      "A placebo"
+    ],
+    [
+      "prism",
+      "A prism"
+    ],
+    [
+      "ribosome",
+      "A ribosome"
+    ],
+    [
+      "rocket",
+      "A rocket"
+    ],
+    [
+      "satellite",
+      "A satellite"
+    ],
+    [
+      "skeleton",
+      "A skeleton"
+    ],
+    [
+      "suspension",
+      "A suspension"
+    ],
+    [
+      "telescope",
+      "A telescope"
+    ],
+    [
+      "thermometer",
+      "A thermometer"
+    ],
+    [
+      "wedge",
+      "A wedge"
+    ],
+    [
+      "alien-face",
+      "An alien face"
+    ],
+    [
+      "ammeter-circuit",
+      "An ammeter in a circuit"
+    ],
+    [
+      "amplitude-marked",
+      "An amplitude marked"
+    ],
+    [
+      "animal-cell",
+      "An animal cell"
+    ],
+    [
+      "anomaly-excluded",
+      "An anomaly excluded"
+    ],
+    [
+      "astronaut-helmet",
+      "An astronaut helmet"
+    ],
+    [
+      "atom-diagram",
+      "An atom diagram"
+    ],
+    [
+      "atom-orbits",
+      "An atom with orbits"
+    ],
+    [
+      "atom-symbol",
+      "An atom symbol"
+    ],
+    [
+      "autoclave-tape",
+      "A autoclave tape"
+    ],
+    [
+      "average-trials",
+      "An average of trials"
+    ]
+  ]
+}

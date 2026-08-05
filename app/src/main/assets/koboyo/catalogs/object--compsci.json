@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "compsci",
+  "count": 50,
+  "entries": [
+    [
+      "heartbeat",
+      "A heartbeat"
+    ],
+    [
+      "inode",
+      "An inode"
+    ],
+    [
+      "interrupt",
+      "An interrupt"
+    ],
+    [
+      "semaphore",
+      "A semaphore"
+    ],
+    [
+      "abstract-shape",
+      "An abstract shape"
+    ],
+    [
+      "acyclic-graph",
+      "An acyclic graph"
+    ],
+    [
+      "async-task",
+      "An async task"
+    ],
+    [
+      "atomic-increment",
+      "An atomic increment"
+    ],
+    [
+      "await-point",
+      "An await point"
+    ],
+    [
+      "backpressure-signal",
+      "A backpressure signal"
+    ],
+    [
+      "barrier-threads",
+      "A barrier of threads"
+    ],
+    [
+      "batch-work",
+      "A batch of work"
+    ],
+    [
+      "block-device",
+      "A block device"
+    ],
+    [
+      "bounded-buffer",
+      "A bounded buffer"
+    ],
+    [
+      "bytecode-block",
+      "A bytecode block"
+    ],
+    [
+      "callback-arrow",
+      "A callback arrow"
+    ],
+    [
+      "callback-queue",
+      "A callback queue"
+    ],
+    [
+      "cancellation-token",
+      "A cancellation token"
+    ],
+    [
+      "character-device",
+      "A character device"
+    ],
+    [
+      "chroot-jail",
+      "A chroot jail"
+    ],
+    [
+      "chubby-heartbeat",
+      "A chubby heartbeat"
+    ],
+    [
+      "chubby-inode",
+      "A chubby inode"
+    ],
+    [
+      "chubby-interrupt",
+      "A chubby interrupt"
+    ],
+    [
+      "chubby-semaphore",
+      "A chubby semaphore"
+    ],
+    [
+      "class-blueprint",
+      "A class blueprint"
+    ],
+    [
+      "compare-swap",
+      "A compare and swap"
+    ],
+    [
+      "composition-diamond",
+      "A composition diamond"
+    ],
+    [
+      "consensus-vote",
+      "A consensus vote"
+    ],
+    [
+      "container-orchestrator",
+      "A container orchestrator"
+    ],
+    [
+      "context-switch",
+      "A context switch"
+    ],
+    [
+      "coroutine-yielding",
+      "A coroutine yielding"
+    ],
+    [
+      "currying-chain",
+      "A currying chain"
+    ],
+    [
+      "daemon-background",
+      "A daemon in the background"
+    ],
+    [
+      "debounce-timer",
+      "A debounce timer"
+    ],
+    [
+      "deep-copy",
+      "A deep copy"
+    ],
+    [
+      "dependency-tree",
+      "A dependency tree"
+    ],
+    [
+      "device-driver",
+      "A device driver"
+    ],
+    [
+      "distributed-lock",
+      "A distributed lock"
+    ],
+    [
+      "enum-set",
+      "An enum set"
+    ],
+    [
+      "event-loop",
+      "An event loop"
+    ],
+    [
+      "exception-catch",
+      "An exception catch"
+    ],
+    [
+      "exception-throw",
+      "An exception throw"
+    ],
+    [
+      "fair-scheduler",
+      "A fair scheduler"
+    ],
+    [
+      "fan-results",
+      "A fan in of results"
+    ],
+    [
+      "filesystem-tree",
+      "A filesystem tree"
+    ],
+    [
+      "finally-block",
+      "A finally block"
+    ],
+    [
+      "fold-arrow",
+      "A fold arrow"
+    ],
+    [
+      "fork-process",
+      "A fork of a process"
+    ],
+    [
+      "forked-process",
+      "A forked process"
+    ],
+    [
+      "generator-yield",
+      "A generator yield"
+    ]
+  ]
+}

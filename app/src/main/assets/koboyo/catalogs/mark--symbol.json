@@ -1,0 +1,207 @@
+{
+  "group": "mark",
+  "subgroup": "symbol",
+  "count": 50,
+  "entries": [
+    [
+      "asterisk",
+      "Asterisk"
+    ],
+    [
+      "bell",
+      "Bell"
+    ],
+    [
+      "clock",
+      "Clock"
+    ],
+    [
+      "cross",
+      "Cross"
+    ],
+    [
+      "droplet",
+      "Droplet"
+    ],
+    [
+      "equals",
+      "Equals"
+    ],
+    [
+      "filter",
+      "Filter"
+    ],
+    [
+      "fire",
+      "Fire"
+    ],
+    [
+      "flag",
+      "Flag"
+    ],
+    [
+      "leaf",
+      "Leaf"
+    ],
+    [
+      "lightning",
+      "Lightning"
+    ],
+    [
+      "lock",
+      "Lock"
+    ],
+    [
+      "minus",
+      "Minus"
+    ],
+    [
+      "percent",
+      "Percent"
+    ],
+    [
+      "plus",
+      "Plus"
+    ],
+    [
+      "search",
+      "Search"
+    ],
+    [
+      "tick",
+      "Tick"
+    ],
+    [
+      "unlock",
+      "Unlock"
+    ],
+    [
+      "arrow-down",
+      "Arrow down"
+    ],
+    [
+      "arrow-left",
+      "Arrow left"
+    ],
+    [
+      "arrow-right",
+      "Arrow right"
+    ],
+    [
+      "arrow-up",
+      "Arrow up"
+    ],
+    [
+      "bell-muted",
+      "Bell muted"
+    ],
+    [
+      "chevron-down",
+      "Chevron down"
+    ],
+    [
+      "chevron-up",
+      "Chevron up"
+    ],
+    [
+      "chubby-asterisk",
+      "Chubby asterisk"
+    ],
+    [
+      "chubby-bell",
+      "Chubby bell"
+    ],
+    [
+      "chubby-clock",
+      "Chubby clock"
+    ],
+    [
+      "chubby-cross",
+      "Chubby cross"
+    ],
+    [
+      "chubby-droplet",
+      "Chubby droplet"
+    ],
+    [
+      "chubby-equals",
+      "Chubby equals"
+    ],
+    [
+      "chubby-filter",
+      "Chubby filter"
+    ],
+    [
+      "chubby-fire",
+      "Chubby fire"
+    ],
+    [
+      "chubby-flag",
+      "Chubby flag"
+    ],
+    [
+      "chubby-leaf",
+      "Chubby leaf"
+    ],
+    [
+      "chubby-lightning",
+      "Chubby lightning"
+    ],
+    [
+      "chubby-lock",
+      "Chubby lock"
+    ],
+    [
+      "chubby-minus",
+      "Chubby minus"
+    ],
+    [
+      "chubby-percent",
+      "Chubby percent"
+    ],
+    [
+      "chubby-plus",
+      "Chubby plus"
+    ],
+    [
+      "chubby-search",
+      "Chubby search"
+    ],
+    [
+      "chubby-tick",
+      "Chubby tick"
+    ],
+    [
+      "chubby-unlock",
+      "Chubby unlock"
+    ],
+    [
+      "collapse-arrows",
+      "Collapse arrows"
+    ],
+    [
+      "double-tick",
+      "Double tick"
+    ],
+    [
+      "expand-arrows",
+      "Expand arrows"
+    ],
+    [
+      "eye-crossed",
+      "Eye crossed"
+    ],
+    [
+      "loop-arrow",
+      "Loop arrow"
+    ],
+    [
+      "refresh-arrows",
+      "Refresh arrows"
+    ],
+    [
+      "solid-asterisk",
+      "A solid asterisk"
+    ]
+  ]
+}

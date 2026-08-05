@@ -1,0 +1,207 @@
+{
+  "group": "people",
+  "subgroup": "interface",
+  "count": 50,
+  "entries": [
+    [
+      "person-aligning-arrow",
+      "A person aligning an arrow"
+    ],
+    [
+      "person-aligning-box",
+      "A person aligning a box"
+    ],
+    [
+      "person-aligning-card",
+      "A person aligning a card"
+    ],
+    [
+      "person-aligning-chart",
+      "A person aligning a chart"
+    ],
+    [
+      "person-aligning-circle",
+      "A person aligning a circle"
+    ],
+    [
+      "person-aligning-comment",
+      "A person aligning a comment"
+    ],
+    [
+      "person-aligning-diagram",
+      "A person aligning a diagram"
+    ],
+    [
+      "person-aligning-flow",
+      "A person aligning a flow"
+    ],
+    [
+      "person-aligning-frame",
+      "A person aligning a frame"
+    ],
+    [
+      "person-aligning-line",
+      "A person aligning a line"
+    ],
+    [
+      "person-aligning-link",
+      "A person aligning a link"
+    ],
+    [
+      "person-aligning-map",
+      "A person aligning a map"
+    ],
+    [
+      "person-aligning-mockup",
+      "A person aligning a mockup"
+    ],
+    [
+      "person-aligning-note",
+      "A person aligning a note"
+    ],
+    [
+      "person-aligning-table",
+      "A person aligning a table"
+    ],
+    [
+      "person-aligning-timeline",
+      "A person aligning a timeline"
+    ],
+    [
+      "person-aligning-wireframe",
+      "A person aligning a wireframe"
+    ],
+    [
+      "person-annotating-card",
+      "A person annotating a card"
+    ],
+    [
+      "person-annotating-circle",
+      "A person annotating a circle"
+    ],
+    [
+      "person-annotating-comment",
+      "A person annotating a comment"
+    ],
+    [
+      "person-annotating-frame",
+      "A person annotating a frame"
+    ],
+    [
+      "person-annotating-label",
+      "A person annotating a label"
+    ],
+    [
+      "person-annotating-line",
+      "A person annotating a line"
+    ],
+    [
+      "person-annotating-link",
+      "A person annotating a link"
+    ],
+    [
+      "person-annotating-note",
+      "A person annotating a note"
+    ],
+    [
+      "person-annotating-table",
+      "A person annotating a table"
+    ],
+    [
+      "person-annotating-wireframe",
+      "A person annotating a wireframe"
+    ],
+    [
+      "person-circling-arrow",
+      "A person circling an arrow"
+    ],
+    [
+      "person-circling-box",
+      "A person circling a box"
+    ],
+    [
+      "person-circling-card",
+      "A person circling a card"
+    ],
+    [
+      "person-circling-chart",
+      "A person circling a chart"
+    ],
+    [
+      "person-circling-circle",
+      "A person circling a circle"
+    ],
+    [
+      "person-circling-comment",
+      "A person circling a comment"
+    ],
+    [
+      "person-circling-diagram",
+      "A person circling a diagram"
+    ],
+    [
+      "person-circling-flow",
+      "A person circling a flow"
+    ],
+    [
+      "person-circling-frame",
+      "A person circling a frame"
+    ],
+    [
+      "person-circling-label",
+      "A person circling a label"
+    ],
+    [
+      "person-circling-line",
+      "A person circling a line"
+    ],
+    [
+      "person-circling-link",
+      "A person circling a link"
+    ],
+    [
+      "person-circling-map",
+      "A person circling a map"
+    ],
+    [
+      "person-circling-mockup",
+      "A person circling a mockup"
+    ],
+    [
+      "person-circling-note",
+      "A person circling a note"
+    ],
+    [
+      "person-circling-table",
+      "A person circling a table"
+    ],
+    [
+      "person-circling-timeline",
+      "A person circling a timeline"
+    ],
+    [
+      "person-circling-wireframe",
+      "A person circling a wireframe"
+    ],
+    [
+      "person-clicking-calendar",
+      "A person clicking a calendar"
+    ],
+    [
+      "person-clicking-canvas",
+      "A person clicking a canvas"
+    ],
+    [
+      "person-clicking-chart",
+      "A person clicking a chart"
+    ],
+    [
+      "person-clicking-dashboard",
+      "A person clicking a dashboard"
+    ],
+    [
+      "person-clicking-dialog",
+      "A person clicking a dialog"
+    ]
+  ]
+}

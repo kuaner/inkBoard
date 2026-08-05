@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "workshop",
+  "count": 50,
+  "entries": [
+    [
+      "tally",
+      "A tally of one"
+    ],
+    [
+      "chubby-tally",
+      "A chubby tally of one"
+    ],
+    [
+      "coin-flip",
+      "A coin flip"
+    ],
+    [
+      "cross-box",
+      "A cross in a box"
+    ],
+    [
+      "debrief-brainstorm",
+      "A debrief of a brainstorm"
+    ],
+    [
+      "debrief-prioritisation",
+      "A debrief of a prioritisation"
+    ],
+    [
+      "debrief-retrospective",
+      "A debrief of a retrospective"
+    ],
+    [
+      "debrief-review",
+      "A debrief of a review"
+    ],
+    [
+      "exclamation-sticker",
+      "An exclamation sticker"
+    ],
+    [
+      "facilitation-brainstorm",
+      "A facilitation of a brainstorm"
+    ],
+    [
+      "facilitation-prioritisation",
+      "A facilitation of a prioritisation"
+    ],
+    [
+      "facilitation-retrospective",
+      "A facilitation of a retrospective"
+    ],
+    [
+      "facilitation-review",
+      "A facilitation of a review"
+    ],
+    [
+      "fire-sticker",
+      "A fire sticker"
+    ],
+    [
+      "frowning-sticker",
+      "A frowning sticker"
+    ],
+    [
+      "gavel-decide",
+      "A gavel to decide"
+    ],
+    [
+      "grouping-prioritisation",
+      "A grouping of a prioritisation"
+    ],
+    [
+      "grouping-retrospective",
+      "A grouping of a retrospective"
+    ],
+    [
+      "grouping-review",
+      "A grouping of a review"
+    ],
+    [
+      "heart-sticker",
+      "A heart sticker"
+    ],
+    [
+      "leader-vote",
+      "A leader in a vote"
+    ],
+    [
+      "neutral-sticker",
+      "A neutral sticker"
+    ],
+    [
+      "pair-dice",
+      "A pair of dice"
+    ],
+    [
+      "plus-mark",
+      "A plus one mark"
+    ],
+    [
+      "rating-star",
+      "A rating of one star"
+    ],
+    [
+      "shrug-uncertainty",
+      "A shrug of uncertainty"
+    ],
+    [
+      "smiley-sticker",
+      "A smiley sticker"
+    ],
+    [
+      "spinner-arrow",
+      "A spinner arrow"
+    ],
+    [
+      "star-sticker",
+      "A star sticker"
+    ],
+    [
+      "tally-four",
+      "A tally of four"
+    ],
+    [
+      "tally-three",
+      "A tally of three"
+    ],
+    [
+      "tally-two",
+      "A tally of two"
+    ],
+    [
+      "tick-box",
+      "A tick in a box"
+    ],
+    [
+      "tie-vote",
+      "A tie in a vote"
+    ],
+    [
+      "vote-brainstorm",
+      "A vote on a brainstorm"
+    ],
+    [
+      "vote-prioritisation",
+      "A vote on a prioritisation"
+    ],
+    [
+      "vote-retrospective",
+      "A vote on a retrospective"
+    ],
+    [
+      "vote-review",
+      "A vote on a review"
+    ],
+    [
+      "ballot-slip-box",
+      "A ballot slip in a box"
+    ],
+    [
+      "bell-end-round",
+      "A bell to end a round"
+    ],
+    [
+      "breakout-for-brainstorm",
+      "A breakout for a brainstorm"
+    ],
+    [
+      "breakout-for-prioritisation",
+      "A breakout for a prioritisation"
+    ],
+    [
+      "breakout-for-retrospective",
+      "A breakout for a retrospective"
+    ],
+    [
+      "breakout-for-review",
+      "A breakout for a review"
+    ],
+    [
+      "canvas-for-brainstorm",
+      "A canvas for a brainstorm"
+    ],
+    [
+      "canvas-for-prioritisation",
+      "A canvas for a prioritisation"
+    ],
+    [
+      "canvas-for-retrospective",
+      "A canvas for a retrospective"
+    ],
+    [
+      "canvas-for-review",
+      "A canvas for a review"
+    ],
+    [
+      "chubby-coin-flip",
+      "A chubby coin flip"
+    ],
+    [
+      "chubby-cross-box",
+      "A chubby cross in a box"
+    ]
+  ]
+}

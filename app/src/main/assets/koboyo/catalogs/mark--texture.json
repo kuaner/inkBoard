@@ -1,0 +1,207 @@
+{
+  "group": "mark",
+  "subgroup": "texture",
+  "count": 50,
+  "entries": [
+    [
+      "brick-pattern",
+      "A brick pattern"
+    ],
+    [
+      "bubble-cluster",
+      "A bubble cluster"
+    ],
+    [
+      "burnt-edge",
+      "A burnt edge"
+    ],
+    [
+      "cable-braid",
+      "A cable braid"
+    ],
+    [
+      "checker-pattern",
+      "A checker pattern"
+    ],
+    [
+      "chevron-pattern",
+      "A chevron pattern"
+    ],
+    [
+      "cloud-texture",
+      "A cloud texture"
+    ],
+    [
+      "concrete-texture",
+      "A concrete texture"
+    ],
+    [
+      "corner-fold",
+      "A corner fold"
+    ],
+    [
+      "corner-ribbon",
+      "A corner ribbon"
+    ],
+    [
+      "denim-texture",
+      "A denim texture"
+    ],
+    [
+      "dotted-grid",
+      "A dotted grid"
+    ],
+    [
+      "fabric-weave",
+      "A fabric weave"
+    ],
+    [
+      "feather-texture",
+      "A feather texture"
+    ],
+    [
+      "fire-texture",
+      "A fire texture"
+    ],
+    [
+      "foam-texture",
+      "A foam texture"
+    ],
+    [
+      "fur-texture",
+      "A fur texture"
+    ],
+    [
+      "grid-pattern",
+      "A grid pattern"
+    ],
+    [
+      "herringbone-pattern",
+      "A herringbone pattern"
+    ],
+    [
+      "honeycomb-pattern",
+      "A honeycomb pattern"
+    ],
+    [
+      "item-banner",
+      "An item on a banner"
+    ],
+    [
+      "item-circle",
+      "An item on a circle"
+    ],
+    [
+      "item-frame",
+      "An item in a frame"
+    ],
+    [
+      "item-ribbon",
+      "An item on a ribbon"
+    ],
+    [
+      "item-tile",
+      "An item on a tile"
+    ],
+    [
+      "knit-texture",
+      "A knit texture"
+    ],
+    [
+      "leaf-vein",
+      "A leaf vein"
+    ],
+    [
+      "leather-grain",
+      "A leather grain"
+    ],
+    [
+      "marble-vein",
+      "A marble vein"
+    ],
+    [
+      "mesh-texture",
+      "A mesh texture"
+    ],
+    [
+      "paper-grain",
+      "A paper grain"
+    ],
+    [
+      "rain-streak",
+      "A rain streak"
+    ],
+    [
+      "rope-twist",
+      "A rope twist"
+    ],
+    [
+      "sand-ripple",
+      "A sand ripple"
+    ],
+    [
+      "scale-pattern",
+      "A scale pattern"
+    ],
+    [
+      "smoke-wisp",
+      "A smoke wisp"
+    ],
+    [
+      "snow-drift",
+      "A snow drift"
+    ],
+    [
+      "spark-scatter",
+      "A spark scatter"
+    ],
+    [
+      "stone-texture",
+      "A stone texture"
+    ],
+    [
+      "tall-arrow",
+      "A tall arrow"
+    ],
+    [
+      "tall-bracket",
+      "A tall bracket"
+    ],
+    [
+      "tall-divider",
+      "A tall divider"
+    ],
+    [
+      "tile-pattern",
+      "A tile pattern"
+    ],
+    [
+      "torn-edge",
+      "A torn edge"
+    ],
+    [
+      "water-ripple",
+      "A water ripple"
+    ],
+    [
+      "wide-arch",
+      "A wide arch"
+    ],
+    [
+      "wood-grain",
+      "A wood grain"
+    ],
+    [
+      "zigzag-fill",
+      "A zigzag fill"
+    ],
+    [
+      "chain-link-texture",
+      "A chain link texture"
+    ],
+    [
+      "chubby-brick-pattern",
+      "A chubby brick pattern"
+    ]
+  ]
+}

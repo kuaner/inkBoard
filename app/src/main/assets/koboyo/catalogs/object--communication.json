@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "communication",
+  "count": 50,
+  "entries": [
+    [
+      "dictaphone",
+      "A dictaphone"
+    ],
+    [
+      "envelope",
+      "An envelope"
+    ],
+    [
+      "megaphone",
+      "A megaphone"
+    ],
+    [
+      "modem",
+      "A modem"
+    ],
+    [
+      "newsletter",
+      "A newsletter"
+    ],
+    [
+      "payphone",
+      "A payphone"
+    ],
+    [
+      "postbox",
+      "A postbox"
+    ],
+    [
+      "postcard",
+      "A postcard"
+    ],
+    [
+      "router",
+      "A router"
+    ],
+    [
+      "telegram",
+      "A telegram"
+    ],
+    [
+      "answerphone-cassette",
+      "A answerphone cassette"
+    ],
+    [
+      "answerphone-tape",
+      "A answerphone tape"
+    ],
+    [
+      "antenna-mast",
+      "An antenna mast"
+    ],
+    [
+      "autocue-paddle",
+      "A autocue paddle"
+    ],
+    [
+      "boom-pole",
+      "A boom pole"
+    ],
+    [
+      "braille-display",
+      "A braille display"
+    ],
+    [
+      "braille-label",
+      "A braille label"
+    ],
+    [
+      "bulletin-sheet",
+      "A bulletin sheet"
+    ],
+    [
+      "chat-window",
+      "A chat window"
+    ],
+    [
+      "chubby-dictaphone",
+      "A chubby dictaphone"
+    ],
+    [
+      "chubby-envelope",
+      "A chubby envelope"
+    ],
+    [
+      "chubby-megaphone",
+      "A chubby megaphone"
+    ],
+    [
+      "chubby-modem",
+      "A chubby modem"
+    ],
+    [
+      "chubby-newsletter",
+      "A chubby newsletter"
+    ],
+    [
+      "chubby-payphone",
+      "A chubby payphone"
+    ],
+    [
+      "chubby-postbox",
+      "A chubby postbox"
+    ],
+    [
+      "chubby-postcard",
+      "A chubby postcard"
+    ],
+    [
+      "chubby-router",
+      "A chubby router"
+    ],
+    [
+      "chubby-telegram",
+      "A chubby telegram"
+    ],
+    [
+      "circular-letter",
+      "A circular letter"
+    ],
+    [
+      "comment-document",
+      "A comment on a document"
+    ],
+    [
+      "community-noticeboard",
+      "A community noticeboard"
+    ],
+    [
+      "conference-speakerphone",
+      "A conference speakerphone"
+    ],
+    [
+      "doorbell-push",
+      "A doorbell push"
+    ],
+    [
+      "draft-folder",
+      "A draft in a folder"
+    ],
+    [
+      "drum-signal",
+      "A drum signal"
+    ],
+    [
+      "email-archived",
+      "An email archived"
+    ],
+    [
+      "email-attachment",
+      "An email with an attachment"
+    ],
+    [
+      "email-bounced",
+      "An email bounced"
+    ],
+    [
+      "email-delivered",
+      "An email delivered"
+    ],
+    [
+      "email-icon",
+      "An email icon"
+    ],
+    [
+      "email-inbox",
+      "An email in an inbox"
+    ],
+    [
+      "email-opened",
+      "An email opened"
+    ],
+    [
+      "email-starred",
+      "An email starred"
+    ],
+    [
+      "email-thread",
+      "An email thread"
+    ],
+    [
+      "ethernet-cable",
+      "An ethernet cable"
+    ],
+    [
+      "fax-machine",
+      "A fax machine"
+    ],
+    [
+      "fax-sheet",
+      "A fax sheet"
+    ],
+    [
+      "forwarding-address",
+      "A forwarding address"
+    ],
+    [
+      "franking-machine",
+      "A franking machine"
+    ]
+  ]
+}

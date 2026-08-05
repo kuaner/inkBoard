@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "gaming",
+  "count": 50,
+  "entries": [
+    [
+      "bishop",
+      "A bishop"
+    ],
+    [
+      "cartridge",
+      "A cartridge"
+    ],
+    [
+      "chessboard",
+      "A chessboard"
+    ],
+    [
+      "domino",
+      "A domino"
+    ],
+    [
+      "jack",
+      "A jack"
+    ],
+    [
+      "meeple",
+      "A meeple"
+    ],
+    [
+      "pawn",
+      "A pawn"
+    ],
+    [
+      "skittle",
+      "A skittle"
+    ],
+    [
+      "spinner",
+      "A spinner"
+    ],
+    [
+      "trackball",
+      "A trackball"
+    ],
+    [
+      "acceleration-vector",
+      "An acceleration vector"
+    ],
+    [
+      "achievement-badge",
+      "An achievement badge"
+    ],
+    [
+      "alert-box",
+      "A alert box"
+    ],
+    [
+      "analyst-desk",
+      "A analyst desk"
+    ],
+    [
+      "arcade-button",
+      "A arcade button"
+    ],
+    [
+      "arcade-cabinet",
+      "An arcade cabinet"
+    ],
+    [
+      "base-station",
+      "A base station"
+    ],
+    [
+      "behaviour-tree",
+      "A behaviour tree"
+    ],
+    [
+      "bingo-ball",
+      "A bingo ball"
+    ],
+    [
+      "button-box",
+      "A button box"
+    ],
+    [
+      "camera-follow",
+      "A camera follow"
+    ],
+    [
+      "card-fan",
+      "A card fan"
+    ],
+    [
+      "caster-desk",
+      "A caster desk"
+    ],
+    [
+      "chat-panel",
+      "A chat panel"
+    ],
+    [
+      "checkpoint-flag",
+      "A checkpoint flag"
+    ],
+    [
+      "chess-set",
+      "A chess set"
+    ],
+    [
+      "chubby-bishop",
+      "A chubby bishop"
+    ],
+    [
+      "chubby-cartridge",
+      "A chubby cartridge"
+    ],
+    [
+      "chubby-domino",
+      "A chubby domino"
+    ],
+    [
+      "chubby-jack",
+      "A chubby jack"
+    ],
+    [
+      "chubby-meeple",
+      "A chubby meeple"
+    ],
+    [
+      "chubby-pawn",
+      "A chubby pawn"
+    ],
+    [
+      "chubby-skittle",
+      "A chubby skittle"
+    ],
+    [
+      "chubby-spinner",
+      "A chubby spinner"
+    ],
+    [
+      "chubby-trackball",
+      "A chubby trackball"
+    ],
+    [
+      "club-suit",
+      "A club suit"
+    ],
+    [
+      "coconut-shy",
+      "A coconut shy"
+    ],
+    [
+      "coin-pickup",
+      "A coin pickup"
+    ],
+    [
+      "collision-box",
+      "A collision box"
+    ],
+    [
+      "collision-circle",
+      "A collision circle"
+    ],
+    [
+      "colour-calibration",
+      "A colour calibration"
+    ],
+    [
+      "cooldown-ring",
+      "A cooldown ring"
+    ],
+    [
+      "cooling-loop",
+      "A cooling loop"
+    ],
+    [
+      "cooling-stand",
+      "A cooling stand"
+    ],
+    [
+      "counter-token",
+      "A counter token"
+    ],
+    [
+      "culling-frustum",
+      "A culling frustum"
+    ],
+    [
+      "curved-ultrawide",
+      "A curved ultrawide"
+    ],
+    [
+      "cutscene-frame",
+      "A cutscene frame"
+    ],
+    [
+      "d-pad",
+      "A d pad"
+    ],
+    [
+      "damage-number",
+      "A damage number"
+    ]
+  ]
+}

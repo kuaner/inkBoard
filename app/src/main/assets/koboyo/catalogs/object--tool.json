@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "tool",
+  "count": 50,
+  "entries": [
+    [
+      "ammeter",
+      "A ammeter"
+    ],
+    [
+      "anemometer",
+      "A anemometer"
+    ],
+    [
+      "bolster",
+      "A bolster"
+    ],
+    [
+      "caliper",
+      "A caliper"
+    ],
+    [
+      "chisel",
+      "A chisel"
+    ],
+    [
+      "clamp",
+      "A clamp"
+    ],
+    [
+      "compressor",
+      "A compressor"
+    ],
+    [
+      "countersink",
+      "A countersink"
+    ],
+    [
+      "crowbar",
+      "A crowbar"
+    ],
+    [
+      "easel",
+      "An easel"
+    ],
+    [
+      "file",
+      "A file"
+    ],
+    [
+      "float",
+      "A float"
+    ],
+    [
+      "funnel",
+      "A funnel"
+    ],
+    [
+      "hacksaw",
+      "A hacksaw"
+    ],
+    [
+      "hammer",
+      "A hammer"
+    ],
+    [
+      "hygrometer",
+      "A hygrometer"
+    ],
+    [
+      "jointer",
+      "A jointer"
+    ],
+    [
+      "kiln",
+      "A kiln"
+    ],
+    [
+      "ladder",
+      "A ladder"
+    ],
+    [
+      "lever",
+      "A lever"
+    ],
+    [
+      "mallet",
+      "A mallet"
+    ],
+    [
+      "micrometer",
+      "A micrometer"
+    ],
+    [
+      "multimeter",
+      "A multimeter"
+    ],
+    [
+      "odometer",
+      "A odometer"
+    ],
+    [
+      "oscilloscope",
+      "A oscilloscope"
+    ],
+    [
+      "pedometer",
+      "A pedometer"
+    ],
+    [
+      "pickaxe",
+      "A pickaxe"
+    ],
+    [
+      "plane",
+      "A plane"
+    ],
+    [
+      "planer",
+      "A planer"
+    ],
+    [
+      "pliers",
+      "Pliers"
+    ],
+    [
+      "rasp",
+      "A rasp"
+    ],
+    [
+      "refractometer",
+      "A refractometer"
+    ],
+    [
+      "ruler",
+      "A ruler"
+    ],
+    [
+      "sawhorse",
+      "A sawhorse"
+    ],
+    [
+      "scissors",
+      "Scissors"
+    ],
+    [
+      "screwdriver",
+      "A screwdriver"
+    ],
+    [
+      "shovel",
+      "A shovel"
+    ],
+    [
+      "sledgehammer",
+      "A sledgehammer"
+    ],
+    [
+      "spanner",
+      "A spanner"
+    ],
+    [
+      "spring",
+      "A spring"
+    ],
+    [
+      "tachometer",
+      "A tachometer"
+    ],
+    [
+      "thermocouple",
+      "A thermocouple"
+    ],
+    [
+      "timer",
+      "A timer"
+    ],
+    [
+      "trowel",
+      "A trowel"
+    ],
+    [
+      "vice",
+      "A vice"
+    ],
+    [
+      "voltmeter",
+      "A voltmeter"
+    ],
+    [
+      "workbench",
+      "A workbench"
+    ],
+    [
+      "3d-printer",
+      "A 3d printer"
+    ],
+    [
+      "adjustable-spanner",
+      "An adjustable spanner"
+    ],
+    [
+      "air-hose",
+      "An air hose"
+    ]
+  ]
+}

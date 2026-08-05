@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "file",
+  "count": 50,
+  "entries": [
+    [
+      "archive-file",
+      "A archive a file"
+    ],
+    [
+      "archived-presentation",
+      "An archived presentation"
+    ],
+    [
+      "archived-spreadsheet",
+      "An archived spreadsheet"
+    ],
+    [
+      "audio-file",
+      "An audio file"
+    ],
+    [
+      "check-file",
+      "A check in a file"
+    ],
+    [
+      "cloud-folder",
+      "A cloud folder"
+    ],
+    [
+      "comment-file",
+      "A comment on a file"
+    ],
+    [
+      "compressed-presentation",
+      "A compressed presentation"
+    ],
+    [
+      "compressed-spreadsheet",
+      "A compressed spreadsheet"
+    ],
+    [
+      "config-file",
+      "A config file"
+    ],
+    [
+      "conflicted-copy",
+      "A conflicted copy"
+    ],
+    [
+      "corrupted-document",
+      "A corrupted document"
+    ],
+    [
+      "corrupted-presentation",
+      "A corrupted presentation"
+    ],
+    [
+      "corrupted-spreadsheet",
+      "A corrupted spreadsheet"
+    ],
+    [
+      "css-file",
+      "A css file"
+    ],
+    [
+      "database-file",
+      "A database file"
+    ],
+    [
+      "deleted-document",
+      "A deleted document"
+    ],
+    [
+      "deleted-presentation",
+      "A deleted presentation"
+    ],
+    [
+      "deleted-spreadsheet",
+      "A deleted spreadsheet"
+    ],
+    [
+      "download-progress",
+      "A download progress"
+    ],
+    [
+      "draft-presentation",
+      "A draft presentation"
+    ],
+    [
+      "draft-spreadsheet",
+      "A draft spreadsheet"
+    ],
+    [
+      "editor-role",
+      "A editor role"
+    ],
+    [
+      "encrypted-document",
+      "An encrypted document"
+    ],
+    [
+      "encrypted-presentation",
+      "An encrypted presentation"
+    ],
+    [
+      "encrypted-spreadsheet",
+      "An encrypted spreadsheet"
+    ],
+    [
+      "executable-file",
+      "An executable file"
+    ],
+    [
+      "file-cross",
+      "A file with a cross"
+    ],
+    [
+      "file-deleted",
+      "A file deleted"
+    ],
+    [
+      "file-downloading",
+      "A file downloading"
+    ],
+    [
+      "file-duplicate",
+      "A file duplicate"
+    ],
+    [
+      "file-folder",
+      "A file in a folder"
+    ],
+    [
+      "file-locked",
+      "A file locked"
+    ],
+    [
+      "file-restored",
+      "A file restored"
+    ],
+    [
+      "file-search",
+      "A file search"
+    ],
+    [
+      "file-tick",
+      "A file with a tick"
+    ],
+    [
+      "file-uploading",
+      "A file uploading"
+    ],
+    [
+      "folder-closed",
+      "A folder closed"
+    ],
+    [
+      "folder-files",
+      "A folder with files"
+    ],
+    [
+      "folder-open",
+      "A folder open"
+    ],
+    [
+      "font-file",
+      "A font file"
+    ],
+    [
+      "generic-document",
+      "A generic document"
+    ],
+    [
+      "html-file",
+      "A html file"
+    ],
+    [
+      "image-file",
+      "An image file"
+    ],
+    [
+      "javascript-file",
+      "A javascript file"
+    ],
+    [
+      "json-file",
+      "A json file"
+    ],
+    [
+      "link-expiry",
+      "A link with an expiry"
+    ],
+    [
+      "link-password",
+      "A link with a password"
+    ],
+    [
+      "locked-folder",
+      "A locked folder"
+    ],
+    [
+      "locked-presentation",
+      "A locked presentation"
+    ]
+  ]
+}

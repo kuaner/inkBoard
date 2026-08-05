@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "incident",
+  "count": 50,
+  "entries": [
+    [
+      "avalanche",
+      "An avalanche"
+    ],
+    [
+      "landslide",
+      "A landslide"
+    ],
+    [
+      "mudslide",
+      "A mudslide"
+    ],
+    [
+      "wildfire",
+      "A wildfire"
+    ],
+    [
+      "ash-cloud",
+      "An ash cloud"
+    ],
+    [
+      "blackout-house",
+      "A blackout house"
+    ],
+    [
+      "boat-rescue",
+      "A boat rescue"
+    ],
+    [
+      "burnt-tree",
+      "A burnt tree"
+    ],
+    [
+      "chubby-avalanche",
+      "A chubby avalanche"
+    ],
+    [
+      "chubby-landslide",
+      "A chubby landslide"
+    ],
+    [
+      "chubby-mudslide",
+      "A chubby mudslide"
+    ],
+    [
+      "chubby-wildfire",
+      "A chubby wildfire"
+    ],
+    [
+      "collapsed-building",
+      "A collapsed building"
+    ],
+    [
+      "degradation-api",
+      "A degradation of an api"
+    ],
+    [
+      "degradation-cdn",
+      "A degradation of a cdn"
+    ],
+    [
+      "degradation-database",
+      "A degradation of a database"
+    ],
+    [
+      "degradation-queue",
+      "A degradation of a queue"
+    ],
+    [
+      "degradation-website",
+      "A degradation of a website"
+    ],
+    [
+      "earthquake-crack",
+      "An earthquake crack"
+    ],
+    [
+      "emergency-shelter",
+      "An emergency shelter"
+    ],
+    [
+      "escalation-api",
+      "An escalation of an api"
+    ],
+    [
+      "escalation-cdn",
+      "An escalation of a cdn"
+    ],
+    [
+      "escalation-database",
+      "An escalation of a database"
+    ],
+    [
+      "escalation-queue",
+      "An escalation of a queue"
+    ],
+    [
+      "escalation-website",
+      "An escalation of a website"
+    ],
+    [
+      "evacuation-sign",
+      "An evacuation sign"
+    ],
+    [
+      "fallen-tree",
+      "A fallen tree"
+    ],
+    [
+      "fire-break",
+      "A fire break"
+    ],
+    [
+      "flood-gate",
+      "A flood gate"
+    ],
+    [
+      "flooded-house",
+      "A flooded house"
+    ],
+    [
+      "handover-api",
+      "A handover of an api"
+    ],
+    [
+      "handover-cdn",
+      "A handover of a cdn"
+    ],
+    [
+      "handover-database",
+      "A handover of a database"
+    ],
+    [
+      "handover-queue",
+      "A handover of a queue"
+    ],
+    [
+      "handover-website",
+      "A handover of a website"
+    ],
+    [
+      "helicopter-rescue",
+      "A helicopter rescue"
+    ],
+    [
+      "iceberg-calving",
+      "An iceberg calving"
+    ],
+    [
+      "lava-flow",
+      "A lava flow"
+    ],
+    [
+      "lifeboat-rescue",
+      "A lifeboat rescue"
+    ],
+    [
+      "lightning-strike",
+      "A lightning strike"
+    ],
+    [
+      "outage-api",
+      "An outage of an api"
+    ],
+    [
+      "outage-database",
+      "An outage of a database"
+    ],
+    [
+      "outage-queue",
+      "An outage of a queue"
+    ],
+    [
+      "outage-website",
+      "An outage of a website"
+    ],
+    [
+      "postmortem-api",
+      "A postmortem of an api"
+    ],
+    [
+      "postmortem-cdn",
+      "A postmortem of a cdn"
+    ],
+    [
+      "postmortem-database",
+      "A postmortem of a database"
+    ],
+    [
+      "postmortem-queue",
+      "A postmortem of a queue"
+    ],
+    [
+      "postmortem-website",
+      "A postmortem of a website"
+    ],
+    [
+      "recovery-api",
+      "A recovery of an api"
+    ]
+  ]
+}

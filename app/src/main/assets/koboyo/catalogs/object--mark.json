@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "mark",
+  "count": 50,
+  "entries": [
+    [
+      "caret",
+      "A caret"
+    ],
+    [
+      "dagger",
+      "A dagger"
+    ],
+    [
+      "dash",
+      "A dash"
+    ],
+    [
+      "ring",
+      "A ring"
+    ],
+    [
+      "spiral",
+      "A spiral"
+    ],
+    [
+      "swirl",
+      "A swirl"
+    ],
+    [
+      "toggle",
+      "A toggle on"
+    ],
+    [
+      "zigzag",
+      "A zigzag"
+    ],
+    [
+      "approximately-mark",
+      "A approximately mark"
+    ],
+    [
+      "arrow-anticlockwise",
+      "A arrow anticlockwise"
+    ],
+    [
+      "arrow-clockwise",
+      "A arrow clockwise"
+    ],
+    [
+      "bold-cross",
+      "A bold cross"
+    ],
+    [
+      "boxed-letter",
+      "A boxed letter a"
+    ],
+    [
+      "brace-pair",
+      "A brace pair"
+    ],
+    [
+      "bracket-closing",
+      "A bracket closing"
+    ],
+    [
+      "bullet-arrow",
+      "A bullet arrow"
+    ],
+    [
+      "bullet-chevron",
+      "A bullet with a chevron"
+    ],
+    [
+      "bullet-dash",
+      "A bullet with a dash"
+    ],
+    [
+      "bullet-dot",
+      "A bullet dot"
+    ],
+    [
+      "burst-outline",
+      "A burst outline"
+    ],
+    [
+      "centre-mark",
+      "A centre mark"
+    ],
+    [
+      "chevron-bullet",
+      "A chevron bullet"
+    ],
+    [
+      "chevron-pair",
+      "A chevron pair"
+    ],
+    [
+      "chubby-dagger",
+      "A chubby dagger"
+    ],
+    [
+      "chubby-ring",
+      "A chubby ring"
+    ],
+    [
+      "chubby-spiral",
+      "A chubby spiral"
+    ],
+    [
+      "chubby-swirl",
+      "A chubby swirl"
+    ],
+    [
+      "chubby-toggle",
+      "A chubby toggle on"
+    ],
+    [
+      "chubby-zigzag",
+      "A chubby zigzag"
+    ],
+    [
+      "circle-outline",
+      "A circle outline"
+    ],
+    [
+      "circled-number",
+      "A circled number one"
+    ],
+    [
+      "corner-mark",
+      "A corner mark"
+    ],
+    [
+      "curved-arrow",
+      "A curved arrow"
+    ],
+    [
+      "dashed-arrow",
+      "A dashed arrow"
+    ],
+    [
+      "degree-mark",
+      "A degree mark"
+    ],
+    [
+      "double-dagger",
+      "A double dagger"
+    ],
+    [
+      "double-prime",
+      "A double prime"
+    ],
+    [
+      "double-rule",
+      "A double rule"
+    ],
+    [
+      "double-underline",
+      "A double underline"
+    ],
+    [
+      "en-dash",
+      "An en dash"
+    ],
+    [
+      "equals-mark",
+      "A equals mark"
+    ],
+    [
+      "exclamation-box",
+      "A exclamation in a box"
+    ],
+    [
+      "flash-mark",
+      "A flash mark"
+    ],
+    [
+      "footnote-marker",
+      "A footnote marker"
+    ],
+    [
+      "hanging-indent",
+      "A hanging indent"
+    ],
+    [
+      "hatched-band",
+      "A hatched band"
+    ],
+    [
+      "heart-empty",
+      "A heart empty"
+    ],
+    [
+      "heart-full",
+      "A heart full"
+    ],
+    [
+      "heart-half",
+      "A heart half"
+    ],
+    [
+      "hollow-bullet",
+      "A hollow bullet"
+    ]
+  ]
+}

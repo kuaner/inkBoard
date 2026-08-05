@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "hospitality",
+  "count": 50,
+  "entries": [
+    [
+      "decanter",
+      "A decanter"
+    ],
+    [
+      "jigger",
+      "A jigger"
+    ],
+    [
+      "muddler",
+      "A muddler"
+    ],
+    [
+      "tamper",
+      "A tamper"
+    ],
+    [
+      "allergen-matrix",
+      "A allergen matrix"
+    ],
+    [
+      "amenity-tray",
+      "A amenity tray"
+    ],
+    [
+      "bain-marie",
+      "A bain marie"
+    ],
+    [
+      "bar-counter",
+      "A bar counter"
+    ],
+    [
+      "bar-mat",
+      "A bar mat"
+    ],
+    [
+      "bar-spoon",
+      "A bar spoon"
+    ],
+    [
+      "bathrobe-hook",
+      "A bathrobe on a hook"
+    ],
+    [
+      "beer-tap",
+      "A beer tap"
+    ],
+    [
+      "bell-cart",
+      "A bell cart"
+    ],
+    [
+      "bill-folder",
+      "A bill folder"
+    ],
+    [
+      "blast-chiller",
+      "A blast chiller"
+    ],
+    [
+      "booking-calendar",
+      "A booking calendar"
+    ],
+    [
+      "bread-basket",
+      "A bread basket"
+    ],
+    [
+      "bread-plate",
+      "A bread plate"
+    ],
+    [
+      "breakfast-tray",
+      "A breakfast tray"
+    ],
+    [
+      "breakfast-voucher",
+      "A breakfast voucher"
+    ],
+    [
+      "buffet-tongs",
+      "A buffet tongs"
+    ],
+    [
+      "butter-dish",
+      "A butter dish"
+    ],
+    [
+      "butter-knife",
+      "A butter knife"
+    ],
+    [
+      "card-machine",
+      "A card machine"
+    ],
+    [
+      "carvery-station",
+      "A carvery station"
+    ],
+    [
+      "chafing-dish",
+      "A chafing dish"
+    ],
+    [
+      "chafing-fuel",
+      "A chafing fuel"
+    ],
+    [
+      "charger-plate",
+      "A charger plate"
+    ],
+    [
+      "checkout-desk",
+      "A checkout desk"
+    ],
+    [
+      "chef-pass",
+      "A chef pass"
+    ],
+    [
+      "chef-toque",
+      "A chef toque"
+    ],
+    [
+      "chef-whites",
+      "A chef whites"
+    ],
+    [
+      "chubby-decanter",
+      "A chubby decanter"
+    ],
+    [
+      "chubby-jigger",
+      "A chubby jigger"
+    ],
+    [
+      "chubby-muddler",
+      "A chubby muddler"
+    ],
+    [
+      "chubby-tamper",
+      "A chubby tamper"
+    ],
+    [
+      "citrus-press",
+      "A citrus press"
+    ],
+    [
+      "cleaning-rota",
+      "A cleaning rota"
+    ],
+    [
+      "cloakroom-ticket",
+      "A cloakroom ticket"
+    ],
+    [
+      "cocktail-shaker",
+      "A cocktail shaker"
+    ],
+    [
+      "cocktail-strainer",
+      "A cocktail strainer"
+    ],
+    [
+      "concierge-desk",
+      "A concierge desk"
+    ],
+    [
+      "condiment-caddy",
+      "A condiment caddy"
+    ],
+    [
+      "decanter-funnel",
+      "A decanter funnel"
+    ],
+    [
+      "dessert-spoon",
+      "A dessert spoon"
+    ],
+    [
+      "dessert-trolley",
+      "A dessert trolley"
+    ],
+    [
+      "docket-rail",
+      "A docket rail"
+    ],
+    [
+      "draught-tap",
+      "A draught tap"
+    ],
+    [
+      "espresso-portafilter",
+      "An espresso portafilter"
+    ],
+    [
+      "evacuation-plan",
+      "A evacuation plan"
+    ]
+  ]
+}

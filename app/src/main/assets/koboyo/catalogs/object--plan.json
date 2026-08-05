@@ -1,0 +1,99 @@
+{
+  "group": "object",
+  "subgroup": "plan",
+  "count": 23,
+  "entries": [
+    [
+      "kerb-line",
+      "A kerb line"
+    ],
+    [
+      "pavement-edge",
+      "A pavement edge"
+    ],
+    [
+      "pedestrian-path",
+      "A pedestrian path"
+    ],
+    [
+      "bin-from-above",
+      "A bin from above"
+    ],
+    [
+      "bookshelf-from-above",
+      "A bookshelf from above"
+    ],
+    [
+      "car-park-bay",
+      "A car park bay"
+    ],
+    [
+      "car-park-rows",
+      "A car park with rows"
+    ],
+    [
+      "chubby-kerb-line",
+      "A chubby kerb line"
+    ],
+    [
+      "chubby-pavement-edge",
+      "A chubby pavement edge"
+    ],
+    [
+      "chubby-pedestrian-path",
+      "A chubby pedestrian path"
+    ],
+    [
+      "desk-from-above",
+      "A desk from above"
+    ],
+    [
+      "dishwasher-from-above",
+      "A dishwasher from above"
+    ],
+    [
+      "footbridge-from-above",
+      "A footbridge from above"
+    ],
+    [
+      "fridge-from-above",
+      "A fridge from above"
+    ],
+    [
+      "oven-from-above",
+      "An oven from above"
+    ],
+    [
+      "printer-from-above",
+      "A printer from above"
+    ],
+    [
+      "roundabout-from-above",
+      "A roundabout from above"
+    ],
+    [
+      "rug-from-above",
+      "A rug from above"
+    ],
+    [
+      "sink-from-above",
+      "A sink from above"
+    ],
+    [
+      "road-junction-from-above",
+      "A road junction from above"
+    ],
+    [
+      "road-segment-from-above",
+      "A road segment from above"
+    ],
+    [
+      "washing-machine-from-above",
+      "A washing machine from above"
+    ],
+    [
+      "zebra-crossing-from-above",
+      "A zebra crossing from above"
+    ]
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "security",
+  "count": 50,
+  "entries": [
+    [
+      "bollard",
+      "A bollard"
+    ],
+    [
+      "dashcam",
+      "A dashcam"
+    ],
+    [
+      "deadbolt",
+      "A deadbolt"
+    ],
+    [
+      "floodlight",
+      "A floodlight"
+    ],
+    [
+      "latch",
+      "A latch"
+    ],
+    [
+      "locker",
+      "A locker"
+    ],
+    [
+      "padbolt",
+      "A padbolt"
+    ],
+    [
+      "shackle",
+      "A shackle"
+    ],
+    [
+      "strobe",
+      "A strobe"
+    ],
+    [
+      "turnstile",
+      "A turnstile"
+    ],
+    [
+      "access-card",
+      "An access card"
+    ],
+    [
+      "alarm-keypad",
+      "A alarm keypad"
+    ],
+    [
+      "alarm-panel",
+      "A alarm panel"
+    ],
+    [
+      "barrier-arm",
+      "A barrier arm"
+    ],
+    [
+      "barrier-gate",
+      "A barrier gate"
+    ],
+    [
+      "bearer-token",
+      "A bearer token"
+    ],
+    [
+      "biometric-reader",
+      "A biometric reader"
+    ],
+    [
+      "body-camera",
+      "A body camera"
+    ],
+    [
+      "body-scanner",
+      "A body scanner"
+    ],
+    [
+      "bollard-security",
+      "A bollard security"
+    ],
+    [
+      "cable-lock",
+      "A cable lock"
+    ],
+    [
+      "camera-housing",
+      "A camera housing"
+    ],
+    [
+      "captcha-challenge",
+      "A captcha challenge"
+    ],
+    [
+      "cctv-bullet",
+      "A cctv bullet"
+    ],
+    [
+      "cctv-camera",
+      "A cctv camera"
+    ],
+    [
+      "cctv-dome",
+      "A cctv dome"
+    ],
+    [
+      "cctv-notice",
+      "A cctv notice"
+    ],
+    [
+      "certificate-authority",
+      "A certificate authority"
+    ],
+    [
+      "certificate-expiry",
+      "A certificate expiry"
+    ],
+    [
+      "chain-lock",
+      "A chain and lock"
+    ],
+    [
+      "chain-padlock",
+      "A chain and padlock"
+    ],
+    [
+      "chubby-bollard",
+      "A chubby bollard"
+    ],
+    [
+      "chubby-dashcam",
+      "A chubby dashcam"
+    ],
+    [
+      "chubby-deadbolt",
+      "A chubby deadbolt"
+    ],
+    [
+      "chubby-floodlight",
+      "A chubby floodlight"
+    ],
+    [
+      "chubby-latch",
+      "A chubby latch"
+    ],
+    [
+      "chubby-locker",
+      "A chubby locker"
+    ],
+    [
+      "chubby-padbolt",
+      "A chubby padbolt"
+    ],
+    [
+      "chubby-shackle",
+      "A chubby shackle"
+    ],
+    [
+      "chubby-strobe",
+      "A chubby strobe"
+    ],
+    [
+      "chubby-turnstile",
+      "A chubby turnstile"
+    ],
+    [
+      "combination-dial",
+      "A combination dial"
+    ],
+    [
+      "command-injection",
+      "A command injection"
+    ],
+    [
+      "control-keypad",
+      "A control keypad"
+    ],
+    [
+      "cylinder-lock",
+      "A cylinder lock"
+    ],
+    [
+      "dependency-vulnerability",
+      "A dependency vulnerability"
+    ],
+    [
+      "dome-camera",
+      "A dome camera"
+    ],
+    [
+      "door-contact",
+      "A door contact"
+    ],
+    [
+      "door-sensor",
+      "A door sensor"
+    ],
+    [
+      "door-viewer",
+      "A door viewer"
+    ]
+  ]
+}

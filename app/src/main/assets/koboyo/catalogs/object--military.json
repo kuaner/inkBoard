@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "military",
+  "count": 50,
+  "entries": [
+    [
+      "bandolier",
+      "A bandolier"
+    ],
+    [
+      "beret",
+      "A beret"
+    ],
+    [
+      "bivouac",
+      "A bivouac"
+    ],
+    [
+      "bugle",
+      "A bugle"
+    ],
+    [
+      "guidon",
+      "A guidon"
+    ],
+    [
+      "jeep",
+      "A jeep"
+    ],
+    [
+      "lanyard",
+      "A lanyard"
+    ],
+    [
+      "pennant",
+      "A pennant"
+    ],
+    [
+      "respirator",
+      "A respirator"
+    ],
+    [
+      "sandbag",
+      "A sandbag"
+    ],
+    [
+      "scabbard",
+      "A scabbard"
+    ],
+    [
+      "scrim",
+      "A scrim"
+    ],
+    [
+      "stretcher",
+      "A stretcher"
+    ],
+    [
+      "watchtower",
+      "A watchtower"
+    ],
+    [
+      "acetate-overlay",
+      "A acetate overlay"
+    ],
+    [
+      "ammunition-pouch",
+      "A ammunition pouch"
+    ],
+    [
+      "anchor-insignia",
+      "A anchor insignia"
+    ],
+    [
+      "armoured-car",
+      "A armoured car"
+    ],
+    [
+      "armoured-vehicle",
+      "An armoured vehicle"
+    ],
+    [
+      "backpack-rucksack",
+      "A backpack rucksack"
+    ],
+    [
+      "barrier-pole",
+      "A barrier pole"
+    ],
+    [
+      "bed-block",
+      "A bed block"
+    ],
+    [
+      "beret-badge",
+      "A beret badge"
+    ],
+    [
+      "bergen-frame",
+      "A bergen frame"
+    ],
+    [
+      "bergen-rucksack",
+      "A bergen rucksack"
+    ],
+    [
+      "binocular-pair",
+      "A binocular pair"
+    ],
+    [
+      "boot-pair",
+      "A boot pair"
+    ],
+    [
+      "briefing-board",
+      "A briefing board"
+    ],
+    [
+      "bunker-entrance",
+      "A bunker entrance"
+    ],
+    [
+      "camouflage-cream",
+      "A camouflage cream"
+    ],
+    [
+      "camouflage-net",
+      "A camouflage net"
+    ],
+    [
+      "camouflage-pattern",
+      "A camouflage pattern"
+    ],
+    [
+      "campaign-ribbon",
+      "A campaign ribbon"
+    ],
+    [
+      "canteen-bottle",
+      "A canteen bottle"
+    ],
+    [
+      "cap-badge",
+      "A cap badge"
+    ],
+    [
+      "casualty-card",
+      "A casualty card"
+    ],
+    [
+      "checkpoint-barrier",
+      "A checkpoint barrier"
+    ],
+    [
+      "chinagraph-pencil",
+      "A chinagraph pencil"
+    ],
+    [
+      "chubby-bandolier",
+      "A chubby bandolier"
+    ],
+    [
+      "chubby-beret",
+      "A chubby beret"
+    ],
+    [
+      "chubby-bivouac",
+      "A chubby bivouac"
+    ],
+    [
+      "chubby-bugle",
+      "A chubby bugle"
+    ],
+    [
+      "chubby-guidon",
+      "A chubby guidon"
+    ],
+    [
+      "chubby-jeep",
+      "A chubby jeep"
+    ],
+    [
+      "chubby-pennant",
+      "A chubby pennant"
+    ],
+    [
+      "chubby-respirator",
+      "A chubby respirator"
+    ],
+    [
+      "chubby-sandbag",
+      "A chubby sandbag"
+    ],
+    [
+      "chubby-scabbard",
+      "A chubby scabbard"
+    ],
+    [
+      "chubby-scrim",
+      "A chubby scrim"
+    ],
+    [
+      "chubby-stretcher",
+      "A chubby stretcher"
+    ]
+  ]
+}

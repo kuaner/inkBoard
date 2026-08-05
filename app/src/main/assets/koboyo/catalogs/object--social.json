@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "social",
+  "count": 50,
+  "entries": [
+    [
+      "leaderboard",
+      "Leaderboard"
+    ],
+    [
+      "angry-reaction",
+      "Angry reaction"
+    ],
+    [
+      "badge-earned",
+      "Badge earned"
+    ],
+    [
+      "block-attachment",
+      "A block of an attachment"
+    ],
+    [
+      "block-hashtag",
+      "A block of a hashtag"
+    ],
+    [
+      "block-link",
+      "A block of a link"
+    ],
+    [
+      "block-location",
+      "A block of a location"
+    ],
+    [
+      "block-mention",
+      "A block of a mention"
+    ],
+    [
+      "block-photo",
+      "A block of a photo"
+    ],
+    [
+      "block-poll",
+      "A block of a poll"
+    ],
+    [
+      "block-reaction",
+      "A block of a reaction"
+    ],
+    [
+      "block-sign",
+      "Block sign"
+    ],
+    [
+      "bookmark-save",
+      "Bookmark save"
+    ],
+    [
+      "carousel-dots",
+      "Carousel dots"
+    ],
+    [
+      "chubby-leaderboard",
+      "Chubby leaderboard"
+    ],
+    [
+      "comment-attachment",
+      "A comment with an attachment"
+    ],
+    [
+      "comment-hashtag",
+      "A comment with a hashtag"
+    ],
+    [
+      "comment-location",
+      "A comment with a location"
+    ],
+    [
+      "comment-mention",
+      "A comment with a mention"
+    ],
+    [
+      "comment-photo",
+      "A comment with a photo"
+    ],
+    [
+      "comment-poll",
+      "A comment with a poll"
+    ],
+    [
+      "comment-quote",
+      "A comment with a quote"
+    ],
+    [
+      "comment-reaction",
+      "A comment with a reaction"
+    ],
+    [
+      "comment-thread",
+      "Comment thread"
+    ],
+    [
+      "comment-video",
+      "A comment with a video"
+    ],
+    [
+      "community-circle",
+      "Community circle"
+    ],
+    [
+      "direct-message",
+      "Direct message"
+    ],
+    [
+      "event-attachment",
+      "An event with an attachment"
+    ],
+    [
+      "event-hashtag",
+      "An event with a hashtag"
+    ],
+    [
+      "event-invite",
+      "Event invite"
+    ],
+    [
+      "event-link",
+      "An event with a link"
+    ],
+    [
+      "event-location",
+      "An event with a location"
+    ],
+    [
+      "event-mention",
+      "An event with a mention"
+    ],
+    [
+      "event-photo",
+      "An event with a photo"
+    ],
+    [
+      "event-poll",
+      "An event with a poll"
+    ],
+    [
+      "event-quote",
+      "An event with a quote"
+    ],
+    [
+      "event-reaction",
+      "An event with a reaction"
+    ],
+    [
+      "event-video",
+      "An event with a video"
+    ],
+    [
+      "explore-compass",
+      "Explore compass"
+    ],
+    [
+      "feed-attachment",
+      "A feed of an attachment"
+    ],
+    [
+      "feed-hashtag",
+      "A feed of a hashtag"
+    ],
+    [
+      "feed-link",
+      "A feed of a link"
+    ],
+    [
+      "feed-list",
+      "Feed list"
+    ],
+    [
+      "feed-location",
+      "A feed of a location"
+    ],
+    [
+      "feed-mention",
+      "A feed of a mention"
+    ],
+    [
+      "feed-poll",
+      "A feed of a poll"
+    ],
+    [
+      "feed-quote",
+      "A feed of a quote"
+    ],
+    [
+      "feed-reaction",
+      "A feed of a reaction"
+    ],
+    [
+      "feed-video",
+      "A feed of a video"
+    ],
+    [
+      "follow-attachment",
+      "A follow of an attachment"
+    ]
+  ]
+}

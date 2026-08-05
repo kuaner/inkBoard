@@ -1,0 +1,203 @@
+{
+  "group": "scene",
+  "subgroup": "vignette",
+  "count": 49,
+  "entries": [
+    [
+      "group-pointing-direction",
+      "A group pointing in one direction"
+    ],
+    [
+      "group-raising-tent",
+      "A group raising a tent"
+    ],
+    [
+      "person-balancing-tightrope",
+      "A person balancing on a tightrope"
+    ],
+    [
+      "person-carrying-lightbulb",
+      "A person carrying a lightbulb"
+    ],
+    [
+      "person-carrying-torch",
+      "A person carrying a torch"
+    ],
+    [
+      "person-climbing-beanstalk",
+      "A person climbing a beanstalk"
+    ],
+    [
+      "person-digging-spade",
+      "A person digging with a spade"
+    ],
+    [
+      "person-disconnecting-plug",
+      "A person disconnecting a plug"
+    ],
+    [
+      "person-fuelling-rocket",
+      "A person fuelling a rocket"
+    ],
+    [
+      "person-grafting-branch",
+      "A person grafting a branch"
+    ],
+    [
+      "person-opening-curtain",
+      "A person opening a curtain"
+    ],
+    [
+      "person-opening-shutters",
+      "A person opening the shutters"
+    ],
+    [
+      "person-planting-seedling",
+      "A person planting a seedling"
+    ],
+    [
+      "person-potting-plant",
+      "A person potting a plant"
+    ],
+    [
+      "person-raising-sail",
+      "A person raising a sail"
+    ],
+    [
+      "person-reconnecting-plug",
+      "A person reconnecting a plug"
+    ],
+    [
+      "person-reeling-line",
+      "A person reeling in a line"
+    ],
+    [
+      "person-releasing-butterfly",
+      "A person releasing a butterfly"
+    ],
+    [
+      "person-sailing-map",
+      "A person sailing with a map"
+    ],
+    [
+      "person-searching-torch",
+      "A person searching with a torch"
+    ],
+    [
+      "person-shredding-document",
+      "A person shredding a document"
+    ],
+    [
+      "person-turning-compost",
+      "A person turning compost"
+    ],
+    [
+      "person-turning-windmill",
+      "A person turning a windmill"
+    ],
+    [
+      "person-untangling-wires",
+      "A person untangling wires"
+    ],
+    [
+      "solid-loading-ellipsis",
+      "A solid loading ellipsis"
+    ],
+    [
+      "chubby-group-raising-tent",
+      "A chubby group raising a tent"
+    ],
+    [
+      "chubby-person-balancing-tightrope",
+      "A chubby person balancing on a tightrope"
+    ],
+    [
+      "chubby-person-carrying-lightbulb",
+      "A chubby person carrying a lightbulb"
+    ],
+    [
+      "chubby-person-climbing-beanstalk",
+      "A chubby person climbing a beanstalk"
+    ],
+    [
+      "chubby-person-fuelling-rocket",
+      "A chubby person fuelling a rocket"
+    ],
+    [
+      "chubby-person-planting-seedling",
+      "A chubby person planting a seedling"
+    ],
+    [
+      "chubby-person-releasing-balloon",
+      "A chubby person releasing a balloon"
+    ],
+    [
+      "chubby-person-releasing-butterfly",
+      "A chubby person releasing a butterfly"
+    ],
+    [
+      "chubby-person-searching-torch",
+      "A chubby person searching with a torch"
+    ],
+    [
+      "chubby-person-turning-compost",
+      "A chubby person turning compost"
+    ],
+    [
+      "chubby-person-turning-windmill",
+      "A chubby person turning a windmill"
+    ],
+    [
+      "group-assembling-large-puzzle",
+      "A group assembling a large puzzle"
+    ],
+    [
+      "group-building-wall-together",
+      "A group building a wall together"
+    ],
+    [
+      "group-carrying-long-beam",
+      "A group carrying a long beam"
+    ],
+    [
+      "group-carrying-trophy-together",
+      "A group carrying a trophy together"
+    ],
+    [
+      "group-climbing-rope-together",
+      "A group climbing a rope together"
+    ],
+    [
+      "group-crossing-stepping-stones",
+      "A group crossing stepping stones"
+    ],
+    [
+      "group-cutting-ribbon-together",
+      "A group cutting a ribbon together"
+    ],
+    [
+      "group-forming-human-pyramid",
+      "A group forming a human pyramid"
+    ],
+    [
+      "group-gathered-round-campfire",
+      "A group gathered round a campfire"
+    ],
+    [
+      "group-lifting-person-up",
+      "A group lifting a person up"
+    ],
+    [
+      "group-linking-arms-circle",
+      "A group linking arms in a circle"
+    ],
+    [
+      "group-passing-buckets-line",
+      "A group passing buckets in a line"
+    ],
+    [
+      "group-planting-row-saplings",
+      "A group planting a row of saplings"
+    ]
+  ]
+}

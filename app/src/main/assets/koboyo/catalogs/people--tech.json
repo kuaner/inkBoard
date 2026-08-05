@@ -1,0 +1,207 @@
+{
+  "group": "people",
+  "subgroup": "tech",
+  "count": 50,
+  "entries": [
+    [
+      "assembling-computer",
+      "Assembling a computer"
+    ],
+    [
+      "debugging-magnifier",
+      "Debugging with a magnifier"
+    ],
+    [
+      "demoing-product",
+      "Demoing a product"
+    ],
+    [
+      "running-standup",
+      "Running a standup"
+    ],
+    [
+      "scanning-barcode",
+      "Scanning a barcode"
+    ],
+    [
+      "sketching-wireframe",
+      "Sketching a wireframe"
+    ],
+    [
+      "solid-mainframe",
+      "A solid mainframe"
+    ],
+    [
+      "carrying-server-unit",
+      "Carrying a server unit"
+    ],
+    [
+      "celebrating-successful-deploy",
+      "Celebrating a successful deploy"
+    ],
+    [
+      "chubby-assembling-computer",
+      "Chubby assembling a computer"
+    ],
+    [
+      "chubby-demoing-product",
+      "Chubby demoing a product"
+    ],
+    [
+      "chubby-running-standup",
+      "Chubby running a standup"
+    ],
+    [
+      "chubby-sketching-wireframe",
+      "Chubby sketching a wireframe"
+    ],
+    [
+      "drawing-architecture-diagram",
+      "Drawing an architecture diagram"
+    ],
+    [
+      "explaining-flow-chart",
+      "Explaining a flow chart"
+    ],
+    [
+      "fixing-phone-screen",
+      "Fixing a phone screen"
+    ],
+    [
+      "flying-drone-controller",
+      "Flying a drone with a controller"
+    ],
+    [
+      "pair-programming-screen",
+      "Pair programming at one screen"
+    ],
+    [
+      "person-adding-idempotency",
+      "A person adding idempotency"
+    ],
+    [
+      "person-adding-index",
+      "A person adding an index"
+    ],
+    [
+      "person-adding-retry",
+      "A person adding a retry"
+    ],
+    [
+      "person-aligning-grid",
+      "A person aligning to a grid"
+    ],
+    [
+      "person-annotating-mockup",
+      "A person annotating a mockup"
+    ],
+    [
+      "person-announcing-downtime",
+      "A person announcing downtime"
+    ],
+    [
+      "person-archiving-service",
+      "A person archiving a service"
+    ],
+    [
+      "person-auditing-access",
+      "A person auditing access"
+    ],
+    [
+      "person-auditing-licences",
+      "A person auditing licences"
+    ],
+    [
+      "person-automating-api",
+      "A person automating an api"
+    ],
+    [
+      "person-automating-certificate",
+      "A person automating a certificate"
+    ],
+    [
+      "person-automating-dashboard",
+      "A person automating a dashboard"
+    ],
+    [
+      "person-automating-database",
+      "A person automating a database"
+    ],
+    [
+      "person-automating-deployment",
+      "A person automating a deployment"
+    ],
+    [
+      "person-automating-firewall",
+      "A person automating a firewall"
+    ],
+    [
+      "person-automating-integration",
+      "A person automating an integration"
+    ],
+    [
+      "person-automating-network",
+      "A person automating a network"
+    ],
+    [
+      "person-automating-runbook",
+      "A person automating a runbook"
+    ],
+    [
+      "person-automating-server",
+      "A person automating a server"
+    ],
+    [
+      "person-automating-website",
+      "A person automating a website"
+    ],
+    [
+      "person-benchmarking-api",
+      "A person benchmarking an api"
+    ],
+    [
+      "person-benchmarking-certificate",
+      "A person benchmarking a certificate"
+    ],
+    [
+      "person-benchmarking-dashboard",
+      "A person benchmarking a dashboard"
+    ],
+    [
+      "person-benchmarking-database",
+      "A person benchmarking a database"
+    ],
+    [
+      "person-benchmarking-deployment",
+      "A person benchmarking a deployment"
+    ],
+    [
+      "person-benchmarking-firewall",
+      "A person benchmarking a firewall"
+    ],
+    [
+      "person-benchmarking-integration",
+      "A person benchmarking an integration"
+    ],
+    [
+      "person-benchmarking-network",
+      "A person benchmarking a network"
+    ],
+    [
+      "person-benchmarking-server",
+      "A person benchmarking a server"
+    ],
+    [
+      "person-benchmarking-website",
+      "A person benchmarking a website"
+    ],
+    [
+      "person-building-dashboard",
+      "A person building a dashboard"
+    ],
+    [
+      "person-checking-breakpoint",
+      "A person checking a breakpoint"
+    ]
+  ]
+}

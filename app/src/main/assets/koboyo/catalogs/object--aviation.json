@@ -1,0 +1,203 @@
+{
+  "group": "object",
+  "subgroup": "aviation",
+  "count": 49,
+  "entries": [
+    [
+      "aileron",
+      "An aileron"
+    ],
+    [
+      "airliner",
+      "An airliner"
+    ],
+    [
+      "airship",
+      "An airship"
+    ],
+    [
+      "altimeter",
+      "An altimeter"
+    ],
+    [
+      "hangar",
+      "A hangar"
+    ],
+    [
+      "helipad",
+      "A helipad"
+    ],
+    [
+      "joystick",
+      "A joystick"
+    ],
+    [
+      "microlight",
+      "A microlight"
+    ],
+    [
+      "paraglider",
+      "A paraglider"
+    ],
+    [
+      "plotter",
+      "A plotter"
+    ],
+    [
+      "propeller",
+      "A propeller"
+    ],
+    [
+      "transponder",
+      "A transponder"
+    ],
+    [
+      "winglet",
+      "A winglet"
+    ],
+    [
+      "aeroplane-wing",
+      "An aeroplane wing"
+    ],
+    [
+      "airspeed-indicator",
+      "An airspeed indicator"
+    ],
+    [
+      "airway-line",
+      "A airway line"
+    ],
+    [
+      "altimeter-dial",
+      "An altimeter dial"
+    ],
+    [
+      "altimeter-setting",
+      "A altimeter setting"
+    ],
+    [
+      "approach-lighting",
+      "A approach lighting"
+    ],
+    [
+      "approach-plate",
+      "A approach plate"
+    ],
+    [
+      "apron-floodlight",
+      "A apron floodlight"
+    ],
+    [
+      "artificial-horizon",
+      "An artificial horizon"
+    ],
+    [
+      "attitude-indicator",
+      "A attitude indicator"
+    ],
+    [
+      "autopilot-panel",
+      "A autopilot panel"
+    ],
+    [
+      "baggage-carousel",
+      "A baggage carousel"
+    ],
+    [
+      "baggage-cart",
+      "A baggage cart"
+    ],
+    [
+      "black-box",
+      "A black box"
+    ],
+    [
+      "boarding-stair",
+      "A boarding stair"
+    ],
+    [
+      "cabin-trolley",
+      "A cabin trolley"
+    ],
+    [
+      "cabin-window",
+      "A cabin window"
+    ],
+    [
+      "cargo-net",
+      "A cargo net"
+    ],
+    [
+      "catering-truck",
+      "A catering truck"
+    ],
+    [
+      "checklist-card",
+      "A checklist card"
+    ],
+    [
+      "chock-pair",
+      "A chock pair"
+    ],
+    [
+      "chubby-aileron",
+      "A chubby aileron"
+    ],
+    [
+      "chubby-airliner",
+      "A chubby airliner"
+    ],
+    [
+      "chubby-airship",
+      "A chubby airship"
+    ],
+    [
+      "chubby-altimeter",
+      "A chubby altimeter"
+    ],
+    [
+      "chubby-hangar",
+      "A chubby hangar"
+    ],
+    [
+      "chubby-helipad",
+      "A chubby helipad"
+    ],
+    [
+      "chubby-joystick",
+      "A chubby joystick"
+    ],
+    [
+      "chubby-microlight",
+      "A chubby microlight"
+    ],
+    [
+      "chubby-paraglider",
+      "A chubby paraglider"
+    ],
+    [
+      "chubby-plotter",
+      "A chubby plotter"
+    ],
+    [
+      "chubby-propeller",
+      "A chubby propeller"
+    ],
+    [
+      "chubby-transponder",
+      "A chubby transponder"
+    ],
+    [
+      "chubby-winglet",
+      "A chubby winglet"
+    ],
+    [
+      "cockpit-dashboard",
+      "A cockpit dashboard"
+    ],
+    [
+      "cockpit-window",
+      "A cockpit window"
+    ]
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "group": "mark",
+  "subgroup": "solid",
+  "count": 50,
+  "entries": [
+    [
+      "bug",
+      "A bug"
+    ],
+    [
+      "handshake",
+      "A handshake"
+    ],
+    [
+      "laptop",
+      "A laptop"
+    ],
+    [
+      "plug",
+      "A plug"
+    ],
+    [
+      "ship",
+      "A ship"
+    ],
+    [
+      "subscript",
+      "A subscript"
+    ],
+    [
+      "superscript",
+      "A superscript"
+    ],
+    [
+      "tag",
+      "A tag"
+    ],
+    [
+      "tree",
+      "A tree"
+    ],
+    [
+      "truck",
+      "A truck"
+    ],
+    [
+      "chubby-bug",
+      "A chubby bug"
+    ],
+    [
+      "chubby-handshake",
+      "A chubby handshake"
+    ],
+    [
+      "chubby-laptop",
+      "A chubby laptop"
+    ],
+    [
+      "chubby-plug",
+      "A chubby plug"
+    ],
+    [
+      "chubby-ship",
+      "A chubby ship"
+    ],
+    [
+      "chubby-subscript",
+      "A chubby subscript"
+    ],
+    [
+      "chubby-superscript",
+      "A chubby superscript"
+    ],
+    [
+      "chubby-tree",
+      "A chubby tree"
+    ],
+    [
+      "chubby-truck",
+      "A chubby truck"
+    ],
+    [
+      "command-palette",
+      "A command palette"
+    ],
+    [
+      "context-menu",
+      "A context menu"
+    ],
+    [
+      "saved-view",
+      "A saved view"
+    ],
+    [
+      "screen-share",
+      "A screen share"
+    ],
+    [
+      "shield-keyhole",
+      "A shield with a keyhole"
+    ],
+    [
+      "solid-bug",
+      "A solid bug"
+    ],
+    [
+      "solid-caption",
+      "A solid caption block"
+    ],
+    [
+      "solid-handshake",
+      "A solid handshake"
+    ],
+    [
+      "solid-laptop",
+      "A solid laptop"
+    ],
+    [
+      "solid-palette",
+      "A solid paint palette"
+    ],
+    [
+      "solid-plug",
+      "A solid power plug"
+    ],
+    [
+      "solid-ship",
+      "A solid ship"
+    ],
+    [
+      "solid-spellcheck",
+      "A solid spellcheck sign"
+    ],
+    [
+      "solid-subscript",
+      "A solid subscript marker"
+    ],
+    [
+      "solid-superscript",
+      "A solid superscript marker"
+    ],
+    [
+      "solid-tag",
+      "A solid label tag"
+    ],
+    [
+      "solid-textarea",
+      "A solid text area"
+    ],
+    [
+      "solid-tree",
+      "A solid tree"
+    ],
+    [
+      "solid-truck",
+      "A solid delivery truck"
+    ],
+    [
+      "spell-check",
+      "A spell check"
+    ],
+    [
+      "split-view",
+      "A split view"
+    ],
+    [
+      "text-cursor",
+      "A text cursor"
+    ],
+    [
+      "text-wrap",
+      "A text wrap"
+    ],
+    [
+      "user-cog",
+      "A user with a cog"
+    ],
+    [
+      "user-shield",
+      "A user with a shield"
+    ],
+    [
+      "zoom-out",
+      "A zoom out"
+    ],
+    [
+      "chubby-command-palette",
+      "A chubby command palette"
+    ],
+    [
+      "chubby-context-menu",
+      "A chubby context menu"
+    ],
+    [
+      "chubby-saved-view",
+      "A chubby saved view"
+    ],
+    [
+      "chubby-screen-share",
+      "A chubby screen share"
+    ],
+    [
+      "chubby-shield-keyhole",
+      "A chubby shield with a keyhole"
+    ]
+  ]
+}

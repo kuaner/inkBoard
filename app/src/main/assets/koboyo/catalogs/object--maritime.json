@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "maritime",
+  "count": 50,
+  "entries": [
+    [
+      "binnacle",
+      "A binnacle"
+    ],
+    [
+      "boom",
+      "A boom"
+    ],
+    [
+      "capstan",
+      "A capstan"
+    ],
+    [
+      "chronometer",
+      "A chronometer"
+    ],
+    [
+      "cleat",
+      "A cleat"
+    ],
+    [
+      "clinometer",
+      "A clinometer"
+    ],
+    [
+      "companionway",
+      "A companionway"
+    ],
+    [
+      "davit",
+      "A davit"
+    ],
+    [
+      "dinghy",
+      "A dinghy"
+    ],
+    [
+      "drogue",
+      "A drogue"
+    ],
+    [
+      "fender",
+      "A fender"
+    ],
+    [
+      "foghorn",
+      "A foghorn"
+    ],
+    [
+      "gangway",
+      "A gangway"
+    ],
+    [
+      "gyrocompass",
+      "A gyrocompass"
+    ],
+    [
+      "heliograph",
+      "A heliograph"
+    ],
+    [
+      "horn",
+      "A horn"
+    ],
+    [
+      "impeller",
+      "A impeller"
+    ],
+    [
+      "jetty",
+      "A jetty"
+    ],
+    [
+      "kayak",
+      "A kayak"
+    ],
+    [
+      "keel",
+      "A keel"
+    ],
+    [
+      "marlinspike",
+      "A marlinspike"
+    ],
+    [
+      "mast",
+      "A mast"
+    ],
+    [
+      "periscope",
+      "A periscope"
+    ],
+    [
+      "rowlock",
+      "A rowlock"
+    ],
+    [
+      "rudder",
+      "A rudder"
+    ],
+    [
+      "slipway",
+      "A slipway"
+    ],
+    [
+      "snubber",
+      "A snubber"
+    ],
+    [
+      "spinnaker",
+      "A spinnaker"
+    ],
+    [
+      "splice",
+      "A splice"
+    ],
+    [
+      "stay",
+      "A stay"
+    ],
+    [
+      "trawler",
+      "A trawler"
+    ],
+    [
+      "tug",
+      "A tug"
+    ],
+    [
+      "yacht",
+      "A yacht"
+    ],
+    [
+      "ais-display",
+      "A ais display"
+    ],
+    [
+      "anode-block",
+      "A anode block"
+    ],
+    [
+      "autopilot-head",
+      "A autopilot head"
+    ],
+    [
+      "battery-isolator",
+      "A battery isolator"
+    ],
+    [
+      "berth-bunk",
+      "A berth bunk"
+    ],
+    [
+      "bilge-alarm",
+      "A bilge alarm"
+    ],
+    [
+      "bilge-pump",
+      "A bilge pump"
+    ],
+    [
+      "block-tackle",
+      "A block and tackle"
+    ],
+    [
+      "boat-hook",
+      "A boat hook"
+    ],
+    [
+      "boatyard-cradle",
+      "A boatyard cradle"
+    ],
+    [
+      "boom-vang",
+      "A boom vang"
+    ],
+    [
+      "brass-telegraph",
+      "A brass telegraph"
+    ],
+    [
+      "bulkhead-door",
+      "A bulkhead door"
+    ],
+    [
+      "cabin-lamp",
+      "A cabin lamp"
+    ],
+    [
+      "captains-hat",
+      "A captains hat"
+    ],
+    [
+      "cardinal-mark",
+      "A cardinal mark"
+    ],
+    [
+      "chain-hook",
+      "A chain hook"
+    ]
+  ]
+}

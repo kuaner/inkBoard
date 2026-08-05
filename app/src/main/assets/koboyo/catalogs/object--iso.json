@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "iso",
+  "count": 50,
+  "entries": [
+    [
+      "isometric-bank",
+      "An isometric bank"
+    ],
+    [
+      "isometric-barn",
+      "An isometric barn"
+    ],
+    [
+      "isometric-beam",
+      "An isometric beam"
+    ],
+    [
+      "isometric-bench",
+      "An isometric bench"
+    ],
+    [
+      "isometric-bookshelf",
+      "An isometric bookshelf"
+    ],
+    [
+      "isometric-bridge",
+      "An isometric bridge"
+    ],
+    [
+      "isometric-bus",
+      "An isometric bus"
+    ],
+    [
+      "isometric-campsite",
+      "An isometric campsite"
+    ],
+    [
+      "isometric-car",
+      "An isometric car"
+    ],
+    [
+      "isometric-checkout",
+      "An isometric checkout"
+    ],
+    [
+      "isometric-church",
+      "An isometric church"
+    ],
+    [
+      "isometric-classroom",
+      "An isometric classroom"
+    ],
+    [
+      "isometric-column",
+      "An isometric column"
+    ],
+    [
+      "isometric-conveyor",
+      "An isometric conveyor"
+    ],
+    [
+      "isometric-corridor",
+      "An isometric corridor"
+    ],
+    [
+      "isometric-crane",
+      "An isometric crane"
+    ],
+    [
+      "isometric-cube",
+      "An isometric cube"
+    ],
+    [
+      "isometric-cylinder",
+      "An isometric cylinder"
+    ],
+    [
+      "isometric-dish",
+      "An isometric dish"
+    ],
+    [
+      "isometric-door",
+      "An isometric door"
+    ],
+    [
+      "isometric-excavator",
+      "An isometric excavator"
+    ],
+    [
+      "isometric-factory",
+      "An isometric factory"
+    ],
+    [
+      "isometric-footbridge",
+      "An isometric footbridge"
+    ],
+    [
+      "isometric-forklift",
+      "An isometric forklift"
+    ],
+    [
+      "isometric-fountain",
+      "An isometric fountain"
+    ],
+    [
+      "isometric-generator",
+      "An isometric generator"
+    ],
+    [
+      "isometric-greenhouse",
+      "An isometric greenhouse"
+    ],
+    [
+      "isometric-hospital",
+      "An isometric hospital"
+    ],
+    [
+      "isometric-hotel",
+      "An isometric hotel"
+    ],
+    [
+      "isometric-house",
+      "An isometric house"
+    ],
+    [
+      "isometric-junction",
+      "An isometric junction"
+    ],
+    [
+      "isometric-keyboard",
+      "An isometric keyboard"
+    ],
+    [
+      "isometric-lamp",
+      "An isometric lamp"
+    ],
+    [
+      "isometric-laptop",
+      "An isometric laptop"
+    ],
+    [
+      "isometric-lighthouse",
+      "An isometric lighthouse"
+    ],
+    [
+      "isometric-lorry",
+      "An isometric lorry"
+    ],
+    [
+      "isometric-mast",
+      "An isometric mast"
+    ],
+    [
+      "isometric-mezzanine",
+      "An isometric mezzanine"
+    ],
+    [
+      "isometric-monitor",
+      "An isometric monitor"
+    ],
+    [
+      "isometric-pallet",
+      "An isometric pallet"
+    ],
+    [
+      "isometric-phone",
+      "An isometric phone"
+    ],
+    [
+      "isometric-pier",
+      "An isometric pier"
+    ],
+    [
+      "isometric-plate",
+      "An isometric plate"
+    ],
+    [
+      "isometric-playground",
+      "An isometric playground"
+    ],
+    [
+      "isometric-printer",
+      "An isometric printer"
+    ],
+    [
+      "isometric-pump",
+      "An isometric pump"
+    ],
+    [
+      "isometric-pyramid",
+      "An isometric pyramid"
+    ],
+    [
+      "isometric-ramp",
+      "An isometric ramp"
+    ],
+    [
+      "isometric-ring",
+      "An isometric ring"
+    ],
+    [
+      "isometric-roundabout",
+      "An isometric roundabout"
+    ]
+  ]
+}

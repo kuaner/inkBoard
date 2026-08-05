@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "logistics",
+  "count": 50,
+  "entries": [
+    [
+      "pallet",
+      "A pallet"
+    ],
+    [
+      "adr-documentation",
+      "A adr documentation"
+    ],
+    [
+      "asn-document",
+      "A asn document"
+    ],
+    [
+      "batch-code",
+      "A batch code"
+    ],
+    [
+      "beam-connector",
+      "A beam connector"
+    ],
+    [
+      "bonded-warehouse",
+      "A bonded warehouse"
+    ],
+    [
+      "booking-reference",
+      "A booking reference"
+    ],
+    [
+      "box-trailer",
+      "A box trailer"
+    ],
+    [
+      "bulk-location",
+      "A bulk location"
+    ],
+    [
+      "cargo-plane",
+      "A cargo plane"
+    ],
+    [
+      "carton-sealer",
+      "A carton sealer"
+    ],
+    [
+      "case-sealer",
+      "A case sealer"
+    ],
+    [
+      "certificate-origin",
+      "A certificate of origin"
+    ],
+    [
+      "chubby-pallet",
+      "A chubby pallet"
+    ],
+    [
+      "chute-label",
+      "A chute label"
+    ],
+    [
+      "consignment-note",
+      "A consignment note"
+    ],
+    [
+      "container-crane",
+      "A container crane"
+    ],
+    [
+      "container-seal",
+      "A container seal"
+    ],
+    [
+      "conveyor-merge",
+      "A conveyor merge"
+    ],
+    [
+      "corner-protector",
+      "A corner protector"
+    ],
+    [
+      "courier-bike",
+      "A courier on a bike"
+    ],
+    [
+      "courier-round",
+      "A courier round"
+    ],
+    [
+      "cubing-machine",
+      "A cubing machine"
+    ],
+    [
+      "curtain-sider",
+      "A curtain sider"
+    ],
+    [
+      "customs-bond",
+      "A customs bond"
+    ],
+    [
+      "customs-declaration",
+      "A customs declaration"
+    ],
+    [
+      "customs-form",
+      "A customs form"
+    ],
+    [
+      "customs-stamp",
+      "A customs stamp"
+    ],
+    [
+      "damage-note",
+      "A damage note"
+    ],
+    [
+      "data-matrix",
+      "A data matrix"
+    ],
+    [
+      "delivery-manifest",
+      "A delivery manifest"
+    ],
+    [
+      "demurrage-clock",
+      "A demurrage clock"
+    ],
+    [
+      "detention-clock",
+      "A detention clock"
+    ],
+    [
+      "dimension-label",
+      "A dimension label"
+    ],
+    [
+      "dimensioning-frame",
+      "A dimensioning frame"
+    ],
+    [
+      "dispatch-note",
+      "A dispatch note"
+    ],
+    [
+      "diverter-arm",
+      "A diverter arm"
+    ],
+    [
+      "dock-plate",
+      "A dock plate"
+    ],
+    [
+      "dock-shelter",
+      "A dock shelter"
+    ],
+    [
+      "driver-tachograph",
+      "A driver tachograph"
+    ],
+    [
+      "drone-delivery",
+      "A drone delivery"
+    ],
+    [
+      "dunnage-bag",
+      "A dunnage bag"
+    ],
+    [
+      "duty-calculation",
+      "A duty calculation"
+    ],
+    [
+      "expiry-label",
+      "A expiry label"
+    ],
+    [
+      "fifth-wheel",
+      "A fifth wheel"
+    ],
+    [
+      "fragile-sticker",
+      "A fragile sticker"
+    ],
+    [
+      "freight-train",
+      "A freight train"
+    ],
+    [
+      "gate-pass",
+      "A gate pass"
+    ],
+    [
+      "gate-record",
+      "A gate in record"
+    ],
+    [
+      "goods-tray",
+      "A goods in tray"
+    ]
+  ]
+}

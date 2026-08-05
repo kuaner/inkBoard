@@ -1,0 +1,207 @@
+{
+  "group": "mark",
+  "subgroup": "math",
+  "count": 50,
+  "entries": [
+    [
+      "angle-symbol",
+      "An angle symbol"
+    ],
+    [
+      "congruent-symbol",
+      "A congruent symbol"
+    ],
+    [
+      "degree-symbol",
+      "A degree symbol"
+    ],
+    [
+      "division-sign",
+      "A division sign"
+    ],
+    [
+      "element-symbol",
+      "An element of symbol"
+    ],
+    [
+      "equals-sign",
+      "An equals sign"
+    ],
+    [
+      "implies-arrow",
+      "An implies arrow"
+    ],
+    [
+      "integral-symbol",
+      "An integral symbol"
+    ],
+    [
+      "intersection-symbol",
+      "An intersection symbol"
+    ],
+    [
+      "logical-wedge",
+      "A logical and wedge"
+    ],
+    [
+      "percent-sign",
+      "A percent sign"
+    ],
+    [
+      "pi-symbol",
+      "A pi symbol"
+    ],
+    [
+      "proportional-symbol",
+      "A proportional to symbol"
+    ],
+    [
+      "sigma-summation",
+      "A sigma summation"
+    ],
+    [
+      "subscript-notation",
+      "A subscript notation"
+    ],
+    [
+      "subset-symbol",
+      "A subset symbol"
+    ],
+    [
+      "union-symbol",
+      "A union symbol"
+    ],
+    [
+      "approximately-equal-wave",
+      "An approximately equal wave"
+    ],
+    [
+      "because-three-dots",
+      "A because three dots"
+    ],
+    [
+      "chubby-congruent-symbol",
+      "A chubby congruent symbol"
+    ],
+    [
+      "chubby-degree-symbol",
+      "A chubby degree symbol"
+    ],
+    [
+      "chubby-division-sign",
+      "A chubby division sign"
+    ],
+    [
+      "chubby-element-symbol",
+      "A chubby element of symbol"
+    ],
+    [
+      "chubby-equals-sign",
+      "A chubby equals sign"
+    ],
+    [
+      "chubby-implies-arrow",
+      "A chubby implies arrow"
+    ],
+    [
+      "chubby-integral-symbol",
+      "A chubby integral symbol"
+    ],
+    [
+      "chubby-intersection-symbol",
+      "A chubby intersection symbol"
+    ],
+    [
+      "chubby-logical-wedge",
+      "A chubby logical and wedge"
+    ],
+    [
+      "chubby-pi-symbol",
+      "A chubby pi symbol"
+    ],
+    [
+      "chubby-proportional-symbol",
+      "A chubby proportional to symbol"
+    ],
+    [
+      "chubby-sigma-summation",
+      "A chubby sigma summation"
+    ],
+    [
+      "chubby-subscript-notation",
+      "A chubby subscript notation"
+    ],
+    [
+      "chubby-subset-symbol",
+      "A chubby subset symbol"
+    ],
+    [
+      "chubby-union-symbol",
+      "A chubby union symbol"
+    ],
+    [
+      "cube-root-radical",
+      "A cube root radical"
+    ],
+    [
+      "delta-triangle-change",
+      "A delta triangle change"
+    ],
+    [
+      "for-all-inverted",
+      "A for all inverted a"
+    ],
+    [
+      "fraction-bar-boxes",
+      "A fraction bar with boxes"
+    ],
+    [
+      "greater-than-sign",
+      "A greater than sign"
+    ],
+    [
+      "less-than-sign",
+      "A less than sign"
+    ],
+    [
+      "logical-not-symbol",
+      "A logical not symbol"
+    ],
+    [
+      "logical-or-wedge",
+      "A logical or wedge"
+    ],
+    [
+      "nabla-del-symbol",
+      "A nabla del symbol"
+    ],
+    [
+      "not-element-symbol",
+      "A not element of symbol"
+    ],
+    [
+      "not-equals-sign",
+      "A not equals sign"
+    ],
+    [
+      "parallel-lines-symbol",
+      "A parallel lines symbol"
+    ],
+    [
+      "partial-derivative-symbol",
+      "A partial derivative symbol"
+    ],
+    [
+      "per-mille-sign",
+      "A per mille sign"
+    ],
+    [
+      "pi-product-symbol",
+      "A pi product symbol"
+    ],
+    [
+      "plus-minus-sign",
+      "A plus minus sign"
+    ]
+  ]
+}

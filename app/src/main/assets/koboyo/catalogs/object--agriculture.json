@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "agriculture",
+  "count": 50,
+  "entries": [
+    [
+      "coulter",
+      "A coulter"
+    ],
+    [
+      "crush",
+      "A crush"
+    ],
+    [
+      "culvert",
+      "A culvert"
+    ],
+    [
+      "ditch",
+      "A ditch"
+    ],
+    [
+      "harrow",
+      "A harrow"
+    ],
+    [
+      "polytunnel",
+      "A polytunnel"
+    ],
+    [
+      "pumpkin",
+      "A pumpkin"
+    ],
+    [
+      "roller",
+      "A roller"
+    ],
+    [
+      "rootstock",
+      "A rootstock"
+    ],
+    [
+      "scythe",
+      "A scythe"
+    ],
+    [
+      "sickle",
+      "A sickle"
+    ],
+    [
+      "smoker",
+      "A smoker"
+    ],
+    [
+      "tedder",
+      "A tedder"
+    ],
+    [
+      "trailer",
+      "A trailer"
+    ],
+    [
+      "weighbridge",
+      "A weighbridge"
+    ],
+    [
+      "windrower",
+      "A windrower"
+    ],
+    [
+      "apple-crate",
+      "An apple crate"
+    ],
+    [
+      "bale-netting",
+      "A bale netting"
+    ],
+    [
+      "bale-spear",
+      "A bale spear"
+    ],
+    [
+      "bale-spike",
+      "A bale spike"
+    ],
+    [
+      "bedding-chopper",
+      "A bedding chopper"
+    ],
+    [
+      "beehive-frame",
+      "A beehive frame"
+    ],
+    [
+      "beehive-row",
+      "A beehive row"
+    ],
+    [
+      "bird-scarer",
+      "A bird scarer"
+    ],
+    [
+      "boom-section",
+      "A boom section"
+    ],
+    [
+      "bulk-tank",
+      "A bulk tank"
+    ],
+    [
+      "butter-churn",
+      "A butter churn"
+    ],
+    [
+      "carrot-bunch",
+      "A carrot bunch"
+    ],
+    [
+      "cattle-gate",
+      "A cattle gate"
+    ],
+    [
+      "cheese-press",
+      "A cheese press"
+    ],
+    [
+      "chubby-coulter",
+      "A chubby coulter"
+    ],
+    [
+      "chubby-crush",
+      "A chubby crush"
+    ],
+    [
+      "chubby-culvert",
+      "A chubby culvert"
+    ],
+    [
+      "chubby-ditch",
+      "A chubby ditch"
+    ],
+    [
+      "chubby-harrow",
+      "A chubby harrow"
+    ],
+    [
+      "chubby-polytunnel",
+      "A chubby polytunnel"
+    ],
+    [
+      "chubby-pumpkin",
+      "A chubby pumpkin"
+    ],
+    [
+      "chubby-roller",
+      "A chubby roller"
+    ],
+    [
+      "chubby-rootstock",
+      "A chubby rootstock"
+    ],
+    [
+      "chubby-scythe",
+      "A chubby scythe"
+    ],
+    [
+      "chubby-sickle",
+      "A chubby sickle"
+    ],
+    [
+      "chubby-smoker",
+      "A chubby smoker"
+    ],
+    [
+      "chubby-tedder",
+      "A chubby tedder"
+    ],
+    [
+      "chubby-trailer",
+      "A chubby trailer"
+    ],
+    [
+      "chubby-weighbridge",
+      "A chubby weighbridge"
+    ],
+    [
+      "chubby-windrower",
+      "A chubby windrower"
+    ],
+    [
+      "clamp-wall",
+      "A clamp wall"
+    ],
+    [
+      "colostrum-bottle",
+      "A colostrum bottle"
+    ],
+    [
+      "combine-header",
+      "A combine header"
+    ],
+    [
+      "cow-field",
+      "A cow in a field"
+    ]
+  ]
+}

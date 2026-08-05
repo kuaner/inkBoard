@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "place",
+  "count": 50,
+  "entries": [
+    [
+      "amphitheatre",
+      "A amphitheatre"
+    ],
+    [
+      "aqueduct",
+      "A aqueduct"
+    ],
+    [
+      "bank",
+      "Bank"
+    ],
+    [
+      "barn",
+      "A barn"
+    ],
+    [
+      "beam",
+      "A beam"
+    ],
+    [
+      "brick",
+      "A brick"
+    ],
+    [
+      "bridge",
+      "A bridge"
+    ],
+    [
+      "bungalow",
+      "Bungalow"
+    ],
+    [
+      "cafe",
+      "A cafe"
+    ],
+    [
+      "castle",
+      "Castle"
+    ],
+    [
+      "chimney",
+      "A chimney"
+    ],
+    [
+      "church",
+      "A church"
+    ],
+    [
+      "cinema",
+      "Cinema"
+    ],
+    [
+      "clinic",
+      "Clinic"
+    ],
+    [
+      "dam",
+      "A dam"
+    ],
+    [
+      "door",
+      "A door"
+    ],
+    [
+      "drainpipe",
+      "A drainpipe"
+    ],
+    [
+      "drawbridge",
+      "A drawbridge"
+    ],
+    [
+      "factory",
+      "Factory"
+    ],
+    [
+      "farmhouse",
+      "Farmhouse"
+    ],
+    [
+      "fence",
+      "A fence"
+    ],
+    [
+      "fort",
+      "Fort"
+    ],
+    [
+      "fountain",
+      "A fountain"
+    ],
+    [
+      "gallery",
+      "Gallery"
+    ],
+    [
+      "gate",
+      "A gate"
+    ],
+    [
+      "girder",
+      "A girder"
+    ],
+    [
+      "hospital",
+      "Hospital"
+    ],
+    [
+      "hostel",
+      "Hostel"
+    ],
+    [
+      "hotel",
+      "Hotel"
+    ],
+    [
+      "house",
+      "House"
+    ],
+    [
+      "igloo",
+      "A igloo"
+    ],
+    [
+      "library",
+      "Library"
+    ],
+    [
+      "mosque",
+      "Mosque"
+    ],
+    [
+      "museum",
+      "Museum"
+    ],
+    [
+      "obelisk",
+      "An obelisk"
+    ],
+    [
+      "pagoda",
+      "A pagoda"
+    ],
+    [
+      "pharmacy",
+      "Pharmacy"
+    ],
+    [
+      "pier",
+      "A pier"
+    ],
+    [
+      "pub",
+      "Pub"
+    ],
+    [
+      "restaurant",
+      "Restaurant"
+    ],
+    [
+      "school",
+      "School"
+    ],
+    [
+      "skip",
+      "A skip"
+    ],
+    [
+      "skyscraper",
+      "Skyscraper"
+    ],
+    [
+      "sphinx",
+      "A sphinx"
+    ],
+    [
+      "stadium",
+      "A stadium"
+    ],
+    [
+      "supermarket",
+      "Supermarket"
+    ],
+    [
+      "synagogue",
+      "Synagogue"
+    ],
+    [
+      "temple",
+      "Temple"
+    ],
+    [
+      "tent",
+      "A tent"
+    ],
+    [
+      "theatre",
+      "Theatre"
+    ]
+  ]
+}

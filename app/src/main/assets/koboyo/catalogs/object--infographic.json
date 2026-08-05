@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "infographic",
+  "count": 50,
+  "entries": [
+    [
+      "dendrogram",
+      "A dendrogram"
+    ],
+    [
+      "plateau",
+      "A plateau"
+    ],
+    [
+      "alluvial-band",
+      "A alluvial band"
+    ],
+    [
+      "annotation-callout",
+      "A annotation callout"
+    ],
+    [
+      "arc-diagram",
+      "A arc diagram"
+    ],
+    [
+      "area-stack",
+      "A area stack"
+    ],
+    [
+      "bubble-comparison",
+      "A bubble comparison"
+    ],
+    [
+      "bullet-chart",
+      "A bullet chart"
+    ],
+    [
+      "bump-chart",
+      "A bump chart"
+    ],
+    [
+      "candlestick-pair",
+      "A candlestick pair"
+    ],
+    [
+      "chord-diagram",
+      "A chord diagram"
+    ],
+    [
+      "chubby-dendrogram",
+      "A chubby dendrogram"
+    ],
+    [
+      "chubby-plateau",
+      "A chubby plateau"
+    ],
+    [
+      "cohort-triangle",
+      "A cohort triangle"
+    ],
+    [
+      "countdown-five",
+      "A countdown of five"
+    ],
+    [
+      "cutaway-view",
+      "A cutaway view"
+    ],
+    [
+      "data-label",
+      "A data label"
+    ],
+    [
+      "distribution-hump",
+      "A distribution hump"
+    ],
+    [
+      "dumbbell-chart",
+      "A dumbbell chart"
+    ],
+    [
+      "error-bar",
+      "A error bar"
+    ],
+    [
+      "exploded-view",
+      "A exploded view"
+    ],
+    [
+      "fraction-bar",
+      "A fraction of a bar"
+    ],
+    [
+      "fraction-whole",
+      "A fraction of a whole"
+    ],
+    [
+      "funnel-narrowing",
+      "A funnel narrowing"
+    ],
+    [
+      "gauge-needle",
+      "A gauge with a needle"
+    ],
+    [
+      "globe-pin",
+      "A globe with a pin"
+    ],
+    [
+      "hemisphere-split",
+      "A hemisphere split"
+    ],
+    [
+      "icicle-chart",
+      "A icicle chart"
+    ],
+    [
+      "inverted-pyramid",
+      "A inverted pyramid"
+    ],
+    [
+      "island-outline",
+      "An island outline"
+    ],
+    [
+      "lollipop-chart",
+      "A lollipop chart"
+    ],
+    [
+      "magnified-inset",
+      "A magnified inset"
+    ],
+    [
+      "map-folded",
+      "A map folded"
+    ],
+    [
+      "matrix-connections",
+      "A matrix of connections"
+    ],
+    [
+      "maturity-ladder",
+      "A maturity ladder"
+    ],
+    [
+      "mountain-effort",
+      "A mountain of effort"
+    ],
+    [
+      "network-hairball",
+      "A network hairball"
+    ],
+    [
+      "north-arrow",
+      "A north arrow"
+    ],
+    [
+      "onion-layers",
+      "A onion of layers"
+    ],
+    [
+      "parallel-coordinates",
+      "A parallel coordinates"
+    ],
+    [
+      "pareto-split",
+      "A pareto split"
+    ],
+    [
+      "peak-trough",
+      "A peak and trough"
+    ],
+    [
+      "percentage-circle",
+      "A percentage circle"
+    ],
+    [
+      "pin-dropping",
+      "A pin dropping"
+    ],
+    [
+      "polar-area",
+      "A polar area"
+    ],
+    [
+      "progress-donut",
+      "A progress donut"
+    ],
+    [
+      "radar-polygon",
+      "A radar polygon"
+    ],
+    [
+      "range-band",
+      "A range band"
+    ],
+    [
+      "ranking-flow",
+      "A ranking flow"
+    ],
+    [
+      "responsibility-grid",
+      "A responsibility grid"
+    ]
+  ]
+}

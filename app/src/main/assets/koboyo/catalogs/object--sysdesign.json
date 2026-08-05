@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "sysdesign",
+  "count": 50,
+  "entries": [
+    [
+      "checkpoint",
+      "A checkpoint"
+    ],
+    [
+      "failback",
+      "A failback"
+    ],
+    [
+      "admin-cog",
+      "An admin with a cog"
+    ],
+    [
+      "api-arrow",
+      "An api with an arrow in"
+    ],
+    [
+      "api-clock",
+      "An api with a clock"
+    ],
+    [
+      "api-padlock",
+      "An api with a padlock"
+    ],
+    [
+      "api-partitioned",
+      "An api partitioned"
+    ],
+    [
+      "api-replicated",
+      "An api replicated"
+    ],
+    [
+      "api-tick",
+      "An api with a tick"
+    ],
+    [
+      "attacker-hood",
+      "An attacker in a hood"
+    ],
+    [
+      "bot-antenna",
+      "A bot with antenna"
+    ],
+    [
+      "bounded-context",
+      "A bounded context"
+    ],
+    [
+      "bulkhead-pools",
+      "A bulkhead of pools"
+    ],
+    [
+      "cache-arrow",
+      "A cache with an arrow in"
+    ],
+    [
+      "cache-aside",
+      "A cache aside"
+    ],
+    [
+      "cache-clock",
+      "A cache with a clock"
+    ],
+    [
+      "cache-padlock",
+      "A cache with a padlock"
+    ],
+    [
+      "cache-partitioned",
+      "A cache partitioned"
+    ],
+    [
+      "cache-replicated",
+      "A cache replicated"
+    ],
+    [
+      "cache-tick",
+      "A cache with a tick"
+    ],
+    [
+      "callback-url",
+      "A callback url"
+    ],
+    [
+      "causal-ordering",
+      "A causal ordering"
+    ],
+    [
+      "certificate-chain",
+      "A certificate chain"
+    ],
+    [
+      "chubby-checkpoint",
+      "A chubby checkpoint"
+    ],
+    [
+      "chubby-failback",
+      "A chubby failback"
+    ],
+    [
+      "chunked-transfer",
+      "A chunked transfer"
+    ],
+    [
+      "cloud-arrow",
+      "A cloud with an arrow in"
+    ],
+    [
+      "cloud-clock",
+      "A cloud with a clock"
+    ],
+    [
+      "cloud-padlock",
+      "A cloud with a padlock"
+    ],
+    [
+      "cloud-partitioned",
+      "A cloud partitioned"
+    ],
+    [
+      "cloud-replicated",
+      "A cloud replicated"
+    ],
+    [
+      "cold-standby",
+      "A cold standby"
+    ],
+    [
+      "compaction-pass",
+      "A compaction pass"
+    ],
+    [
+      "compliance-checklist",
+      "A compliance checklist"
+    ],
+    [
+      "compressed-response",
+      "A compressed response"
+    ],
+    [
+      "consensus-round",
+      "A consensus round"
+    ],
+    [
+      "consent-form",
+      "A consent form"
+    ],
+    [
+      "consumer-group",
+      "A consumer group"
+    ],
+    [
+      "container-arrow",
+      "A container with an arrow in"
+    ],
+    [
+      "container-clock",
+      "A container with a clock"
+    ],
+    [
+      "container-padlock",
+      "A container with a padlock"
+    ],
+    [
+      "container-partitioned",
+      "A container partitioned"
+    ],
+    [
+      "container-tick",
+      "A container with a tick"
+    ],
+    [
+      "content-negotiation",
+      "A content negotiation"
+    ],
+    [
+      "cors-preflight",
+      "A cors preflight"
+    ],
+    [
+      "crawler-spider",
+      "A crawler spider"
+    ],
+    [
+      "database-arrow",
+      "A database with an arrow in"
+    ],
+    [
+      "database-padlock",
+      "A database with a padlock"
+    ],
+    [
+      "database-partitioned",
+      "A database partitioned"
+    ],
+    [
+      "database-replicated",
+      "A database replicated"
+    ]
+  ]
+}

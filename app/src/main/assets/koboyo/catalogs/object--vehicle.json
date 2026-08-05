@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "vehicle",
+  "count": 50,
+  "entries": [
+    [
+      "aeroplane",
+      "An aeroplane"
+    ],
+    [
+      "ambulance",
+      "An ambulance"
+    ],
+    [
+      "bicycle",
+      "A bicycle"
+    ],
+    [
+      "biplane",
+      "A biplane"
+    ],
+    [
+      "boat",
+      "Boat"
+    ],
+    [
+      "bulldozer",
+      "Bulldozer"
+    ],
+    [
+      "bus",
+      "A bus"
+    ],
+    [
+      "canoe",
+      "A canoe"
+    ],
+    [
+      "car",
+      "A car"
+    ],
+    [
+      "crane",
+      "A crane"
+    ],
+    [
+      "digger",
+      "Digger"
+    ],
+    [
+      "ferry",
+      "A ferry"
+    ],
+    [
+      "funicular",
+      "Funicular"
+    ],
+    [
+      "glider",
+      "Glider"
+    ],
+    [
+      "helicopter",
+      "A helicopter"
+    ],
+    [
+      "hovercraft",
+      "A hovercraft"
+    ],
+    [
+      "jet",
+      "Jet"
+    ],
+    [
+      "lorry",
+      "Lorry"
+    ],
+    [
+      "minibus",
+      "Minibus"
+    ],
+    [
+      "monorail",
+      "A monorail"
+    ],
+    [
+      "moped",
+      "Moped"
+    ],
+    [
+      "motorbike",
+      "A motorbike"
+    ],
+    [
+      "parachute",
+      "A parachute"
+    ],
+    [
+      "sailboat",
+      "A sailboat"
+    ],
+    [
+      "scooter",
+      "A scooter"
+    ],
+    [
+      "snowmobile",
+      "A snowmobile"
+    ],
+    [
+      "speedboat",
+      "A speedboat"
+    ],
+    [
+      "submarine",
+      "A submarine"
+    ],
+    [
+      "tandem",
+      "Tandem"
+    ],
+    [
+      "tanker",
+      "Tanker"
+    ],
+    [
+      "taxi",
+      "Taxi"
+    ],
+    [
+      "train",
+      "Train"
+    ],
+    [
+      "tram",
+      "A tram"
+    ],
+    [
+      "tricycle",
+      "Tricycle"
+    ],
+    [
+      "unicycle",
+      "Unicycle"
+    ],
+    [
+      "van",
+      "A van"
+    ],
+    [
+      "airbag-cover",
+      "A airbag cover"
+    ],
+    [
+      "alloy-wheel",
+      "A alloy wheel"
+    ],
+    [
+      "ambulance-driver",
+      "An ambulance with a driver"
+    ],
+    [
+      "ambulance-empty",
+      "An ambulance empty"
+    ],
+    [
+      "ambulance-loaded",
+      "An ambulance loaded"
+    ],
+    [
+      "ambulance-parked",
+      "An ambulance parked"
+    ],
+    [
+      "ambulance-stop",
+      "An ambulance at a stop"
+    ],
+    [
+      "anchor-chain",
+      "An anchor and chain"
+    ],
+    [
+      "articulated-lorry",
+      "Articulated lorry"
+    ],
+    [
+      "battery-terminal",
+      "A battery terminal"
+    ],
+    [
+      "bicycle-driver",
+      "A bicycle with a driver"
+    ],
+    [
+      "bicycle-empty",
+      "A bicycle empty"
+    ],
+    [
+      "bicycle-loaded",
+      "A bicycle loaded"
+    ],
+    [
+      "bicycle-motion",
+      "A bicycle in motion"
+    ]
+  ]
+}

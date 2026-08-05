@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "commerce",
+  "count": 50,
+  "entries": [
+    [
+      "basket",
+      "Basket"
+    ],
+    [
+      "coupon",
+      "Coupon"
+    ],
+    [
+      "mannequin",
+      "A mannequin"
+    ],
+    [
+      "storefront",
+      "Storefront"
+    ],
+    [
+      "bakery-counter",
+      "A bakery counter"
+    ],
+    [
+      "bank-transfer",
+      "Bank transfer"
+    ],
+    [
+      "barcode-scanner",
+      "A barcode scanner"
+    ],
+    [
+      "basket-book",
+      "A basket with a book"
+    ],
+    [
+      "basket-clothing",
+      "A basket with clothing"
+    ],
+    [
+      "basket-electronics",
+      "A basket with electronics"
+    ],
+    [
+      "basket-furniture",
+      "A basket with furniture"
+    ],
+    [
+      "basket-game",
+      "A basket with a game"
+    ],
+    [
+      "basket-groceries",
+      "A basket with groceries"
+    ],
+    [
+      "basket-homeware",
+      "A basket with homeware"
+    ],
+    [
+      "basket-jewellery",
+      "A basket with jewellery"
+    ],
+    [
+      "basket-plant",
+      "A basket with a plant"
+    ],
+    [
+      "basket-shoes",
+      "A basket with shoes"
+    ],
+    [
+      "basket-ticket",
+      "A basket with a ticket"
+    ],
+    [
+      "basket-tool",
+      "A basket with a tool"
+    ],
+    [
+      "basket-toy",
+      "A basket with a toy"
+    ],
+    [
+      "bundle-book",
+      "A bundle of a book"
+    ],
+    [
+      "bundle-clothing",
+      "A bundle of clothing"
+    ],
+    [
+      "bundle-electronics",
+      "A bundle of electronics"
+    ],
+    [
+      "bundle-furniture",
+      "A bundle of furniture"
+    ],
+    [
+      "bundle-game",
+      "A bundle of a game"
+    ],
+    [
+      "bundle-groceries",
+      "A bundle of groceries"
+    ],
+    [
+      "bundle-homeware",
+      "A bundle of homeware"
+    ],
+    [
+      "bundle-jewellery",
+      "A bundle of jewellery"
+    ],
+    [
+      "bundle-plant",
+      "A bundle of a plant"
+    ],
+    [
+      "bundle-shoes",
+      "A bundle of shoes"
+    ],
+    [
+      "bundle-ticket",
+      "A bundle of a ticket"
+    ],
+    [
+      "bundle-tool",
+      "A bundle of a tool"
+    ],
+    [
+      "bundle-toy",
+      "A bundle of a toy"
+    ],
+    [
+      "card-reader",
+      "A card reader"
+    ],
+    [
+      "cart-abandoned",
+      "Cart abandoned"
+    ],
+    [
+      "checkout-form",
+      "Checkout form"
+    ],
+    [
+      "chubby-basket",
+      "Chubby basket"
+    ],
+    [
+      "chubby-coupon",
+      "Chubby coupon"
+    ],
+    [
+      "chubby-mannequin",
+      "A chubby mannequin"
+    ],
+    [
+      "chubby-storefront",
+      "Chubby storefront"
+    ],
+    [
+      "closed-sign",
+      "A closed sign"
+    ],
+    [
+      "clothes-rail",
+      "A clothes rail"
+    ],
+    [
+      "coat-hanger",
+      "A coat hanger"
+    ],
+    [
+      "colour-swatches",
+      "Colour swatches"
+    ],
+    [
+      "compare-arrows",
+      "Compare arrows"
+    ],
+    [
+      "delivery-book",
+      "A delivery of a book"
+    ],
+    [
+      "delivery-clothing",
+      "A delivery of clothing"
+    ],
+    [
+      "delivery-electronics",
+      "A delivery of electronics"
+    ],
+    [
+      "delivery-furniture",
+      "A delivery of furniture"
+    ],
+    [
+      "delivery-game",
+      "A delivery of a game"
+    ]
+  ]
+}

@@ -1,0 +1,646 @@
+{
+  "source": "koboyo object/animal",
+  "count": 128,
+  "icons": [
+    {
+      "slug": "anemone",
+      "name": "Anemone",
+      "file": "anemone.svg"
+    },
+    {
+      "slug": "bat",
+      "name": "A bat",
+      "file": "bat.svg"
+    },
+    {
+      "slug": "bittern",
+      "name": "A bittern",
+      "file": "bittern.svg"
+    },
+    {
+      "slug": "butterfly",
+      "name": "A butterfly",
+      "file": "butterfly.svg"
+    },
+    {
+      "slug": "centipede",
+      "name": "A centipede",
+      "file": "centipede.svg"
+    },
+    {
+      "slug": "clam",
+      "name": "Clam",
+      "file": "clam.svg"
+    },
+    {
+      "slug": "coral",
+      "name": "Coral",
+      "file": "coral.svg"
+    },
+    {
+      "slug": "curlew",
+      "name": "A curlew",
+      "file": "curlew.svg"
+    },
+    {
+      "slug": "eagle",
+      "name": "An eagle",
+      "file": "eagle.svg"
+    },
+    {
+      "slug": "falcon",
+      "name": "Falcon",
+      "file": "falcon.svg"
+    },
+    {
+      "slug": "frog",
+      "name": "A frog",
+      "file": "frog.svg"
+    },
+    {
+      "slug": "giraffe",
+      "name": "A giraffe",
+      "file": "giraffe.svg"
+    },
+    {
+      "slug": "greenfinch",
+      "name": "A greenfinch",
+      "file": "greenfinch.svg"
+    },
+    {
+      "slug": "hedgehog",
+      "name": "A hedgehog",
+      "file": "hedgehog.svg"
+    },
+    {
+      "slug": "jackdaw",
+      "name": "A jackdaw",
+      "file": "jackdaw.svg"
+    },
+    {
+      "slug": "kingfisher",
+      "name": "A kingfisher",
+      "file": "kingfisher.svg"
+    },
+    {
+      "slug": "ladybird",
+      "name": "A ladybird",
+      "file": "ladybird.svg"
+    },
+    {
+      "slug": "llama",
+      "name": "A llama",
+      "file": "llama.svg"
+    },
+    {
+      "slug": "manta",
+      "name": "Manta",
+      "file": "manta.svg"
+    },
+    {
+      "slug": "moose",
+      "name": "Moose",
+      "file": "moose.svg"
+    },
+    {
+      "slug": "nightingale",
+      "name": "A nightingale",
+      "file": "nightingale.svg"
+    },
+    {
+      "slug": "owl",
+      "name": "An owl",
+      "file": "owl.svg"
+    },
+    {
+      "slug": "peacock",
+      "name": "A peacock",
+      "file": "peacock.svg"
+    },
+    {
+      "slug": "polecat",
+      "name": "A polecat",
+      "file": "polecat.svg"
+    },
+    {
+      "slug": "raccoon",
+      "name": "Raccoon",
+      "file": "raccoon.svg"
+    },
+    {
+      "slug": "ringlet",
+      "name": "A ringlet",
+      "file": "ringlet.svg"
+    },
+    {
+      "slug": "scorpion",
+      "name": "A scorpion",
+      "file": "scorpion.svg"
+    },
+    {
+      "slug": "shelduck",
+      "name": "A shelduck",
+      "file": "shelduck.svg"
+    },
+    {
+      "slug": "snake",
+      "name": "Snake",
+      "file": "snake.svg"
+    },
+    {
+      "slug": "squirrel",
+      "name": "A squirrel",
+      "file": "squirrel.svg"
+    },
+    {
+      "slug": "swan",
+      "name": "A swan",
+      "file": "swan.svg"
+    },
+    {
+      "slug": "terrier",
+      "name": "A terrier",
+      "file": "terrier.svg"
+    },
+    {
+      "slug": "wagtail",
+      "name": "A wagtail",
+      "file": "wagtail.svg"
+    },
+    {
+      "slug": "widgeon",
+      "name": "A widgeon",
+      "file": "widgeon.svg"
+    },
+    {
+      "slug": "worm",
+      "name": "A worm",
+      "file": "worm.svg"
+    },
+    {
+      "slug": "badger-grazing",
+      "name": "A badger grazing",
+      "file": "badger-grazing.svg"
+    },
+    {
+      "slug": "barnacle-goose",
+      "name": "A barnacle goose",
+      "file": "barnacle-goose.svg"
+    },
+    {
+      "slug": "bat-standing",
+      "name": "A bat standing",
+      "file": "bat-standing.svg"
+    },
+    {
+      "slug": "bear-sleeping",
+      "name": "A bear sleeping",
+      "file": "bear-sleeping.svg"
+    },
+    {
+      "slug": "blackbird-landing",
+      "name": "A blackbird landing",
+      "file": "blackbird-landing.svg"
+    },
+    {
+      "slug": "border-collie",
+      "name": "A border collie",
+      "file": "border-collie.svg"
+    },
+    {
+      "slug": "buzzard-nest",
+      "name": "A buzzard on a nest",
+      "file": "buzzard-nest.svg"
+    },
+    {
+      "slug": "cat-drinking",
+      "name": "A cat drinking",
+      "file": "cat-drinking.svg"
+    },
+    {
+      "slug": "cat-standing",
+      "name": "A cat standing",
+      "file": "cat-standing.svg"
+    },
+    {
+      "slug": "chubby-angelfish",
+      "name": "Chubby angelfish",
+      "file": "chubby-angelfish.svg"
+    },
+    {
+      "slug": "chubby-bear",
+      "name": "A chubby bear",
+      "file": "chubby-bear.svg"
+    },
+    {
+      "slug": "chubby-brimstone",
+      "name": "A chubby brimstone",
+      "file": "chubby-brimstone.svg"
+    },
+    {
+      "slug": "chubby-caddisfly",
+      "name": "A chubby caddisfly",
+      "file": "chubby-caddisfly.svg"
+    },
+    {
+      "slug": "chubby-cheetah",
+      "name": "Chubby cheetah",
+      "file": "chubby-cheetah.svg"
+    },
+    {
+      "slug": "chubby-cockchafer",
+      "name": "A chubby cockchafer",
+      "file": "chubby-cockchafer.svg"
+    },
+    {
+      "slug": "chubby-cricket",
+      "name": "A chubby cricket",
+      "file": "chubby-cricket.svg"
+    },
+    {
+      "slug": "chubby-dipper",
+      "name": "A chubby dipper",
+      "file": "chubby-dipper.svg"
+    },
+    {
+      "slug": "chubby-egret",
+      "name": "A chubby egret",
+      "file": "chubby-egret.svg"
+    },
+    {
+      "slug": "chubby-flamingo",
+      "name": "A chubby flamingo",
+      "file": "chubby-flamingo.svg"
+    },
+    {
+      "slug": "chubby-gannet",
+      "name": "A chubby gannet",
+      "file": "chubby-gannet.svg"
+    },
+    {
+      "slug": "chubby-goosander",
+      "name": "A chubby goosander",
+      "file": "chubby-goosander.svg"
+    },
+    {
+      "slug": "chubby-hamster",
+      "name": "Chubby hamster",
+      "file": "chubby-hamster.svg"
+    },
+    {
+      "slug": "chubby-hornet",
+      "name": "A chubby hornet",
+      "file": "chubby-hornet.svg"
+    },
+    {
+      "slug": "chubby-kangaroo",
+      "name": "A chubby kangaroo",
+      "file": "chubby-kangaroo.svg"
+    },
+    {
+      "slug": "chubby-koala",
+      "name": "A chubby koala",
+      "file": "chubby-koala.svg"
+    },
+    {
+      "slug": "chubby-lobster",
+      "name": "A chubby lobster",
+      "file": "chubby-lobster.svg"
+    },
+    {
+      "slug": "chubby-mayfly",
+      "name": "A chubby mayfly",
+      "file": "chubby-mayfly.svg"
+    },
+    {
+      "slug": "chubby-mosquito",
+      "name": "A chubby mosquito",
+      "file": "chubby-mosquito.svg"
+    },
+    {
+      "slug": "chubby-nightingale",
+      "name": "A chubby nightingale",
+      "file": "chubby-nightingale.svg"
+    },
+    {
+      "slug": "chubby-oystercatcher",
+      "name": "A chubby oystercatcher",
+      "file": "chubby-oystercatcher.svg"
+    },
+    {
+      "slug": "chubby-peregrine",
+      "name": "A chubby peregrine",
+      "file": "chubby-peregrine.svg"
+    },
+    {
+      "slug": "chubby-pufferfish",
+      "name": "Chubby pufferfish",
+      "file": "chubby-pufferfish.svg"
+    },
+    {
+      "slug": "chubby-razorbill",
+      "name": "A chubby razorbill",
+      "file": "chubby-razorbill.svg"
+    },
+    {
+      "slug": "chubby-sardine",
+      "name": "Chubby sardine",
+      "file": "chubby-sardine.svg"
+    },
+    {
+      "slug": "chubby-shag",
+      "name": "A chubby shag",
+      "file": "chubby-shag.svg"
+    },
+    {
+      "slug": "chubby-sloth",
+      "name": "Chubby sloth",
+      "file": "chubby-sloth.svg"
+    },
+    {
+      "slug": "chubby-sparrowhawk",
+      "name": "A chubby sparrowhawk",
+      "file": "chubby-sparrowhawk.svg"
+    },
+    {
+      "slug": "chubby-stork",
+      "name": "A chubby stork",
+      "file": "chubby-stork.svg"
+    },
+    {
+      "slug": "chubby-termite",
+      "name": "A chubby termite",
+      "file": "chubby-termite.svg"
+    },
+    {
+      "slug": "chubby-treecreeper",
+      "name": "A chubby treecreeper",
+      "file": "chubby-treecreeper.svg"
+    },
+    {
+      "slug": "chubby-weasel",
+      "name": "A chubby weasel",
+      "file": "chubby-weasel.svg"
+    },
+    {
+      "slug": "chubby-woodlouse",
+      "name": "A chubby woodlouse",
+      "file": "chubby-woodlouse.svg"
+    },
+    {
+      "slug": "common-seal",
+      "name": "A common seal",
+      "file": "common-seal.svg"
+    },
+    {
+      "slug": "cormorant-singing",
+      "name": "A cormorant singing",
+      "file": "cormorant-singing.svg"
+    },
+    {
+      "slug": "cow-walking",
+      "name": "A cow walking",
+      "file": "cow-walking.svg"
+    },
+    {
+      "slug": "crow-preening",
+      "name": "A crow preening",
+      "file": "crow-preening.svg"
+    },
+    {
+      "slug": "curlew-preening",
+      "name": "A curlew preening",
+      "file": "curlew-preening.svg"
+    },
+    {
+      "slug": "deer-sleeping",
+      "name": "A deer sleeping",
+      "file": "deer-sleeping.svg"
+    },
+    {
+      "slug": "dog-drinking",
+      "name": "A dog drinking",
+      "file": "dog-drinking.svg"
+    },
+    {
+      "slug": "dog-walking",
+      "name": "A dog walking",
+      "file": "dog-walking.svg"
+    },
+    {
+      "slug": "dolphin-standing",
+      "name": "A dolphin standing",
+      "file": "dolphin-standing.svg"
+    },
+    {
+      "slug": "donkey-running",
+      "name": "A donkey running",
+      "file": "donkey-running.svg"
+    },
+    {
+      "slug": "dove-landing",
+      "name": "A dove landing",
+      "file": "dove-landing.svg"
+    },
+    {
+      "slug": "duck-landing",
+      "name": "A duck landing",
+      "file": "duck-landing.svg"
+    },
+    {
+      "slug": "elephant-drinking",
+      "name": "An elephant drinking",
+      "file": "elephant-drinking.svg"
+    },
+    {
+      "slug": "elephant-young",
+      "name": "An elephant with young",
+      "file": "elephant-young.svg"
+    },
+    {
+      "slug": "fox-drinking",
+      "name": "A fox drinking",
+      "file": "fox-drinking.svg"
+    },
+    {
+      "slug": "gannet-flight",
+      "name": "A gannet in flight",
+      "file": "gannet-flight.svg"
+    },
+    {
+      "slug": "garden-snail",
+      "name": "A garden snail",
+      "file": "garden-snail.svg"
+    },
+    {
+      "slug": "giraffe-standing",
+      "name": "A giraffe standing",
+      "file": "giraffe-standing.svg"
+    },
+    {
+      "slug": "goat-running",
+      "name": "A goat running",
+      "file": "goat-running.svg"
+    },
+    {
+      "slug": "goldfinch-nest",
+      "name": "A goldfinch on a nest",
+      "file": "goldfinch-nest.svg"
+    },
+    {
+      "slug": "goose-landing",
+      "name": "A goose landing",
+      "file": "goose-landing.svg"
+    },
+    {
+      "slug": "grey-seal",
+      "name": "A grey seal",
+      "file": "grey-seal.svg"
+    },
+    {
+      "slug": "gull-landing",
+      "name": "A gull landing",
+      "file": "gull-landing.svg"
+    },
+    {
+      "slug": "harbour-porpoise",
+      "name": "A harbour porpoise",
+      "file": "harbour-porpoise.svg"
+    },
+    {
+      "slug": "hare-walking",
+      "name": "A hare walking",
+      "file": "hare-walking.svg"
+    },
+    {
+      "slug": "hedgehog-running",
+      "name": "A hedgehog running",
+      "file": "hedgehog-running.svg"
+    },
+    {
+      "slug": "hermit-crab",
+      "name": "Hermit crab",
+      "file": "hermit-crab.svg"
+    },
+    {
+      "slug": "highland-cow",
+      "name": "A highland cow",
+      "file": "highland-cow.svg"
+    },
+    {
+      "slug": "horse-standing",
+      "name": "A horse standing",
+      "file": "horse-standing.svg"
+    },
+    {
+      "slug": "jay-flight",
+      "name": "A jay in flight",
+      "file": "jay-flight.svg"
+    },
+    {
+      "slug": "jersey-cow",
+      "name": "A jersey cow",
+      "file": "jersey-cow.svg"
+    },
+    {
+      "slug": "kingfisher-flight",
+      "name": "A kingfisher in flight",
+      "file": "kingfisher-flight.svg"
+    },
+    {
+      "slug": "lapwing-flight",
+      "name": "A lapwing in flight",
+      "file": "lapwing-flight.svg"
+    },
+    {
+      "slug": "leash-hook",
+      "name": "Leash hook",
+      "file": "leash-hook.svg"
+    },
+    {
+      "slug": "lion-walking",
+      "name": "A lion walking",
+      "file": "lion-walking.svg"
+    },
+    {
+      "slug": "llama-sleeping",
+      "name": "A llama sleeping",
+      "file": "llama-sleeping.svg"
+    },
+    {
+      "slug": "magpie-nest",
+      "name": "A magpie on a nest",
+      "file": "magpie-nest.svg"
+    },
+    {
+      "slug": "minke-whale",
+      "name": "A minke whale",
+      "file": "minke-whale.svg"
+    },
+    {
+      "slug": "mole-walking",
+      "name": "A mole walking",
+      "file": "mole-walking.svg"
+    },
+    {
+      "slug": "monkey-walking",
+      "name": "A monkey walking",
+      "file": "monkey-walking.svg"
+    },
+    {
+      "slug": "mouse-standing",
+      "name": "A mouse standing",
+      "file": "mouse-standing.svg"
+    },
+    {
+      "slug": "otter-running",
+      "name": "An otter running",
+      "file": "otter-running.svg"
+    },
+    {
+      "slug": "owl-barn",
+      "name": "A owl barn",
+      "file": "owl-barn.svg"
+    },
+    {
+      "slug": "owl-tawny",
+      "name": "A owl tawny",
+      "file": "owl-tawny.svg"
+    },
+    {
+      "slug": "panda-standing",
+      "name": "A panda standing",
+      "file": "panda-standing.svg"
+    },
+    {
+      "slug": "pheasant-flight",
+      "name": "A pheasant in flight",
+      "file": "pheasant-flight.svg"
+    },
+    {
+      "slug": "pig-drinking",
+      "name": "A pig drinking",
+      "file": "pig-drinking.svg"
+    },
+    {
+      "slug": "pigeon-flight",
+      "name": "A pigeon in flight",
+      "file": "pigeon-flight.svg"
+    },
+    {
+      "slug": "pine-marten",
+      "name": "A pine marten",
+      "file": "pine-marten.svg"
+    },
+    {
+      "slug": "puffin-nest",
+      "name": "A puffin on a nest",
+      "file": "puffin-nest.svg"
+    },
+    {
+      "slug": "rabbit-running",
+      "name": "A rabbit running",
+      "file": "rabbit-running.svg"
+    }
+  ]
+}

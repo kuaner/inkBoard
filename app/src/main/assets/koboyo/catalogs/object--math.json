@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "math",
+  "count": 50,
+  "entries": [
+    [
+      "asymptote",
+      "An asymptote"
+    ],
+    [
+      "hyperbola",
+      "A hyperbola"
+    ],
+    [
+      "mapping",
+      "A one to one mapping"
+    ],
+    [
+      "parabola",
+      "A parabola"
+    ],
+    [
+      "rhombus",
+      "A rhombus"
+    ],
+    [
+      "sector",
+      "A sector"
+    ],
+    [
+      "segment",
+      "A segment"
+    ],
+    [
+      "abacus-rod",
+      "A abacus rod"
+    ],
+    [
+      "angle-acute",
+      "A angle acute"
+    ],
+    [
+      "angle-obtuse",
+      "A angle obtuse"
+    ],
+    [
+      "angle-reflex",
+      "A angle reflex"
+    ],
+    [
+      "angle-right",
+      "A angle right"
+    ],
+    [
+      "angles-line",
+      "A angles on a line"
+    ],
+    [
+      "angles-point",
+      "A angles at a point"
+    ],
+    [
+      "area-grid",
+      "A area grid"
+    ],
+    [
+      "binomial-coefficient",
+      "A binomial coefficient"
+    ],
+    [
+      "bounded-region",
+      "A bounded region"
+    ],
+    [
+      "chord-curve",
+      "A chord on a curve"
+    ],
+    [
+      "chubby-asymptote",
+      "A chubby asymptote"
+    ],
+    [
+      "chubby-hyperbola",
+      "A chubby hyperbola"
+    ],
+    [
+      "chubby-mapping",
+      "A chubby one to one mapping"
+    ],
+    [
+      "chubby-rhombus",
+      "A chubby rhombus"
+    ],
+    [
+      "chubby-sector",
+      "A chubby sector"
+    ],
+    [
+      "chubby-segment",
+      "A chubby segment"
+    ],
+    [
+      "circle-chord",
+      "A circle with a chord"
+    ],
+    [
+      "circle-diameter",
+      "A circle with a diameter"
+    ],
+    [
+      "circle-radius",
+      "A circle with a radius"
+    ],
+    [
+      "complement-shaded",
+      "A complement shaded"
+    ],
+    [
+      "cone-height",
+      "A cone with a height"
+    ],
+    [
+      "congruent-mark",
+      "A congruent mark"
+    ],
+    [
+      "coordinate-grid",
+      "A coordinate grid"
+    ],
+    [
+      "cosine-wave",
+      "A cosine wave"
+    ],
+    [
+      "cross-section",
+      "A cross section"
+    ],
+    [
+      "cube-perspective",
+      "A cube in perspective"
+    ],
+    [
+      "cuboid-edges",
+      "A cuboid with edges"
+    ],
+    [
+      "curve-axes",
+      "A curve on axes"
+    ],
+    [
+      "curved-graph",
+      "A curved graph"
+    ],
+    [
+      "cylinder-radius",
+      "A cylinder with a radius"
+    ],
+    [
+      "decimal-grid",
+      "A decimal grid"
+    ],
+    [
+      "derivative-notation",
+      "A derivative notation"
+    ],
+    [
+      "discontinuity-jump",
+      "A discontinuity jump"
+    ],
+    [
+      "ellipse-axes",
+      "An ellipse on axes"
+    ],
+    [
+      "enlargement-ray",
+      "A enlargement ray"
+    ],
+    [
+      "factor-tree",
+      "A factor tree"
+    ],
+    [
+      "factorial-mark",
+      "A factorial mark"
+    ],
+    [
+      "fibonacci-spiral",
+      "A fibonacci spiral"
+    ],
+    [
+      "fixed-point",
+      "A fixed point"
+    ],
+    [
+      "fractal-branch",
+      "A fractal branch"
+    ],
+    [
+      "fraction-circle",
+      "A fraction circle"
+    ],
+    [
+      "golden-rectangle",
+      "A golden rectangle"
+    ]
+  ]
+}

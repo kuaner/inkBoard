@@ -1,0 +1,207 @@
+{
+  "group": "scene",
+  "subgroup": "uistate",
+  "count": 50,
+  "entries": [
+    [
+      "person-checkout",
+      "A person at a checkout"
+    ],
+    [
+      "person-invoice",
+      "A person with an invoice"
+    ],
+    [
+      "person-subscribing",
+      "A person subscribing"
+    ],
+    [
+      "person-turnstile",
+      "A person at a turnstile"
+    ],
+    [
+      "person-wishlist",
+      "A person with a wishlist"
+    ],
+    [
+      "chubby-person-checkout",
+      "A chubby person at a checkout"
+    ],
+    [
+      "chubby-person-invoice",
+      "A chubby person with an invoice"
+    ],
+    [
+      "chubby-person-turnstile",
+      "A chubby person at a turnstile"
+    ],
+    [
+      "chubby-person-wishlist",
+      "A chubby person with a wishlist"
+    ],
+    [
+      "confirmation-for-calendar",
+      "A confirmation for a calendar"
+    ],
+    [
+      "confirmation-for-dashboard",
+      "A confirmation for a dashboard"
+    ],
+    [
+      "confirmation-for-document",
+      "A confirmation for a document"
+    ],
+    [
+      "confirmation-for-form",
+      "A confirmation for a form"
+    ],
+    [
+      "confirmation-for-inbox",
+      "A confirmation for an inbox"
+    ],
+    [
+      "confirmation-for-profile",
+      "A confirmation for a profile"
+    ],
+    [
+      "confirmation-for-report",
+      "A confirmation for a report"
+    ],
+    [
+      "confirmation-for-search",
+      "A confirmation for a search"
+    ],
+    [
+      "person-accepting-invite",
+      "A person accepting an invite"
+    ],
+    [
+      "person-adding-basket",
+      "A person adding to a basket"
+    ],
+    [
+      "person-alone-room",
+      "A person alone in a room"
+    ],
+    [
+      "person-approving-submission",
+      "A person approving a submission"
+    ],
+    [
+      "person-archiving-box",
+      "A person archiving a box"
+    ],
+    [
+      "person-assembling-model",
+      "A person assembling a model"
+    ],
+    [
+      "person-behind-firewall",
+      "A person behind a firewall"
+    ],
+    [
+      "person-blank-map",
+      "A person with a blank map"
+    ],
+    [
+      "person-broken-sync",
+      "A person with a broken sync"
+    ],
+    [
+      "person-cancelling-job",
+      "A person cancelling a job"
+    ],
+    [
+      "person-cancelling-order",
+      "A person cancelling an order"
+    ],
+    [
+      "person-cancelling-subscription",
+      "A person cancelling a subscription"
+    ],
+    [
+      "person-celebrating-confetti",
+      "A person celebrating with confetti"
+    ],
+    [
+      "person-changing-password",
+      "A person changing a password"
+    ],
+    [
+      "person-charging-device",
+      "A person charging a device"
+    ],
+    [
+      "person-checking-wristwatch",
+      "A person checking a wristwatch"
+    ],
+    [
+      "person-choosing-language",
+      "A person choosing a language"
+    ],
+    [
+      "person-choosing-option",
+      "A person choosing an option"
+    ],
+    [
+      "person-cloud-download",
+      "A person with a cloud download"
+    ],
+    [
+      "person-cloud-upload",
+      "A person with a cloud upload"
+    ],
+    [
+      "person-completing-checklist",
+      "A person completing a checklist"
+    ],
+    [
+      "person-confirming-order",
+      "A person confirming an order"
+    ],
+    [
+      "person-connecting-account",
+      "A person connecting an account"
+    ],
+    [
+      "person-contacting-seller",
+      "A person contacting a seller"
+    ],
+    [
+      "person-contacting-support",
+      "A person contacting support"
+    ],
+    [
+      "person-creating-profile",
+      "A person creating a profile"
+    ],
+    [
+      "person-customising-layout",
+      "A person customising a layout"
+    ],
+    [
+      "person-cutting-ribbon",
+      "A person cutting a ribbon"
+    ],
+    [
+      "person-dead-end",
+      "A person at a dead end"
+    ],
+    [
+      "person-declined-card",
+      "A person with a declined card"
+    ],
+    [
+      "person-deduplicating-list",
+      "A person deduplicating a list"
+    ],
+    [
+      "person-dismissing-tip",
+      "A person dismissing a tip"
+    ],
+    [
+      "person-downgrading-plan",
+      "A person downgrading a plan"
+    ]
+  ]
+}

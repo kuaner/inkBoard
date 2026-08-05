@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "interface",
+  "count": 50,
+  "entries": [
+    [
+      "about-window",
+      "An about window"
+    ],
+    [
+      "alert-dialog",
+      "An alert dialog"
+    ],
+    [
+      "application-window",
+      "An application window"
+    ],
+    [
+      "archive-action",
+      "A archive action"
+    ],
+    [
+      "autosave-indicator",
+      "A autosave indicator"
+    ],
+    [
+      "back-navigation",
+      "A back navigation"
+    ],
+    [
+      "breadcrumb-path",
+      "A breadcrumb path"
+    ],
+    [
+      "browser-window",
+      "A browser window"
+    ],
+    [
+      "calendar-screen",
+      "A calendar screen"
+    ],
+    [
+      "card-activity",
+      "A card of activity"
+    ],
+    [
+      "card-calendar",
+      "A card of a calendar"
+    ],
+    [
+      "card-comments",
+      "A card of comments"
+    ],
+    [
+      "card-contacts",
+      "A card of contacts"
+    ],
+    [
+      "card-devices",
+      "A card of devices"
+    ],
+    [
+      "card-downloads",
+      "A card of downloads"
+    ],
+    [
+      "card-drafts",
+      "A card of drafts"
+    ],
+    [
+      "card-favourites",
+      "A card of favourites"
+    ],
+    [
+      "card-files",
+      "A card of files"
+    ],
+    [
+      "card-invoices",
+      "A card of invoices"
+    ],
+    [
+      "card-messages",
+      "A card of messages"
+    ],
+    [
+      "card-notifications",
+      "A card of notifications"
+    ],
+    [
+      "card-orders",
+      "A card of orders"
+    ],
+    [
+      "card-photos",
+      "A card of photos"
+    ],
+    [
+      "card-profile",
+      "A card of a profile"
+    ],
+    [
+      "card-reports",
+      "A card of reports"
+    ],
+    [
+      "card-tasks",
+      "A card of tasks"
+    ],
+    [
+      "chart-screen",
+      "A chart screen"
+    ],
+    [
+      "checkbox-ticked",
+      "A checkbox ticked"
+    ],
+    [
+      "checkout-screen",
+      "A checkout screen"
+    ],
+    [
+      "clear-selection",
+      "A clear selection"
+    ],
+    [
+      "collapse-all",
+      "A collapse all"
+    ],
+    [
+      "compare-view",
+      "A compare view"
+    ],
+    [
+      "confirm-dialog",
+      "A confirm dialog"
+    ],
+    [
+      "currency-picker",
+      "A currency picker"
+    ],
+    [
+      "cursor-arrow",
+      "A cursor arrow"
+    ],
+    [
+      "dashboard-screen",
+      "A dashboard screen"
+    ],
+    [
+      "detail-screen",
+      "A detail screen"
+    ],
+    [
+      "draft-label",
+      "A draft label"
+    ],
+    [
+      "dropdown-menu",
+      "A dropdown menu"
+    ],
+    [
+      "duplicate-action",
+      "A duplicate action"
+    ],
+    [
+      "error-screen",
+      "An error screen"
+    ],
+    [
+      "expand-all",
+      "A expand all"
+    ],
+    [
+      "export-menu",
+      "A export menu"
+    ],
+    [
+      "favourites-list",
+      "A favourites list"
+    ],
+    [
+      "form-screen",
+      "A form screen"
+    ],
+    [
+      "forward-navigation",
+      "A forward navigation"
+    ],
+    [
+      "grid-activity",
+      "A grid of activity"
+    ],
+    [
+      "grid-calendar",
+      "A grid of a calendar"
+    ],
+    [
+      "grid-comments",
+      "A grid of comments"
+    ],
+    [
+      "grid-contacts",
+      "A grid of contacts"
+    ]
+  ]
+}

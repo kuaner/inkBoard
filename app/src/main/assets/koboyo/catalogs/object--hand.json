@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "hand",
+  "count": 50,
+  "entries": [
+    [
+      "cheek",
+      "A cheek"
+    ],
+    [
+      "chin",
+      "A chin"
+    ],
+    [
+      "eyebrow",
+      "A eyebrow"
+    ],
+    [
+      "forearm",
+      "A forearm"
+    ],
+    [
+      "hairline",
+      "A hairline"
+    ],
+    [
+      "neck",
+      "A neck"
+    ],
+    [
+      "shoulder",
+      "A shoulder"
+    ],
+    [
+      "bare-foot",
+      "A bare foot"
+    ],
+    [
+      "bent-elbow",
+      "A bent elbow"
+    ],
+    [
+      "bent-knee",
+      "A bent knee"
+    ],
+    [
+      "chubby-cheek",
+      "A chubby cheek"
+    ],
+    [
+      "chubby-chin",
+      "A chubby chin"
+    ],
+    [
+      "chubby-eyebrow",
+      "A chubby eyebrow"
+    ],
+    [
+      "chubby-forearm",
+      "A chubby forearm"
+    ],
+    [
+      "chubby-hairline",
+      "A chubby hairline"
+    ],
+    [
+      "chubby-neck",
+      "A chubby neck"
+    ],
+    [
+      "chubby-shoulder",
+      "A chubby shoulder"
+    ],
+    [
+      "clenched-fist",
+      "A clenched fist"
+    ],
+    [
+      "closed-fist",
+      "A closed fist"
+    ],
+    [
+      "eye-open",
+      "A eye open"
+    ],
+    [
+      "hand-beckoning",
+      "A hand beckoning"
+    ],
+    [
+      "hand-chest",
+      "A hand on a chest"
+    ],
+    [
+      "hand-counting",
+      "A hand counting one"
+    ],
+    [
+      "hand-dragging",
+      "A hand dragging"
+    ],
+    [
+      "hand-dropping",
+      "A hand dropping"
+    ],
+    [
+      "hand-hip",
+      "A hand on a hip"
+    ],
+    [
+      "hand-knocking",
+      "A hand knocking"
+    ],
+    [
+      "hand-pinching",
+      "A hand pinching"
+    ],
+    [
+      "hand-scrolling",
+      "A hand scrolling"
+    ],
+    [
+      "hand-shoulder",
+      "A hand on a shoulder"
+    ],
+    [
+      "hand-tapping",
+      "A hand tapping"
+    ],
+    [
+      "hand-waving",
+      "A hand waving"
+    ],
+    [
+      "head-profile",
+      "A head profile"
+    ],
+    [
+      "leg-standing",
+      "A leg standing"
+    ],
+    [
+      "lowered-arm",
+      "A lowered arm"
+    ],
+    [
+      "mouth-closed",
+      "A mouth closed"
+    ],
+    [
+      "mouth-open",
+      "A mouth open"
+    ],
+    [
+      "mouth-smiling",
+      "A mouth smiling"
+    ],
+    [
+      "open-hand",
+      "An open hand"
+    ],
+    [
+      "pointing-finger",
+      "A pointing finger"
+    ],
+    [
+      "raised-arm",
+      "A raised arm"
+    ],
+    [
+      "shoe-foot",
+      "A shoe on a foot"
+    ],
+    [
+      "shoulder-line",
+      "A shoulder line"
+    ],
+    [
+      "solid-traceroute",
+      "A solid traceroute path"
+    ],
+    [
+      "stepping-foot",
+      "A stepping foot"
+    ],
+    [
+      "thumb-down",
+      "A thumb down"
+    ],
+    [
+      "thumb-up",
+      "A thumb up"
+    ],
+    [
+      "torso-front",
+      "A torso front"
+    ],
+    [
+      "torso-side",
+      "A torso side"
+    ],
+    [
+      "upper-arm",
+      "An upper arm"
+    ]
+  ]
+}

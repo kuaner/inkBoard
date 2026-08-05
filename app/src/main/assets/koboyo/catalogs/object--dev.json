@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "dev",
+  "count": 50,
+  "entries": [
+    [
+      "adapter",
+      "A adapter"
+    ],
+    [
+      "assembler",
+      "An assembler"
+    ],
+    [
+      "bulkhead",
+      "A bulkhead"
+    ],
+    [
+      "checksum",
+      "A checksum"
+    ],
+    [
+      "colon",
+      "A colon"
+    ],
+    [
+      "controller",
+      "A controller"
+    ],
+    [
+      "deserialiser",
+      "A deserialiser"
+    ],
+    [
+      "disassembler",
+      "A disassembler"
+    ],
+    [
+      "docstring",
+      "Docstring"
+    ],
+    [
+      "emulator",
+      "An emulator"
+    ],
+    [
+      "facade",
+      "A facade"
+    ],
+    [
+      "heisenbug",
+      "A heisenbug"
+    ],
+    [
+      "livelock",
+      "A livelock"
+    ],
+    [
+      "loader",
+      "A loader"
+    ],
+    [
+      "logpoint",
+      "A logpoint"
+    ],
+    [
+      "makefile",
+      "A makefile"
+    ],
+    [
+      "playbook",
+      "A playbook"
+    ],
+    [
+      "preprocessor",
+      "A preprocessor"
+    ],
+    [
+      "semicolon",
+      "A semicolon"
+    ],
+    [
+      "serialiser",
+      "A serialiser"
+    ],
+    [
+      "singleton",
+      "A singleton"
+    ],
+    [
+      "tilde",
+      "A tilde"
+    ],
+    [
+      "acceptance-criterion",
+      "An acceptance criterion"
+    ],
+    [
+      "accessibility-check",
+      "An accessibility check"
+    ],
+    [
+      "accessibility-label",
+      "An accessibility label"
+    ],
+    [
+      "active-record",
+      "A active record"
+    ],
+    [
+      "affinity-rule",
+      "A affinity rule"
+    ],
+    [
+      "alert-bell",
+      "Alert bell"
+    ],
+    [
+      "allocation-profile",
+      "An allocation profile"
+    ],
+    [
+      "ampersand-reference",
+      "An ampersand reference"
+    ],
+    [
+      "analytics-event",
+      "An analytics event"
+    ],
+    [
+      "annotated-tag",
+      "An annotated tag"
+    ],
+    [
+      "api-endpoint",
+      "Api endpoint"
+    ],
+    [
+      "api-gateway",
+      "Api gateway"
+    ],
+    [
+      "app-background",
+      "An app in background"
+    ],
+    [
+      "app-launching",
+      "An app launching"
+    ],
+    [
+      "approving-review",
+      "An approving review"
+    ],
+    [
+      "aria-landmark",
+      "An aria landmark"
+    ],
+    [
+      "aria-role",
+      "A aria role"
+    ],
+    [
+      "array-boxes",
+      "Array of boxes"
+    ],
+    [
+      "arrow-pipeline",
+      "An arrow pipeline"
+    ],
+    [
+      "artefact-promotion",
+      "A artefact promotion"
+    ],
+    [
+      "artefact-store",
+      "An artefact store"
+    ],
+    [
+      "assertion-equals",
+      "Assertion equals"
+    ],
+    [
+      "assertion-throws",
+      "An assertion throws"
+    ],
+    [
+      "assigned-person",
+      "Assigned person"
+    ],
+    [
+      "asterisk-pointer",
+      "An asterisk pointer"
+    ],
+    [
+      "async-script",
+      "An async script"
+    ],
+    [
+      "autocomplete-engine",
+      "An autocomplete engine"
+    ],
+    [
+      "autocomplete-popup",
+      "An autocomplete popup"
+    ]
+  ]
+}

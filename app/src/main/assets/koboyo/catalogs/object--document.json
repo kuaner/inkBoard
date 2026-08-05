@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "document",
+  "count": 50,
+  "entries": [
+    [
+      "counterfoil",
+      "A counterfoil"
+    ],
+    [
+      "docket",
+      "A docket"
+    ],
+    [
+      "folder",
+      "A folder"
+    ],
+    [
+      "manifest",
+      "A manifest"
+    ],
+    [
+      "microfiche",
+      "A microfiche"
+    ],
+    [
+      "newspaper",
+      "A newspaper"
+    ],
+    [
+      "quotation",
+      "A quotation"
+    ],
+    [
+      "rolodex",
+      "A rolodex"
+    ],
+    [
+      "stub",
+      "A stub"
+    ],
+    [
+      "waybill",
+      "A waybill"
+    ],
+    [
+      "account-statement",
+      "A account statement"
+    ],
+    [
+      "action-list",
+      "A action list"
+    ],
+    [
+      "agenda-sheet",
+      "A agenda sheet"
+    ],
+    [
+      "appraisal-form",
+      "A appraisal form"
+    ],
+    [
+      "approved-document",
+      "An approved document"
+    ],
+    [
+      "archive-box",
+      "An archive box"
+    ],
+    [
+      "archived-document",
+      "An archived document"
+    ],
+    [
+      "barcode-label",
+      "A barcode label"
+    ],
+    [
+      "bill-lading",
+      "A bill of lading"
+    ],
+    [
+      "blank-document",
+      "A blank document"
+    ],
+    [
+      "box-file",
+      "A box file"
+    ],
+    [
+      "broken-pencil",
+      "A broken pencil"
+    ],
+    [
+      "bulldog-clip",
+      "A bulldog clip"
+    ],
+    [
+      "carbon-copy",
+      "A carbon copy"
+    ],
+    [
+      "card-index",
+      "A card index"
+    ],
+    [
+      "certificate-seal",
+      "A certificate with a seal"
+    ],
+    [
+      "checklist-sheet",
+      "A checklist sheet"
+    ],
+    [
+      "chubby-counterfoil",
+      "A chubby counterfoil"
+    ],
+    [
+      "chubby-docket",
+      "A chubby docket"
+    ],
+    [
+      "chubby-folder",
+      "A chubby folder"
+    ],
+    [
+      "chubby-manifest",
+      "A chubby manifest"
+    ],
+    [
+      "chubby-microfiche",
+      "A chubby microfiche"
+    ],
+    [
+      "chubby-newspaper",
+      "A chubby newspaper"
+    ],
+    [
+      "chubby-quotation",
+      "A chubby quotation"
+    ],
+    [
+      "chubby-rolodex",
+      "A chubby rolodex"
+    ],
+    [
+      "chubby-stub",
+      "A chubby stub"
+    ],
+    [
+      "chubby-waybill",
+      "A chubby waybill"
+    ],
+    [
+      "clear-whiteboard",
+      "A clear whiteboard"
+    ],
+    [
+      "clipboard-paper",
+      "A clipboard with paper"
+    ],
+    [
+      "closed-notebook",
+      "A closed notebook"
+    ],
+    [
+      "cluttered-desk",
+      "A cluttered desk"
+    ],
+    [
+      "competency-matrix",
+      "A competency matrix"
+    ],
+    [
+      "covered-whiteboard",
+      "A covered whiteboard"
+    ],
+    [
+      "credit-application",
+      "A credit application"
+    ],
+    [
+      "credit-note",
+      "A credit note"
+    ],
+    [
+      "damaged-box",
+      "A damaged box"
+    ],
+    [
+      "day-book",
+      "A day book"
+    ],
+    [
+      "debit-note",
+      "A debit note"
+    ],
+    [
+      "delivered-box",
+      "A delivered box"
+    ],
+    [
+      "delivery-note",
+      "A delivery note"
+    ]
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "ai",
+  "count": 50,
+  "entries": [
+    [
+      "scratchpad",
+      "A scratchpad"
+    ],
+    [
+      "accuracy-curve",
+      "Accuracy curve"
+    ],
+    [
+      "agent-loop",
+      "A agent loop"
+    ],
+    [
+      "agent-robot",
+      "Agent robot"
+    ],
+    [
+      "alignment-step",
+      "A alignment step"
+    ],
+    [
+      "assistant-avatar",
+      "A assistant avatar"
+    ],
+    [
+      "attention-head",
+      "A attention head"
+    ],
+    [
+      "backpropagation-path",
+      "A backpropagation path"
+    ],
+    [
+      "batch-normalisation",
+      "A batch normalisation"
+    ],
+    [
+      "batch-samples",
+      "A batch of samples"
+    ],
+    [
+      "benchmark-bars",
+      "Benchmark bars"
+    ],
+    [
+      "benchmark-score",
+      "A benchmark score"
+    ],
+    [
+      "brain-circuit",
+      "Brain circuit"
+    ],
+    [
+      "chain-steps",
+      "Chain of steps"
+    ],
+    [
+      "checkpoint-save",
+      "Checkpoint save"
+    ],
+    [
+      "chubby-scratchpad",
+      "A chubby scratchpad"
+    ],
+    [
+      "chunked-document",
+      "A chunked document"
+    ],
+    [
+      "citation-footnote",
+      "A citation footnote"
+    ],
+    [
+      "classification-labels",
+      "Classification labels"
+    ],
+    [
+      "clustering-dots",
+      "Clustering dots"
+    ],
+    [
+      "completion-text",
+      "Completion text"
+    ],
+    [
+      "confidence-bar",
+      "A confidence bar"
+    ],
+    [
+      "confidence-meter",
+      "Confidence meter"
+    ],
+    [
+      "confusion-matrix",
+      "A confusion matrix"
+    ],
+    [
+      "consent-notice",
+      "A consent notice"
+    ],
+    [
+      "content-filter",
+      "A content filter"
+    ],
+    [
+      "context-window",
+      "Context window"
+    ],
+    [
+      "convolution-filter",
+      "A convolution filter"
+    ],
+    [
+      "cosine-decay",
+      "A cosine decay"
+    ],
+    [
+      "cross-validation",
+      "Cross validation"
+    ],
+    [
+      "data-augmentation",
+      "A data augmentation"
+    ],
+    [
+      "data-pipeline",
+      "A data pipeline"
+    ],
+    [
+      "dataset-stack",
+      "Dataset stack"
+    ],
+    [
+      "distilled-model",
+      "A distilled model"
+    ],
+    [
+      "drift-detector",
+      "A drift detector"
+    ],
+    [
+      "dropout-mask",
+      "A dropout mask"
+    ],
+    [
+      "embedding-cloud",
+      "A embedding cloud"
+    ],
+    [
+      "embedding-space",
+      "Embedding space"
+    ],
+    [
+      "epoch-counter",
+      "An epoch counter"
+    ],
+    [
+      "evaluation-harness",
+      "An evaluation harness"
+    ],
+    [
+      "evaluation-scorecard",
+      "Evaluation scorecard"
+    ],
+    [
+      "feature-store",
+      "A feature store"
+    ],
+    [
+      "feature-vector",
+      "Feature vector"
+    ],
+    [
+      "feedback-signal",
+      "A feedback signal"
+    ],
+    [
+      "feedback-thumbs",
+      "Feedback thumbs"
+    ],
+    [
+      "global-minimum",
+      "A global minimum"
+    ],
+    [
+      "gpu-card",
+      "Gpu card"
+    ],
+    [
+      "gradient-arrow",
+      "Gradient arrow"
+    ],
+    [
+      "guardrail-filter",
+      "A guardrail filter"
+    ],
+    [
+      "guardrail-shield",
+      "Guardrail shield"
+    ]
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "tech",
+  "count": 50,
+  "entries": [
+    [
+      "accelerometer",
+      "An accelerometer"
+    ],
+    [
+      "bezel",
+      "A bezel"
+    ],
+    [
+      "bootloader",
+      "A bootloader"
+    ],
+    [
+      "breadboard",
+      "A breadboard"
+    ],
+    [
+      "capacitor",
+      "A capacitor"
+    ],
+    [
+      "diode",
+      "A diode"
+    ],
+    [
+      "earbuds",
+      "Earbuds"
+    ],
+    [
+      "fuse",
+      "A fuse"
+    ],
+    [
+      "gyroscope",
+      "A gyroscope"
+    ],
+    [
+      "inductor",
+      "An inductor"
+    ],
+    [
+      "keycap",
+      "A keycap"
+    ],
+    [
+      "microdrive",
+      "A microdrive"
+    ],
+    [
+      "monitor",
+      "Monitor"
+    ],
+    [
+      "mosfet",
+      "A mosfet"
+    ],
+    [
+      "motherboard",
+      "Motherboard"
+    ],
+    [
+      "netbook",
+      "A netbook"
+    ],
+    [
+      "plugboard",
+      "A plugboard"
+    ],
+    [
+      "potentiometer",
+      "A potentiometer"
+    ],
+    [
+      "relay",
+      "A relay"
+    ],
+    [
+      "resistor",
+      "A resistor"
+    ],
+    [
+      "soundbar",
+      "A soundbar"
+    ],
+    [
+      "trackpad",
+      "Trackpad"
+    ],
+    [
+      "transistor",
+      "A transistor"
+    ],
+    [
+      "typeball",
+      "A typeball"
+    ],
+    [
+      "access-point",
+      "A access point"
+    ],
+    [
+      "acoustic-coupler",
+      "A acoustic coupler"
+    ],
+    [
+      "activity-led",
+      "A activity led"
+    ],
+    [
+      "activity-light",
+      "A activity light"
+    ],
+    [
+      "adapter-dongle",
+      "A adapter dongle"
+    ],
+    [
+      "alert-siren",
+      "An alert siren"
+    ],
+    [
+      "all-desktop",
+      "A all in one desktop"
+    ],
+    [
+      "all-printer",
+      "A all in one printer"
+    ],
+    [
+      "antenna-pair",
+      "A antenna pair"
+    ],
+    [
+      "api-socket",
+      "An API socket"
+    ],
+    [
+      "atm-screen",
+      "A atm screen"
+    ],
+    [
+      "atx-motherboard",
+      "A atx motherboard"
+    ],
+    [
+      "audit-log",
+      "An audit log"
+    ],
+    [
+      "autoscale-arrows",
+      "An autoscale arrows"
+    ],
+    [
+      "backlight-strip",
+      "A backlight strip"
+    ],
+    [
+      "backup-completed",
+      "A backup completed"
+    ],
+    [
+      "backup-disk",
+      "A backup disk"
+    ],
+    [
+      "backup-failed",
+      "A backup failed"
+    ],
+    [
+      "backup-schedule",
+      "A backup schedule"
+    ],
+    [
+      "bandwidth-meter",
+      "A bandwidth meter"
+    ],
+    [
+      "barebones-kit",
+      "A barebones kit"
+    ],
+    [
+      "battery-cell",
+      "A battery cell"
+    ],
+    [
+      "biometric-fingerprint",
+      "A biometric fingerprint"
+    ],
+    [
+      "bios-chip",
+      "A bios chip"
+    ],
+    [
+      "bios-screen",
+      "A bios screen"
+    ],
+    [
+      "blade-chassis",
+      "A blade chassis"
+    ]
+  ]
+}

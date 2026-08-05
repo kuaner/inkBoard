@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "telecom",
+  "count": 50,
+  "entries": [
+    [
+      "attenuator",
+      "A attenuator"
+    ],
+    [
+      "cleaver",
+      "A cleaver"
+    ],
+    [
+      "femtocell",
+      "A femtocell"
+    ],
+    [
+      "inverter",
+      "A inverter"
+    ],
+    [
+      "multiplexer",
+      "A multiplexer"
+    ],
+    [
+      "pigtail",
+      "A pigtail"
+    ],
+    [
+      "rectifier",
+      "A rectifier"
+    ],
+    [
+      "repeater",
+      "A repeater"
+    ],
+    [
+      "splitter",
+      "A splitter"
+    ],
+    [
+      "switchboard",
+      "A switchboard"
+    ],
+    [
+      "winch",
+      "A winch"
+    ],
+    [
+      "aerial-rotator",
+      "An aerial rotator"
+    ],
+    [
+      "alarm-relay",
+      "A alarm relay"
+    ],
+    [
+      "battery-monitor",
+      "A battery monitor"
+    ],
+    [
+      "battery-string",
+      "A battery string"
+    ],
+    [
+      "blanking-panel",
+      "A blanking panel"
+    ],
+    [
+      "bonding-conductor",
+      "A bonding conductor"
+    ],
+    [
+      "brush-strip",
+      "A brush strip"
+    ],
+    [
+      "cable-comb",
+      "A cable comb"
+    ],
+    [
+      "cable-drum",
+      "A cable drum"
+    ],
+    [
+      "cable-label",
+      "A cable label"
+    ],
+    [
+      "cable-manager",
+      "A cable manager"
+    ],
+    [
+      "cable-tester",
+      "A cable tester"
+    ],
+    [
+      "call-progress",
+      "A call in progress"
+    ],
+    [
+      "cb-radio",
+      "A CB radio"
+    ],
+    [
+      "chamber-lid",
+      "A chamber lid"
+    ],
+    [
+      "chamber-map",
+      "A chamber map"
+    ],
+    [
+      "chubby-attenuator",
+      "A chubby attenuator"
+    ],
+    [
+      "chubby-cleaver",
+      "A chubby cleaver"
+    ],
+    [
+      "chubby-femtocell",
+      "A chubby femtocell"
+    ],
+    [
+      "chubby-inverter",
+      "A chubby inverter"
+    ],
+    [
+      "chubby-multiplexer",
+      "A chubby multiplexer"
+    ],
+    [
+      "chubby-pigtail",
+      "A chubby pigtail"
+    ],
+    [
+      "chubby-rectifier",
+      "A chubby rectifier"
+    ],
+    [
+      "chubby-repeater",
+      "A chubby repeater"
+    ],
+    [
+      "chubby-splitter",
+      "A chubby splitter"
+    ],
+    [
+      "chubby-switchboard",
+      "A chubby switchboard"
+    ],
+    [
+      "chubby-winch",
+      "A chubby winch"
+    ],
+    [
+      "coaxial-cable",
+      "A coaxial cable"
+    ],
+    [
+      "comms-cabinet",
+      "A comms cabinet"
+    ],
+    [
+      "communications-satellite",
+      "A communications satellite"
+    ],
+    [
+      "conference-bridge",
+      "A conference bridge"
+    ],
+    [
+      "copper-cable",
+      "A copper cable"
+    ],
+    [
+      "copper-pair",
+      "A copper pair"
+    ],
+    [
+      "coverage-map",
+      "A coverage map"
+    ],
+    [
+      "cross-connect",
+      "A cross connect"
+    ],
+    [
+      "directional-drill",
+      "A directional drill"
+    ],
+    [
+      "dish-alignment",
+      "A dish alignment"
+    ],
+    [
+      "distribution-frame",
+      "A distribution frame"
+    ],
+    [
+      "distribution-pole",
+      "A distribution pole"
+    ]
+  ]
+}

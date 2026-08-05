@@ -1,0 +1,207 @@
+{
+  "group": "people",
+  "subgroup": "vehicle",
+  "count": 50,
+  "entries": [
+    [
+      "hailing-taxi",
+      "Hailing a taxi"
+    ],
+    [
+      "paddling-canoe",
+      "Paddling a canoe"
+    ],
+    [
+      "pulling-suitcase",
+      "Pulling a suitcase"
+    ],
+    [
+      "pushing-wheelchair",
+      "Pushing a wheelchair"
+    ],
+    [
+      "riding-bicycle",
+      "Riding a bicycle"
+    ],
+    [
+      "riding-horse",
+      "Riding a horse"
+    ],
+    [
+      "riding-motorbike",
+      "Riding a motorbike"
+    ],
+    [
+      "riding-scooter",
+      "Riding a scooter"
+    ],
+    [
+      "roller-skates",
+      "On roller skates"
+    ],
+    [
+      "sitting-wheelchair",
+      "Sitting in a wheelchair"
+    ],
+    [
+      "solid-convertible",
+      "A solid convertible"
+    ],
+    [
+      "solid-suv",
+      "A solid SUV"
+    ],
+    [
+      "standing-bus",
+      "Standing on a bus"
+    ],
+    [
+      "using-crutches",
+      "Using crutches"
+    ],
+    [
+      "using-escalator",
+      "Using an escalator"
+    ],
+    [
+      "waiting-lift",
+      "Waiting at a lift"
+    ],
+    [
+      "waiting-luggage",
+      "Waiting with luggage"
+    ],
+    [
+      "boarding-plane-ticket",
+      "Boarding a plane with a ticket"
+    ],
+    [
+      "checking-departure-board",
+      "Checking a departure board"
+    ],
+    [
+      "chubby-hailing-taxi",
+      "Chubby hailing a taxi"
+    ],
+    [
+      "chubby-paddling-canoe",
+      "Chubby paddling a canoe"
+    ],
+    [
+      "chubby-pulling-suitcase",
+      "Chubby pulling a suitcase"
+    ],
+    [
+      "chubby-pushing-wheelchair",
+      "Chubby pushing a wheelchair"
+    ],
+    [
+      "chubby-sitting-wheelchair",
+      "Chubby sitting in a wheelchair"
+    ],
+    [
+      "chubby-standing-bus",
+      "Chubby standing on a bus"
+    ],
+    [
+      "chubby-using-crutches",
+      "Chubby using crutches"
+    ],
+    [
+      "chubby-using-escalator",
+      "Chubby using an escalator"
+    ],
+    [
+      "chubby-waiting-lift",
+      "Chubby waiting at a lift"
+    ],
+    [
+      "chubby-waiting-luggage",
+      "Chubby waiting with luggage"
+    ],
+    [
+      "person-boarding-bicycle",
+      "A person boarding a bicycle"
+    ],
+    [
+      "person-boarding-boat",
+      "A person boarding a boat"
+    ],
+    [
+      "person-boarding-bus",
+      "A person boarding a bus"
+    ],
+    [
+      "person-boarding-car",
+      "A person boarding a car"
+    ],
+    [
+      "person-boarding-ferry",
+      "A person boarding a ferry"
+    ],
+    [
+      "person-boarding-forklift",
+      "A person boarding a forklift"
+    ],
+    [
+      "person-boarding-helicopter",
+      "A person boarding a helicopter"
+    ],
+    [
+      "person-boarding-lorry",
+      "A person boarding a lorry"
+    ],
+    [
+      "person-boarding-motorbike",
+      "A person boarding a motorbike"
+    ],
+    [
+      "person-boarding-plane",
+      "A person boarding a plane"
+    ],
+    [
+      "person-boarding-scooter",
+      "A person boarding a scooter"
+    ],
+    [
+      "person-boarding-taxi",
+      "A person boarding a taxi"
+    ],
+    [
+      "person-boarding-tractor",
+      "A person boarding a tractor"
+    ],
+    [
+      "person-boarding-train",
+      "A person boarding a train"
+    ],
+    [
+      "person-boarding-tram",
+      "A person boarding a tram"
+    ],
+    [
+      "person-boarding-van",
+      "A person boarding a van"
+    ],
+    [
+      "person-buying-bicycle",
+      "A person buying a bicycle"
+    ],
+    [
+      "person-buying-boat",
+      "A person buying a boat"
+    ],
+    [
+      "person-buying-bus",
+      "A person buying a bus"
+    ],
+    [
+      "person-buying-car",
+      "A person buying a car"
+    ],
+    [
+      "person-buying-ferry",
+      "A person buying a ferry"
+    ]
+  ]
+}

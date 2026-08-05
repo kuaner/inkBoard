@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "health",
+  "count": 50,
+  "entries": [
+    [
+      "aftershave",
+      "A aftershave"
+    ],
+    [
+      "audiogram",
+      "A audiogram"
+    ],
+    [
+      "bacterium",
+      "A bacterium"
+    ],
+    [
+      "bathrobe",
+      "A bathrobe"
+    ],
+    [
+      "bladder",
+      "A bladder"
+    ],
+    [
+      "bone",
+      "A bone"
+    ],
+    [
+      "brainstem",
+      "A brainstem"
+    ],
+    [
+      "cannula",
+      "A cannula"
+    ],
+    [
+      "catheter",
+      "A catheter"
+    ],
+    [
+      "cochlea",
+      "The cochlea"
+    ],
+    [
+      "crutches",
+      "Crutches"
+    ],
+    [
+      "deodorant",
+      "A deodorant"
+    ],
+    [
+      "diaphragm",
+      "A diaphragm"
+    ],
+    [
+      "ear",
+      "An ear"
+    ],
+    [
+      "forceps",
+      "Forceps"
+    ],
+    [
+      "humerus",
+      "A humerus"
+    ],
+    [
+      "humidifier",
+      "A humidifier"
+    ],
+    [
+      "jaw",
+      "A jaw"
+    ],
+    [
+      "kidney",
+      "A kidney"
+    ],
+    [
+      "ligament",
+      "A ligament"
+    ],
+    [
+      "liver",
+      "A liver"
+    ],
+    [
+      "nose",
+      "A nose"
+    ],
+    [
+      "ophthalmoscope",
+      "A ophthalmoscope"
+    ],
+    [
+      "otoscope",
+      "An otoscope"
+    ],
+    [
+      "scalpel",
+      "A scalpel"
+    ],
+    [
+      "skull",
+      "A skull"
+    ],
+    [
+      "sling",
+      "A sling"
+    ],
+    [
+      "stethoscope",
+      "A stethoscope"
+    ],
+    [
+      "stomach",
+      "A stomach"
+    ],
+    [
+      "syringe",
+      "A syringe"
+    ],
+    [
+      "tendon",
+      "A tendon"
+    ],
+    [
+      "throat",
+      "A throat"
+    ],
+    [
+      "thyroid",
+      "A thyroid"
+    ],
+    [
+      "tooth",
+      "A tooth"
+    ],
+    [
+      "trachea",
+      "The trachea"
+    ],
+    [
+      "tweezers",
+      "A tweezers"
+    ],
+    [
+      "wheelchair",
+      "A wheelchair"
+    ],
+    [
+      "adapted-cutlery",
+      "A adapted cutlery"
+    ],
+    [
+      "adapted-keyboard",
+      "A adapted keyboard"
+    ],
+    [
+      "adapted-mouse",
+      "A adapted mouse"
+    ],
+    [
+      "alcohol-wipe",
+      "A alcohol wipe"
+    ],
+    [
+      "alveolus-cluster",
+      "An alveolus cluster"
+    ],
+    [
+      "bandage-roll",
+      "A bandage roll"
+    ],
+    [
+      "beaker-lid",
+      "A beaker with a lid"
+    ],
+    [
+      "blister-plaster",
+      "A blister plaster"
+    ],
+    [
+      "blood-cell",
+      "A blood cell"
+    ],
+    [
+      "bmi-chart",
+      "A bmi chart"
+    ],
+    [
+      "body-brush",
+      "A body brush"
+    ],
+    [
+      "braille-book",
+      "A braille book"
+    ],
+    [
+      "brain-lobes",
+      "The brain lobes"
+    ]
+  ]
+}

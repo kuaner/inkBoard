@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "print",
+  "count": 50,
+  "entries": [
+    [
+      "catalogue",
+      "A catalogue"
+    ],
+    [
+      "densitometer",
+      "A densitometer"
+    ],
+    [
+      "endpaper",
+      "An endpaper"
+    ],
+    [
+      "knockout",
+      "A knockout"
+    ],
+    [
+      "laminator",
+      "A laminator"
+    ],
+    [
+      "loupe",
+      "A loupe"
+    ],
+    [
+      "overprint",
+      "A overprint"
+    ],
+    [
+      "palletiser",
+      "A palletiser"
+    ],
+    [
+      "platen",
+      "A platen"
+    ],
+    [
+      "processor",
+      "A processor"
+    ],
+    [
+      "spectrophotometer",
+      "A spectrophotometer"
+    ],
+    [
+      "spine",
+      "A spine"
+    ],
+    [
+      "splicer",
+      "A splicer"
+    ],
+    [
+      "stacker",
+      "A stacker"
+    ],
+    [
+      "strapper",
+      "A strapper"
+    ],
+    [
+      "back-gauge",
+      "A back gauge"
+    ],
+    [
+      "banner-stand",
+      "A banner stand"
+    ],
+    [
+      "baseline-grid",
+      "A baseline grid"
+    ],
+    [
+      "blanket-wash",
+      "A blanket wash"
+    ],
+    [
+      "bleed-edge",
+      "A bleed edge"
+    ],
+    [
+      "board-shear",
+      "A board shear"
+    ],
+    [
+      "book-block",
+      "A book block"
+    ],
+    [
+      "book-press",
+      "A book press"
+    ],
+    [
+      "brightness-meter",
+      "A brightness meter"
+    ],
+    [
+      "brochure-fold",
+      "A brochure fold"
+    ],
+    [
+      "bulk-measure",
+      "A bulk measure"
+    ],
+    [
+      "caliper-gauge",
+      "A caliper gauge"
+    ],
+    [
+      "caliper-micrometer",
+      "A caliper micrometer"
+    ],
+    [
+      "case-binding",
+      "A case binding"
+    ],
+    [
+      "case-maker",
+      "A case maker"
+    ],
+    [
+      "casing-machine",
+      "A casing in machine"
+    ],
+    [
+      "chase-frame",
+      "A chase frame"
+    ],
+    [
+      "chill-roller",
+      "A chill roller"
+    ],
+    [
+      "chubby-catalogue",
+      "A chubby catalogue"
+    ],
+    [
+      "chubby-densitometer",
+      "A chubby densitometer"
+    ],
+    [
+      "chubby-endpaper",
+      "A chubby endpaper"
+    ],
+    [
+      "chubby-knockout",
+      "A chubby knockout"
+    ],
+    [
+      "chubby-laminator",
+      "A chubby laminator"
+    ],
+    [
+      "chubby-loupe",
+      "A chubby loupe"
+    ],
+    [
+      "chubby-overprint",
+      "A chubby overprint"
+    ],
+    [
+      "chubby-palletiser",
+      "A chubby palletiser"
+    ],
+    [
+      "chubby-platen",
+      "A chubby platen"
+    ],
+    [
+      "chubby-processor",
+      "A chubby processor"
+    ],
+    [
+      "chubby-spectrophotometer",
+      "A chubby spectrophotometer"
+    ],
+    [
+      "chubby-spine",
+      "A chubby spine"
+    ],
+    [
+      "chubby-splicer",
+      "A chubby splicer"
+    ],
+    [
+      "chubby-stacker",
+      "A chubby stacker"
+    ],
+    [
+      "chubby-strapper",
+      "A chubby strapper"
+    ],
+    [
+      "colour-bar",
+      "A colour bar"
+    ],
+    [
+      "compliment-slip",
+      "A compliment slip"
+    ]
+  ]
+}

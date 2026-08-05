@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "industry",
+  "count": 50,
+  "entries": [
+    [
+      "bushing",
+      "A bushing"
+    ],
+    [
+      "camshaft",
+      "A camshaft"
+    ],
+    [
+      "cantilever",
+      "A cantilever"
+    ],
+    [
+      "crankshaft",
+      "A crankshaft"
+    ],
+    [
+      "differential",
+      "A differential"
+    ],
+    [
+      "flywheel",
+      "A flywheel"
+    ],
+    [
+      "forklift",
+      "A forklift"
+    ],
+    [
+      "gasket",
+      "A gasket"
+    ],
+    [
+      "generator",
+      "A generator"
+    ],
+    [
+      "governor",
+      "A governor"
+    ],
+    [
+      "jackhammer",
+      "A jackhammer"
+    ],
+    [
+      "piston",
+      "A piston"
+    ],
+    [
+      "toolbox",
+      "A toolbox"
+    ],
+    [
+      "turbocharger",
+      "A turbocharger"
+    ],
+    [
+      "batch-bottles",
+      "A batch of bottles"
+    ],
+    [
+      "batch-boxes",
+      "A batch of boxes"
+    ],
+    [
+      "batch-cans",
+      "A batch of cans"
+    ],
+    [
+      "batch-chemicals",
+      "A batch of chemicals"
+    ],
+    [
+      "batch-food",
+      "A batch of food"
+    ],
+    [
+      "batch-furniture",
+      "A batch of furniture"
+    ],
+    [
+      "batch-glass",
+      "A batch of glass"
+    ],
+    [
+      "batch-medicine",
+      "A batch of medicine"
+    ],
+    [
+      "batch-paper",
+      "A batch of paper"
+    ],
+    [
+      "batch-plastics",
+      "A batch of plastics"
+    ],
+    [
+      "batch-steel",
+      "A batch of steel"
+    ],
+    [
+      "batch-textiles",
+      "A batch of textiles"
+    ],
+    [
+      "battery-bank",
+      "A battery bank"
+    ],
+    [
+      "bellows-joint",
+      "A bellows joint"
+    ],
+    [
+      "bevel-gear",
+      "A bevel gear"
+    ],
+    [
+      "bolt-nut",
+      "A bolt and nut"
+    ],
+    [
+      "brake-caliper",
+      "A brake caliper"
+    ],
+    [
+      "braze-joint",
+      "A braze joint"
+    ],
+    [
+      "butt-joint",
+      "A butt joint"
+    ],
+    [
+      "cargo-crane",
+      "A cargo crane"
+    ],
+    [
+      "cement-mixer",
+      "A cement mixer"
+    ],
+    [
+      "chain-sprocket",
+      "A chain and sprocket"
+    ],
+    [
+      "charging-cable",
+      "A charging cable"
+    ],
+    [
+      "chubby-bushing",
+      "A chubby bushing"
+    ],
+    [
+      "chubby-camshaft",
+      "A chubby camshaft"
+    ],
+    [
+      "chubby-cantilever",
+      "A chubby cantilever"
+    ],
+    [
+      "chubby-crankshaft",
+      "A chubby crankshaft"
+    ],
+    [
+      "chubby-differential",
+      "A chubby differential"
+    ],
+    [
+      "chubby-flywheel",
+      "A chubby flywheel"
+    ],
+    [
+      "chubby-forklift",
+      "A chubby forklift"
+    ],
+    [
+      "chubby-gasket",
+      "A chubby gasket"
+    ],
+    [
+      "chubby-generator",
+      "A chubby generator"
+    ],
+    [
+      "chubby-governor",
+      "A chubby governor"
+    ],
+    [
+      "chubby-jackhammer",
+      "A chubby jackhammer"
+    ],
+    [
+      "chubby-piston",
+      "A chubby piston"
+    ],
+    [
+      "chubby-toolbox",
+      "A chubby toolbox"
+    ]
+  ]
+}

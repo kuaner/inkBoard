@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "rail",
+  "count": 50,
+  "entries": [
+    [
+      "balise",
+      "A balise"
+    ],
+    [
+      "baseplate",
+      "A baseplate"
+    ],
+    [
+      "bogie",
+      "A bogie"
+    ],
+    [
+      "coupling",
+      "A coupling"
+    ],
+    [
+      "fishplate",
+      "A fishplate"
+    ],
+    [
+      "headshunt",
+      "A headshunt"
+    ],
+    [
+      "pantograph",
+      "A pantograph"
+    ],
+    [
+      "railcard",
+      "A railcard"
+    ],
+    [
+      "shunter",
+      "A shunter"
+    ],
+    [
+      "siding",
+      "A siding"
+    ],
+    [
+      "sleeper",
+      "A sleeper"
+    ],
+    [
+      "turntable",
+      "A turntable"
+    ],
+    [
+      "viaduct",
+      "A viaduct"
+    ],
+    [
+      "wheelset",
+      "A wheelset"
+    ],
+    [
+      "axle-box",
+      "An axle box"
+    ],
+    [
+      "axle-counter",
+      "A axle counter"
+    ],
+    [
+      "barrier-light",
+      "A barrier light"
+    ],
+    [
+      "barrow-crossing",
+      "A barrow crossing"
+    ],
+    [
+      "block-bell",
+      "A block bell"
+    ],
+    [
+      "bogie-frame",
+      "A bogie frame"
+    ],
+    [
+      "brake-block",
+      "A brake block"
+    ],
+    [
+      "brake-shoe",
+      "A brake shoe"
+    ],
+    [
+      "brake-van",
+      "A brake van"
+    ],
+    [
+      "buffer-stop",
+      "A buffer stop"
+    ],
+    [
+      "carriage-door",
+      "A carriage door"
+    ],
+    [
+      "carriage-window",
+      "A carriage window"
+    ],
+    [
+      "catch-point",
+      "A catch point"
+    ],
+    [
+      "check-rail",
+      "A check rail"
+    ],
+    [
+      "chubby-balise",
+      "A chubby balise"
+    ],
+    [
+      "chubby-baseplate",
+      "A chubby baseplate"
+    ],
+    [
+      "chubby-bogie",
+      "A chubby bogie"
+    ],
+    [
+      "chubby-coupling",
+      "A chubby coupling"
+    ],
+    [
+      "chubby-fishplate",
+      "A chubby fishplate"
+    ],
+    [
+      "chubby-headshunt",
+      "A chubby headshunt"
+    ],
+    [
+      "chubby-pantograph",
+      "A chubby pantograph"
+    ],
+    [
+      "chubby-railcard",
+      "A chubby railcard"
+    ],
+    [
+      "chubby-shunter",
+      "A chubby shunter"
+    ],
+    [
+      "chubby-siding",
+      "A chubby siding"
+    ],
+    [
+      "chubby-sleeper",
+      "A chubby sleeper"
+    ],
+    [
+      "chubby-turntable",
+      "A chubby turntable"
+    ],
+    [
+      "chubby-viaduct",
+      "A chubby viaduct"
+    ],
+    [
+      "chubby-wheelset",
+      "A chubby wheelset"
+    ],
+    [
+      "coal-shovel",
+      "A coal shovel"
+    ],
+    [
+      "coaling-stage",
+      "A coaling stage"
+    ],
+    [
+      "concrete-sleeper",
+      "A concrete sleeper"
+    ],
+    [
+      "conductor-whistle",
+      "A conductor whistle"
+    ],
+    [
+      "corridor-connection",
+      "A corridor connection"
+    ],
+    [
+      "crossing-frog",
+      "A crossing frog"
+    ],
+    [
+      "departure-summary",
+      "A departure summary"
+    ],
+    [
+      "diamond-crossing",
+      "A diamond crossing"
+    ]
+  ]
+}

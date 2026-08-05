@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "travel",
+  "count": 50,
+  "entries": [
+    [
+      "camera",
+      "A camera"
+    ],
+    [
+      "campervan",
+      "A campervan"
+    ],
+    [
+      "compass",
+      "A compass"
+    ],
+    [
+      "globe",
+      "A globe"
+    ],
+    [
+      "passport",
+      "A passport"
+    ],
+    [
+      "rucksack",
+      "A rucksack"
+    ],
+    [
+      "sextant",
+      "A sextant"
+    ],
+    [
+      "signpost",
+      "A signpost"
+    ],
+    [
+      "suitcase",
+      "A suitcase"
+    ],
+    [
+      "air-stairs",
+      "A air stairs"
+    ],
+    [
+      "airsickness-bag",
+      "A airsickness bag"
+    ],
+    [
+      "altitude-marker",
+      "A altitude marker"
+    ],
+    [
+      "atm-airport",
+      "A atm at an airport"
+    ],
+    [
+      "beach-umbrella",
+      "A beach umbrella"
+    ],
+    [
+      "binoculars-scanning",
+      "A binoculars scanning"
+    ],
+    [
+      "biometric-gate",
+      "A biometric gate"
+    ],
+    [
+      "boarding-pass",
+      "A boarding pass"
+    ],
+    [
+      "boardwalk-path",
+      "A boardwalk path"
+    ],
+    [
+      "bridge-sign",
+      "A bridge sign"
+    ],
+    [
+      "bridleway-sign",
+      "A bridleway sign"
+    ],
+    [
+      "buoy-marker",
+      "A buoy marker"
+    ],
+    [
+      "bus-gate",
+      "A bus gate"
+    ],
+    [
+      "cabin-berth",
+      "A cabin berth"
+    ],
+    [
+      "cairn-stones",
+      "A cairn of stones"
+    ],
+    [
+      "call-button",
+      "A call button"
+    ],
+    [
+      "camera-strap",
+      "A camera with a strap"
+    ],
+    [
+      "channel-post",
+      "A channel post"
+    ],
+    [
+      "charging-post",
+      "A charging post"
+    ],
+    [
+      "chubby-camera",
+      "A chubby camera"
+    ],
+    [
+      "chubby-campervan",
+      "A chubby campervan"
+    ],
+    [
+      "chubby-compass",
+      "A chubby compass"
+    ],
+    [
+      "chubby-globe",
+      "A chubby globe"
+    ],
+    [
+      "chubby-passport",
+      "A chubby passport"
+    ],
+    [
+      "chubby-rucksack",
+      "A chubby rucksack"
+    ],
+    [
+      "chubby-sextant",
+      "A chubby sextant"
+    ],
+    [
+      "chubby-signpost",
+      "A chubby signpost"
+    ],
+    [
+      "chubby-suitcase",
+      "A chubby suitcase"
+    ],
+    [
+      "compression-bag",
+      "A compression bag"
+    ],
+    [
+      "crossroads-sign",
+      "A crossroads sign"
+    ],
+    [
+      "currency-counter",
+      "A currency counter"
+    ],
+    [
+      "currency-wallet",
+      "A currency wallet"
+    ],
+    [
+      "deck-chair",
+      "A deck chair"
+    ],
+    [
+      "destination-flag",
+      "A destination flag"
+    ],
+    [
+      "detour-sign",
+      "A detour sign"
+    ],
+    [
+      "distance-sign",
+      "A distance sign"
+    ],
+    [
+      "e-gate",
+      "A e gate"
+    ],
+    [
+      "escalator-gate",
+      "A escalator to a gate"
+    ],
+    [
+      "eye-mask",
+      "A eye mask"
+    ],
+    [
+      "finish-marker",
+      "A finish marker"
+    ],
+    [
+      "footpath-stile",
+      "A footpath stile"
+    ]
+  ]
+}

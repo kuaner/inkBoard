@@ -1,0 +1,207 @@
+{
+  "group": "object",
+  "subgroup": "environment",
+  "count": 50,
+  "entries": [
+    [
+      "glade",
+      "A glade"
+    ],
+    [
+      "lysimeter",
+      "A lysimeter"
+    ],
+    [
+      "piezometer",
+      "A piezometer"
+    ],
+    [
+      "swale",
+      "A swale"
+    ],
+    [
+      "wormery",
+      "A wormery"
+    ],
+    [
+      "albedo-measure",
+      "A albedo measure"
+    ],
+    [
+      "ancient-hedgerow",
+      "A ancient hedgerow"
+    ],
+    [
+      "bat-box",
+      "A bat box"
+    ],
+    [
+      "bat-detector",
+      "A bat detector"
+    ],
+    [
+      "beaver-dam",
+      "A beaver dam"
+    ],
+    [
+      "beehive-conservation",
+      "A beehive conservation"
+    ],
+    [
+      "beetle-bank",
+      "A beetle bank"
+    ],
+    [
+      "bicycle-commute",
+      "A bicycle commute"
+    ],
+    [
+      "biodegradable-label",
+      "A biodegradable label"
+    ],
+    [
+      "biodiversity-net",
+      "A biodiversity net"
+    ],
+    [
+      "biomass-pellet",
+      "A biomass pellet"
+    ],
+    [
+      "bird-box",
+      "A bird box"
+    ],
+    [
+      "bund-wall",
+      "A bund wall"
+    ],
+    [
+      "butterfly-transect",
+      "A butterfly transect"
+    ],
+    [
+      "carbon-sink",
+      "A carbon sink"
+    ],
+    [
+      "charcoal-kiln",
+      "A charcoal kiln"
+    ],
+    [
+      "check-dam",
+      "A check dam"
+    ],
+    [
+      "chubby-glade",
+      "A chubby glade"
+    ],
+    [
+      "chubby-lysimeter",
+      "A chubby lysimeter"
+    ],
+    [
+      "chubby-piezometer",
+      "A chubby piezometer"
+    ],
+    [
+      "chubby-swale",
+      "A chubby swale"
+    ],
+    [
+      "chubby-wormery",
+      "A chubby wormery"
+    ],
+    [
+      "community-garden",
+      "A community garden"
+    ],
+    [
+      "compost-heap",
+      "A compost heap"
+    ],
+    [
+      "conductivity-meter",
+      "A conductivity meter"
+    ],
+    [
+      "coppice-cycle",
+      "A coppice cycle"
+    ],
+    [
+      "coppice-hurdle",
+      "A coppice hurdle"
+    ],
+    [
+      "coppice-stool",
+      "A coppice stool"
+    ],
+    [
+      "coral-fragment",
+      "A coral fragment"
+    ],
+    [
+      "coral-restoration",
+      "A coral restoration"
+    ],
+    [
+      "deadwood-pile",
+      "A deadwood pile"
+    ],
+    [
+      "deer-guard",
+      "A deer guard"
+    ],
+    [
+      "dormouse-tube",
+      "A dormouse tube"
+    ],
+    [
+      "eco-certificate",
+      "An eco certificate"
+    ],
+    [
+      "energy-meter",
+      "An energy meter"
+    ],
+    [
+      "erosion-pin",
+      "A erosion pin"
+    ],
+    [
+      "evaporation-pan",
+      "A evaporation pan"
+    ],
+    [
+      "fish-pass",
+      "A fish pass"
+    ],
+    [
+      "geothermal-vent",
+      "A geothermal vent"
+    ],
+    [
+      "glacier-snout",
+      "A glacier snout"
+    ],
+    [
+      "globe-leaf",
+      "A globe with a leaf"
+    ],
+    [
+      "grease-trap",
+      "A grease trap"
+    ],
+    [
+      "green-bridge",
+      "A green bridge"
+    ],
+    [
+      "green-roof",
+      "A green roof"
+    ],
+    [
+      "greywater-tank",
+      "A greywater tank"
+    ]
+  ]
+}

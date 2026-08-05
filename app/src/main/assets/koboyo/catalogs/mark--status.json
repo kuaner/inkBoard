@@ -1,0 +1,207 @@
+{
+  "group": "mark",
+  "subgroup": "status",
+  "count": 50,
+  "entries": [
+    [
+      "battery-full",
+      "A battery full"
+    ],
+    [
+      "battery-half",
+      "A battery half"
+    ],
+    [
+      "battery-low",
+      "A battery low"
+    ],
+    [
+      "bell-active",
+      "A bell active"
+    ],
+    [
+      "bookmark-filled",
+      "A bookmark filled"
+    ],
+    [
+      "cloud-cross",
+      "A cloud with a cross"
+    ],
+    [
+      "cloud-tick",
+      "A cloud with a tick"
+    ],
+    [
+      "cross-badge",
+      "A cross on a badge"
+    ],
+    [
+      "cross-banner",
+      "A cross on a banner"
+    ],
+    [
+      "cross-circle",
+      "A cross in a circle"
+    ],
+    [
+      "cross-large",
+      "A cross large"
+    ],
+    [
+      "cross-own",
+      "A cross on its own"
+    ],
+    [
+      "cross-shadow",
+      "A cross with a shadow"
+    ],
+    [
+      "cross-small",
+      "A cross small"
+    ],
+    [
+      "cross-square",
+      "A cross in a square"
+    ],
+    [
+      "flag-lowered",
+      "A flag lowered"
+    ],
+    [
+      "flag-raised",
+      "A flag raised"
+    ],
+    [
+      "heartbeat-line",
+      "A heartbeat line"
+    ],
+    [
+      "pulsing-dot",
+      "A pulsing dot"
+    ],
+    [
+      "shield-badge",
+      "A shield on a badge"
+    ],
+    [
+      "shield-banner",
+      "A shield on a banner"
+    ],
+    [
+      "shield-circle",
+      "A shield in a circle"
+    ],
+    [
+      "shield-large",
+      "A shield large"
+    ],
+    [
+      "shield-own",
+      "A shield on its own"
+    ],
+    [
+      "shield-shadow",
+      "A shield with a shadow"
+    ],
+    [
+      "shield-small",
+      "A shield small"
+    ],
+    [
+      "shield-square",
+      "A shield in a square"
+    ],
+    [
+      "solid-error",
+      "An error octagon with an exclamation"
+    ],
+    [
+      "spinner-arc",
+      "A spinner arc"
+    ],
+    [
+      "spinner-dots",
+      "A spinner of dots"
+    ],
+    [
+      "tick-badge",
+      "A tick on a badge"
+    ],
+    [
+      "tick-banner",
+      "A tick on a banner"
+    ],
+    [
+      "tick-circle",
+      "A tick in a circle"
+    ],
+    [
+      "tick-large",
+      "A tick large"
+    ],
+    [
+      "tick-own",
+      "A tick on its own"
+    ],
+    [
+      "tick-shadow",
+      "A tick with a shadow"
+    ],
+    [
+      "tick-small",
+      "A tick small"
+    ],
+    [
+      "tick-square",
+      "A tick in a square"
+    ],
+    [
+      "wifi-full",
+      "A wifi full"
+    ],
+    [
+      "wifi-off",
+      "A wifi off"
+    ],
+    [
+      "wifi-weak",
+      "A wifi weak"
+    ],
+    [
+      "chubby-battery-full",
+      "A chubby battery full"
+    ],
+    [
+      "chubby-battery-half",
+      "A chubby battery half"
+    ],
+    [
+      "chubby-battery-low",
+      "A chubby battery low"
+    ],
+    [
+      "chubby-bell-active",
+      "A chubby bell active"
+    ],
+    [
+      "chubby-cloud-cross",
+      "A chubby cloud with a cross"
+    ],
+    [
+      "chubby-cloud-tick",
+      "A chubby cloud with a tick"
+    ],
+    [
+      "chubby-cross-badge",
+      "A chubby cross on a badge"
+    ],
+    [
+      "chubby-cross-banner",
+      "A chubby cross on a banner"
+    ],
+    [
+      "chubby-cross-circle",
+      "A chubby cross in a circle"
+    ]
+  ]
+}
