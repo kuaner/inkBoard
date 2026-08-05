@@ -113,7 +113,7 @@ internal fun SenderPage(
             onBack = onBack,
             onAction = onBack
         )
-        Spacer(Modifier.height(if (wide) 30.dp else 20.dp))
+        Spacer(Modifier.height(if (wide) 30.dp else 14.dp))
 
         if (wide) {
             Row(
@@ -122,7 +122,12 @@ internal fun SenderPage(
                     .weight(1f),
                 verticalAlignment = Alignment.Top
             ) {
-                SenderInstructions(modifier = Modifier.weight(1.05f))
+                SenderInstructions(
+                    compact = false,
+                    modifier = Modifier
+                        .weight(1.05f)
+                        .fillMaxHeight()
+                )
                 Spacer(Modifier.width(42.dp))
                 SenderAddressPanel(
                     snapshot = snapshot,
@@ -132,26 +137,32 @@ internal fun SenderPage(
                 )
             }
         } else {
+            // Portrait: connection (URL + QR) first — instructions used to
+            // fillMaxHeight() and pushed the address block off-screen.
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
             ) {
-                SenderInstructions()
-                Spacer(Modifier.height(26.dp))
                 SenderAddressPanel(
                     snapshot = snapshot,
                     onRetry = onRetry,
-                    wide = false
+                    wide = false,
+                    modifier = Modifier.fillMaxWidth()
                 )
+                Spacer(Modifier.height(16.dp))
+                SenderInstructions(compact = true)
             }
         }
     }
 }
 
 @Composable
-private fun SenderInstructions(modifier: Modifier = Modifier) {
-    Column(modifier = modifier.fillMaxHeight()) {
+private fun SenderInstructions(
+    compact: Boolean,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier = modifier) {
         Text(
             text = "LOCAL FILE DROP",
             color = InkBlack,
@@ -159,31 +170,39 @@ private fun SenderInstructions(modifier: Modifier = Modifier) {
             fontWeight = FontWeight.Black,
             letterSpacing = 2.sp
         )
-        Spacer(Modifier.height(14.dp))
+        Spacer(Modifier.height(if (compact) 8.dp else 14.dp))
         Text(
-            text = "把文件送到\n平板。",
+            text = if (compact) "把文件送到平板。" else "把文件送到\n平板。",
             color = InkBlack,
-            fontSize = 44.sp,
-            lineHeight = 48.sp,
+            fontSize = if (compact) 26.sp else 44.sp,
+            lineHeight = if (compact) 30.sp else 48.sp,
             fontWeight = FontWeight.Black,
             letterSpacing = (-1.2).sp
         )
-        Spacer(Modifier.height(22.dp))
+        Spacer(Modifier.height(if (compact) 12.dp else 22.dp))
         Hairline(thick = true)
-        Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(if (compact) 10.dp else 16.dp))
         Text(
-            text = "电脑与平板连接同一网络，\n在电脑浏览器打开右侧地址。",
+            text = if (compact) {
+                "电脑与平板同一网络，浏览器打开上方地址；也可扫码。"
+            } else {
+                "电脑与平板连接同一网络，\n在电脑浏览器打开右侧地址。"
+            },
             color = InkBlack,
-            fontSize = 16.sp,
-            lineHeight = 24.sp,
+            fontSize = if (compact) 14.sp else 16.sp,
+            lineHeight = if (compact) 20.sp else 24.sp,
             fontWeight = FontWeight.Bold
         )
-        Spacer(Modifier.height(12.dp))
+        Spacer(Modifier.height(if (compact) 8.dp else 12.dp))
         Text(
-            text = "网页可以选择文件夹，目录结构会保留。\n文件保存到 Download / InkBoard；返回后服务关闭。",
+            text = if (compact) {
+                "支持选文件夹；保存到 Download / InkBoard。返回后服务关闭。"
+            } else {
+                "网页可以选择文件夹，目录结构会保留。\n文件保存到 Download / InkBoard；返回后服务关闭。"
+            },
             color = InkDark,
-            fontSize = 13.sp,
-            lineHeight = 20.sp,
+            fontSize = if (compact) 12.sp else 13.sp,
+            lineHeight = if (compact) 18.sp else 20.sp,
             fontWeight = FontWeight.Bold
         )
     }
@@ -204,20 +223,21 @@ private fun SenderAddressPanel(
             fontWeight = FontWeight.Black,
             letterSpacing = 1.8.sp
         )
-        Spacer(Modifier.height(12.dp))
+        Spacer(Modifier.height(if (wide) 12.dp else 10.dp))
         SenderConnectionCard(
             snapshot = snapshot,
-            qrSize = if (wide) 176.dp else 154.dp
+            wide = wide,
+            qrSize = if (wide) 176.dp else 148.dp
         )
         if (!snapshot.running && !snapshot.loading) {
-            Spacer(Modifier.height(16.dp))
+            Spacer(Modifier.height(12.dp))
             ControlActionTile(
                 title = "RETRY",
                 detail = "重新启动临时服务",
                 onClick = onRetry,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(82.dp)
+                    .height(if (wide) 82.dp else 72.dp)
             )
         }
     }
@@ -226,81 +246,122 @@ private fun SenderAddressPanel(
 @Composable
 private fun SenderConnectionCard(
     snapshot: SenderSnapshot,
+    wide: Boolean,
     qrSize: Dp
 ) {
+    val urlText = when {
+        snapshot.url != null -> snapshot.url
+        snapshot.loading -> "正在启动…"
+        else -> "局域网地址未发现"
+    }
+    val statusText = when {
+        snapshot.loading -> "正在打开临时服务…"
+        snapshot.running && snapshot.url != null -> "服务已开启 · 等待上传"
+        snapshot.running -> "服务已开启，但未找到局域网地址"
+        snapshot.error != null -> snapshot.error
+        else -> "服务已关闭"
+    }
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .background(InkBlack)
-            .padding(horizontal = 20.dp, vertical = 20.dp)
+            .padding(
+                horizontal = if (wide) 20.dp else 16.dp,
+                vertical = if (wide) 20.dp else 16.dp
+            )
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = "LOCAL DROP",
-                    color = InkWhite,
-                    fontSize = 10.sp,
-                    fontWeight = FontWeight.Black,
-                    letterSpacing = 1.8.sp
+        if (wide) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                SenderConnectionCopy(
+                    snapshot = snapshot,
+                    urlText = urlText,
+                    statusText = statusText,
+                    compact = false,
+                    modifier = Modifier.weight(1f)
                 )
-                Spacer(Modifier.height(12.dp))
-                Text(
-                    text = if (snapshot.url != null) "扫码或打开地址" else "正在准备连接",
-                    color = InkWhite,
-                    fontSize = 21.sp,
-                    lineHeight = 26.sp,
-                    fontWeight = FontWeight.Black
-                )
-                Spacer(Modifier.height(16.dp))
-                Text(
-                    text = when {
-                        snapshot.url != null -> snapshot.url
-                        snapshot.loading -> "正在启动…"
-                        else -> "局域网地址未发现"
-                    },
-                    color = InkWhite,
-                    fontSize = 17.sp,
-                    lineHeight = 23.sp,
-                    fontWeight = FontWeight.Black,
-                    maxLines = 3,
-                    overflow = TextOverflow.Ellipsis
-                )
-                if (snapshot.port != null) {
-                    Spacer(Modifier.height(8.dp))
-                    Text(
-                        text = "PORT ${snapshot.port}",
-                        color = InkWhite,
-                        fontSize = 10.sp,
-                        fontWeight = FontWeight.Bold,
-                        letterSpacing = 1.6.sp
-                    )
+                if (snapshot.url != null) {
+                    Spacer(Modifier.width(18.dp))
+                    SenderQrMark(url = snapshot.url, size = qrSize)
                 }
-                Spacer(Modifier.height(16.dp))
-                Text(
-                    text = when {
-                        snapshot.loading -> "正在打开临时服务…"
-                        snapshot.running && snapshot.url != null -> "服务已开启 · 等待上传"
-                        snapshot.running -> "服务已开启，但未找到局域网地址"
-                        snapshot.error != null -> snapshot.error
-                        else -> "服务已关闭"
-                    },
-                    color = InkWhite,
-                    fontSize = 12.sp,
-                    lineHeight = 18.sp,
-                    fontWeight = FontWeight.Bold
-                )
             }
-            if (snapshot.url != null) {
-                Spacer(Modifier.width(18.dp))
-                SenderQrMark(
-                    url = snapshot.url,
-                    size = qrSize
+        } else {
+            // Portrait: stack so the full URL and QR stay on-screen.
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                SenderConnectionCopy(
+                    snapshot = snapshot,
+                    urlText = urlText,
+                    statusText = statusText,
+                    compact = true,
+                    modifier = Modifier.fillMaxWidth()
                 )
+                if (snapshot.url != null) {
+                    Spacer(Modifier.height(14.dp))
+                    SenderQrMark(url = snapshot.url, size = qrSize)
+                }
             }
         }
+    }
+}
+
+@Composable
+private fun SenderConnectionCopy(
+    snapshot: SenderSnapshot,
+    urlText: String,
+    statusText: String,
+    compact: Boolean,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier = modifier) {
+        Text(
+            text = "LOCAL DROP",
+            color = InkWhite,
+            fontSize = 10.sp,
+            fontWeight = FontWeight.Black,
+            letterSpacing = 1.8.sp
+        )
+        Spacer(Modifier.height(if (compact) 8.dp else 12.dp))
+        Text(
+            text = if (snapshot.url != null) "扫码或打开地址" else "正在准备连接",
+            color = InkWhite,
+            fontSize = if (compact) 18.sp else 21.sp,
+            lineHeight = if (compact) 22.sp else 26.sp,
+            fontWeight = FontWeight.Black
+        )
+        Spacer(Modifier.height(if (compact) 10.dp else 16.dp))
+        Text(
+            text = urlText,
+            color = InkWhite,
+            fontSize = if (compact) 15.sp else 17.sp,
+            lineHeight = if (compact) 20.sp else 23.sp,
+            fontWeight = FontWeight.Black,
+            maxLines = if (compact) 4 else 3,
+            overflow = TextOverflow.Ellipsis
+        )
+        if (snapshot.port != null) {
+            Spacer(Modifier.height(6.dp))
+            Text(
+                text = "PORT ${snapshot.port}",
+                color = InkWhite,
+                fontSize = 10.sp,
+                fontWeight = FontWeight.Bold,
+                letterSpacing = 1.6.sp
+            )
+        }
+        Spacer(Modifier.height(if (compact) 10.dp else 16.dp))
+        Text(
+            text = statusText,
+            color = InkWhite,
+            fontSize = if (compact) 11.sp else 12.sp,
+            lineHeight = if (compact) 16.sp else 18.sp,
+            fontWeight = FontWeight.Bold
+        )
     }
 }
 
