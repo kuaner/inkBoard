@@ -136,6 +136,10 @@ EPD 的真实字段、刷新策略和 S11A 固件限制见 [EPD_S11A.md](EPD_S11
 
 默认刷新策略是 InkBoard 维护的“跟随默认应用集合”，不是一个虚构的常驻系统服务。改变默认策略时由 ViewModel 同步跟随默认的应用；独立应用不会被覆盖。
 
+即时全刷仍走 `EpdSettingsRepository.requestFullRefresh()` 的 `EinkManager.sendOneFullFrame()`；
+默认 HOME 返回由 `MainActivity` 在桌面恢复后触发一次，手动入口则作为 `BuiltInShortcut.FULL_REFRESH`
+出现在 APPS 的内置工具中，避免页面层直接碰厂商服务。
+
 ## 验证清单
 
 每次涉及架构或页面行为的改动至少执行：

@@ -124,7 +124,6 @@ internal fun ControlPage(
 
             val openSystemEpd = epd.openSystem
             val openInkBoardEpd = epd.openInkBoard
-            val refreshScreen = epd.refresh
 
             if (wide) {
                 Row(
@@ -132,7 +131,7 @@ internal fun ControlPage(
                         .fillMaxWidth()
                         .weight(1f)
                 ) {
-                    if (openSystemEpd != null && openInkBoardEpd != null && refreshScreen != null) {
+                    if (openSystemEpd != null && openInkBoardEpd != null) {
                         ControlDomain(
                             kicker = "DISPLAY",
                             title = "显示",
@@ -141,7 +140,6 @@ internal fun ControlPage(
                             ControlActionTile(
                                 title = "系统默认",
                                 detail = "所有未单独设置的应用",
-                                emphasized = true,
                                 onClick = openSystemEpd,
                                 modifier = Modifier.weight(1f)
                             )
@@ -150,13 +148,6 @@ internal fun ControlPage(
                                 title = "InkBoard",
                                 detail = "桌面自己的 DPI · 对比度 · 浅色",
                                 onClick = openInkBoardEpd,
-                                modifier = Modifier.weight(1f)
-                            )
-                            Spacer(Modifier.height(6.dp))
-                            ControlActionTile(
-                                title = "全刷屏幕",
-                                detail = "立即清除当前残影",
-                                onClick = refreshScreen,
                                 modifier = Modifier.weight(1f)
                             )
                         }
@@ -178,7 +169,7 @@ internal fun ControlPage(
                             title = "快捷方式",
                             detail = "管理桌面的 8 个位置",
                             onClick = onOpenApps,
-                            modifier = Modifier.weight(0.72f)
+                            modifier = Modifier.weight(1f)
                         )
                     }
                     VerticalRule()
@@ -200,41 +191,31 @@ internal fun ControlPage(
                             title = "系统设置",
                             detail = "Android",
                             onClick = actions.onOpenSystemSettings,
-                            modifier = Modifier.weight(0.72f)
+                            modifier = Modifier.weight(1f)
                         )
                     }
                 }
             } else {
                 Column(modifier = Modifier.fillMaxWidth().weight(1f)) {
-                    if (openSystemEpd != null && openInkBoardEpd != null && refreshScreen != null) {
+                    if (openSystemEpd != null && openInkBoardEpd != null) {
                         ControlDomain(
                             kicker = "DISPLAY",
                             title = "显示",
                             modifier = Modifier.weight(1f)
                         ) {
-                            Column(modifier = Modifier.fillMaxWidth().weight(1f)) {
-                                Row(modifier = Modifier.fillMaxWidth().weight(1f)) {
-                                    ControlActionTile(
-                                        title = "系统默认",
-                                        detail = "未单独设置的应用",
-                                        emphasized = true,
-                                        onClick = openSystemEpd,
-                                        modifier = Modifier.weight(1f)
-                                    )
-                                    Spacer(Modifier.width(6.dp))
-                                    ControlActionTile(
-                                        title = "InkBoard",
-                                        detail = "桌面 EPD",
-                                        onClick = openInkBoardEpd,
-                                        modifier = Modifier.weight(1f)
-                                    )
-                                }
-                                Spacer(Modifier.height(6.dp))
+                            Row(modifier = Modifier.fillMaxWidth().weight(1f)) {
                                 ControlActionTile(
-                                    title = "全刷屏幕",
-                                    detail = "清除残影",
-                                    onClick = refreshScreen,
-                                    modifier = Modifier.weight(0.72f)
+                                    title = "系统默认",
+                                    detail = "未单独设置的应用",
+                                    onClick = openSystemEpd,
+                                    modifier = Modifier.weight(1f)
+                                )
+                                Spacer(Modifier.width(6.dp))
+                                ControlActionTile(
+                                    title = "InkBoard",
+                                    detail = "桌面 EPD",
+                                    onClick = openInkBoardEpd,
+                                    modifier = Modifier.weight(1f)
                                 )
                             }
                         }

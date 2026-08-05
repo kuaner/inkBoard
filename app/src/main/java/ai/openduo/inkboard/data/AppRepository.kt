@@ -117,6 +117,13 @@ class AppRepository(private val context: Context) {
                 builtInShortcut = BuiltInShortcut.CLEAR_BACKGROUND
             ),
             AppInfo(
+                label = "全刷屏幕",
+                packageName = shortcutPackage,
+                activityName = BuiltInShortcut.FULL_REFRESH.id,
+                icon = null,
+                builtInShortcut = BuiltInShortcut.FULL_REFRESH
+            ),
+            AppInfo(
                 label = "锁屏",
                 packageName = shortcutPackage,
                 activityName = BuiltInShortcut.LOCK_SCREEN.id,

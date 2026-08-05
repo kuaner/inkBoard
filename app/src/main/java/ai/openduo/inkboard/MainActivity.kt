@@ -1,5 +1,6 @@
 package ai.openduo.inkboard
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,17 +11,22 @@ import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import ai.openduo.inkboard.ui.LauncherActions
 import ai.openduo.inkboard.ui.home.LauncherHome
 import ai.openduo.inkboard.ui.theme.InkBoardTheme
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 
     private val viewModel: LauncherViewModel by viewModels()
     private var uiAttached = false
+    private var wasInBackground = false
+    private var homeRefreshJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,11 +77,48 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
+        val returningToHome = uiAttached && wasInBackground
+        wasInBackground = false
         if (!uiAttached) return
+        if (returningToHome) scheduleHomeRefresh()
         viewModel.refreshStatus()
         // Home shortcuts are process-cached; refresh keeps the drawer catalog
         // current without clearing the desktop snapshot first.
         viewModel.refreshApps()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        wasInBackground = uiAttached
+        homeRefreshJob?.cancel()
+        homeRefreshJob = null
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        // A HOME intent is delivered to this singleTask launcher when the
+        // system Home button brings the existing desktop task forward. The
+        // onResume fallback above covers firmware that only resumes the task.
+        if (intent.action == Intent.ACTION_MAIN &&
+            intent.categories?.contains(Intent.CATEGORY_HOME) == true
+        ) {
+            scheduleHomeRefresh()
+        }
+    }
+
+    private fun scheduleHomeRefresh() {
+        if (!uiAttached) return
+        homeRefreshJob?.cancel()
+        homeRefreshJob = lifecycleScope.launch {
+            // Let the launcher surface become the visible frame before asking
+            // the driver to repaint it. This avoids refreshing the app that
+            // was just left during the HOME transition.
+            delay(HOME_REFRESH_SETTLE_MS)
+            if (lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
+                viewModel.refreshEpdScreen()
+            }
+        }
     }
 
     @Deprecated("Deprecated in Java")
@@ -88,5 +131,9 @@ class MainActivity : ComponentActivity() {
         } else {
             onBackPressedDispatcher.onBackPressed()
         }
+    }
+
+    private companion object {
+        private const val HOME_REFRESH_SETTLE_MS = 120L
     }
 }

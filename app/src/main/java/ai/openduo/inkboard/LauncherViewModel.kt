@@ -262,6 +262,12 @@ class LauncherViewModel(application: Application) : AndroidViewModel(application
                 }
                 return
             }
+            BuiltInShortcut.FULL_REFRESH -> {
+                // The app drawer closes at the same time as this action. Give
+                // Compose a moment to expose the desktop before repainting it.
+                refreshEpdScreenAfterNavigation()
+                return
+            }
             BuiltInShortcut.LOCK_SCREEN -> {
                 SystemControls.lockScreen(ctx)
                 return
@@ -474,7 +480,16 @@ class LauncherViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun refreshEpdScreen() {
+        requestFullRefreshAfter(0L)
+    }
+
+    private fun refreshEpdScreenAfterNavigation() {
+        requestFullRefreshAfter(FULL_REFRESH_SETTLE_MS)
+    }
+
+    private fun requestFullRefreshAfter(delayMs: Long) {
         viewModelScope.launch(Dispatchers.IO) {
+            if (delayMs > 0) delay(delayMs)
             if (!epdRepo.requestFullRefresh()) {
                 // requestFullRefresh no-ops off S11A; only surface an error when
                 // the stack is present but the call failed.
@@ -547,5 +562,6 @@ class LauncherViewModel(application: Application) : AndroidViewModel(application
 
     companion object {
         private const val TAG = "InkBoardBoot"
+        private const val FULL_REFRESH_SETTLE_MS = 150L
     }
 }

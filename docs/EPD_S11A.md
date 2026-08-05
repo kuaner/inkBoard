@@ -22,6 +22,17 @@
 
 当前系统色彩模式只有 `NATIVE (0)`。它不是普通 LCD 那种可在多个色彩空间之间切换的选项；浅色不清晰时，应优先检查 EPD 波形、对比度、浅色处理和全刷策略。
 
+## 即时全刷
+
+系统顶部导航栏的刷新按钮对应 `android.os.EinkManager.sendOneFullFrame()`，不是修改
+`refresh_frequency` 的配置操作。S11A 的 SystemUI `NavigationBarFragment` 在按钮点击时
+直接调用这个 Binder 方法，然后让导航栏自身重绘；InkBoard 的
+`EpdSettingsRepository.requestFullRefresh()` 复用同一调用。
+
+当 InkBoard 作为默认 HOME 从其它应用回到前台时，`MainActivity` 会等待桌面窗口稳定后
+请求一次全刷，避免刷新到刚离开的应用画面。需要手动清残影时，也可以在 `APPS` 中选择
+内置工具“全刷屏幕”，把它加入 8 个桌面位置；它与设置页使用同一调用链。
+
 ## 系统 EPD Provider
 
 系统自带的“应用优化”对话框使用：

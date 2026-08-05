@@ -26,6 +26,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DeleteSweep
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -395,6 +396,7 @@ internal fun AppGlyph(
     val shortcut = app.builtInShortcut ?: return
     val glyph = when (shortcut) {
         BuiltInShortcut.CLEAR_BACKGROUND -> Icons.Filled.DeleteSweep
+        BuiltInShortcut.FULL_REFRESH -> Icons.Filled.Refresh
         BuiltInShortcut.LOCK_SCREEN -> Icons.Filled.Lock
     }
     Icon(
