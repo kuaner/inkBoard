@@ -46,8 +46,6 @@ A. 引导用户打开 USB 调试（ADB）
 应出现 device。若是 unauthorized，请用户在平板上点「允许 USB 调试」。
 若仍 offline / 无设备，回到上面步骤核对，或换线 / 口后再试。
 
-（装好 InkBoard 之后，也可在 App 内 MENU → USB 调试 开关 ADB，依赖云思/Yitoa 系统服务；其它机器可能无效。首次安装仍按上面手势打开。）
-
 ────────────────────────────────
 B. 安装与首次配置（adb 命令）
 ────────────────────────────────
@@ -142,6 +140,135 @@ InkBoard 是一个 **HOME 启动器**：设为默认主屏幕后，按电源键�
 EPD 能力是为云思固件里的「每应用刷新配置」做的，不是通用 Android API。
 
 ---
+
+## 云思智学 S11A / EB1004P 调优
+
+以下内容已在云思智学 S11A（`EB1004P`、RK3566、Android 11、1404 × 1872）上验证。
+
+### 开启 ADB
+
+在平板上依次操作：
+
+1. 打开「设置」→「我的设备」。
+2. 连续点击「序列号」七次。
+3. 连续点击页面上的 logo 七次。
+4. 再连续点击「我的设备」三次。
+
+电脑端验证：
+
+```bash
+adb devices -l
+```
+
+状态应为 `device`。
+
+### 云思设备的 EPD 总开关
+
+开启后，InkBoard 的系统 EPD 和单应用 EPD 配置才会生效：
+
+```bash
+adb shell setprop persist.modify.eink.mode true
+adb shell getprop persist.modify.eink.mode
+```
+
+输出应为 `true`。
+
+### 开启 Android 手势导航
+
+执行：
+
+```bash
+adb shell cmd overlay enable-exclusive --user 0 --category com.android.internal.systemui.navbar.gestural
+adb shell settings put secure navigation_mode 2
+```
+
+验证：
+
+```bash
+adb shell settings get secure navigation_mode
+```
+
+输出为 `2` 后，从屏幕左侧或右侧边缘向内滑动返回，从底部上滑回到主页。
+
+### 锁屏/待机、开机与关机画面
+
+当前固件实际读取以下文件：
+
+| 画面 | 文件 | 尺寸/说明 |
+|------|------|-----------|
+| 锁屏/待机 | `/vendor/media/standby.png` | `1872×1404` 1-bit 灰度 PNG |
+| 充电待机 | `/vendor/media/standby_charge.png` | `1872×1404` 1-bit 灰度 PNG |
+| 低电量待机 | `/vendor/media/standby_lowpower.png` | `1872×1404` 1-bit 灰度 PNG |
+| 关机 | `/vendor/media/poweroff.png` | `1872×1404` RGBA PNG |
+| 关机（无电源提示） | `/vendor/media/poweroff_nopower.png` | `1872×1404` RGBA PNG |
+| RK 最早开机 Logo（实际生效） | `/dev/block/by-name/logo` → `/dev/block/mmcblk2p14` | `16 MiB` 的 `RKEL/GR04` 原始分区，`1872×1404`，11 份 4-bit 图像 |
+
+三张待机图已统一替换为同一张图片：`standby.png`、`standby_charge.png`、`standby_lowpower.png`。竖屏源图必须先处理成设备存储方向的横向 `1872×1404` 图片；本机最终资源为 1-bit 灰度 PNG，直接按竖屏方向写入会导致左右镜像。关机画面仍对应 2 张图：`poweroff.png`、`poweroff_nopower.png`。
+
+当前待机图和原厂备份位于 `firmware-dump/display-assets/`：
+
+```text
+standby_book_quote.png                                  # 当前三张待机图使用的设备格式
+device-backup-before-book-standby/standby.png           # 原厂锁屏/待机图
+device-backup-before-book-standby/standby_charge.png   # 原厂充电待机图
+device-backup-before-book-standby/standby_lowpower.png  # 原厂低电量待机图
+```
+
+最早开机画面只使用 `logo` 分区，不能把 PNG 直接写入：
+
+- 分区头是 `RKEL`；
+- 每个 `GR04` 条目对应一份 `1872×1404` 的 4-bit 图像；
+- 分区共有 11 份图像，替换时需要全部替换；
+- 输入文件必须是完整的 `16 MiB` `RKEL/GR04` 镜像。
+
+原始备份和已验证的镜像位于 `firmware-dump/display-assets/`：
+
+```text
+device-backup-before-logo-apple/logo.img       # 原始 16 MiB logo 分区
+logo_apple_crisp_bold.img                      # 当前写入的 RKEL/GR04 版本
+```
+
+导出设备上的画面和原始 Logo：
+
+```bash
+adb exec-out su -c 'cat /vendor/media/standby.png' > standby.png
+adb exec-out su -c 'cat /vendor/media/standby_charge.png' > standby_charge.png
+adb exec-out su -c 'cat /vendor/media/standby_lowpower.png' > standby_lowpower.png
+adb exec-out su -c 'cat /vendor/media/poweroff.png' > poweroff.png
+adb exec-out su -c 'cat /vendor/media/poweroff_nopower.png' > poweroff_nopower.png
+adb exec-out su -c 'cat /dev/block/by-name/logo' > logo-original.img
+```
+
+写入已编码的 Logo 镜像：
+
+```bash
+adb push logo_apple_crisp_bold.img /data/local/tmp/logo.img
+adb shell su -c 'dd if=/data/local/tmp/logo.img of=/dev/block/mmcblk2p14 bs=1M; sync'
+
+# 回读核对
+adb exec-out su -c 'cat /dev/block/by-name/logo' > logo-after.img
+shasum -a 256 logo_apple_crisp_bold.img logo-after.img
+```
+
+恢复原厂 Logo：
+
+```bash
+adb push logo-original.img /data/local/tmp/logo-original.img
+adb shell su -c 'dd if=/data/local/tmp/logo-original.img of=/dev/block/mmcblk2p14 bs=1M; sync'
+```
+
+当前设备的 `/vendor` 分区已满，替换这些文件时不能直接用 `cp` 覆盖大文件；写入后应回读确认 PNG 可读。
+
+### 进入 Rockchip Loader
+
+设备正常运行时可执行：
+
+```bash
+adb reboot loader
+rkdeveloptool ld
+```
+
+应看到 `Vid=0x2207,Pid=0x350a` 和 `Loader`。这不是 Google Fastboot，不能用 `fastboot flash` 代替。若系统无法启动，可关机后插入数据线并按住物理 Home 键进入 Loader。
 
 ## 功能一览
 

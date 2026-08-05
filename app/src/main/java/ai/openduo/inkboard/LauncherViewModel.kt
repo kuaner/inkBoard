@@ -54,6 +54,8 @@ class LauncherViewModel(application: Application) : AndroidViewModel(application
     private val senderFlow = MutableStateFlow(SenderSnapshot())
     private val epdWriteMutex = Mutex()
     private val appsRefreshMutex = Mutex()
+    /** Set when refreshApps() is requested while a scan is already running. */
+    @Volatile private var appsRefreshPending = false
     private var iconLoadGeneration = 0
     private var senderRequestGeneration = 0
 
@@ -134,47 +136,120 @@ class LauncherViewModel(application: Application) : AndroidViewModel(application
         refreshStatus()
     }
 
+    /**
+     * Rescan launchable apps and re-resolve home slots.
+     *
+     * Scans PackageManager every time, but only writes into UI StateFlows when
+     * the catalog or slot keys actually changed — avoids e-ink redraws on a
+     * no-op open of APPS.
+     */
     fun refreshApps() {
         viewModelScope.launch {
-            if (!appsRefreshMutex.tryLock()) return@launch
+            if (!appsRefreshMutex.tryLock()) {
+                appsRefreshPending = true
+                return@launch
+            }
             try {
-                // 1) Atomic home-slot snapshot first — never paint keys without apps.
-                val homeMs = measureTimeMillis {
-                    withContext(Dispatchers.IO) {
-                        val bootstrapped = app.awaitHomeBootstrap()
-                        if (bootstrapped.any { it != null }) {
-                            homeSlotsFlow.value = bootstrapped
-                            mottoFlow.value = app.motto.value
-                        } else {
-                            publishResolvedHomeSlots()
+                do {
+                    appsRefreshPending = false
+                    // 1) First paint only: seed home from process bootstrap.
+                    val homeMs = measureTimeMillis {
+                        withContext(Dispatchers.IO) {
+                            val needHomeSeed = homeSlotsFlow.value.all { it == null }
+                            if (needHomeSeed) {
+                                val bootstrapped = app.awaitHomeBootstrap()
+                                if (bootstrapped.any { it != null }) {
+                                    publishHomeIfChanged(bootstrapped, app.motto.value)
+                                } else {
+                                    publishResolvedHomeSlots()
+                                }
+                            } else {
+                                app.awaitHomeBootstrap()
+                            }
                         }
                     }
-                }
-                Log.i(TAG, "home slots ready in ${homeMs}ms filled=${homeSlotsFlow.value.count { it != null }}")
+                    Log.i(TAG, "home slots ready in ${homeMs}ms filled=${homeSlotsFlow.value.count { it != null }}")
 
-                // 2) Full catalog for the app drawer; home already visible.
-                val fullMs = measureTimeMillis {
-                    val apps = appRepo.loadLaunchableApps()
-                    appsFlow.value = apps
-                    // Refresh home from the richer catalog without clearing first.
-                    withContext(Dispatchers.IO) {
-                        publishResolvedHomeSlots(appsByKey = apps.associateBy { it.key })
+                    // 2) Full catalog for the app drawer.
+                    var catalogChanged = false
+                    var scannedApps: List<AppInfo> = appsFlow.value
+                    val fullMs = measureTimeMillis {
+                        val apps = appRepo.loadLaunchableApps()
+                        scannedApps = apps
+                        catalogChanged = !sameAppCatalog(appsFlow.value, apps)
+                        if (catalogChanged) {
+                            appsFlow.value = apps
+                        }
+                        // Re-resolve home when catalog changed, or when slots still empty.
+                        if (catalogChanged || homeSlotsFlow.value.all { it == null }) {
+                            withContext(Dispatchers.IO) {
+                                publishResolvedHomeSlots(appsByKey = apps.associateBy { it.key })
+                            }
+                        }
                     }
-                }
-                Log.i(TAG, "full app scan ${fullMs}ms count=${appsFlow.value.size}")
+                    Log.i(
+                        TAG,
+                        "full app scan ${fullMs}ms count=${scannedApps.size} catalogChanged=$catalogChanged"
+                    )
 
-                // 3) Slow migrations stay off the critical path.
-                withContext(Dispatchers.IO) {
-                    val apps = appsFlow.value
-                    prefs.ensureDefaults(appRepo.defaultSlotKeys(apps))
-                    // No-ops on non-S11A: epdRepo is self-gated.
-                    syncSystemDefaultApps(apps)
-                    // Defaults may have filled empty first-run slots.
-                    publishResolvedHomeSlots(appsByKey = apps.associateBy { it.key })
-                }
+                    // 3) Slow migrations stay off the critical path.
+                    withContext(Dispatchers.IO) {
+                        val apps = scannedApps.ifEmpty { appsFlow.value }
+                        val keysBefore = prefs.slotKeys.first()
+                        prefs.ensureDefaults(appRepo.defaultSlotKeys(apps))
+                        // No-ops on non-S11A: epdRepo is self-gated.
+                        syncSystemDefaultApps(apps)
+                        val keysAfter = prefs.slotKeys.first()
+                        if (keysBefore != keysAfter || homeSlotsFlow.value.all { it == null }) {
+                            publishResolvedHomeSlots(appsByKey = apps.associateBy { it.key })
+                        }
+                    }
+                } while (appsRefreshPending)
             } finally {
                 appsRefreshMutex.unlock()
+                if (appsRefreshPending) refreshApps()
             }
+        }
+    }
+
+    /** Compare catalogs without Drawable identity (which always differs after a rescan). */
+    private fun sameAppCatalog(previous: List<AppInfo>, next: List<AppInfo>): Boolean {
+        if (previous.size != next.size) return false
+        for (i in previous.indices) {
+            if (!sameAppIdentity(previous[i], next[i])) return false
+        }
+        return true
+    }
+
+    private fun sameSlotCatalog(previous: List<AppInfo?>, next: List<AppInfo?>): Boolean {
+        if (previous.size != next.size) return false
+        for (i in previous.indices) {
+            val a = previous[i]
+            val b = next[i]
+            if (a == null && b == null) continue
+            if (a == null || b == null) return false
+            if (!sameAppIdentity(a, b)) return false
+        }
+        return true
+    }
+
+    private fun sameAppIdentity(a: AppInfo, b: AppInfo): Boolean =
+        a.key == b.key &&
+            a.label == b.label &&
+            a.builtInShortcut == b.builtInShortcut &&
+            a.customIconPath == b.customIconPath
+
+    private fun publishHomeIfChanged(slots: List<AppInfo?>, motto: String) {
+        val mottoNext = motto.trim().ifBlank { PreferencesRepository.DEFAULT_MOTTO }
+        val slotsChanged = !sameSlotCatalog(homeSlotsFlow.value, slots)
+        val mottoChanged = mottoFlow.value != mottoNext
+        if (!slotsChanged && !mottoChanged) return
+        if (mottoChanged) mottoFlow.value = mottoNext
+        if (slotsChanged) {
+            homeSlotsFlow.value = slots
+            app.publishHomeSlots(slots, mottoNext)
+        } else if (mottoChanged) {
+            app.publishHomeSlots(homeSlotsFlow.value, mottoNext)
         }
     }
 
@@ -196,6 +271,11 @@ class LauncherViewModel(application: Application) : AndroidViewModel(application
                 base?.copy(customIconPath = iconPaths.getOrNull(index))
             }
         }
+        if (sameSlotCatalog(homeSlotsFlow.value, slots) &&
+            mottoFlow.value == motto.trim().ifBlank { PreferencesRepository.DEFAULT_MOTTO }
+        ) {
+            return
+        }
         val density = getApplication<Application>().resources.displayMetrics.density
         val warmPx = (68f * density).toInt().coerceAtLeast(48)
         withContext(Dispatchers.IO) {
@@ -205,9 +285,7 @@ class LauncherViewModel(application: Application) : AndroidViewModel(application
                 }
             }
         }
-        mottoFlow.value = motto
-        homeSlotsFlow.value = slots
-        app.publishHomeSlots(slots, motto)
+        publishHomeIfChanged(slots, motto)
     }
 
     /**

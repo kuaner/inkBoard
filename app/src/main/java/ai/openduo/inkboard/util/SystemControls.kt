@@ -12,7 +12,6 @@ import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
-import android.os.SystemClock
 import android.provider.Settings
 import android.view.Gravity
 import android.view.Surface
@@ -119,26 +118,31 @@ object SystemControls {
     }
 
     /**
-     * Ask Android to clear only the user-installed apps that are actually
-     * running in a killable background state.
+     * Request that Android reclaim third-party background processes.
      *
-     * The old implementation enumerated every installed third-party package,
-     * so its number meant "installed apps", not "background apps". That made
-     * the launcher report the same 13 apps on every tap. ActivityManager still
-     * owns the final decision: foreground services and other protected work
-     * may legitimately survive this request.
+     * On Android 8+ a normal app's [ActivityManager.getRunningAppProcesses]
+     * almost never lists other packages (privacy), so "scan running processes
+     * then kill" falsely reports 0 even when KOReader / browsers are still
+     * resident. The reliable approach for a launcher with only
+     * [android.Manifest.permission.KILL_BACKGROUND_PROCESSES] is to call
+     * [ActivityManager.killBackgroundProcesses] on every user-installed
+     * package: the system only tears down processes that are safe to kill
+     * (cached / empty), and leaves the true foreground + protected FGS alone.
      */
     fun clearBackgroundApps(context: Context): Int {
         val activityManager = context.getSystemService(ActivityManager::class.java) ?: return 0
         val packageManager = context.packageManager
-        val candidates = findKillableBackgroundPackages(
-            context = context,
-            activityManager = activityManager,
-            packageManager = packageManager
-        )
+        val self = context.packageName
+        val candidates = packageManager.getInstalledApplications(0)
+            .asSequence()
+            .filter { isUserInstalledApp(it) }
+            .map { it.packageName }
+            .filter { it != self }
+            .distinct()
+            .toList()
 
         if (candidates.isEmpty()) {
-            showToast(context, "没有可清理的第三方后台应用")
+            showToast(context, "没有可清理的第三方应用")
             return 0
         }
 
@@ -146,48 +150,10 @@ object SystemControls {
             runCatching { activityManager.killBackgroundProcesses(packageName) }
         }
 
-        // Give ActivityManager a short chance to tear down cached processes so
-        // the message reflects the current state instead of only the request.
-        SystemClock.sleep(250L)
-        val remaining = findKillableBackgroundPackages(
-            context = context,
-            activityManager = activityManager,
-            packageManager = packageManager
-        ).count { it in candidates }
-        showToast(
-            context,
-            if (remaining == 0) {
-                "已请求清理 ${candidates.size} 个后台应用"
-            } else {
-                "已请求清理 ${candidates.size} 个，仍有 ${remaining} 个由系统保留"
-            }
-        )
+        // killBackgroundProcesses is asynchronous and process visibility is
+        // limited; report the request, not a guessed "still running" count.
+        showToast(context, "已请求清理 ${candidates.size} 个第三方应用后台")
         return candidates.size
-    }
-
-    private fun findKillableBackgroundPackages(
-        context: Context,
-        activityManager: ActivityManager,
-        packageManager: android.content.pm.PackageManager
-    ): List<String> {
-        return activityManager.runningAppProcesses
-            .orEmpty()
-            .asSequence()
-            // Everything after FOREGROUND is outside the current app's
-            // foreground state. Some vendor apps report a foreground service
-            // as PERCEPTIBLE rather than SERVICE, so do not discard that
-            // process here; killBackgroundProcesses() still makes the final
-            // system-owned decision about protected work.
-            .filter { process ->
-                process.importance > ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND
-            }
-            .flatMap { process -> process.pkgList.orEmpty().asSequence() }
-            .filter { packageName -> packageName != context.packageName }
-            .filter { packageName ->
-                isUserInstalledApp(packageManager, packageName)
-            }
-            .distinct()
-            .toList()
     }
 
     /**
@@ -269,16 +235,6 @@ object SystemControls {
         } catch (_: Exception) {
             showToast(context, "无法修改屏幕方向")
         }
-    }
-
-    private fun isUserInstalledApp(
-        packageManager: android.content.pm.PackageManager,
-        packageName: String
-    ): Boolean {
-        val appInfo = runCatching {
-            packageManager.getApplicationInfo(packageName, 0)
-        }.getOrNull() ?: return false
-        return isUserInstalledApp(appInfo)
     }
 
     private fun isUserInstalledApp(appInfo: ApplicationInfo): Boolean {

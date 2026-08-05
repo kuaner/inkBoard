@@ -15,3 +15,7 @@ captures/
 .externalNativeBuild/
 .cxx/
 *.hprof
+
+# Local device dumps (do not publish)
+firmware-dump/
+

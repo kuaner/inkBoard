@@ -20,6 +20,8 @@ class LauncherActions(
     val onLoadSystemEpdProfile: () -> Unit,
     val onApplySystemEpdProfile: (EpdProfile) -> Unit,
     val onRefreshEpdScreen: () -> Unit,
+    /** Rescan launchable apps when opening APPS; no-op UI update if unchanged. */
+    val onRefreshApps: () -> Unit,
     val onOrientation: (OrientationMode) -> Unit,
     val onToggleAdb: () -> Unit,
     val onOpenSystemSettings: () -> Unit,

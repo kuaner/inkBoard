@@ -338,6 +338,7 @@ fun LauncherHome(
                 editingSlot = 0
                 drawerPage = 0
                 editing = true
+                actions.onRefreshApps()
             },
             onBack = { controls = false },
             modifier = modifier
@@ -355,11 +356,13 @@ fun LauncherHome(
                 editingSlot = 0
                 drawerPage = 0
                 editing = true
+                actions.onRefreshApps()
             },
             onEditSlot = {
                 editingSlot = it
                 drawerPage = 0
                 editing = true
+                actions.onRefreshApps()
             },
             onOpenMotto = { mottoEditor = true },
             onOpenSender = { sender = true },

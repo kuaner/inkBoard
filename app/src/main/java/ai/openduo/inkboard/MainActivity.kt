@@ -53,6 +53,7 @@ class MainActivity : ComponentActivity() {
                             onLoadSystemEpdProfile = viewModel::loadSystemEpdProfile,
                             onApplySystemEpdProfile = viewModel::applySystemEpdProfile,
                             onRefreshEpdScreen = viewModel::refreshEpdScreen,
+                            onRefreshApps = viewModel::refreshApps,
                             onOrientation = viewModel::setOrientation,
                             onToggleAdb = viewModel::toggleAdb,
                             onOpenSystemSettings = viewModel::openSystemSettings,
