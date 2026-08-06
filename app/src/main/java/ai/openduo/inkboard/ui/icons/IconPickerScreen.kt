@@ -486,6 +486,8 @@ private fun IconPickerTile(
 ) {
     Column(
         modifier = modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
             .background(InkPaper)
             .border(1.5.dp, InkBlack)
             .inkClickable(onClick)

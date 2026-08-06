@@ -204,12 +204,11 @@ internal fun EpdRefreshPresetOption(
     val foreground = if (selected) InkWhite else InkBlack
     Column(
         modifier = modifier
+            .fillMaxWidth()
             .fillMaxHeight()
             .background(if (selected) InkBlack else InkPaper)
-            .border(
-                width = if (selected) 2.dp else 1.5.dp,
-                color = InkBlack
-            )
+            // Fixed stroke; selected state is the fill, not a fatter border.
+            .border(width = 1.5.dp, color = InkBlack)
             .inkClickable(onClick)
             .padding(horizontal = 14.dp, vertical = 11.dp),
         verticalArrangement = Arrangement.SpaceBetween

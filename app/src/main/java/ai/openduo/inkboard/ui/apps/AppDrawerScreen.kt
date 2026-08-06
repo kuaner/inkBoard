@@ -344,8 +344,23 @@ private fun ShortcutSlotTile(
     val foreground = InkBlack
     Row(
         modifier = modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
             .background(InkPaper)
-            .border(if (selected) 2.dp else 1.5.dp, InkBlack)
+            // Fixed outer stroke; selection is an inset ring so neighbors stay equal.
+            .border(1.5.dp, InkBlack)
+            .drawBehind {
+                if (selected) {
+                    val inset = 3.dp.toPx()
+                    val stroke = 1.5.dp.toPx()
+                    drawRect(
+                        color = InkBlack,
+                        topLeft = Offset(inset, inset),
+                        size = Size(size.width - inset * 2, size.height - inset * 2),
+                        style = Stroke(width = stroke)
+                    )
+                }
+            }
             .inkClickable(onClick)
             .padding(horizontal = 16.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically
@@ -457,6 +472,7 @@ private fun DrawerAppTile(
     Row(
         modifier = modifier
             .fillMaxWidth()
+            .fillMaxHeight()
             .background(InkPaper)
             .border(1.5.dp, InkBlack),
         verticalAlignment = Alignment.CenterVertically

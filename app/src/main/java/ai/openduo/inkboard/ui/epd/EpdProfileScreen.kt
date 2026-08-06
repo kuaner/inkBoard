@@ -248,7 +248,7 @@ private fun EpdTab(
         modifier = modifier
             .fillMaxHeight()
             .background(if (selected) InkBlack else InkPaper)
-            .border(width = if (selected) 2.dp else 1.5.dp, color = InkBlack)
+            .border(width = 1.5.dp, color = InkBlack)
             .inkClickable(onClick),
         contentAlignment = Alignment.Center
     ) {
@@ -429,9 +429,10 @@ private fun EpdDpiPresetOption(
     val foreground = if (selected) InkWhite else InkBlack
     Column(
         modifier = modifier
+            .fillMaxWidth()
             .fillMaxHeight()
             .background(if (selected) InkBlack else InkPaper)
-            .border(width = if (selected) 2.dp else 1.5.dp, color = InkBlack)
+            .border(width = 1.5.dp, color = InkBlack)
             .inkClickable(onClick)
             .padding(horizontal = 8.dp, vertical = 8.dp),
         verticalArrangement = Arrangement.SpaceBetween
@@ -679,7 +680,7 @@ private fun EpdBinaryChoice(text: String, selected: Boolean, onClick: () -> Unit
             .height(44.dp)
             .width(86.dp)
             .background(if (selected) InkBlack else InkPaper)
-            .border(width = if (selected) 2.dp else 1.5.dp, color = InkBlack)
+            .border(width = 1.5.dp, color = InkBlack)
             .inkClickable(onClick),
         contentAlignment = Alignment.Center
     ) {
@@ -738,7 +739,7 @@ private fun EpdStepButton(symbol: String, enabled: Boolean, onClick: () -> Unit)
         modifier = Modifier
             .size(58.dp)
             .background(if (enabled) InkBlack else InkPaper)
-            .border(width = if (enabled) 2.dp else 1.5.dp, color = InkBlack)
+            .border(width = 1.5.dp, color = InkBlack)
             .then(if (enabled) Modifier.inkClickable(onClick) else Modifier),
         contentAlignment = Alignment.Center
     ) {

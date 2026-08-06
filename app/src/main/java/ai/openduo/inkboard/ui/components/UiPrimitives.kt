@@ -278,11 +278,15 @@ internal fun ControlActionTile(
 ) {
     val foreground = if (emphasized) InkWhite else InkBlack
     val secondary = if (emphasized) InkWhite else InkDark
+    // fillMaxHeight so side-by-side / stacked weight tiles share one border box
+    // even when titles/details wrap differently. Keep stroke width constant so
+    // selection/emphasis does not make one tile look larger than its neighbor.
     Column(
         modifier = modifier
             .fillMaxWidth()
+            .fillMaxHeight()
             .background(if (emphasized) InkBlack else InkPaper)
-            .border(width = if (emphasized) 2.dp else 1.5.dp, color = InkBlack)
+            .border(width = 1.5.dp, color = InkBlack)
             .inkClickable(onClick)
             .padding(horizontal = 18.dp, vertical = 16.dp),
         verticalArrangement = Arrangement.SpaceBetween
@@ -310,6 +314,7 @@ internal fun ControlActionTile(
                 )
             }
         }
+        Spacer(Modifier.height(8.dp))
         Text(
             text = detail,
             color = secondary,

@@ -135,20 +135,26 @@ internal fun ControlPage(
                         ControlDomain(
                             kicker = "DISPLAY",
                             title = "显示",
-                            modifier = Modifier.weight(1f)
+                            modifier = Modifier
+                                .weight(1f)
+                                .fillMaxHeight()
                         ) {
                             ControlActionTile(
                                 title = "系统默认",
                                 detail = "所有未单独设置的应用",
                                 onClick = openSystemEpd,
-                                modifier = Modifier.weight(1f)
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .fillMaxWidth()
                             )
                             Spacer(Modifier.height(6.dp))
                             ControlActionTile(
                                 title = "InkBoard",
                                 detail = "桌面自己的 DPI · 对比度 · 浅色",
                                 onClick = openInkBoardEpd,
-                                modifier = Modifier.weight(1f)
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .fillMaxWidth()
                             )
                         }
                         VerticalRule()
@@ -156,27 +162,35 @@ internal fun ControlPage(
                     ControlDomain(
                         kicker = "HOME",
                         title = "桌面",
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxHeight()
                     ) {
                         ControlActionTile(
                             title = "桌面文字",
                             detail = "修改主屏的一句话",
                             onClick = onOpenMotto,
-                            modifier = Modifier.weight(1f)
+                            modifier = Modifier
+                                .weight(1f)
+                                .fillMaxWidth()
                         )
                         Spacer(Modifier.height(6.dp))
                         ControlActionTile(
                             title = "快捷方式",
                             detail = "管理桌面的 8 个位置",
                             onClick = onOpenApps,
-                            modifier = Modifier.weight(1f)
+                            modifier = Modifier
+                                .weight(1f)
+                                .fillMaxWidth()
                         )
                     }
                     VerticalRule()
                     ControlDomain(
                         kicker = "SYSTEM",
                         title = "系统",
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxHeight()
                     ) {
                         ControlActionTile(
                             title = "USB 调试",
@@ -184,14 +198,18 @@ internal fun ControlPage(
                             value = if (state.adbEnabled) "开启" else "关闭",
                             emphasized = state.adbEnabled,
                             onClick = actions.onToggleAdb,
-                            modifier = Modifier.weight(1f)
+                            modifier = Modifier
+                                .weight(1f)
+                                .fillMaxWidth()
                         )
                         Spacer(Modifier.height(6.dp))
                         ControlActionTile(
                             title = "系统设置",
                             detail = "Android",
                             onClick = actions.onOpenSystemSettings,
-                            modifier = Modifier.weight(1f)
+                            modifier = Modifier
+                                .weight(1f)
+                                .fillMaxWidth()
                         )
                     }
                 }
@@ -201,21 +219,31 @@ internal fun ControlPage(
                         ControlDomain(
                             kicker = "DISPLAY",
                             title = "显示",
+                            compact = true,
                             modifier = Modifier.weight(1f)
                         ) {
-                            Row(modifier = Modifier.fillMaxWidth().weight(1f)) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .weight(1f),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
                                 ControlActionTile(
                                     title = "系统默认",
                                     detail = "未单独设置的应用",
                                     onClick = openSystemEpd,
-                                    modifier = Modifier.weight(1f)
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .fillMaxHeight()
                                 )
                                 Spacer(Modifier.width(6.dp))
                                 ControlActionTile(
                                     title = "InkBoard",
                                     detail = "桌面 EPD",
                                     onClick = openInkBoardEpd,
-                                    modifier = Modifier.weight(1f)
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .fillMaxHeight()
                                 )
                             }
                         }
@@ -224,21 +252,31 @@ internal fun ControlPage(
                     ControlDomain(
                         kicker = "HOME",
                         title = "桌面",
+                        compact = true,
                         modifier = Modifier.weight(1f)
                     ) {
-                        Row(modifier = Modifier.fillMaxWidth().weight(1f)) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .weight(1f),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
                             ControlActionTile(
                                 title = "桌面文字",
                                 detail = "主屏的一句话",
                                 onClick = onOpenMotto,
-                                modifier = Modifier.weight(1f)
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .fillMaxHeight()
                             )
                             Spacer(Modifier.width(6.dp))
                             ControlActionTile(
                                 title = "快捷方式",
                                 detail = "8 个位置",
                                 onClick = onOpenApps,
-                                modifier = Modifier.weight(1f)
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .fillMaxHeight()
                             )
                         }
                     }
@@ -246,23 +284,33 @@ internal fun ControlPage(
                     ControlDomain(
                         kicker = "SYSTEM",
                         title = "系统",
+                        compact = true,
                         modifier = Modifier.weight(1f)
                     ) {
-                        Row(modifier = Modifier.fillMaxWidth().weight(1f)) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .weight(1f),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
                             ControlActionTile(
                                 title = "USB 调试",
                                 detail = "ADB",
                                 value = if (state.adbEnabled) "开启" else "关闭",
                                 emphasized = state.adbEnabled,
                                 onClick = actions.onToggleAdb,
-                                modifier = Modifier.weight(1f)
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .fillMaxHeight()
                             )
                             Spacer(Modifier.width(6.dp))
                             ControlActionTile(
                                 title = "系统设置",
                                 detail = "Android",
                                 onClick = actions.onOpenSystemSettings,
-                                modifier = Modifier.weight(1f)
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .fillMaxHeight()
                             )
                         }
                     }
@@ -344,7 +392,8 @@ private fun CompactOrientationChoice(
         modifier = modifier
             .fillMaxHeight()
             .background(if (selected) InkBlack else InkPaper)
-            .border(width = if (selected) 2.dp else 1.5.dp, color = InkBlack)
+            // Same stroke for selected/unselected so the four cells stay equal size.
+            .border(width = 1.5.dp, color = InkBlack)
             .inkClickable(onClick),
         contentAlignment = Alignment.Center
     ) {
@@ -369,12 +418,15 @@ private fun ControlDomain(
     kicker: String,
     title: String,
     modifier: Modifier = Modifier,
+    /** Portrait MENU uses less horizontal inset so paired tiles stay equal width. */
+    compact: Boolean = false,
     content: @Composable ColumnScope.() -> Unit
 ) {
     Column(
         modifier = modifier
             .fillMaxHeight()
-            .padding(horizontal = 24.dp)
+            .fillMaxWidth()
+            .padding(horizontal = if (compact) 0.dp else 24.dp)
     ) {
         Text(
             text = kicker,
@@ -383,20 +435,18 @@ private fun ControlDomain(
             fontWeight = FontWeight.Black,
             letterSpacing = 1.8.sp
         )
-        Spacer(Modifier.height(7.dp))
+        Spacer(Modifier.height(if (compact) 5.dp else 7.dp))
         Text(
             text = title,
             color = InkBlack,
-            fontSize = 26.sp,
+            fontSize = if (compact) 22.sp else 26.sp,
             fontWeight = FontWeight.Black,
             letterSpacing = (-0.5).sp
         )
-        Spacer(Modifier.height(18.dp))
+        Spacer(Modifier.height(if (compact) 10.dp else 18.dp))
         content()
     }
 }
-
-@Composable
 
 private fun rotationLabel(mode: OrientationMode): String = when (mode) {
     OrientationMode.PORTRAIT -> "0°"
