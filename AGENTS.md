@@ -9,7 +9,8 @@
 | [README.md](README.md) | 产品说明 + **给 Agent 的安装整段** |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | 模块边界、状态流、如何加功能 |
 | [docs/INKBOARD_UI.md](docs/INKBOARD_UI.md) | 黑白 UI / 墨水屏交互约定 |
-| [docs/EPD_S11A.md](docs/EPD_S11A.md) | 云思 EPD Provider 与 `persist.modify.eink.mode` 实测 |
+| [docs/EPD_S11A.md](docs/EPD_S11A.md) | EPD 刷新模式、Provider、`persist.modify.eink.mode` |
+| [docs/S11A_TUNING.md](docs/S11A_TUNING.md) | S11A 调优：ADB、Loader、待机/关机图、logo 分区 |
 
 ---
 

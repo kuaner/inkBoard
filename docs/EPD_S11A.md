@@ -1,8 +1,12 @@
-# S11A EPD 调查记录
+# S11A EPD：刷新模式与 Provider
 
-最后核对：2026-08-05
+最后核对：2026-08-06
 
-这份文档记录 S11A（`EB1004P`）现场固件的实际行为，作为 InkBoard 后续 EPD 代码的依据。属性值是本次设备现场值，不应直接当成所有 Onyx/Yitoa 设备的固定默认值。
+本文只记 **屏幕刷新 / EPD 配置链路**：SystemUI Provider、波形、全刷阈值、`persist.modify.eink.mode`，以及 InkBoard 如何读写。
+
+**待机图、关机图、logo 分区、Loader 刷机** 见 [S11A_TUNING.md](S11A_TUNING.md)。
+
+属性值来自 S11A（`EB1004P`）现场固件，不要当成所有 Onyx/Yitoa 机型的固定默认。
 
 ## 设备与显示链路
 

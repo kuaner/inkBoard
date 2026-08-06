@@ -117,7 +117,9 @@ adb shell setprop persist.modify.eink.mode true
 
 出厂多为 `false`：能写配置但不换波形。InkBoard **不会**在应用内执行 `setprop`。
 
-更细的波形字段、待机图 / logo 分区等见 [docs/EPD_S11A.md](docs/EPD_S11A.md)。
+波形字段与 Provider 细节见 [docs/EPD_S11A.md](docs/EPD_S11A.md)。
+
+ADB / 手势 / 待机与开关机图 / logo 分区 / Loader 刷机见 [docs/S11A_TUNING.md](docs/S11A_TUNING.md)。
 
 **参考验证机**：云思智学 S11A（EB1004P）、RK3566、Android 11、1404×1872。
 
@@ -141,7 +143,8 @@ Secrets：`ANDROID_KEYSTORE_*`（与 [InkFlow](https://github.com/kuaner/inkflow
 |------|------|
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | 模块与状态流 |
 | [docs/INKBOARD_UI.md](docs/INKBOARD_UI.md) | 黑白 UI / 墨水屏交互 |
-| [docs/EPD_S11A.md](docs/EPD_S11A.md) | 云思 EPD 与固件相关实测 |
+| [docs/EPD_S11A.md](docs/EPD_S11A.md) | 云思 EPD 刷新模式与 Provider |
+| [docs/S11A_TUNING.md](docs/S11A_TUNING.md) | S11A 调优：ADB、刷机、待机/关机图、logo |
 | [AGENTS.md](AGENTS.md) | 协作者 / Agent 工程约定 |
 
 截图：`docs/images/`。
