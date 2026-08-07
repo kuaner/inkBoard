@@ -243,6 +243,74 @@ rkdeveloptool ld
 rkdeveloptool ppt
 ```
 
+## 本机 `super` 完整布局（LP 动态分区）
+
+本机的 `system`、`vendor`、`product`、`odm` 和 `system_ext` 都不是
+Loader GPT 中可以直接按名称写入的独立物理分区，而是由 `super` 内的
+LP（Logical Partition）元数据映射出来的逻辑分区。系统正常运行时，可以用
+下面的命令查看当前设备的真实映射：
+
+```bash
+adb shell lpdump /dev/block/by-name/super
+```
+
+当前 S11A / EB1004P 的 `super` 物理范围和 LP 元数据如下。表中的“结束 LBA”
+是**结束但不包含**的地址，即区间按 `[起始, 结束)` 计算；Loader 的 `rl` / `wl`
+使用表中的物理起始 LBA。
+
+| 逻辑分区 | 相对 `super` 起始 | 物理起始 LBA | 物理结束 LBA（不含） | 扇区数 | 大小（字节） |
+|---|---:|---:|---:|---:|---:|
+| `system` | 2048 | 1933312 | 4257144 | 2323832 | 1189801984 |
+| `vendor` | 2325880 | 4257144 | 4648448 | 391304 | 200347648 |
+| `product` | 2717184 | 4648448 | 4997600 | 349152 | 178765824 |
+| `odm` | 3066336 | 4997600 | 5671360 | 673760 | 344965120 |
+| `system_ext` | 3740096 | 5671360 | 5780192 | 108832 | 55721984 |
+
+外层 GPT 中：
+
+```text
+super：     LBA 1931264 .. 8304639（共 6373376 个扇区，3263168512 字节）
+logo：      从 LBA 8304640 开始
+userdata：  从 LBA 8337408 开始
+```
+
+`super` 内部还有以下非分区区域：
+
+```text
+[1931264, 1933312)  LP 元数据及保留区，1048576 字节
+[1933312, 5780192)  当前 5 个逻辑分区，连续无间隔
+[5780192, 8298496)  动态分区组空闲空间，1289371648 字节
+[8298496, 8304640)  super 尾部保留空间，3145728 字节
+```
+
+本机常用的物理写入常量如下，直接查表即可：
+
+```bash
+SUPER_LBA=1931264
+SYSTEM_LBA=1933312
+SYSTEM_SECTORS=2323832
+VENDOR_LBA=4257144
+VENDOR_SECTORS=391304
+PRODUCT_LBA=4648448
+PRODUCT_SECTORS=349152
+ODM_LBA=4997600
+ODM_SECTORS=673760
+SYSTEM_EXT_LBA=5671360
+SYSTEM_EXT_SECTORS=108832
+```
+
+例如恢复 `system_ext`：
+
+```bash
+TOOL=~/bin/rkdeveloptool
+"$TOOL" wl "$SYSTEM_EXT_LBA" system_ext.img
+"$TOOL" rl "$SYSTEM_EXT_LBA" "$SYSTEM_EXT_SECTORS" /tmp/system_ext.readback.img
+cmp system_ext.img /tmp/system_ext.readback.img
+```
+
+这些地址只对当前设备当前的 LP 元数据有效。更换 OTA 版本、重建
+`super` 或修改动态分区布局后，必须重新执行 `lpdump`，不能继续照抄本表。
+
 ## `vendor` 的提取、修改与刷回
 
 ### 本机的分区事实
