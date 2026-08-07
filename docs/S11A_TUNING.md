@@ -48,6 +48,31 @@ adb devices -l
 
 状态应为 `device`。若为 `unauthorized`，在平板上点允许 USB 调试。
 
+## InkBoard 锁屏权限
+
+InkBoard 的“锁屏”快捷方式调用 Android `DevicePolicyManager.lockNow()`，需要先启用 InkBoard 的 **设备管理员 / 强制锁屏** 权限。这不是 `WRITE_SETTINGS` 权限，单纯打开 USB 调试也不会自动授予它。
+
+首次点击 InkBoard 的“锁屏”快捷方式时，系统应显示设备管理员确认页；确认启用即可。若系统没有自动弹出，进入：
+
+```text
+设置 → 安全（或安全与隐私）→ 设备管理应用 → InkBoard → 启用
+```
+
+设备已连接 ADB 时，也可以直接启用：
+
+```bash
+adb shell dpm set-active-admin --user current \
+  ai.openduo.inkboard/.admin.InkBoardDeviceAdminReceiver
+```
+
+检查是否生效：
+
+```bash
+adb shell dumpsys device_policy | grep -A 8 -B 2 ai.openduo.inkboard
+```
+
+看到 `InkBoardDeviceAdminReceiver` 后，再点击锁屏即可立即锁屏。`WRITE_SETTINGS` 仍只用于 InkBoard 的旋转等系统设置。
+
 ---
 
 ## EPD 波形总开关（与 InkBoard 配合）
@@ -118,47 +143,81 @@ firmware-dump/display-assets/
 
 ## 开机 Logo（`logo` 分区）
 
-最早开机画面走 **Rockchip logo 分区**，不是 `/vendor/media` 里的 PNG。
+### 先记住这一点
+
+设备最早出现的开机画面来自 **Rockchip 的 `logo` 分区**，不是
+`/odm/media/bootanimation.zip`，也不是 `/vendor/media` 下的 PNG。
+不要为了修改最早开机画面再改 `/odm`，不要安装启动动画模块；本机的
+`/odm/media/bootanimation.zip` 已恢复为原厂文件。
 
 | 项目 | 值 |
 |------|-----|
 | 符号链接 | `/dev/block/by-name/logo` |
 | 本机块设备 | `/dev/block/mmcblk2p14`（以机内 `by-name` 为准） |
 | 体积 | **16 MiB** 完整镜像 |
-| 格式 | 头 `RKEL`；条目 `GR04`；每份 `1872×1404` **4-bit**；共 **11** 份图像 |
+| 格式 | 头 `RKEL`；条目 `GR04`；每份 `1872×1404`、4-bit；共 11 个存储条目 |
 
-### 规则
+### 为什么只看到两张图
 
-- **不能**把普通 PNG 直接 `dd` 进分区。
-- 替换时应用 **完整 16 MiB** 的 `RKEL/GR04` 镜像，11 份图都要替换。
-- 写前备份，写后回读比对 checksum。
-
-### 备份 / 写入 / 恢复（需 root）
-
-```bash
-# 备份
-adb exec-out su -c 'cat /dev/block/by-name/logo' > logo-original.img
-
-# 写入已编码镜像（示例文件名）
-adb push logo_apple_crisp_bold.img /data/local/tmp/logo.img
-adb shell su -c 'dd if=/data/local/tmp/logo.img of=/dev/block/mmcblk2p14 bs=1M; sync'
-
-# 回读核对
-adb exec-out su -c 'cat /dev/block/by-name/logo' > logo-after.img
-shasum -a 256 logo_apple_crisp_bold.img logo-after.img
-
-# 恢复原厂
-adb push logo-original.img /data/local/tmp/logo-original.img
-adb shell su -c 'dd if=/data/local/tmp/logo-original.img of=/dev/block/mmcblk2p14 bs=1M; sync'
-```
-
-本地参考：
+这 11 个 `GR04` 条目不是当前固件会依次播放的 11 帧动画。S11A 的启动流程
+只显示两个阶段：U-Boot 的 `ulogo`，以及 Linux EBC 驱动接管后的 `klogo`。
+设备启动日志会分别出现：
 
 ```text
-firmware-dump/display-assets/
-  device-backup-before-logo-apple/logo.img   # 原厂 16 MiB
-  logo_apple_crisp_bold.img                  # 已验证可写版本（若你本地有）
+ebc-dev: have ulogo display, ulogo addr = ...
+ebc-dev: need show klogo, klogo addr = ...
 ```
+
+因此只改 Logo 镜像时，实际可见的是第 1 张和第 2 张；想让 11 张连续播放，
+必须修改 U-Boot / 内核的播放逻辑，单纯把 11 张图写进分区不能实现。
+当前已验证的版本设置为 **0% → 50%**：第一张居中显示空进度条，第二张位置
+不变并显示约半格进度，给 Android 后续启动留下余量。
+
+### RKEL 写入的关键陷阱
+
+不能把每帧从 `0x200 + index × frame_size` 紧密排列写入。原始 S11A 容器的
+每个 `GR04` 条目会在头部给出自己的 payload 偏移；单帧数据为 `1,314,144`
+字节，但相邻帧起始地址相差 `1,314,304` 字节，中间有 **160 字节间隔**。
+忽略这 160 字节会导致第 1 帧看起来正常，而第 2 帧开始整体向下错位。
+
+不要直接写普通 PNG，也不要只写某一帧；必须使用完整、正确编码的 **16 MiB**
+镜像。仓库已经保存本次实际刷入并回读校验通过的版本：
+
+| 文件 | 用途 | 大小 | SHA-256 |
+|------|------|------|---------|
+| `firmware/s11a/logo-apple-progress-50.img` | S11A 最早开机 Logo，0% → 50% | 16 MiB | `90ae86583b2bb6d622127bb75e895a22cbecbadfeb3be9c7e29595c93171cdc5` |
+
+### 通过 Loader 备份、写入和恢复
+
+使用 Loader 写物理范围，避免在已启动 Android 中直接操作块设备。每次都先用
+`ppt` 核对当前 GPT；下面的 LBA 是这台 S11A 当前实测值，不要套用到其他设备：
+
+```bash
+TOOL=~/bin/rkdeveloptool
+
+"$TOOL" ld
+"$TOOL" ppt
+# 当前 S11A：logo 起始 LBA 0x007EB800 = 8304640，长度 32768 sectors
+
+# 先备份当前 16 MiB logo
+"$TOOL" rl 8304640 32768 logo-before.img
+shasum -a 256 logo-before.img
+
+# 写入仓库中的完整镜像
+"$TOOL" wl 8304640 firmware/s11a/logo-apple-progress-50.img
+
+# 必须整段回读并逐字节校验
+"$TOOL" rl 8304640 32768 logo-after.img
+cmp firmware/s11a/logo-apple-progress-50.img logo-after.img
+shasum -a 256 logo-after.img
+
+# 回系统测试
+"$TOOL" rd
+```
+
+恢复时只需把最后写入的文件换成刷写前保存的 `logo-before.img`，再按同样的
+回读校验流程确认。不要使用 `fastboot`，不要把 Logo 镜像写入 `boot`、
+`uboot` 或 `super`。
 
 ---
 

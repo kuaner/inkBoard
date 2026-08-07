@@ -63,6 +63,15 @@ adb shell am start -n ai.openduo.inkboard/.MainActivity
 
 4. 系统设置 → 默认应用 → 主屏幕 → **InkBoard**
 
+**启用锁屏快捷方式：**锁屏需要单独启用 InkBoard 的设备管理员权限，不是 `WRITE_SETTINGS`。首次点击 InkBoard 的“锁屏”快捷方式时，在系统确认页允许即可；如果系统没有弹出，可执行：
+
+```bash
+adb shell dpm set-active-admin --user current \
+  ai.openduo.inkboard/.admin.InkBoardDeviceAdminReceiver
+```
+
+也可以在「设置 → 安全（或安全与隐私）→ 设备管理应用 → InkBoard」中启用。
+
 **打开 ADB：**  
 - 多数设备：设置 → 关于本机 → 连点版本号 → 开发者选项 → USB 调试  
 - **云思智学**：设置 → 我的设备 → 序列号 7 次 → logo 7 次 →「我的设备」3 次（不要用「点版本号」那套）
