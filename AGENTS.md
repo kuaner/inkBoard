@@ -27,26 +27,6 @@ InkBoard 是面向 **Android 墨水屏平板** 的 **HOME 启动器**（默认�
 
 ---
 
-## 本机 Android 工具链（这台 Mac）
-
-执行 Gradle / adb 时直接用下列路径，不要反复搜索：
-
-```bash
-export JAVA_HOME=/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home
-export ANDROID_HOME=/opt/homebrew/share/android-commandlinetools
-export ANDROID_SDK_ROOT=/opt/homebrew/share/android-commandlinetools
-```
-
-`local.properties` 已被 `.gitignore` 忽略；本机可写：
-
-```properties
-sdk.dir=/opt/homebrew/share/android-commandlinetools
-```
-
-**不要提交** `local.properties`、keystore、密码、签名材料或任意 `*.jks` / `*.keystore`。
-
----
-
 ## 包名与版本
 
 | 项 | 值 |
@@ -70,10 +50,7 @@ app/src/main/java/ai/openduo/inkboard/
 在项目根目录 `/Users/kuaner/Documents/code/inkBoard`：
 
 ```bash
-export JAVA_HOME=/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home
-export ANDROID_HOME=/opt/homebrew/share/android-commandlinetools
-
-# Debug（日常改 UI / 功能）
+# Debug（日常改 UI / 功能；使用当前 shell 已配置的 Android/Java 环境）
 ./gradlew --no-daemon :app:assembleDebug
 adb install -r app/build/outputs/apk/debug/app-debug.apk
 
