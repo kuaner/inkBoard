@@ -589,27 +589,163 @@ if ((blkstart + blkcnt) > RKUSB_READ_LIMIT_ADDR) {
 
 所以 `rkdeveloptool rl` 可能显示成功，但读出的镜像后半段已经被 `0xCC` 替代，导致提取的 `boot.img` 损坏或无法启动。
 
-### 修复方法
+### S11A 已验证的精确二进制修改
 
-修复是对**匹配设备的 U-Boot 源码**做一个很小的改动，禁用这段人为读取限制。例如社区补丁把条件改成：
+上面的 C 代码说明了原因；本机实际采用的是对 **S11A 原厂 `uboot.img`** 的二进制级精确修改，而不是刷入 PineNote 的 U-Boot，也不是把 Android `boot.img` 写入 `uboot`。
 
-```diff
--if ((blkstart + blkcnt) > RKUSB_READ_LIMIT_ADDR) {
-+if ((blkstart + blkcnt) > RKUSB_READ_LIMIT_ADDR && 0) {
+仓库已附上这次实际验证过的两份完整 4 MiB 镜像：
+
+| 文件 | 用途 | SHA-256 |
+|------|------|---------|
+| `firmware/s11a/uboot.img` | S11A 原版 U-Boot，作为备份和恢复镜像 | `55131177f3ba423b404b6402c3f20fff493c1255a07eeef09fd1860bc921f75d` |
+| `firmware/s11a/uboot-patched.img` | 已绕过 32 MiB 读取限制的 S11A U-Boot | `963d1cc0124c72e9edf96e1f7da3b3d3d04b3c51f82af16160a8f6692386fd17` |
+
+本机原厂 U-Boot 分区镜像大小为 `0x400000`（4 MiB），内部有两份相同的 FIT 副本，起始偏移分别为 `0x0` 和 `0x200000`。每份 FIT 中的 U-Boot payload 从 `0xe00` 开始，大小为 `0x128988`。
+
+在 `rkusb_read_sector()` 中，原始指令逻辑如下：
+
+```asm
+cmp   x4, #0x10, lsl #12       // 0x10000 个扇区，即 32 MiB
+b.ls  normal_read              // 未超过限制时读取真实数据
+...
+mov   w1, #0xcc                // 超过限制时填充 0xCC
+...
+normal_read:
 ```
 
-然后使用 S11A / EB1004P 对应的厂商 SDK、原板级配置、ATF / OP-TEE / DTB 和原有 FIT / 签名流程重新构建 `uboot.img`。不要直接拿 PineNote 的 U-Boot 二进制替换 S11A 的 U-Boot；两者即使 SoC / 屏幕相近，板级配置和启动链仍可能不同。
+超过 32 MiB 时，原厂 U-Boot 会落入 `0xCC` 填充路径；`rkdeveloptool rl` 仍可能报告成功，因此得到的 `boot`、`vendor` 或 `super` dump 看起来完整，实际内容却已经损坏。
 
-构建出确认匹配的 U-Boot 分区镜像后，才通过 Loader 写入 `uboot`：
+实际补丁只把两份 FIT 副本中的这条条件跳转改成跳到同一目标地址的无条件跳转：
+
+```asm
+b     normal_read
+```
+
+以整个 4 MiB `uboot.img` 为基准、偏移从 0 开始计数，两个分支的变化是：
+
+```text
+偏移       原始字节       补丁字节       原始指令                 补丁指令
+0x13710    49 01 00 54    0a 00 00 14    b.ls #0xa12938           b #0xa12938
+0x213710   49 01 00 54    0a 00 00 14    b.ls #0xa12938           b #0xa12938
+```
+
+每条 4 字节指令实际只有 3 个字节发生变化，另一字节仍为 `00`。`cmp` 指令和 `0xCC` 填充代码都保留，只是不再通过该分支进入填充路径。
+
+由于这是 FIT 镜像，修改 payload 后还必须更新两份 FIT 元数据中的 U-Boot SHA-256。两个哈希字段的位置和内容是：
+
+```text
+字段偏移   原始 SHA-256
+0x190      b872cfdefb4fd8e1ca58d31f1d61f55e45e8597af6d1a816f88b8326e7b6bf55
+0x200190   b872cfdefb4fd8e1ca58d31f1d61f55e45e8597af6d1a816f88b8326e7b6bf55
+
+补丁后两处都应为：
+5ebbc757fffc6b084dfd0e940110681d24d86ccc01242f43ff0ebd3dd460a8ad
+```
+
+因此相对原版严格只有 `64 + 3 + 3 = 70` 个字节不同。已验证的整文件校验值为：
+
+```text
+原版：55131177f3ba423b404b6402c3f20fff493c1255a07eeef09fd1860bc921f75d
+补丁版：963d1cc0124c72e9edf96e1f7da3b3d3d04b3c51f82af16160a8f6692386fd17
+```
+
+### 如何制作同样的补丁
+
+必须从已确认无损的 S11A 原厂 `uboot.img` 开始。不要对已经出现大段 `0xCC` 的 dump 继续打补丁。下面脚本会检查原版整文件 SHA-256、检查两个分支和两个旧哈希，再生成补丁文件，并要求最终差异数恰好为 70：
 
 ```bash
-rkdeveloptool ld
-rkdeveloptool ppt                 # 确认机型和 uboot 分区
-rkdeveloptool wlx uboot uboot-patched.img
-rkdeveloptool rd
+ORIGINAL=uboot.img
+PATCHED=uboot-patched.img
+
+python3 - "$ORIGINAL" "$PATCHED" <<'PY'
+import hashlib
+import sys
+from pathlib import Path
+
+if len(sys.argv) != 3:
+    raise SystemExit("usage: patch.py ORIGINAL UBOOT_PATCHED")
+
+src = Path(sys.argv[1])
+dst = Path(sys.argv[2])
+original = src.read_bytes()
+
+if len(original) != 0x400000:
+    raise SystemExit(f"unexpected size: {len(original)}")
+if hashlib.sha256(original).hexdigest() != (
+    "55131177f3ba423b404b6402c3f20fff493c1255a07eeef09fd1860bc921f75d"
+):
+    raise SystemExit("not the verified S11A original uboot.img")
+
+out = bytearray(original)
+old_branch = bytes.fromhex("49010054")
+new_branch = bytes.fromhex("0a000014")
+for off in (0x13710, 0x213710):
+    if bytes(out[off:off + 4]) != old_branch:
+        raise SystemExit(f"unexpected branch bytes at 0x{off:x}")
+    out[off:off + 4] = new_branch
+
+payload_hashes = []
+for base in (0x0, 0x200000):
+    payload = out[base + 0xe00:base + 0xe00 + 0x128988]
+    payload_hashes.append(hashlib.sha256(payload).digest())
+if payload_hashes[0] != payload_hashes[1]:
+    raise SystemExit("the two FIT payloads are not identical")
+
+old_hash = bytes.fromhex(
+    "b872cfdefb4fd8e1ca58d31f1d61f55e45e8597af6d1a816f88b8326e7b6bf55"
+)
+for off in (0x190, 0x200190):
+    if bytes(out[off:off + 32]) != old_hash:
+        raise SystemExit(f"unexpected FIT hash at 0x{off:x}")
+    out[off:off + 32] = payload_hashes[0]
+
+different = sum(a != b for a, b in zip(original, out))
+if different != 70:
+    raise SystemExit(f"unexpected diff count: {different}")
+
+dst.write_bytes(out)
+print("payload SHA-256:", payload_hashes[0].hex())
+print("image SHA-256:", hashlib.sha256(out).hexdigest())
+print("different bytes:", different)
+PY
+
+shasum -a 256 "$ORIGINAL" "$PATCHED"
+cmp -l "$ORIGINAL" "$PATCHED" | wc -l       # 必须为 70
 ```
 
-写入后重新进入 Loader，再按 `ppt` 得到的实际 LBA 使用 `rkdeveloptool rl` 读取 `boot` 或其它分区，并检查文件大小、校验值和是否仍出现连续 `0xCC`。`uboot-patched.img` 不是 Android `boot.img`，也不是 Magisk 的 `boot_patch.img`；不要使用 `db` / `ul` 把它当作临时 Loader 下载。
+### 写入、回读与恢复
+
+先进入 Rockchip Loader，确认设备显示 `Vid=0x2207, Pid=0x350a` 和 `Loader`。写入前必须读取并保存当前 `uboot`，它是最可靠的恢复镜像：
+
+```bash
+TOOL="$HOME/bin/rkdeveloptool"
+
+"$TOOL" ld
+"$TOOL" ppt                         # 始终以当前输出为准
+"$TOOL" rl 0x4000 0x2000 uboot.before-patch.img
+shasum -a 256 uboot.before-patch.img
+```
+
+本机这次 `ppt` 显示 `uboot` 起始 LBA 为 `0x4000`，`0x2000` 个扇区正好是 4 MiB；不同设备或分区布局必须重新以 `ppt` 为准。确认备份是完整、可恢复的原版后再写入：
+
+```bash
+"$TOOL" wlx uboot "$PATCHED"
+
+# 写完重新进入 Loader 后回读，先校验再重启
+"$TOOL" rl 0x4000 0x2000 uboot.after-patch.readback.img
+cmp "$PATCHED" uboot.after-patch.readback.img
+shasum -a 256 uboot.after-patch.readback.img
+"$TOOL" rd
+```
+
+如果补丁 U-Boot 导致异常，重新进入 Loader，刷回刚才保存的原版：
+
+```bash
+"$TOOL" wlx uboot uboot.before-patch.img
+"$TOOL" rd
+```
+
+`uboot-patched.img` 是 S11A 的 U-Boot 分区镜像，不是 Android `boot.img`，也不是 Magisk 的 `boot_patch.img`。不要把 PineNote U-Boot、Android boot 镜像或不匹配版本的 U-Boot 写入 `uboot`，不要使用 `db` / `ul` 把它当作临时 Loader 下载。只需要修改启动图时，直接使用本文前面准备好的 root `boot`；这个 U-Boot 补丁只用于可靠提取超过 32 MiB 的分区内容。
 
 ### 修复出处
 
