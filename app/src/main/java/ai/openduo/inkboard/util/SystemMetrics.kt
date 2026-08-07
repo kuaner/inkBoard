@@ -2,7 +2,8 @@ package ai.openduo.inkboard.util
 
 import android.app.ActivityManager
 import android.content.Context
-import java.io.File
+import android.os.Process
+import android.os.SystemClock
 import java.util.Locale
 import kotlin.math.roundToInt
 
@@ -17,8 +18,8 @@ data class SystemMetrics(
     val memoryUsedGb: String,
     /** e.g. "3.5" */
     val memoryTotalGb: String,
-    /** 1-minute load average, e.g. "0.35", or "—" if unavailable. */
-    val load1m: String
+    /** InkBoard process CPU usage over the last sampling interval. */
+    val processCpuPercent: String
 ) {
     val memorySummary: String
         get() = "$memoryUsedPercent%  ·  ${memoryUsedGb}/${memoryTotalGb}G"
@@ -30,7 +31,7 @@ fun readSystemMetrics(context: Context): SystemMetrics {
         memoryUsedPercent = memory.percent,
         memoryUsedGb = memory.usedGb,
         memoryTotalGb = memory.totalGb,
-        load1m = readLoadAverage1m()
+        processCpuPercent = ProcessCpuSampler.readPercent()
     )
 }
 
@@ -60,11 +61,34 @@ private fun formatGb(bytes: Long): String {
     return String.format(Locale.US, "%.1f", gb)
 }
 
-/** First field of `/proc/loadavg` (1-minute load). */
-private fun readLoadAverage1m(): String {
-    return runCatching {
-        val raw = File("/proc/loadavg").readText().trim().substringBefore(' ')
-        val value = raw.toDoubleOrNull() ?: return@runCatching "—"
-        String.format(Locale.US, "%.2f", value)
-    }.getOrDefault("—")
+/**
+ * Public Android process CPU accounting, sampled at the same cadence as the
+ * home metrics. Android does not expose the host's load average to ordinary
+ * apps, so the UI labels this honestly as CPU rather than LOAD.
+ */
+private object ProcessCpuSampler {
+    private var previousCpuMs: Long? = null
+    private var previousWallMs: Long? = null
+
+    @Synchronized
+    fun readPercent(): String {
+        val nowCpuMs = runCatching { Process.getElapsedCpuTime() }.getOrNull()
+            ?: return "—"
+        val nowWallMs = SystemClock.elapsedRealtime()
+        val oldCpuMs = previousCpuMs
+        val oldWallMs = previousWallMs
+        previousCpuMs = nowCpuMs
+        previousWallMs = nowWallMs
+
+        if (oldCpuMs == null || oldWallMs == null) return "—"
+        val cpuDeltaMs = nowCpuMs - oldCpuMs
+        val wallDeltaMs = nowWallMs - oldWallMs
+        if (cpuDeltaMs < 0L || wallDeltaMs <= 0L) return "—"
+
+        val cpuCount = Runtime.getRuntime().availableProcessors().coerceAtLeast(1)
+        val percent = (cpuDeltaMs.toDouble() / (wallDeltaMs * cpuCount) * 100.0)
+            .roundToInt()
+            .coerceIn(0, 100)
+        return String.format(Locale.US, "%d%%", percent)
+    }
 }

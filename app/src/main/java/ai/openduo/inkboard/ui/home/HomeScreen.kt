@@ -251,7 +251,7 @@ private fun HeroTimePanel(
     val timeSize = timeSizeSp.sp
     val weekdayShort = dateParts.weekday.take(3)
     val dateLine = "$weekdayShort · ${dateParts.dayOfMonth} ${dateParts.monthYear.substringBefore(' ')}"
-    val statsLine = "MEM ${metrics.memoryUsedPercent}%  ·  LOAD ${metrics.load1m}"
+    val statsLine = "MEM ${metrics.memoryUsedPercent}%  ·  CPU ${metrics.processCpuPercent}"
     val align = if (centered) Alignment.CenterHorizontally else Alignment.End
     val textAlign = if (centered) TextAlign.Center else TextAlign.End
 
