@@ -136,10 +136,10 @@ ADB / 手势 / 待机与开关机图 / logo 分区 / Loader 刷机见 [docs/S11A
 
 ## 发布
 
-推送标签 `v*`（须等于 `app/build.gradle.kts` 的 `versionName`，如 `v1.0.2`）会签名构建并创建 [GitHub Release](https://github.com/kuaner/inkBoard/releases)。`main` 推送不发版。
+推送标签 `v*`（须等于 `app/build.gradle.kts` 的 `versionName`，如 `v1.0.3`）会签名构建并创建 [GitHub Release](https://github.com/kuaner/inkBoard/releases)。`main` 推送不发版。
 
 ```bash
-git tag v1.0.2 && git push origin v1.0.2
+git tag v1.0.3 && git push origin v1.0.3
 ```
 
 Secrets：`ANDROID_KEYSTORE_*`（与 [InkFlow](https://github.com/kuaner/inkflow) 共用证书命名）。
