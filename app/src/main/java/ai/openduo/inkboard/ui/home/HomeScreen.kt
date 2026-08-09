@@ -4,36 +4,39 @@ import ai.openduo.inkboard.ui.LauncherActions
 import ai.openduo.inkboard.ui.components.AppGlyph
 import ai.openduo.inkboard.ui.components.EditorialHeader
 import ai.openduo.inkboard.ui.components.Hairline
+import ai.openduo.inkboard.ui.components.HomeLayoutSpec
 import ai.openduo.inkboard.ui.components.PaperFrame
 import ai.openduo.inkboard.ui.components.ShortcutColumns
-import ai.openduo.inkboard.ui.components.ShortcutRows
 import ai.openduo.inkboard.ui.components.VerticalRule
+import ai.openduo.inkboard.ui.components.homeGridRowsFor
+import ai.openduo.inkboard.ui.components.homeLayoutSpec
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ai.openduo.inkboard.LauncherUiState
 import ai.openduo.inkboard.data.AppInfo
-import ai.openduo.inkboard.data.BuiltInShortcut
 import ai.openduo.inkboard.ui.components.HomeDateParts
 import ai.openduo.inkboard.ui.components.inkClickable
 import ai.openduo.inkboard.ui.epd.EpdEntryPoints
@@ -41,6 +44,8 @@ import ai.openduo.inkboard.ui.theme.InkBlack
 import ai.openduo.inkboard.ui.theme.InkMid
 import ai.openduo.inkboard.ui.theme.InkSoft
 import ai.openduo.inkboard.util.SystemMetrics
+import kotlin.math.min
+import kotlin.math.roundToInt
 
 @Composable
 internal fun HomeSurface(
@@ -51,68 +56,73 @@ internal fun HomeSurface(
     dateParts: HomeDateParts,
     metrics: SystemMetrics,
     motto: String,
-    onEditApps: () -> Unit,
+    onOpenApps: () -> Unit,
     onEditSlot: (Int) -> Unit,
     onOpenMotto: () -> Unit,
     onOpenSender: () -> Unit,
     onOpenControls: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val slotCount = state.homeSlotCount
+    val rows = homeGridRowsFor(slotCount)
+    val layout = homeLayoutSpec(slotCount)
+
     PaperFrame(modifier) { wide ->
         EditorialHeader(
             section = "HOME",
-            onEdit = onEditApps,
-            onEpd = epd.openSystem,
+            onEdit = onOpenApps,
+            onEpd = epd.open,
             onSender = onOpenSender,
             onMenu = onOpenControls
         )
         Spacer(Modifier.height(if (wide) 12.dp else 10.dp))
 
-        // Hero takes all space above the fixed app grid, with large type so
-        // the band feels full (not a thin strip + void).
+        val gridModifier = if (layout.gridHeight != null) {
+            Modifier
+                .fillMaxWidth()
+                .height(if (wide) layout.gridHeight else layout.gridHeight + 10.dp)
+        } else {
+            Modifier
+                .fillMaxWidth()
+                .weight(layout.gridWeight)
+        }
+
+        // Classic 8-slot: hero fills remaining space (weight 1). Dense: shared weights.
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(1f),
+                .then(
+                    if (layout.gridHeight != null) Modifier.weight(1f)
+                    else Modifier.weight(layout.heroWeight)
+                ),
             contentAlignment = if (wide) Alignment.CenterStart else Alignment.Center
         ) {
             HomeHero(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxSize(),
                 dateParts = dateParts,
                 time = time,
                 metrics = metrics,
                 motto = motto,
                 onOpenMotto = onOpenMotto,
-                wide = wide
+                wide = wide,
+                layout = layout
             )
         }
 
         Spacer(Modifier.height(if (wide) 12.dp else 10.dp))
 
-        // Keep the app grid at the size that already felt right.
         AppColumns(
-            slots = state.slots,
+            slots = state.slots.take(slotCount),
+            rows = rows,
+            layout = layout,
             onLaunch = actions.onLaunch,
             onEditSlot = onEditSlot,
-            onOpenEpd = epd.openApp,
             compact = !wide,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(if (wide) 320.dp else 330.dp)
+            modifier = gridModifier
         )
     }
 }
 
-/**
- * Landing-style hero (no game, no floating ornaments).
- *
- * Landscape — classic split landing:
- *   left  : kicker + headline (motto) with type hierarchy
- *   right : oversized time as the visual anchor + meta
- *
- * Portrait — stacked landing:
- *   time → headline → meta strip
- */
 @Composable
 private fun HomeHero(
     modifier: Modifier,
@@ -121,8 +131,13 @@ private fun HomeHero(
     metrics: SystemMetrics,
     motto: String,
     onOpenMotto: () -> Unit,
-    wide: Boolean
+    wide: Boolean,
+    layout: HomeLayoutSpec
 ) {
+    val timeSp = if (wide) layout.timeSpWide else layout.timeSpCompact
+    val leadSp = if (wide) layout.mottoLeadSpWide else layout.mottoLeadSpCompact
+    val trailSp = if (wide) layout.mottoTrailSpWide else layout.mottoTrailSpCompact
+
     if (wide) {
         Row(
             modifier = modifier.fillMaxWidth(),
@@ -132,6 +147,9 @@ private fun HomeHero(
                 motto = motto,
                 onOpenMotto = onOpenMotto,
                 wide = true,
+                leadSp = leadSp,
+                trailSp = trailSp,
+                maxLines = layout.mottoMaxLines,
                 modifier = Modifier
                     .weight(1f)
                     .padding(end = 36.dp)
@@ -140,8 +158,10 @@ private fun HomeHero(
                 dateParts = dateParts,
                 time = time,
                 metrics = metrics,
-                timeSizeSp = 108,
-                compact = false
+                timeSizeSp = timeSp,
+                compact = false,
+                showStats = layout.showStats,
+                centered = false
             )
         }
     } else {
@@ -154,15 +174,19 @@ private fun HomeHero(
                 dateParts = dateParts,
                 time = time,
                 metrics = metrics,
-                timeSizeSp = 92,
+                timeSizeSp = timeSp,
                 compact = true,
+                showStats = layout.showStats,
                 centered = true
             )
-            Spacer(Modifier.height(24.dp))
+            Spacer(Modifier.height(if (layout.mottoMaxLines <= 1) 10.dp else 24.dp))
             HeroHeadline(
                 motto = motto,
                 onOpenMotto = onOpenMotto,
                 wide = false,
+                leadSp = leadSp,
+                trailSp = trailSp,
+                maxLines = layout.mottoMaxLines,
                 modifier = Modifier.fillMaxWidth()
             )
         }
@@ -174,34 +198,37 @@ private fun HeroHeadline(
     motto: String,
     onOpenMotto: () -> Unit,
     wide: Boolean,
+    leadSp: Int,
+    trailSp: Int,
+    maxLines: Int,
     modifier: Modifier = Modifier
 ) {
-    val parts = splitMottoLeadTrail(motto)
+    val parts = if (maxLines <= 1) emptyList() else splitMottoLeadTrail(motto)
     Column(
         modifier = modifier.inkClickable(onClick = onOpenMotto),
         horizontalAlignment = if (wide) Alignment.Start else Alignment.CenterHorizontally
     ) {
-        if (parts.size >= 2) {
+        if (parts.size >= 2 && maxLines >= 2) {
             Text(
                 text = parts[0],
                 color = InkBlack,
-                fontSize = if (wide) 58.sp else 40.sp,
-                lineHeight = if (wide) 68.sp else 48.sp,
+                fontSize = leadSp.sp,
+                lineHeight = (leadSp * 1.18f).sp,
                 fontWeight = FontWeight.Black,
-                letterSpacing = (-1.1).sp,
-                maxLines = 2,
+                letterSpacing = (-1.0).sp,
+                maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 textAlign = if (wide) TextAlign.Start else TextAlign.Center
             )
-            Spacer(Modifier.height(if (wide) 14.dp else 10.dp))
+            Spacer(Modifier.height(if (wide) 12.dp else 8.dp))
             Text(
                 text = parts[1],
                 color = InkBlack,
-                fontSize = if (wide) 32.sp else 22.sp,
-                lineHeight = if (wide) 40.sp else 30.sp,
+                fontSize = trailSp.sp,
+                lineHeight = (trailSp * 1.2f).sp,
                 fontWeight = FontWeight.Bold,
                 letterSpacing = (-0.3).sp,
-                maxLines = 2,
+                maxLines = (maxLines - 1).coerceAtLeast(1),
                 overflow = TextOverflow.Ellipsis,
                 textAlign = if (wide) TextAlign.Start else TextAlign.Center
             )
@@ -209,11 +236,11 @@ private fun HeroHeadline(
             Text(
                 text = motto,
                 color = InkBlack,
-                fontSize = if (wide) 54.sp else 38.sp,
-                lineHeight = if (wide) 64.sp else 46.sp,
+                fontSize = leadSp.sp,
+                lineHeight = (leadSp * 1.15f).sp,
                 fontWeight = FontWeight.Black,
-                letterSpacing = (-0.9).sp,
-                maxLines = 3,
+                letterSpacing = (-0.8).sp,
+                maxLines = maxLines,
                 overflow = TextOverflow.Ellipsis,
                 textAlign = if (wide) TextAlign.Start else TextAlign.Center
             )
@@ -221,7 +248,6 @@ private fun HeroHeadline(
     }
 }
 
-/** Prefer sentence end, then softer pauses — type hierarchy for landing copy. */
 private fun splitMottoLeadTrail(motto: String): List<String> {
     val text = motto.trim()
     if (text.isEmpty()) return emptyList()
@@ -244,7 +270,8 @@ private fun HeroTimePanel(
     metrics: SystemMetrics,
     timeSizeSp: Int,
     compact: Boolean,
-    centered: Boolean = false
+    showStats: Boolean,
+    centered: Boolean
 ) {
     val hours = time.substringBefore(":")
     val minutes = time.substringAfter(":")
@@ -278,32 +305,35 @@ private fun HeroTimePanel(
             letterSpacing = 1.8.sp,
             textAlign = textAlign
         )
-        Spacer(Modifier.height(if (compact) 8.dp else 10.dp))
-        Text(
-            text = statsLine,
-            color = InkBlack,
-            fontFamily = FontFamily.Monospace,
-            fontSize = if (compact) 12.sp else 14.sp,
-            fontWeight = FontWeight.Bold,
-            letterSpacing = 0.8.sp,
-            textAlign = textAlign
-        )
+        if (showStats) {
+            Spacer(Modifier.height(if (compact) 8.dp else 10.dp))
+            Text(
+                text = statsLine,
+                color = InkBlack,
+                fontFamily = FontFamily.Monospace,
+                fontSize = if (compact) 12.sp else 14.sp,
+                fontWeight = FontWeight.Bold,
+                letterSpacing = 0.8.sp,
+                textAlign = textAlign
+            )
+        }
     }
 }
 
 @Composable
 private fun AppColumns(
     slots: List<AppInfo?>,
+    rows: Int,
+    layout: HomeLayoutSpec,
     onLaunch: (AppInfo) -> Unit,
     onEditSlot: (Int) -> Unit,
-    onOpenEpd: ((AppInfo) -> Unit)?,
     compact: Boolean,
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier) {
         Hairline()
         Column(modifier = Modifier.weight(1f)) {
-            for (row in 0 until ShortcutRows) {
+            for (row in 0 until rows) {
                 if (row > 0) Hairline()
                 Row(modifier = Modifier.weight(1f)) {
                     for (column in 0 until ShortcutColumns) {
@@ -312,12 +342,12 @@ private fun AppColumns(
                         AppColumn(
                             index = index,
                             app = slots.getOrNull(index),
+                            layout = layout,
                             compact = compact,
                             onClick = {
                                 slots.getOrNull(index)?.let(onLaunch) ?: onEditSlot(index)
                             },
                             onLongClick = { onEditSlot(index) },
-                            onOpenEpd = onOpenEpd,
                             modifier = Modifier
                                 .weight(1f)
                                 .fillMaxHeight()
@@ -333,69 +363,67 @@ private fun AppColumns(
 private fun AppColumn(
     index: Int,
     app: AppInfo?,
+    layout: HomeLayoutSpec,
     compact: Boolean,
     onClick: () -> Unit,
     onLongClick: () -> Unit,
-    onOpenEpd: ((AppInfo) -> Unit)?,
     modifier: Modifier
 ) {
-    Column(
+    BoxWithConstraints(
         modifier = modifier
             .inkClickable(onClick = onClick, onLongClick = onLongClick)
-            .padding(horizontal = if (compact) 14.dp else 18.dp, vertical = 14.dp)
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = "0${index + 1}",
-                color = InkMid,
-                fontSize = 10.sp,
-                fontWeight = FontWeight.Bold,
-                letterSpacing = 1.7.sp
+            .padding(
+                horizontal = if (compact) 10.dp else 16.dp,
+                vertical = if (compact) 8.dp else 12.dp
             )
-            Spacer(Modifier.weight(1f))
-            if (onOpenEpd != null && app != null && app.builtInShortcut == null) {
+    ) {
+        val density = LocalDensity.current
+        val cellMinPx = min(constraints.maxWidth, constraints.maxHeight).toFloat()
+        val iconDp: Dp = with(density) {
+            (cellMinPx * layout.iconRatio).toDp().coerceIn(layout.iconMinDp, layout.iconMaxDp)
+        }
+        val labelSp = with(density) {
+            (cellMinPx * 0.10f).toSp().value.roundToInt().coerceIn(11, 16)
+        }
+
+        Column(modifier = Modifier.fillMaxSize()) {
+            if (layout.showSlotIndex) {
                 Text(
-                    text = "EPD",
-                    color = InkBlack,
-                    fontSize = 9.sp,
-                    fontWeight = FontWeight.Black,
-                    letterSpacing = 1.2.sp,
-                    modifier = Modifier
-                        .inkClickable(onClick = { onOpenEpd(app) })
-                        .padding(start = 12.dp, top = 4.dp, bottom = 4.dp)
+                    text = (index + 1).toString().padStart(2, '0'),
+                    color = InkMid,
+                    fontSize = 10.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 1.7.sp
                 )
             }
-        }
-        Spacer(Modifier.weight(1f))
-        if (app == null) {
-            Text(
-                text = "+",
-                color = InkSoft,
-                fontSize = if (compact) 36.sp else 46.sp,
-                fontWeight = FontWeight.Light,
-                modifier = Modifier.align(Alignment.CenterHorizontally)
-            )
-        } else {
-            Box(
-                modifier = Modifier.fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                AppGlyph(app = app, size = if (compact) 56.dp else 68.dp)
+            Spacer(Modifier.weight(1f))
+            if (app == null) {
+                Text(
+                    text = "+",
+                    color = InkSoft,
+                    fontSize = if (compact) 32.sp else 42.sp,
+                    fontWeight = FontWeight.Light,
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                )
+            } else {
+                Box(
+                    modifier = Modifier.fillMaxWidth(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    AppGlyph(app = app, size = iconDp)
+                }
             }
+            Spacer(Modifier.weight(1f))
+            Text(
+                text = app?.label ?: "ADD APP",
+                color = if (app == null) InkSoft else InkBlack,
+                fontSize = labelSp.sp,
+                fontWeight = if (app == null) FontWeight.Medium else FontWeight.Bold,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
         }
-        Spacer(Modifier.weight(1f))
-        Text(
-            text = app?.label ?: "ADD APP",
-            color = if (app == null) InkSoft else InkBlack,
-            fontSize = if (compact) 14.sp else 16.sp,
-            fontWeight = if (app == null) FontWeight.Medium else FontWeight.Bold,
-            maxLines = 2,
-            overflow = TextOverflow.Ellipsis,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth()
-        )
     }
 }

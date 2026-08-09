@@ -21,26 +21,28 @@ import kotlinx.coroutines.withContext
 import kotlin.system.measureTimeMillis
 
 /**
- * Starts resolving the eight home shortcuts as soon as the process exists,
- * before [MainActivity] has finished composing an empty grid.
+ * Starts resolving home shortcuts as soon as the process exists, before
+ * [MainActivity] has finished composing an empty grid.
  *
  * Also resolves EPD customization support once (firmware/service probe, cached
  * forever in DataStore) so the first UI frame already knows whether to show
- * SYSTEM EPD / per-app EPD.
+ * the unified EPD hub.
  */
 class InkBoardApp : Application() {
 
     private val appScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     private val _homeSlots = MutableStateFlow<List<AppInfo?>>(
-        List(PreferencesRepository.SLOT_COUNT) { null }
+        List(PreferencesRepository.DEFAULT_SLOT_COUNT) { null }
     )
+    private val _homeSlotCount = MutableStateFlow(PreferencesRepository.DEFAULT_SLOT_COUNT)
     private val _motto = MutableStateFlow(PreferencesRepository.DEFAULT_MOTTO)
     private val _homeReady = MutableStateFlow(false)
     private val _epdCustomizationEnabled = MutableStateFlow(false)
     private val _epdCapabilityReady = MutableStateFlow(false)
 
     val homeSlots: StateFlow<List<AppInfo?>> = _homeSlots.asStateFlow()
+    val homeSlotCount: StateFlow<Int> = _homeSlotCount.asStateFlow()
     val motto: StateFlow<String> = _motto.asStateFlow()
     val homeReady: StateFlow<Boolean> = _homeReady.asStateFlow()
     val epdCustomizationEnabled: StateFlow<Boolean> = _epdCustomizationEnabled.asStateFlow()
@@ -81,8 +83,9 @@ class InkBoardApp : Application() {
                 }
 
                 if (!_homeReady.value) {
-                    val keys = prefs.slotKeys.first()
-                    val iconPaths = prefs.slotIconPaths.first()
+                    val slotCount = prefs.homeSlotCount.first()
+                    val keys = prefs.slotKeys.first().take(slotCount)
+                    val iconPaths = prefs.slotIconPaths.first().take(slotCount)
                     val motto = prefs.motto.first()
                     val resolved = appRepo.resolveByKeys(keys.filterNotNull())
                     val slots = keys.mapIndexed { index, key ->
@@ -100,6 +103,7 @@ class InkBoardApp : Application() {
                         }
                     }
                     _motto.value = motto
+                    _homeSlotCount.value = slotCount
                     _homeSlots.value = slots
                     _homeReady.value = true
                 }
@@ -112,8 +116,15 @@ class InkBoardApp : Application() {
         }
     }
 
-    fun publishHomeSlots(slots: List<AppInfo?>, motto: String? = null) {
+    fun publishHomeSlots(
+        slots: List<AppInfo?>,
+        motto: String? = null,
+        homeSlotCount: Int? = null
+    ) {
         if (motto != null) _motto.value = motto
+        if (homeSlotCount != null) {
+            _homeSlotCount.value = PreferencesRepository.normalizeSlotCount(homeSlotCount)
+        }
         _homeSlots.value = slots
         _homeReady.value = true
     }

@@ -18,11 +18,28 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 /**
  * Ordered home slots: slot_0 … slot_N store "package/activity" keys.
  * Empty string = vacant slot.
+ *
+ * Physical storage covers [MAX_SLOT_COUNT]; the visible desktop uses
+ * [homeSlotCount] (8 / 12 / 16 / 24). Keys beyond the active count are kept
+ * so shrinking density does not wipe user choices.
  */
 class PreferencesRepository(private val context: Context) {
 
     companion object {
-        const val SLOT_COUNT = 8
+        /** Physical slot storage ceiling. */
+        const val MAX_SLOT_COUNT = 24
+        /** Default visible shortcuts (legacy layout). */
+        const val DEFAULT_SLOT_COUNT = 8
+        /** MENU density options. Default selection is [DEFAULT_SLOT_COUNT]. */
+        val SLOT_COUNT_OPTIONS = listOf(4, 8, 12, 16, 24)
+
+        /**
+         * Backward-compatible alias used by older call sites that still mean
+         * "how many slots the home grid shows by default". Prefer
+         * [DEFAULT_SLOT_COUNT] / [MAX_SLOT_COUNT] / live [homeSlotCount].
+         */
+        const val SLOT_COUNT = DEFAULT_SLOT_COUNT
+
         /** Reading-themed default — two clauses for lead/trail type scale. */
         const val DEFAULT_MOTTO = "书读百遍，其义自见。一页有声，世界便慢。"
         private val LEGACY_DEFAULT_MOTTOS = setOf(
@@ -31,9 +48,10 @@ class PreferencesRepository(private val context: Context) {
             "书读百遍，其义自见 · 一页有声，世界便慢",
             "书读百遍，其义自见。一页有声，世界便慢。今日所读，皆有回响。"
         )
-        private const val SLOT_SCHEMA_VERSION = "5a"
+        private const val SLOT_SCHEMA_VERSION = "6a"
         private val SLOT_SCHEMA = stringPreferencesKey("slot_schema")
         private val MOTTO = stringPreferencesKey("motto")
+        private val HOME_SLOT_COUNT = intPreferencesKey("home_slot_count")
         private val SYSTEM_EPD_PACKAGES = stringSetPreferencesKey("epd_system_packages")
         private val EPD_CUSTOM_PROBED = booleanPreferencesKey("epd_custom_probed")
         private val EPD_CUSTOM_SUPPORTED = booleanPreferencesKey("epd_custom_supported")
@@ -41,6 +59,12 @@ class PreferencesRepository(private val context: Context) {
 
         fun slotKey(index: Int) = stringPreferencesKey("slot_$index")
         fun slotIconKey(index: Int) = stringPreferencesKey("slot_icon_$index")
+
+        fun normalizeSlotCount(raw: Int?): Int {
+            if (raw == null) return DEFAULT_SLOT_COUNT
+            return SLOT_COUNT_OPTIONS.minByOrNull { kotlin.math.abs(it - raw) }
+                ?: DEFAULT_SLOT_COUNT
+        }
     }
 
     /**
@@ -73,14 +97,30 @@ class PreferencesRepository(private val context: Context) {
         return current[EPD_CUSTOM_SUPPORTED] == true
     }
 
+    /** Visible home shortcut count (8 / 12 / 16 / 24). Default 8. */
+    val homeSlotCount: Flow<Int> = context.dataStore.data.map { prefs ->
+        normalizeSlotCount(prefs[HOME_SLOT_COUNT])
+    }
+
+    suspend fun setHomeSlotCount(count: Int) {
+        val normalized = normalizeSlotCount(count)
+        context.dataStore.edit { prefs ->
+            prefs[HOME_SLOT_COUNT] = normalized
+        }
+    }
+
+    /**
+     * All stored slot keys up to [MAX_SLOT_COUNT]. Callers that render the
+     * home grid should take only the first [homeSlotCount] entries.
+     */
     val slotKeys: Flow<List<String?>> = context.dataStore.data.map { prefs ->
-        (0 until SLOT_COUNT).map { i ->
+        (0 until MAX_SLOT_COUNT).map { i ->
             prefs[slotKey(i)]?.takeIf { it.isNotBlank() }
         }
     }
 
     val slotIconPaths: Flow<List<String?>> = context.dataStore.data.map { prefs ->
-        (0 until SLOT_COUNT).map { i ->
+        (0 until MAX_SLOT_COUNT).map { i ->
             prefs[slotIconKey(i)]?.takeIf { it.isNotBlank() }
         }
     }
@@ -95,7 +135,7 @@ class PreferencesRepository(private val context: Context) {
     }
 
     suspend fun setSlot(index: Int, appKey: String?) {
-        if (index !in 0 until SLOT_COUNT) return
+        if (index !in 0 until MAX_SLOT_COUNT) return
         context.dataStore.edit { prefs ->
             prefs.remove(slotIconKey(index))
             if (appKey.isNullOrBlank()) {
@@ -107,7 +147,7 @@ class PreferencesRepository(private val context: Context) {
     }
 
     suspend fun setSlotIcon(index: Int, path: String?) {
-        if (index !in 0 until SLOT_COUNT) return
+        if (index !in 0 until MAX_SLOT_COUNT) return
         context.dataStore.edit { prefs ->
             if (path.isNullOrBlank()) {
                 prefs.remove(slotIconKey(index))
@@ -148,11 +188,16 @@ class PreferencesRepository(private val context: Context) {
         }
     }
 
-    /** Seed eight launcher slots once, while preserving a user's choices. */
+    /**
+     * Seed launcher slots once, while preserving a user's choices.
+     * Seeds only the default visible count; extra density slots stay empty
+     * until the user assigns them.
+     */
     suspend fun ensureDefaults(preferredKeys: List<String>) {
         context.dataStore.edit { prefs ->
             val schema = prefs[SLOT_SCHEMA]
-            val existingKeys = (0 until SLOT_COUNT).map { index -> prefs[slotKey(index)] }
+            val existingKeys = (0 until MAX_SLOT_COUNT).map { index -> prefs[slotKey(index)] }
+            val seedCount = DEFAULT_SLOT_COUNT
             if (schema != SLOT_SCHEMA_VERSION) {
                 // The previous build could seed Onyx Launcher itself as a shortcut.
                 // Remove only that known legacy default; preserve other choices.
@@ -162,21 +207,29 @@ class PreferencesRepository(private val context: Context) {
                 val containsLegacySystemApp = existingKeys.any { key ->
                     key?.let(::isSystemAppKey) == true
                 }
-                if (containsLegacyLauncher || containsLegacySystemApp || existingKeys.all { it == null }) {
-                    for (i in 0 until SLOT_COUNT) {
+                val firstEightEmpty = existingKeys.take(seedCount).all { it == null }
+                if (containsLegacyLauncher || containsLegacySystemApp || firstEightEmpty) {
+                    for (i in 0 until seedCount) {
                         prefs.remove(slotKey(i))
                     }
-                    preferredKeys.take(SLOT_COUNT).forEachIndexed { i, key ->
+                    preferredKeys.take(seedCount).forEachIndexed { i, key ->
                         prefs[slotKey(i)] = key
                     }
+                }
+                // Existing installs without home_slot_count keep default 8.
+                if (prefs[HOME_SLOT_COUNT] == null) {
+                    prefs[HOME_SLOT_COUNT] = DEFAULT_SLOT_COUNT
                 }
                 prefs[SLOT_SCHEMA] = SLOT_SCHEMA_VERSION
                 return@edit
             }
-            val anySet = existingKeys.any { it != null }
+            val anySet = existingKeys.take(seedCount).any { it != null }
             if (anySet) return@edit
-            preferredKeys.take(SLOT_COUNT).forEachIndexed { i, key ->
+            preferredKeys.take(seedCount).forEachIndexed { i, key ->
                 prefs[slotKey(i)] = key
+            }
+            if (prefs[HOME_SLOT_COUNT] == null) {
+                prefs[HOME_SLOT_COUNT] = DEFAULT_SLOT_COUNT
             }
         }
     }

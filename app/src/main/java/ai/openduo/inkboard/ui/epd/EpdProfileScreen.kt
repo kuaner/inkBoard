@@ -107,7 +107,7 @@ internal fun EpdProfilePage(
     PaperFrame(modifier) { wide ->
         PageHeader(
             title = "EPD.",
-            meta = if (target.app == null) "INKBOARD" else "APP",
+            meta = target.editorMeta,
             actionLabel = "FULL",
             onBack = onBack,
             onAction = onRefreshScreen

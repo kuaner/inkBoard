@@ -138,6 +138,13 @@ enum class EpdRefreshPreset(
     }
 }
 
+/** One refresh-mode tile on the mode-first EPD hub. */
+data class EpdModeSummary(
+    val preset: EpdRefreshPreset,
+    val isSystemDefault: Boolean,
+    val appCount: Int
+)
+
 /**
  * Thin adapter over the exported SystemUI provider used by the stock EPD
  * “应用优化” dialog. Saving a profile changes only that app's row; the vendor

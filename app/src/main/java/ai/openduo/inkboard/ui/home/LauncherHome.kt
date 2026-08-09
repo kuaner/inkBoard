@@ -2,48 +2,21 @@ package ai.openduo.inkboard.ui.home
 
 import ai.openduo.inkboard.ui.LauncherActions
 import ai.openduo.inkboard.ui.apps.AppDrawer
+import ai.openduo.inkboard.ui.apps.AppLauncherPage
 import ai.openduo.inkboard.ui.components.formatCurrentTime
 import ai.openduo.inkboard.ui.components.formatHomeDateParts
 import ai.openduo.inkboard.util.readSystemMetrics
 import ai.openduo.inkboard.ui.controls.ControlPage
 import ai.openduo.inkboard.ui.epd.EpdEntryPoints
-import ai.openduo.inkboard.ui.epd.EpdProfilePage
-import ai.openduo.inkboard.ui.epd.EpdSection
-import ai.openduo.inkboard.ui.epd.EpdTarget
-import ai.openduo.inkboard.ui.epd.SystemEpdPage
+import ai.openduo.inkboard.ui.epd.EpdHomePage
+import ai.openduo.inkboard.ui.epd.EpdListTarget
+import ai.openduo.inkboard.ui.epd.EpdModeChoice
+import ai.openduo.inkboard.ui.epd.EpdRoute
 import ai.openduo.inkboard.ui.icons.IconPicker
 import ai.openduo.inkboard.ui.sender.SenderPage
 
-import android.graphics.Bitmap
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DeleteSweep
-import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -51,58 +24,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.geometry.CornerRadius
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.FilterQuality
-import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import ai.openduo.inkboard.LauncherUiState
-import ai.openduo.inkboard.SenderSnapshot
 import ai.openduo.inkboard.data.AppInfo
-import ai.openduo.inkboard.data.BuiltInShortcut
-import ai.openduo.inkboard.data.EpdDpiPreset
 import ai.openduo.inkboard.data.EpdProfile
 import ai.openduo.inkboard.data.EpdRefreshPreset
-import ai.openduo.inkboard.data.KoboyoIcon
-import ai.openduo.inkboard.data.KoboyoIconCategory
-import ai.openduo.inkboard.data.KoboyoIconGroup
-import ai.openduo.inkboard.ui.components.MonochromeIcon
-import ai.openduo.inkboard.ui.components.inkClickable
-import ai.openduo.inkboard.ui.theme.InkBlack
-import ai.openduo.inkboard.ui.theme.InkDark
-import ai.openduo.inkboard.ui.theme.InkLine
-import ai.openduo.inkboard.ui.theme.InkMid
-import ai.openduo.inkboard.ui.theme.InkPaper
-import ai.openduo.inkboard.ui.theme.InkSoft
-import ai.openduo.inkboard.ui.theme.InkWhite
-import ai.openduo.inkboard.util.OrientationMode
-import com.google.zxing.BarcodeFormat
-import com.google.zxing.EncodeHintType
-import com.google.zxing.qrcode.QRCodeWriter
-import java.time.LocalDate
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
-import java.util.Locale
-import kotlin.math.roundToInt
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 
-// Root compositor: owns navigation state and delegates each feature to its page.
+private const val GLOBAL_ID = "global"
+private const val INKBOARD_ID = "inkboard"
+
 @Composable
 fun LauncherHome(
     state: LauncherUiState,
@@ -110,99 +43,144 @@ fun LauncherHome(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    var editing by rememberSaveable { mutableStateOf(false) }
+    var appLauncher by rememberSaveable { mutableStateOf(false) }
+    var shortcutEditor by rememberSaveable { mutableStateOf(false) }
     var controls by rememberSaveable { mutableStateOf(false) }
     var sender by rememberSaveable { mutableStateOf(false) }
     var mottoEditor by rememberSaveable { mutableStateOf(false) }
     var iconPicker by rememberSaveable { mutableStateOf(false) }
     var editingSlot by rememberSaveable { mutableIntStateOf(0) }
     var drawerPage by rememberSaveable { mutableIntStateOf(0) }
+    var launcherPage by rememberSaveable { mutableIntStateOf(0) }
     var currentTime by rememberSaveable { mutableStateOf(formatCurrentTime()) }
-    var currentDateParts by remember {
-        mutableStateOf(formatHomeDateParts())
-    }
-    var systemMetrics by remember {
-        mutableStateOf(readSystemMetrics(context))
-    }
-    var systemEpd by rememberSaveable { mutableStateOf(false) }
-    var epdTarget by remember { mutableStateOf<EpdTarget?>(null) }
-    var epdDraft by remember { mutableStateOf<EpdProfile?>(null) }
-    var systemEpdDraft by remember { mutableStateOf<EpdProfile?>(null) }
-    var pendingInkBoardEpdApply by remember { mutableStateOf<EpdProfile?>(null) }
-    var pendingSystemEpdApply by remember { mutableStateOf<EpdProfile?>(null) }
-    var epdSectionName by rememberSaveable { mutableStateOf(EpdSection.REFRESH.name) }
-    val epdSection = EpdSection.entries.firstOrNull { it.name == epdSectionName }
-        ?: EpdSection.REFRESH
+    var currentDateParts by remember { mutableStateOf(formatHomeDateParts()) }
+    var systemMetrics by remember { mutableStateOf(readSystemMetrics(context)) }
 
-    val openEpd: (EpdTarget) -> Unit = { target ->
-        epdTarget = target
-        epdDraft = null
-        epdSectionName = EpdSection.REFRESH.name
-        actions.onLoadEpdProfile(target.packageName)
+    // EPD single page: list + modes. Drafts flush on leave / target change.
+    var epdRoute by remember { mutableStateOf<EpdRoute?>(null) }
+    var epdListPage by rememberSaveable { mutableIntStateOf(0) }
+    var selectedTargetId by rememberSaveable { mutableStateOf(GLOBAL_ID) }
+    var modeChoice by remember { mutableStateOf(EpdModeChoice.of(EpdRefreshPreset.CLEAN)) }
+    var modeDirty by remember { mutableStateOf(false) }
+    // Track which target the current draft belongs to.
+    var draftTargetId by remember { mutableStateOf(GLOBAL_ID) }
+
+    val epdTargets = remember(state.allApps, context.packageName) {
+        buildEpdTargets(state.allApps, context)
     }
 
-    val openSystemEpd: () -> Unit = {
-        systemEpd = true
-        systemEpdDraft = null
-        actions.onLoadSystemEpdProfile()
-    }
-
-    // One place decides whether EPD controls exist. Child pages only see
-    // nullable callbacks and never re-check the product gate.
     val epd = EpdEntryPoints.of(
         enabled = state.epdCustomizationEnabled,
-        openSystem = openSystemEpd,
-        openApp = { app -> openEpd(EpdTarget(app.label, app.packageName, app)) },
-        openInkBoard = {
-            openEpd(
-                EpdTarget(
-                    label = "InkBoard",
-                    packageName = context.packageName
-                )
-            )
+        open = {
+            epdRoute = EpdRoute.Home
+            epdListPage = 0
+            selectedTargetId = GLOBAL_ID
+            draftTargetId = GLOBAL_ID
+            modeDirty = false
+            modeChoice = EpdModeChoice.of(EpdRefreshPreset.CLEAN)
+            actions.onLoadSystemEpdProfile()
+            actions.onRefreshApps()
         },
         refresh = actions.onRefreshEpdScreen
     )
 
-    // Wait until the EPD editor has left composition before asking the vendor
-    // provider to activate InkBoard's profile.  On this firmware activation
-    // briefly recreates the foreground activity.
-    LaunchedEffect(pendingInkBoardEpdApply) {
-        pendingInkBoardEpdApply?.let { profile ->
-            actions.onApplyInkBoardEpdProfile(profile)
-            pendingInkBoardEpdApply = null
+    // Seed mode panel when system profile or selected app profile loads.
+    LaunchedEffect(state.systemEpdProfile, selectedTargetId, epdRoute) {
+        if (epdRoute == null || modeDirty) return@LaunchedEffect
+        if (selectedTargetId == GLOBAL_ID) {
+            state.systemEpdProfile?.let {
+                modeChoice = EpdModeChoice.of(
+                    EpdRefreshPreset.fromProfile(it) ?: EpdRefreshPreset.CLEAN
+                )
+                draftTargetId = GLOBAL_ID
+            }
         }
     }
 
-    LaunchedEffect(pendingSystemEpdApply) {
-        pendingSystemEpdApply?.let { profile ->
-            actions.onApplySystemEpdProfile(profile)
-            pendingSystemEpdApply = null
+    LaunchedEffect(state.epdProfile, selectedTargetId, epdRoute) {
+        if (epdRoute == null || modeDirty) return@LaunchedEffect
+        if (selectedTargetId == GLOBAL_ID) return@LaunchedEffect
+        val target = epdTargets.firstOrNull { it.id == selectedTargetId } ?: return@LaunchedEffect
+        val pkg = target.packageName ?: return@LaunchedEffect
+        val profile = state.epdProfile?.takeIf { it.packageName == pkg } ?: return@LaunchedEffect
+        modeChoice = if (!profile.refreshEnabled) {
+            EpdModeChoice.follow()
+        } else {
+            EpdModeChoice.of(EpdRefreshPreset.fromProfile(profile) ?: EpdRefreshPreset.CLEAN)
+        }
+        draftTargetId = selectedTargetId
+    }
+
+    fun flushModeDraft(targetId: String, choice: EpdModeChoice) {
+        val target = epdTargets.firstOrNull { it.id == targetId } ?: return
+        if (target.isGlobal) {
+            val preset = choice.preset ?: EpdRefreshPreset.CLEAN
+            val base = state.systemEpdProfile
+                ?: EpdProfile(
+                    packageName = "ai.openduo.inkboard.system-default",
+                    refreshEnabled = true
+                )
+            actions.onApplySystemEpdProfile(preset.applyTo(base))
+        } else {
+            val app = target.app ?: AppInfo(
+                label = target.label,
+                packageName = target.packageName ?: return,
+                activityName = "",
+                icon = null
+            )
+            if (choice.followGlobal) {
+                actions.onRemoveAppFromEpdMode(app)
+            } else {
+                val preset = choice.preset ?: EpdRefreshPreset.CLEAN
+                actions.onAssignAppToEpdMode(app, preset)
+            }
         }
     }
 
     val closeEpd: () -> Unit = {
-        val target = epdTarget
-        val editedProfile = epdDraft
-        epdTarget = null
-        epdDraft = null
-        if (target?.packageName == context.packageName && editedProfile != null) {
-            pendingInkBoardEpdApply = editedProfile
+        if (modeDirty) {
+            flushModeDraft(draftTargetId, modeChoice)
         }
+        modeDirty = false
+        epdRoute = null
     }
 
-    val closeSystemEpd: () -> Unit = {
-        val editedProfile = systemEpdDraft
-        systemEpd = false
-        systemEpdDraft = null
-        if (editedProfile != null) {
-            pendingSystemEpdApply = editedProfile
+    val selectTarget: (EpdListTarget) -> Unit = { target ->
+        if (target.id != selectedTargetId) {
+            if (modeDirty) {
+                flushModeDraft(draftTargetId, modeChoice)
+                modeDirty = false
+            }
+            selectedTargetId = target.id
+            draftTargetId = target.id
+            // Reset choice until load arrives (avoid flashing wrong mode).
+            modeChoice = if (target.isGlobal) {
+                EpdModeChoice.of(
+                    state.systemEpdProfile?.let { EpdRefreshPreset.fromProfile(it) }
+                        ?: EpdRefreshPreset.CLEAN
+                )
+            } else {
+                EpdModeChoice.follow()
+            }
+            if (!target.isGlobal) {
+                val pkg = target.packageName
+                if (pkg != null) actions.onLoadEpdProfile(pkg)
+            } else {
+                actions.onLoadSystemEpdProfile()
+            }
         }
     }
 
     val closeSender: () -> Unit = {
         sender = false
         actions.onStopSender()
+    }
+
+    val openShortcutEditor: (Int) -> Unit = { slot ->
+        editingSlot = slot
+        drawerPage = 0
+        shortcutEditor = true
+        actions.onRefreshApps()
     }
 
     LaunchedEffect(sender) {
@@ -219,20 +197,19 @@ fun LauncherHome(
         }
     }
 
-    // Ignore stale EPD navigation if the product gate later becomes false.
-    val showSystemEpd = epd.available && systemEpd
-    val showAppEpd = epd.available && epdTarget != null
+    val showEpd = epd.available && epdRoute != null
 
     BackHandler(
-        enabled = sender || showSystemEpd || showAppEpd || editing || controls || mottoEditor || iconPicker
+        enabled = sender || showEpd || appLauncher || shortcutEditor ||
+            controls || mottoEditor || iconPicker
     ) {
         when {
             sender -> closeSender()
-            showSystemEpd -> closeSystemEpd()
-            showAppEpd -> closeEpd()
+            showEpd -> closeEpd()
             iconPicker -> iconPicker = false
             mottoEditor -> mottoEditor = false
-            editing -> editing = false
+            shortcutEditor -> shortcutEditor = false
+            appLauncher -> appLauncher = false
             controls -> controls = false
         }
     }
@@ -246,45 +223,29 @@ fun LauncherHome(
             modifier = modifier
         )
 
-        showSystemEpd -> SystemEpdPage(
-            profile = systemEpdDraft ?: state.systemEpdProfile,
-            loading = state.systemEpdLoading,
-            error = state.systemEpdError,
-            onProfileChange = { profile -> systemEpdDraft = profile },
+        showEpd -> EpdHomePage(
+            targets = epdTargets,
+            selectedId = selectedTargetId,
+            listPage = epdListPage,
+            onListPageChange = { epdListPage = it },
+            onSelectTarget = selectTarget,
+            modeChoice = modeChoice,
+            onModeChoice = { choice ->
+                modeChoice = choice
+                modeDirty = true
+                draftTargetId = selectedTargetId
+            },
             onRefreshScreen = actions.onRefreshEpdScreen,
-            onBack = closeSystemEpd,
+            onBack = closeEpd,
+            error = state.systemEpdError ?: state.epdError,
             modifier = modifier
         )
-
-        showAppEpd -> {
-            val target = checkNotNull(epdTarget)
-            EpdProfilePage(
-                target = target,
-                profile = state.epdProfile?.takeIf { it.packageName == target.packageName },
-                loading = state.epdLoading,
-                error = state.epdError,
-                section = epdSection,
-                onSectionChange = { epdSectionName = it.name },
-                onProfileChange = { profile ->
-                    epdDraft = profile
-                    actions.onSaveEpdProfile(profile)
-                },
-                onRefreshScreen = actions.onRefreshEpdScreen,
-                applyOnExit = target.packageName == context.packageName,
-                onBack = closeEpd,
-                modifier = modifier
-            )
-        }
 
         iconPicker -> IconPicker(
             state = state,
             slot = editingSlot,
-            onCategory = { category ->
-                actions.onLoadIconPage(category, 0)
-            },
-            onPage = { page ->
-                actions.onLoadIconPage(state.iconPicker.category, page)
-            },
+            onCategory = { category -> actions.onLoadIconPage(category, 0) },
+            onPage = { page -> actions.onLoadIconPage(state.iconPicker.category, page) },
             onSelectIcon = { icon ->
                 actions.onSetSlotIcon(editingSlot, icon)
                 iconPicker = false
@@ -303,43 +264,44 @@ fun LauncherHome(
             modifier = modifier
         )
 
-        editing -> AppDrawer(
+        appLauncher -> AppLauncherPage(
+            apps = state.allApps,
+            page = launcherPage,
+            onPageChange = { launcherPage = it },
+            onLaunch = { app ->
+                appLauncher = false
+                actions.onLaunch(app)
+            },
+            onBack = { appLauncher = false },
+            modifier = modifier
+        )
+
+        shortcutEditor -> AppDrawer(
             slots = state.slots,
             apps = state.allApps,
             selectedSlot = editingSlot,
             onSelectSlot = { editingSlot = it },
             onLaunch = { app ->
-                editing = false
+                shortcutEditor = false
                 actions.onLaunch(app)
             },
-            onAddShortcut = { app ->
-                actions.onAssignSlot(editingSlot, app)
-            },
-            onClearSlot = {
-                actions.onClearSlot(editingSlot)
-            },
+            onAddShortcut = { app -> actions.onAssignSlot(editingSlot, app) },
+            onClearSlot = { actions.onClearSlot(editingSlot) },
             onOpenIconPicker = {
                 iconPicker = true
                 actions.onLoadIconPage(state.iconPicker.category, 0)
             },
-            onOpenEpd = epd.openApp,
             page = drawerPage,
             onPageChange = { drawerPage = it },
-            onBack = { editing = false },
+            onBack = { shortcutEditor = false },
             modifier = modifier
         )
 
         controls -> ControlPage(
             state = state,
             actions = actions,
-            epd = epd,
             onOpenMotto = { mottoEditor = true },
-            onOpenApps = {
-                editingSlot = 0
-                drawerPage = 0
-                editing = true
-                actions.onRefreshApps()
-            },
+            onOpenApps = { openShortcutEditor(0) },
             onBack = { controls = false },
             modifier = modifier
         )
@@ -352,22 +314,83 @@ fun LauncherHome(
             dateParts = currentDateParts,
             metrics = systemMetrics,
             motto = state.motto,
-            onEditApps = {
-                editingSlot = 0
-                drawerPage = 0
-                editing = true
+            onOpenApps = {
+                launcherPage = 0
+                appLauncher = true
                 actions.onRefreshApps()
             },
-            onEditSlot = {
-                editingSlot = it
-                drawerPage = 0
-                editing = true
-                actions.onRefreshApps()
-            },
+            onEditSlot = { openShortcutEditor(it) },
             onOpenMotto = { mottoEditor = true },
             onOpenSender = { sender = true },
             onOpenControls = { controls = true },
             modifier = modifier
         )
     }
+}
+
+private fun buildEpdTargets(
+    apps: List<AppInfo>,
+    context: android.content.Context
+): List<EpdListTarget> {
+    val inkBoardPackage = context.packageName
+    val launchable = apps.filter { it.builtInShortcut == null }
+    val others = launchable
+        .filter { it.packageName != inkBoardPackage }
+        .sortedBy { it.label.lowercase() }
+    val inkBoardApp = resolveSelfAppInfo(context)
+
+    return buildList {
+        add(
+            EpdListTarget(
+                id = GLOBAL_ID,
+                label = "全局缺省",
+                packageName = null,
+                app = null,
+                isGlobal = true,
+                iconSvgPath = "koboyo/svg/aperture.svg"
+            )
+        )
+        add(
+            EpdListTarget(
+                id = INKBOARD_ID,
+                label = "InkBoard",
+                packageName = inkBoardPackage,
+                app = inkBoardApp,
+                isGlobal = false
+            )
+        )
+        others.forEach { app ->
+            add(
+                EpdListTarget(
+                    id = app.key,
+                    label = app.label,
+                    packageName = app.packageName,
+                    app = app,
+                    isGlobal = false
+                )
+            )
+        }
+    }
+}
+
+/** Load this process's launcher icon (self is filtered out of the app catalog). */
+private fun resolveSelfAppInfo(context: android.content.Context): AppInfo {
+    val pm = context.packageManager
+    val packageName = context.packageName
+    val appInfo = runCatching {
+        pm.getApplicationInfo(packageName, 0)
+    }.getOrNull()
+    val label = appInfo?.let { pm.getApplicationLabel(it)?.toString() }?.trim().orEmpty()
+        .ifBlank { "InkBoard" }
+    val icon = appInfo?.let { pm.getApplicationIcon(it) }
+        ?: runCatching { pm.getApplicationIcon(packageName) }.getOrNull()
+    val activityName = runCatching {
+        pm.getLaunchIntentForPackage(packageName)?.component?.className
+    }.getOrNull().orEmpty().ifBlank { "$packageName.MainActivity" }
+    return AppInfo(
+        label = label,
+        packageName = packageName,
+        activityName = activityName,
+        icon = icon
+    )
 }
