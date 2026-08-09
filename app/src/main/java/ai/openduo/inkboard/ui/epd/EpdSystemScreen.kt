@@ -102,14 +102,14 @@ internal fun SystemEpdPage(
 ) {
     PaperFrame(modifier) { wide ->
         PageHeader(
-            title = "SYSTEM EPD.",
-            meta = "DEFAULT",
+            title = "EPD.",
+            meta = "SYSTEM",
             actionLabel = "FULL",
             onBack = onBack,
             onAction = onRefreshScreen
         )
         Spacer(Modifier.height(if (wide) 20.dp else 14.dp))
-        EpdSystemNotice("这里设置全局缺省策略；应用单独策略请从 APPS 中该应用右侧的 EPD 进入。")
+        EpdSystemNotice("这里设置全局缺省刷新策略；未单独配置的应用会跟随此处。应用策略请从 EPD 总览进入。")
         Spacer(Modifier.height(18.dp))
 
         when {
@@ -148,7 +148,7 @@ internal fun SystemEpdPage(
                     "${active.refreshMode.label} · 每完成 ${active.refreshFrequency} 次局部刷新后，自动执行 1 次全屏刷新。"
                 )
                 Spacer(Modifier.height(10.dp))
-                EpdSystemNotice("没有单独策略的应用会跟随此处的全局缺省；选择 APP 后独立保存。")
+                EpdSystemNotice("没有单独策略的应用会跟随此处的全局缺省；在「应用策略」中可为单个应用独立保存。")
             }
         }
 

@@ -92,12 +92,138 @@ internal val DateFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy  ·  EEE",
 internal val DayOfMonthFormatter = DateTimeFormatter.ofPattern("dd")
 internal val MonthYearFormatter = DateTimeFormatter.ofPattern("MMM yyyy", Locale.ENGLISH)
 internal val WeekdayFormatter = DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH)
+/** Home shortcut grid: always 4 columns. */
 internal const val ShortcutColumns = 4
 internal const val ShortcutRows = 2
-internal const val DrawerPageSize = ShortcutColumns * ShortcutRows
+
+/**
+ * APPS launcher — dense for e-ink: 4×5 = 20 apps per page, fewer page turns.
+ */
+internal const val AppsGridColumns = 4
+internal const val AppsGridRows = 5
+internal const val AppsPageSize = AppsGridColumns * AppsGridRows
+
+/** MENU shortcut editor / legacy drawer pagination. */
+internal const val DrawerPageSize = 8
 internal const val DrawerGridColumns = 2
 internal const val DrawerGridRows = DrawerPageSize / DrawerGridColumns
+internal const val DrawerSlotPageSize = 8
 internal const val IconRows = 4
+
+internal fun homeGridRowsFor(slotCount: Int): Int =
+    (slotCount / ShortcutColumns).coerceAtLeast(1)
+
+/**
+ * Discrete home layouts (not continuous scaling).
+ * 8 slots keep the original magazine hero + fixed grid height.
+ */
+internal data class HomeLayoutSpec(
+    val gridHeight: Dp?,
+    val heroWeight: Float,
+    val gridWeight: Float,
+    val timeSpWide: Int,
+    val timeSpCompact: Int,
+    val mottoLeadSpWide: Int,
+    val mottoLeadSpCompact: Int,
+    val mottoTrailSpWide: Int,
+    val mottoTrailSpCompact: Int,
+    val mottoMaxLines: Int,
+    val showStats: Boolean,
+    val iconMaxDp: Dp,
+    val iconMinDp: Dp,
+    val iconRatio: Float,
+    val showSlotIndex: Boolean
+)
+
+internal fun homeLayoutSpec(slotCount: Int): HomeLayoutSpec = when {
+    // Single row of 4 — max hero, shorter app strip.
+    slotCount <= 4 -> HomeLayoutSpec(
+        gridHeight = 168.dp,
+        heroWeight = 1f,
+        gridWeight = 0f,
+        timeSpWide = 112,
+        timeSpCompact = 96,
+        mottoLeadSpWide = 56,
+        mottoLeadSpCompact = 40,
+        mottoTrailSpWide = 34,
+        mottoTrailSpCompact = 24,
+        mottoMaxLines = 3,
+        showStats = true,
+        iconMaxDp = 72.dp,
+        iconMinDp = 56.dp,
+        iconRatio = 0.42f,
+        showSlotIndex = true
+    )
+    // Classic 4×2 default.
+    slotCount <= 8 -> HomeLayoutSpec(
+        gridHeight = 320.dp,
+        heroWeight = 1f,
+        gridWeight = 0f,
+        timeSpWide = 108,
+        timeSpCompact = 92,
+        mottoLeadSpWide = 54,
+        mottoLeadSpCompact = 38,
+        mottoTrailSpWide = 32,
+        mottoTrailSpCompact = 22,
+        mottoMaxLines = 3,
+        showStats = true,
+        iconMaxDp = 68.dp,
+        iconMinDp = 52.dp,
+        iconRatio = 0.40f,
+        showSlotIndex = true
+    )
+    slotCount <= 12 -> HomeLayoutSpec(
+        gridHeight = null,
+        heroWeight = 4f,
+        gridWeight = 5f,
+        timeSpWide = 96,
+        timeSpCompact = 72,
+        mottoLeadSpWide = 42,
+        mottoLeadSpCompact = 28,
+        mottoTrailSpWide = 24,
+        mottoTrailSpCompact = 18,
+        mottoMaxLines = 2,
+        showStats = true,
+        iconMaxDp = 56.dp,
+        iconMinDp = 40.dp,
+        iconRatio = 0.36f,
+        showSlotIndex = true
+    )
+    slotCount <= 16 -> HomeLayoutSpec(
+        gridHeight = null,
+        heroWeight = 3f,
+        gridWeight = 6f,
+        timeSpWide = 84,
+        timeSpCompact = 56,
+        mottoLeadSpWide = 34,
+        mottoLeadSpCompact = 22,
+        mottoTrailSpWide = 20,
+        mottoTrailSpCompact = 15,
+        mottoMaxLines = 2,
+        showStats = false,
+        iconMaxDp = 48.dp,
+        iconMinDp = 32.dp,
+        iconRatio = 0.32f,
+        showSlotIndex = true
+    )
+    else -> HomeLayoutSpec(
+        gridHeight = null,
+        heroWeight = 2f,
+        gridWeight = 7f,
+        timeSpWide = 72,
+        timeSpCompact = 44,
+        mottoLeadSpWide = 28,
+        mottoLeadSpCompact = 16,
+        mottoTrailSpWide = 16,
+        mottoTrailSpCompact = 12,
+        mottoMaxLines = 1,
+        showStats = false,
+        iconMaxDp = 40.dp,
+        iconMinDp = 26.dp,
+        iconRatio = 0.28f,
+        showSlotIndex = false
+    )
+}
 
 @Composable
 internal fun PaperFrame(
@@ -119,9 +245,10 @@ internal fun PaperFrame(
                     top = if (wide) 32.dp else 22.dp,
                     end = if (wide) WidePagePadding else CompactPagePadding,
                     bottom = bottomPadding ?: (if (wide) 32.dp else 22.dp)
-                ),
-            content = { content(wide) }
-        )
+                )
+        ) {
+            content(wide)
+        }
     }
 }
 
@@ -163,7 +290,7 @@ internal fun EditorialHeader(
         }
         Spacer(Modifier.weight(1f))
         if (onEpd != null) {
-            HeaderLink(text = "SYSTEM EPD", onClick = onEpd)
+            HeaderLink(text = "EPD", onClick = onEpd)
             Spacer(Modifier.width(16.dp))
         }
         HeaderLink(text = "SENDER", onClick = onSender)

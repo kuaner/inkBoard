@@ -7,7 +7,9 @@ import androidx.lifecycle.viewModelScope
 import ai.openduo.inkboard.data.AppInfo
 import ai.openduo.inkboard.data.AppRepository
 import ai.openduo.inkboard.data.BuiltInShortcut
+import ai.openduo.inkboard.data.EpdModeSummary
 import ai.openduo.inkboard.data.EpdProfile
+import ai.openduo.inkboard.data.EpdRefreshPreset
 import ai.openduo.inkboard.data.EpdSettingsRepository
 import ai.openduo.inkboard.data.IconPickerState
 import ai.openduo.inkboard.data.KoboyoIcon
@@ -46,11 +48,13 @@ class LauncherViewModel(application: Application) : AndroidViewModel(application
     private val appsFlow = MutableStateFlow<List<AppInfo>>(emptyList())
     /** Fully resolved home row; never published half-empty from key/apps races. */
     private val homeSlotsFlow = MutableStateFlow(app.homeSlots.value)
+    private val homeSlotCountFlow = MutableStateFlow(app.homeSlotCount.value)
     private val mottoFlow = MutableStateFlow(app.motto.value)
     private val statusFlow = MutableStateFlow(StatusSnapshot())
     private val iconPickerFlow = MutableStateFlow(IconPickerState())
     private val epdFlow = MutableStateFlow(EpdSnapshot())
     private val systemEpdFlow = MutableStateFlow(EpdSnapshot())
+    private val epdModesFlow = MutableStateFlow(EpdModesSnapshot())
     private val senderFlow = MutableStateFlow(SenderSnapshot())
     private val epdWriteMutex = Mutex()
     private val appsRefreshMutex = Mutex()
@@ -70,21 +74,31 @@ class LauncherViewModel(application: Application) : AndroidViewModel(application
         val error: String? = null
     )
 
+    private data class EpdModesSnapshot(
+        val summaries: List<EpdModeSummary> = emptyList(),
+        val summariesLoading: Boolean = false,
+        val members: List<AppInfo> = emptyList(),
+        val membersLoading: Boolean = false,
+        val membersPreset: EpdRefreshPreset? = null
+    )
+
     private val baseUiStateFlow = combine(
-        combine(homeSlotsFlow, appsFlow, mottoFlow) { slots, apps, motto ->
-            Triple(slots, apps, motto)
+        combine(homeSlotsFlow, homeSlotCountFlow, appsFlow, mottoFlow) { slots, slotCount, apps, motto ->
+            HomeBundle(slots, slotCount, apps, motto)
         },
         combine(statusFlow, epdCustomizationFlow) { status, epdCustom -> status to epdCustom },
         iconPickerFlow,
-        combine(epdFlow, systemEpdFlow) { epd, systemEpd -> epd to systemEpd }
+        combine(epdFlow, systemEpdFlow, epdModesFlow) { epd, systemEpd, modes ->
+            Triple(epd, systemEpd, modes)
+        }
     ) { home, statusEpd, iconPicker, epdStates ->
-        val (slots, apps, motto) = home
         val (status, epdCustom) = statusEpd
-        val (epd, systemEpd) = epdStates
+        val (epd, systemEpd, modes) = epdStates
         LauncherUiState(
-            slots = slots,
-            allApps = apps,
-            motto = motto,
+            slots = home.slots,
+            homeSlotCount = home.slotCount,
+            allApps = home.apps,
+            motto = home.motto,
             orientation = status.orientation,
             adbEnabled = status.adbEnabled,
             iconPicker = iconPicker,
@@ -94,10 +108,22 @@ class LauncherViewModel(application: Application) : AndroidViewModel(application
             systemEpdProfile = systemEpd.profile,
             systemEpdLoading = systemEpd.loading,
             systemEpdError = systemEpd.error,
+            epdModeSummaries = modes.summaries,
+            epdModesLoading = modes.summariesLoading,
+            epdModeMembers = modes.members,
+            epdModeMembersLoading = modes.membersLoading,
+            epdModeMembersPreset = modes.membersPreset,
             epdCustomizationEnabled = epdCustom,
-            ready = slots.any { it != null } || apps.isNotEmpty() || app.homeReady.value
+            ready = home.slots.any { it != null } || home.apps.isNotEmpty() || app.homeReady.value
         )
     }
+
+    private data class HomeBundle(
+        val slots: List<AppInfo?>,
+        val slotCount: Int,
+        val apps: List<AppInfo>,
+        val motto: String
+    )
 
     val uiState: StateFlow<LauncherUiState> = combine(
         baseUiStateFlow,
@@ -109,6 +135,7 @@ class LauncherViewModel(application: Application) : AndroidViewModel(application
         started = SharingStarted.Eagerly,
         initialValue = LauncherUiState(
             slots = app.homeSlots.value,
+            homeSlotCount = app.homeSlotCount.value,
             motto = app.motto.value,
             epdCustomizationEnabled = app.epdCustomizationEnabled.value,
             ready = app.homeReady.value
@@ -121,6 +148,7 @@ class LauncherViewModel(application: Application) : AndroidViewModel(application
             app.homeSlots.collect { slots ->
                 if (app.homeReady.value && homeSlotsFlow.value.all { it == null } && slots.any { it != null }) {
                     homeSlotsFlow.value = slots
+                    homeSlotCountFlow.value = app.homeSlotCount.value
                     mottoFlow.value = app.motto.value
                 }
             }
@@ -131,6 +159,14 @@ class LauncherViewModel(application: Application) : AndroidViewModel(application
         viewModelScope.launch {
             // Keep motto in sync when edited elsewhere.
             prefs.motto.collect { mottoFlow.value = it }
+        }
+        viewModelScope.launch {
+            prefs.homeSlotCount.collect { count ->
+                if (homeSlotCountFlow.value != count) {
+                    homeSlotCountFlow.value = count
+                    publishResolvedHomeSlots(appsByKey = appsFlow.value.associateBy { it.key })
+                }
+            }
         }
         refreshApps()
         refreshStatus()
@@ -239,25 +275,33 @@ class LauncherViewModel(application: Application) : AndroidViewModel(application
             a.builtInShortcut == b.builtInShortcut &&
             a.customIconPath == b.customIconPath
 
-    private fun publishHomeIfChanged(slots: List<AppInfo?>, motto: String) {
+    private fun publishHomeIfChanged(
+        slots: List<AppInfo?>,
+        motto: String,
+        slotCount: Int = homeSlotCountFlow.value
+    ) {
         val mottoNext = motto.trim().ifBlank { PreferencesRepository.DEFAULT_MOTTO }
+        val countNext = PreferencesRepository.normalizeSlotCount(slotCount)
         val slotsChanged = !sameSlotCatalog(homeSlotsFlow.value, slots)
         val mottoChanged = mottoFlow.value != mottoNext
-        if (!slotsChanged && !mottoChanged) return
+        val countChanged = homeSlotCountFlow.value != countNext
+        if (!slotsChanged && !mottoChanged && !countChanged) return
         if (mottoChanged) mottoFlow.value = mottoNext
+        if (countChanged) homeSlotCountFlow.value = countNext
         if (slotsChanged) {
             homeSlotsFlow.value = slots
-            app.publishHomeSlots(slots, mottoNext)
-        } else if (mottoChanged) {
-            app.publishHomeSlots(homeSlotsFlow.value, mottoNext)
+            app.publishHomeSlots(slots, mottoNext, countNext)
+        } else {
+            app.publishHomeSlots(homeSlotsFlow.value, mottoNext, countNext)
         }
     }
 
     private suspend fun publishResolvedHomeSlots(
         appsByKey: Map<String, AppInfo>? = null
     ) {
-        val keys = prefs.slotKeys.first()
-        val iconPaths = prefs.slotIconPaths.first()
+        val slotCount = prefs.homeSlotCount.first()
+        val keys = prefs.slotKeys.first().take(slotCount)
+        val iconPaths = prefs.slotIconPaths.first().take(slotCount)
         val motto = prefs.motto.first()
         val needed = keys.filterNotNull().filter { appsByKey?.containsKey(it) != true }
         val resolved = if (needed.isEmpty()) {
@@ -271,7 +315,14 @@ class LauncherViewModel(application: Application) : AndroidViewModel(application
                 base?.copy(customIconPath = iconPaths.getOrNull(index))
             }
         }
-        if (sameSlotCatalog(homeSlotsFlow.value, slots) &&
+        // Pad to slotCount if storage was shorter (should not happen with MAX keys).
+        val padded = if (slots.size < slotCount) {
+            slots + List(slotCount - slots.size) { null }
+        } else {
+            slots
+        }
+        if (sameSlotCatalog(homeSlotsFlow.value, padded) &&
+            homeSlotCountFlow.value == slotCount &&
             mottoFlow.value == motto.trim().ifBlank { PreferencesRepository.DEFAULT_MOTTO }
         ) {
             return
@@ -279,13 +330,13 @@ class LauncherViewModel(application: Application) : AndroidViewModel(application
         val density = getApplication<Application>().resources.displayMetrics.density
         val warmPx = (68f * density).toInt().coerceAtLeast(48)
         withContext(Dispatchers.IO) {
-            slots.forEach { slotApp ->
+            padded.forEach { slotApp ->
                 if (slotApp != null && slotApp.builtInShortcut == null) {
                     MonoIconCache.prewarm(slotApp, warmPx, getApplication())
                 }
             }
         }
-        publishHomeIfChanged(slots, motto)
+        publishHomeIfChanged(padded, motto, slotCount)
     }
 
     /**
@@ -357,13 +408,17 @@ class LauncherViewModel(application: Application) : AndroidViewModel(application
 
     fun assignSlot(index: Int, appInfo: AppInfo) {
         viewModelScope.launch {
+            if (index !in 0 until PreferencesRepository.MAX_SLOT_COUNT) return@launch
             prefs.setSlot(index, appInfo.key)
             val iconPaths = prefs.slotIconPaths.first()
             val next = homeSlotsFlow.value.toMutableList()
+            while (next.size <= index && next.size < homeSlotCountFlow.value) {
+                next += null
+            }
             if (index in next.indices) {
                 next[index] = appInfo.copy(customIconPath = iconPaths.getOrNull(index))
                 homeSlotsFlow.value = next
-                app.publishHomeSlots(next)
+                app.publishHomeSlots(next, homeSlotCount = homeSlotCountFlow.value)
             }
             // Also ensure it exists in the drawer catalog.
             if (appsFlow.value.none { it.key == appInfo.key }) {
@@ -380,7 +435,7 @@ class LauncherViewModel(application: Application) : AndroidViewModel(application
             if (index in next.indices) {
                 next[index] = null
                 homeSlotsFlow.value = next
-                app.publishHomeSlots(next)
+                app.publishHomeSlots(next, homeSlotCount = homeSlotCountFlow.value)
             }
             previous?.let { MonoIconCache.invalidate(it.key) }
         }
@@ -390,6 +445,16 @@ class LauncherViewModel(application: Application) : AndroidViewModel(application
         viewModelScope.launch {
             prefs.setMotto(value)
             mottoFlow.value = value.trim().ifBlank { PreferencesRepository.DEFAULT_MOTTO }
+        }
+    }
+
+    fun setHomeSlotCount(count: Int) {
+        viewModelScope.launch {
+            val normalized = PreferencesRepository.normalizeSlotCount(count)
+            if (normalized == homeSlotCountFlow.value) return@launch
+            prefs.setHomeSlotCount(normalized)
+            homeSlotCountFlow.value = normalized
+            publishResolvedHomeSlots(appsByKey = appsFlow.value.associateBy { it.key })
         }
     }
 
@@ -499,6 +564,112 @@ class LauncherViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
+    /** Scan apps into refresh-mode buckets for the mode-first EPD hub. */
+    fun loadEpdModeSummaries() {
+        if (!epdRepo.enabled) return
+        epdModesFlow.value = epdModesFlow.value.copy(summariesLoading = true)
+        viewModelScope.launch(Dispatchers.IO) {
+            epdWriteMutex.withLock {
+                val system = epdRepo.loadSystemProfile()
+                systemEpdFlow.value = EpdSnapshot(profile = system)
+                val defaultPreset = EpdRefreshPreset.fromProfile(system)
+                val systemPackages = prefs.getSystemEpdPackages()
+                val apps = appsFlow.value.filter { it.builtInShortcut == null }
+                val counts = EpdRefreshPreset.entries.associateWith { 0 }.toMutableMap()
+                apps.forEach { appInfo ->
+                    val follows = appInfo.packageName in systemPackages
+                    if (follows) return@forEach
+                    val profile = epdRepo.load(appInfo.packageName)
+                    if (!profile.refreshEnabled) return@forEach
+                    val preset = EpdRefreshPreset.fromProfile(profile) ?: return@forEach
+                    counts[preset] = (counts[preset] ?: 0) + 1
+                }
+                val summaries = EpdRefreshPreset.entries.map { preset ->
+                    EpdModeSummary(
+                        preset = preset,
+                        isSystemDefault = preset == defaultPreset,
+                        appCount = counts[preset] ?: 0
+                    )
+                }
+                epdModesFlow.value = epdModesFlow.value.copy(
+                    summaries = summaries,
+                    summariesLoading = false
+                )
+            }
+        }
+    }
+
+    fun loadEpdModeMembers(preset: EpdRefreshPreset) {
+        if (!epdRepo.enabled) return
+        epdModesFlow.value = epdModesFlow.value.copy(
+            membersLoading = true,
+            membersPreset = preset,
+            members = emptyList()
+        )
+        viewModelScope.launch(Dispatchers.IO) {
+            epdWriteMutex.withLock {
+                val systemPackages = prefs.getSystemEpdPackages()
+                val apps = appsFlow.value.filter { it.builtInShortcut == null }
+                val members = apps.filter { appInfo ->
+                    if (appInfo.packageName in systemPackages) return@filter false
+                    val profile = epdRepo.load(appInfo.packageName)
+                    profile.refreshEnabled && EpdRefreshPreset.fromProfile(profile) == preset
+                }.sortedBy { it.label.lowercase() }
+                epdModesFlow.value = epdModesFlow.value.copy(
+                    members = members,
+                    membersLoading = false,
+                    membersPreset = preset
+                )
+            }
+        }
+    }
+
+    fun assignAppToEpdMode(appInfo: AppInfo, preset: EpdRefreshPreset) {
+        if (!epdRepo.enabled || appInfo.builtInShortcut != null) return
+        val ctx = getApplication<Application>()
+        viewModelScope.launch(Dispatchers.IO) {
+            epdWriteMutex.withLock {
+                prefs.setSystemEpdPackage(appInfo.packageName, followsSystem = false)
+                val existing = epdRepo.load(appInfo.packageName)
+                val saved = preset.applyTo(existing)
+                epdRepo.save(saved)
+                // Desktop must activate immediately; other apps wait for foreground.
+                if (appInfo.packageName == ctx.packageName) {
+                    epdRepo.activate(saved)
+                }
+            }
+        }
+    }
+
+    fun removeAppFromEpdMode(appInfo: AppInfo) {
+        if (!epdRepo.enabled || appInfo.builtInShortcut != null) return
+        val ctx = getApplication<Application>()
+        viewModelScope.launch(Dispatchers.IO) {
+            epdWriteMutex.withLock {
+                prefs.setSystemEpdPackage(appInfo.packageName, followsSystem = true)
+                val global = epdRepo.loadSystemProfile()
+                epdRepo.applySystemRefreshToApp(appInfo.packageName, global)
+                if (appInfo.packageName == ctx.packageName) {
+                    epdRepo.activate(epdRepo.load(appInfo.packageName))
+                }
+            }
+        }
+    }
+
+    fun setEpdModeAsSystemDefault(preset: EpdRefreshPreset) {
+        if (!epdRepo.enabled) return
+        viewModelScope.launch(Dispatchers.IO) {
+            val base = epdRepo.loadSystemProfile()
+            val next = preset.applyTo(base)
+            // Reuse the existing system-default apply path (sync followers).
+            applySystemEpdProfile(next)
+            // Wait briefly for apply, then refresh hub tiles.
+            delay(200)
+            loadEpdModeSummaries()
+            epdModesFlow.value.membersPreset?.let { loadEpdModeMembers(it) }
+        }
+    }
+
     fun applySystemEpdProfile(profile: EpdProfile) {
         if (!epdRepo.enabled) return
         systemEpdFlow.value = EpdSnapshot(profile = profile, loading = true)
@@ -506,20 +677,16 @@ class LauncherViewModel(application: Application) : AndroidViewModel(application
         viewModelScope.launch(Dispatchers.IO) {
             epdWriteMutex.withLock {
                 val applied = epdRepo.applySystemProfile(profile)
+                // Only packages marked “follow global” (including InkBoard if
+                // the user never gave it a private override) get rewritten.
                 val systemPackages = prefs.getSystemEpdPackages()
                 val synced = applied && systemPackages.all { packageName ->
                     epdRepo.applySystemRefreshToApp(packageName, profile)
                 }
-                val inkBoard = epdRepo.load(ctx.packageName)
-                val inkBoardFollowsSystem = ctx.packageName in systemPackages
-                if (synced && !inkBoardFollowsSystem && inkBoard.refreshEnabled &&
-                    (inkBoard.refreshMode != profile.refreshMode ||
-                        inkBoard.refreshFrequency != profile.refreshFrequency)
-                ) {
-                    // The launcher is itself an app override. Restore its
-                    // profile after updating the global baseline so changing
-                    // the default does not silently change the desktop.
-                    epdRepo.activate(inkBoard)
+                // Refresh the desktop with whatever row it currently has
+                // (follow-global was just synced if InkBoard is in the set).
+                if (synced) {
+                    epdRepo.activate(epdRepo.load(ctx.packageName))
                 }
                 systemEpdFlow.value = if (synced) {
                     EpdSnapshot(profile = profile)

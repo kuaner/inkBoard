@@ -95,12 +95,12 @@ class AppRepository(private val context: Context) {
         for (pkg in preferredPackages) {
             val app = byPkg[pkg]?.firstOrNull() ?: continue
             picked += app.key
-            if (picked.size >= PreferencesRepository.SLOT_COUNT) break
+            if (picked.size >= PreferencesRepository.DEFAULT_SLOT_COUNT) break
         }
-        if (picked.size < PreferencesRepository.SLOT_COUNT) {
+        if (picked.size < PreferencesRepository.DEFAULT_SLOT_COUNT) {
             for (app in normalApps) {
                 if (!isGoodDefaultCandidate(app)) continue
-                if (picked.add(app.key) && picked.size >= PreferencesRepository.SLOT_COUNT) break
+                if (picked.add(app.key) && picked.size >= PreferencesRepository.DEFAULT_SLOT_COUNT) break
             }
         }
         return picked.toList()

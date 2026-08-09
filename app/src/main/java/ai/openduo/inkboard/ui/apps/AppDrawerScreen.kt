@@ -4,96 +4,49 @@ import ai.openduo.inkboard.ui.components.AppGlyph
 import ai.openduo.inkboard.ui.components.DrawerGridColumns
 import ai.openduo.inkboard.ui.components.DrawerGridRows
 import ai.openduo.inkboard.ui.components.DrawerPageSize
+import ai.openduo.inkboard.ui.components.DrawerSlotPageSize
 import ai.openduo.inkboard.ui.components.Hairline
 import ai.openduo.inkboard.ui.components.PageHeader
 import ai.openduo.inkboard.ui.components.PageNavigation
 import ai.openduo.inkboard.ui.components.PaperFrame
 import ai.openduo.inkboard.ui.components.VerticalRule
-
-import android.graphics.Bitmap
-import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.Image
+import ai.openduo.inkboard.ui.components.inkClickable
+import ai.openduo.inkboard.ui.theme.InkBlack
+import ai.openduo.inkboard.ui.theme.InkDark
+import ai.openduo.inkboard.ui.theme.InkPaper
+import ai.openduo.inkboard.data.AppInfo
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ai.openduo.inkboard.LauncherUiState
-import ai.openduo.inkboard.SenderSnapshot
-import ai.openduo.inkboard.data.AppInfo
-import ai.openduo.inkboard.data.BuiltInShortcut
-import ai.openduo.inkboard.data.EpdDpiPreset
-import ai.openduo.inkboard.data.EpdProfile
-import ai.openduo.inkboard.data.EpdRefreshPreset
-import ai.openduo.inkboard.data.KoboyoIcon
-import ai.openduo.inkboard.data.KoboyoIconCategory
-import ai.openduo.inkboard.data.KoboyoIconGroup
-import ai.openduo.inkboard.ui.components.MonochromeIcon
-import ai.openduo.inkboard.ui.components.inkClickable
-import ai.openduo.inkboard.ui.theme.InkBlack
-import ai.openduo.inkboard.ui.theme.InkDark
-import ai.openduo.inkboard.ui.theme.InkLine
-import ai.openduo.inkboard.ui.theme.InkMid
-import ai.openduo.inkboard.ui.theme.InkPaper
-import ai.openduo.inkboard.ui.theme.InkSoft
-import ai.openduo.inkboard.ui.theme.InkWhite
-import ai.openduo.inkboard.util.OrientationMode
-import com.google.zxing.BarcodeFormat
-import com.google.zxing.EncodeHintType
-import com.google.zxing.qrcode.QRCodeWriter
-import java.time.LocalDate
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
-import java.util.Locale
-import kotlin.math.roundToInt
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
 
 @Composable
 internal fun AppDrawer(
@@ -105,7 +58,6 @@ internal fun AppDrawer(
     onAddShortcut: (AppInfo) -> Unit,
     onClearSlot: () -> Unit,
     onOpenIconPicker: () -> Unit,
-    onOpenEpd: ((AppInfo) -> Unit)?,
     page: Int,
     onPageChange: (Int) -> Unit,
     onBack: () -> Unit,
@@ -141,7 +93,6 @@ internal fun AppDrawer(
                     selectedSlot = selectedSlot,
                     onSelectSlot = onSelectSlot,
                     onOpenIconPicker = onOpenIconPicker,
-                    onOpenEpd = onOpenEpd,
                     onClearSlot = onClearSlot,
                     modifier = Modifier.weight(1f)
                 )
@@ -155,7 +106,6 @@ internal fun AppDrawer(
                     pageCount = pageCount,
                     onLaunch = onLaunch,
                     onAddShortcut = onAddShortcut,
-                    onOpenEpd = onOpenEpd,
                     wide = wide,
                     onPrevious = { onPageChange((activePage - 1).coerceAtLeast(0)) },
                     onNext = { onPageChange((activePage + 1).coerceAtMost(pageCount - 1)) },
@@ -169,7 +119,6 @@ internal fun AppDrawer(
                     selectedSlot = selectedSlot,
                     onSelectSlot = onSelectSlot,
                     onOpenIconPicker = onOpenIconPicker,
-                    onOpenEpd = onOpenEpd,
                     onClearSlot = onClearSlot,
                     modifier = Modifier.weight(1f)
                 )
@@ -183,7 +132,6 @@ internal fun AppDrawer(
                     pageCount = pageCount,
                     onLaunch = onLaunch,
                     onAddShortcut = onAddShortcut,
-                    onOpenEpd = onOpenEpd,
                     wide = wide,
                     onPrevious = { onPageChange((activePage - 1).coerceAtLeast(0)) },
                     onNext = { onPageChange((activePage + 1).coerceAtMost(pageCount - 1)) },
@@ -200,14 +148,32 @@ private fun ShortcutPanel(
     selectedSlot: Int,
     onSelectSlot: (Int) -> Unit,
     onOpenIconPicker: () -> Unit,
-    onOpenEpd: ((AppInfo) -> Unit)?,
     onClearSlot: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val selectedApp = slots.getOrNull(selectedSlot)
+    val slotPageCount = maxOf(1, (slots.size + DrawerSlotPageSize - 1) / DrawerSlotPageSize)
+    var slotPage by rememberSaveable { mutableIntStateOf(0) }
+    LaunchedEffect(selectedSlot, slots.size) {
+        if (slots.isEmpty()) {
+            slotPage = 0
+            return@LaunchedEffect
+        }
+        val pageForSelection = (selectedSlot / DrawerSlotPageSize).coerceIn(0, slotPageCount - 1)
+        slotPage = pageForSelection
+    }
+    val activeSlotPage = slotPage.coerceIn(0, slotPageCount - 1)
+    val pageSlots = (0 until DrawerSlotPageSize).map { offset ->
+        val index = activeSlotPage * DrawerSlotPageSize + offset
+        index to slots.getOrNull(index)
+    }
+
     Column(modifier = modifier.fillMaxHeight()) {
-        DrawerPanelHeading(kicker = "SHORTCUTS", title = "快捷方式")
-        Spacer(Modifier.height(16.dp))
+        DrawerPanelHeading(
+            kicker = "SHORTCUTS",
+            title = "快捷方式 · ${slots.size}"
+        )
+        Spacer(Modifier.height(12.dp))
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -218,24 +184,37 @@ private fun ShortcutPanel(
                 Row(modifier = Modifier.weight(1f)) {
                     for (column in 0 until DrawerGridColumns) {
                         if (column > 0) Spacer(Modifier.width(6.dp))
-                        val index = row * DrawerGridColumns + column
-                        ShortcutSlotTile(
-                            app = slots.getOrNull(index),
-                            selected = index == selectedSlot,
-                            onClick = { onSelectSlot(index) },
-                            modifier = Modifier
-                                .weight(1f)
-                                .fillMaxHeight()
-                        )
+                        val (index, app) = pageSlots[row * DrawerGridColumns + column]
+                        if (index >= slots.size) {
+                            Spacer(Modifier.weight(1f))
+                        } else {
+                            ShortcutSlotTile(
+                                index = index,
+                                app = app,
+                                selected = index == selectedSlot,
+                                onClick = { onSelectSlot(index) },
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .fillMaxHeight()
+                            )
+                        }
                     }
                 }
             }
+        }
+        if (slotPageCount > 1) {
+            Spacer(Modifier.height(8.dp))
+            PageNavigation(
+                page = activeSlotPage,
+                pageCount = slotPageCount,
+                onPrevious = { slotPage = (activeSlotPage - 1).coerceAtLeast(0) },
+                onNext = { slotPage = (activeSlotPage + 1).coerceAtMost(slotPageCount - 1) }
+            )
         }
         Spacer(Modifier.height(12.dp))
         ShortcutActionBar(
             app = selectedApp,
             onOpenIconPicker = onOpenIconPicker,
-            onOpenEpd = onOpenEpd?.let { open -> { selectedApp?.let(open) } },
             onClearSlot = onClearSlot
         )
     }
@@ -249,7 +228,6 @@ private fun AppCatalogPanel(
     pageCount: Int,
     onLaunch: (AppInfo) -> Unit,
     onAddShortcut: (AppInfo) -> Unit,
-    onOpenEpd: ((AppInfo) -> Unit)?,
     wide: Boolean,
     onPrevious: () -> Unit,
     onNext: () -> Unit,
@@ -291,7 +269,6 @@ private fun AppCatalogPanel(
                                     app = app,
                                     onLaunch = { onLaunch(app) },
                                     onAddShortcut = { onAddShortcut(app) },
-                                    onOpenEpd = onOpenEpd?.let { open -> { open(app) } },
                                     wide = wide,
                                     modifier = Modifier
                                         .weight(1f)
@@ -336,6 +313,7 @@ private fun DrawerPanelHeading(kicker: String, title: String) {
 
 @Composable
 private fun ShortcutSlotTile(
+    index: Int,
     app: AppInfo?,
     selected: Boolean,
     onClick: () -> Unit,
@@ -362,29 +340,37 @@ private fun ShortcutSlotTile(
                 }
             }
             .inkClickable(onClick)
-            .padding(horizontal = 16.dp, vertical = 12.dp),
+            .padding(horizontal = 12.dp, vertical = 10.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
+        Text(
+            text = (index + 1).toString().padStart(2, '0'),
+            color = InkDark,
+            fontSize = 11.sp,
+            fontWeight = FontWeight.Bold,
+            letterSpacing = 1.0.sp
+        )
+        Spacer(Modifier.width(10.dp))
         if (app == null) {
             Box(
-                modifier = Modifier.size(58.dp),
+                modifier = Modifier.size(48.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
                     text = "+",
                     color = foreground,
-                    fontSize = 34.sp,
+                    fontSize = 28.sp,
                     fontWeight = FontWeight.Light
                 )
             }
         } else {
-            AppGlyph(app = app, size = 58.dp)
+            AppGlyph(app = app, size = 48.dp)
         }
-        Spacer(Modifier.width(16.dp))
+        Spacer(Modifier.width(12.dp))
         Text(
             text = app?.label ?: "添加",
             color = foreground,
-            fontSize = 17.sp,
+            fontSize = 15.sp,
             fontWeight = FontWeight.Bold,
             maxLines = 2,
             overflow = TextOverflow.Ellipsis,
@@ -398,7 +384,6 @@ private fun ShortcutSlotTile(
 private fun ShortcutActionBar(
     app: AppInfo?,
     onOpenIconPicker: () -> Unit,
-    onOpenEpd: (() -> Unit)?,
     onClearSlot: () -> Unit
 ) {
     Row(
@@ -429,10 +414,6 @@ private fun ShortcutActionBar(
             )
             Spacer(Modifier.width(10.dp))
             ShortcutActionButton(text = "图标", onClick = onOpenIconPicker)
-            if (onOpenEpd != null && app.builtInShortcut == null) {
-                Spacer(Modifier.width(6.dp))
-                ShortcutActionButton(text = "EPD", onClick = onOpenEpd)
-            }
             Spacer(Modifier.width(6.dp))
             ShortcutActionButton(text = "移除", onClick = onClearSlot)
         }
@@ -465,7 +446,6 @@ private fun DrawerAppTile(
     app: AppInfo,
     onLaunch: () -> Unit,
     onAddShortcut: () -> Unit,
-    onOpenEpd: (() -> Unit)?,
     wide: Boolean,
     modifier: Modifier = Modifier
 ) {
@@ -498,52 +478,19 @@ private fun DrawerAppTile(
                 modifier = Modifier.weight(1f)
             )
         }
-        if (wide) {
-            Column(
-                modifier = Modifier
-                    .width(58.dp)
-                    .fillMaxHeight()
-                    .padding(end = 8.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                DrawerTileAction(
-                    text = "+",
-                    onClick = onAddShortcut,
-                    isAddAction = true,
-                    modifier = Modifier.size(48.dp)
-                )
-                if (onOpenEpd != null && app.builtInShortcut == null) {
-                    Spacer(Modifier.height(4.dp))
-                    DrawerTileAction(
-                        text = "EPD",
-                        onClick = onOpenEpd,
-                        modifier = Modifier.size(48.dp)
-                    )
-                }
-            }
-        } else {
-            Row(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .padding(end = 8.dp),
-                horizontalArrangement = Arrangement.spacedBy(4.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                DrawerTileAction(
-                    text = "+",
-                    onClick = onAddShortcut,
-                    isAddAction = true,
-                    modifier = Modifier.size(48.dp)
-                )
-                if (onOpenEpd != null && app.builtInShortcut == null) {
-                    DrawerTileAction(
-                        text = "EPD",
-                        onClick = onOpenEpd,
-                        modifier = Modifier.size(48.dp)
-                    )
-                }
-            }
+        Box(
+            modifier = Modifier
+                .width(58.dp)
+                .fillMaxHeight()
+                .padding(end = 8.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            DrawerTileAction(
+                text = "+",
+                onClick = onAddShortcut,
+                isAddAction = true,
+                modifier = Modifier.size(48.dp)
+            )
         }
     }
 }
