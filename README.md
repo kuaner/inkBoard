@@ -5,7 +5,7 @@
 
 **给 Android 墨水屏平板用的 HOME 启动器。**
 
-市面多数启动器为 LCD/OLED 设计：滚动、动画、灰阶阴影在电子纸上又慢又脏。InkBoard 反过来做——纯黑白、少动画、大触控、手动翻页，把常用应用钉在 8 个固定位置上，一按就开。
+市面多数启动器为 LCD/OLED 设计：滚动、动画、灰阶阴影在电子纸上又慢又脏。InkBoard 反过来做——纯黑白、少动画、大触控、手动翻页，把常用应用钉在桌面上，一按就开。
 
 | | |
 |--|--|
@@ -13,7 +13,7 @@
 | **包名** | `ai.openduo.inkboard` |
 | **下载** | [GitHub Releases](https://github.com/kuaner/inkBoard/releases) 签名 APK |
 
-> 最初在云思智学 S11A（RK3566）上打磨；**核心桌面能力不依赖云思**。该系列额外提供 SYSTEM EPD / 每应用 EPD（见文末）。
+> 最初在云思智学 S11A（RK3566）上打磨；**核心桌面能力不依赖云思**。该系列额外提供 EPD 刷新模式设置（见文末）。
 
 ![InkBoard 主屏幕](docs/images/01-home.png)
 
@@ -35,9 +35,9 @@ InkBoard 只做这些，并针对墨水屏交互收束：无涟漪、无惯性�
 
 | 能力 | 说明 |
 |------|------|
-| 主屏 | 座右铭、大号时间/日期、内存与负载、**8 个快捷方式** |
-| APPS | 管理槽位、加应用、换单色图标（Koboyo 内置，离线） |
-| MENU | 旋转、改座右铭、快捷方式、ADB 开关入口、系统设置 |
+| 主屏 | 座右铭、大号时间/日期、内存与负载、快捷方式网格（**4 / 8 / 12 / 16 / 24**，默认 8） |
+| APPS | 完整应用列表启动（4×5 网格，手动翻页） |
+| MENU | 旋转、座右铭、快捷方式钉位、桌面密度、ADB、系统设置 |
 | SENDER | 同网段浏览器上传文件/文件夹，返回即关，不常驻 |
 | 内置工具 | 清理后台、全刷屏幕、锁屏（可钉到桌面） |
 
@@ -114,10 +114,11 @@ adb shell setprop persist.modify.eink.mode true
 
 仅在识别为云思 S11A / EB1004P 等且存在系统 EPD Provider 时显示入口；**其它机器完全不受影响**。
 
-![SYSTEM EPD](docs/images/04-system-epd.png)
+![EPD](docs/images/04-system-epd.png)
 
-- **SYSTEM EPD**：全局刷新策略（自动 / 清晰 / 灰阶 / 快速 / 黑白极速等）  
-- **每应用 EPD**：APPS 里应用旁进入，可调刷新、DPI、对比度、浅色处理  
+- **EPD 单页**：上方 4×3 目标网格（全局缺省 → InkBoard → 其它应用，可翻页），下方刷新模式卡片  
+- **模式**：自动 / 清晰 / 灰阶 / 快速 / 黑白极速等（含波形与全刷节奏说明）  
+- 全局缺省影响未单独设置的应用；应用/桌面可单独指定或「跟随全局」  
 - 配置写入系统 SystemUI EPD 表；前台切换波形还需一次：
 
 ```bash
@@ -136,10 +137,10 @@ ADB / 手势 / 待机与开关机图 / logo 分区 / Loader 刷机见 [docs/S11A
 
 ## 发布
 
-推送标签 `v*`（须等于 `app/build.gradle.kts` 的 `versionName`，如 `v1.0.3`）会签名构建并创建 [GitHub Release](https://github.com/kuaner/inkBoard/releases)。`main` 推送不发版。
+推送标签 `v*`（须等于 `app/build.gradle.kts` 的 `versionName`，如 `v1.0.4`）会签名构建并创建 [GitHub Release](https://github.com/kuaner/inkBoard/releases)。`main` 推送不发版。
 
 ```bash
-git tag v1.0.3 && git push origin v1.0.3
+git tag v1.0.4 && git push origin v1.0.4
 ```
 
 Secrets：`ANDROID_KEYSTORE_*`（与 [InkFlow](https://github.com/kuaner/inkflow) 共用证书命名）。
