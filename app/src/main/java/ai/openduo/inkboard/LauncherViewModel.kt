@@ -624,14 +624,18 @@ class LauncherViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
-    fun assignAppToEpdMode(appInfo: AppInfo, preset: EpdRefreshPreset) {
+    fun assignAppToEpdMode(
+        appInfo: AppInfo,
+        preset: EpdRefreshPreset,
+        frequency: Int = preset.frequency
+    ) {
         if (!epdRepo.enabled || appInfo.builtInShortcut != null) return
         val ctx = getApplication<Application>()
         viewModelScope.launch(Dispatchers.IO) {
             epdWriteMutex.withLock {
                 prefs.setSystemEpdPackage(appInfo.packageName, followsSystem = false)
                 val existing = epdRepo.load(appInfo.packageName)
-                val saved = preset.applyTo(existing)
+                val saved = preset.applyTo(existing, frequency)
                 epdRepo.save(saved)
                 // Desktop must activate immediately; other apps wait for foreground.
                 if (appInfo.packageName == ctx.packageName) {

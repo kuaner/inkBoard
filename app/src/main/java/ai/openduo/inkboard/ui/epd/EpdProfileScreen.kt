@@ -304,6 +304,13 @@ private fun EpdRefreshPanel(
             onSelect = { preset -> onProfileChange(preset.applyTo(profile)) }
         )
         Spacer(Modifier.height(14.dp))
+        EpdFrequencyRow(
+            frequency = profile.refreshFrequency,
+            onSelect = { next ->
+                onProfileChange(profile.copy(refreshFrequency = next))
+            }
+        )
+        Spacer(Modifier.height(12.dp))
         EpdSystemNotice(
             "每完成 ${profile.refreshFrequency} 次局部刷新，系统自动执行 1 次全屏刷新；次数越小，残影越少，但全屏刷新越频繁。"
         )

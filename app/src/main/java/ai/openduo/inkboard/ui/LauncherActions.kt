@@ -24,7 +24,7 @@ class LauncherActions(
     val onApplySystemEpdProfile: (EpdProfile) -> Unit,
     val onLoadEpdModeSummaries: () -> Unit,
     val onLoadEpdModeMembers: (EpdRefreshPreset) -> Unit,
-    val onAssignAppToEpdMode: (AppInfo, EpdRefreshPreset) -> Unit,
+    val onAssignAppToEpdMode: (AppInfo, EpdRefreshPreset, Int) -> Unit,
     val onRemoveAppFromEpdMode: (AppInfo) -> Unit,
     val onSetEpdModeAsSystemDefault: (EpdRefreshPreset) -> Unit,
     val onRefreshEpdScreen: () -> Unit,

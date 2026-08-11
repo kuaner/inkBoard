@@ -116,8 +116,9 @@ adb shell setprop persist.modify.eink.mode true
 
 ![EPD](docs/images/04-system-epd.png)
 
-- **EPD 单页**：上方 4×3 目标网格（全局缺省 → InkBoard → 其它应用，可翻页），下方刷新模式卡片  
-- **模式**：自动 / 清晰 / 灰阶 / 快速 / 黑白极速等（含波形与全刷节奏说明）  
+- **EPD 单页**：上方 4×3 目标网格（全局缺省 → InkBoard → 其它应用，可翻页），下方刷新模式 + 全刷间隔  
+- **模式**：自动 / 清晰 / 灰阶 / 快速 / 黑白极速（决定波形；选中时带推荐全刷阈值）  
+- **全刷间隔**：可单独设 `10 / 20 / 30 / 50 / 70 / 90`（每 N 次局部刷新后全屏 1 次，不是秒数）；应用「跟随全局」时显示继承值，点选档位即改为独立策略  
 - 全局缺省影响未单独设置的应用；应用/桌面可单独指定或「跟随全局」  
 - 配置写入系统 SystemUI EPD 表；前台切换波形还需一次：
 
@@ -137,10 +138,10 @@ ADB / 手势 / 待机与开关机图 / logo 分区 / Loader 刷机见 [docs/S11A
 
 ## 发布
 
-推送标签 `v*`（须等于 `app/build.gradle.kts` 的 `versionName`，如 `v1.0.4`）会签名构建并创建 [GitHub Release](https://github.com/kuaner/inkBoard/releases)。`main` 推送不发版。
+推送标签 `v*`（须等于 `app/build.gradle.kts` 的 `versionName`，如 `v1.0.5`）会签名构建并创建 [GitHub Release](https://github.com/kuaner/inkBoard/releases)。`main` 推送不发版。
 
 ```bash
-git tag v1.0.4 && git push origin v1.0.4
+git tag v1.0.5 && git push origin v1.0.5
 ```
 
 Secrets：`ANDROID_KEYSTORE_*`（与 [InkFlow](https://github.com/kuaner/inkflow) 共用证书命名）。

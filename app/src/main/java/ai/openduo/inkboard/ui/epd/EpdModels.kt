@@ -1,6 +1,7 @@
 package ai.openduo.inkboard.ui.epd
 
 import ai.openduo.inkboard.data.AppInfo
+import ai.openduo.inkboard.data.EpdProfile
 import ai.openduo.inkboard.data.EpdRefreshPreset
 
 internal enum class EpdSection {
@@ -52,14 +53,48 @@ internal data class EpdListTarget(
     val iconSvgPath: String? = null
 )
 
-/** Choice for the mode panel. Global has no “follow”. */
+/**
+ * Choice for the mode panel. Global has no “follow”.
+ * [frequency] is the full-refresh threshold (partial updates → 1 full frame);
+ * presets only supply a recommended default when first selected.
+ *
+ * When [followGlobal] is true, [frequency] still carries the effective global
+ * threshold so the chip row can show what the app inherits — and a chip tap
+ * can break free into an independent profile.
+ */
 internal data class EpdModeChoice(
     val followGlobal: Boolean,
-    val preset: EpdRefreshPreset?
+    val preset: EpdRefreshPreset?,
+    val frequency: Int = preset?.frequency ?: EpdRefreshPreset.CLEAN.frequency
 ) {
     companion object {
-        fun follow() = EpdModeChoice(followGlobal = true, preset = null)
-        fun of(preset: EpdRefreshPreset) = EpdModeChoice(followGlobal = false, preset = preset)
+        fun follow(
+            frequency: Int = EpdRefreshPreset.CLEAN.frequency
+        ) = EpdModeChoice(
+            followGlobal = true,
+            preset = null,
+            frequency = frequency.coerceIn(
+                EpdRefreshPreset.MIN_FREQUENCY,
+                EpdRefreshPreset.MAX_FREQUENCY
+            )
+        )
+
+        fun of(
+            preset: EpdRefreshPreset,
+            frequency: Int = preset.frequency
+        ) = EpdModeChoice(
+            followGlobal = false,
+            preset = preset,
+            frequency = frequency.coerceIn(
+                EpdRefreshPreset.MIN_FREQUENCY,
+                EpdRefreshPreset.MAX_FREQUENCY
+            )
+        )
+
+        fun fromProfile(profile: EpdProfile): EpdModeChoice {
+            val preset = EpdRefreshPreset.fromProfile(profile) ?: EpdRefreshPreset.CLEAN
+            return of(preset, profile.refreshFrequency)
+        }
     }
 }
 

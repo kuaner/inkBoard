@@ -73,16 +73,17 @@ enum class EpdRefreshMode(
 }
 
 /**
- * Curated combinations for the two controls that most affect day-to-day
- * e-ink feel: waveform and the number of partial updates before a full
- * refresh.  Keep the raw values in one place so the UI does not ask users to
- * reason about six modes multiplied by eleven threshold values.
+ * Curated waveform presets for day-to-day e-ink feel. Each preset still
+ * carries a recommended full-refresh threshold, but the UI can override
+ * that threshold independently — Provider stores mode and frequency as
+ * separate fields.
  */
 enum class EpdRefreshPreset(
     val title: String,
     val modeLabel: String,
     val description: String,
     val mode: EpdRefreshMode,
+    /** Recommended partial-update count before one full frame. */
     val frequency: Int
 ) {
     AUTO(
@@ -121,20 +122,38 @@ enum class EpdRefreshPreset(
         frequency = 70
     );
 
+    /** Preset identity is the waveform; frequency is a free secondary knob. */
     fun matches(profile: EpdProfile): Boolean =
-        profile.refreshEnabled &&
-            profile.refreshMode == mode &&
-            profile.refreshFrequency == frequency
+        profile.refreshEnabled && profile.refreshMode == mode
 
-    fun applyTo(profile: EpdProfile): EpdProfile = profile.copy(
+    fun applyTo(
+        profile: EpdProfile,
+        frequency: Int = this.frequency
+    ): EpdProfile = profile.copy(
         refreshEnabled = true,
         refreshMode = mode,
-        refreshFrequency = frequency
+        refreshFrequency = frequency.coerceIn(MIN_FREQUENCY, MAX_FREQUENCY)
     )
 
     companion object {
+        const val MIN_FREQUENCY = 0
+        const val MAX_FREQUENCY = 100
+
+        /** Common thresholds offered as one-tap chips (unit: partial updates). */
+        val FREQUENCY_CHOICES = listOf(10, 20, 30, 50, 70, 90)
+
         fun fromProfile(profile: EpdProfile): EpdRefreshPreset? =
             entries.firstOrNull { it.matches(profile) }
+
+        /** Include an out-of-list stored value so the chip row can show it selected. */
+        fun frequencyChoices(current: Int): List<Int> {
+            val clamped = current.coerceIn(MIN_FREQUENCY, MAX_FREQUENCY)
+            return if (clamped in FREQUENCY_CHOICES) {
+                FREQUENCY_CHOICES
+            } else {
+                (FREQUENCY_CHOICES + clamped).sorted()
+            }
+        }
     }
 }
 

@@ -46,9 +46,18 @@ private const val EpdGridRows = 3
 internal const val EpdListPageSize = EpdGridColumns * EpdGridRows // 12
 
 /**
- * EPD single page:
- * - Target grid 4×3 (全局 / InkBoard / apps) + pager under it
- * - Mode cards below, compact 3-line, fill remaining width
+ * EPD single page layout (landscape-first):
+ *
+ * ```
+ * header
+ * app grid 4×3 + pager   ← takes remaining height (icons scale with cell)
+ * ────
+ * mode cards             ← fixed band, ~3 lines, never stretched
+ * frequency chips        ← fixed control row, same visual family
+ * ```
+ *
+ * Bottom blocks use natural heights so they stay compact and readable;
+ * the app grid only fills whatever is left. Stretching either end looks wrong.
  */
 @Composable
 internal fun EpdHomePage(
@@ -59,6 +68,9 @@ internal fun EpdHomePage(
     onSelectTarget: (EpdListTarget) -> Unit,
     modeChoice: EpdModeChoice,
     onModeChoice: (EpdModeChoice) -> Unit,
+    /** Current global baseline — used when an app leaves “跟随全局”. */
+    globalPreset: EpdRefreshPreset = EpdRefreshPreset.CLEAN,
+    globalFrequency: Int = EpdRefreshPreset.CLEAN.frequency,
     onRefreshScreen: () -> Unit,
     onBack: () -> Unit,
     error: String? = null,
@@ -71,6 +83,12 @@ internal fun EpdHomePage(
     val showFollow = selected != null && !selected.isGlobal
 
     PaperFrame(modifier, bottomPadding = 12.dp) { wide ->
+        val modeColumns = if (wide) {
+            if (showFollow) 6 else 5
+        } else {
+            2
+        }
+
         PageHeader(
             title = "EPD.",
             meta = selected?.label ?: "REFRESH",
@@ -78,13 +96,13 @@ internal fun EpdHomePage(
             onBack = onBack,
             onAction = onRefreshScreen
         )
-        Spacer(Modifier.height(if (wide) 12.dp else 8.dp))
+        Spacer(Modifier.height(if (wide) 10.dp else 8.dp))
 
-        // —— Target grid (fills upper band) + pager glued under it ——
+        // Apps + pager fill leftover space after the fixed bottom controls.
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(if (wide) 0.48f else 0.46f)
+                .weight(1f)
         ) {
             EpdTargetGrid(
                 pageTargets = pageTargets,
@@ -107,17 +125,34 @@ internal fun EpdHomePage(
         Hairline()
         Spacer(Modifier.height(if (wide) 10.dp else 8.dp))
 
-        // —— Mode cards fill remaining space ——
+        // Fixed-height mode band: tall enough for 3 text lines, never billboard-tall.
         EpdPresetCardGrid(
             selected = modeChoice.preset,
+            selectedFrequency = modeChoice.frequency,
             showFollow = showFollow,
             followSelected = modeChoice.followGlobal,
-            columns = if (wide) 3 else 2,
+            columns = modeColumns,
             onSelectPreset = { onModeChoice(EpdModeChoice.of(it)) },
-            onSelectFollow = { onModeChoice(EpdModeChoice.follow()) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(if (wide) 0.52f else 0.54f)
+            onSelectFollow = { onModeChoice(EpdModeChoice.follow(globalFrequency)) },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        // Always show the threshold row. Global / independent apps edit in place;
+        // apps still on “跟随全局” show the inherited value — tapping a chip
+        // switches that app to an independent profile (global waveform + chip).
+        Spacer(Modifier.height(if (wide) 10.dp else 8.dp))
+        EpdFrequencyRow(
+            frequency = modeChoice.frequency,
+            followingGlobal = modeChoice.followGlobal,
+            onSelect = { next ->
+                if (modeChoice.followGlobal) {
+                    onModeChoice(EpdModeChoice.of(globalPreset, next))
+                } else {
+                    val preset = modeChoice.preset ?: globalPreset
+                    onModeChoice(EpdModeChoice.of(preset, next))
+                }
+            },
+            modifier = Modifier.fillMaxWidth()
         )
 
         if (error != null) {
@@ -136,14 +171,14 @@ private fun EpdTargetGrid(
 ) {
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(4.dp)
+        verticalArrangement = Arrangement.spacedBy(5.dp)
     ) {
         repeat(EpdGridRows) { row ->
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f),
-                horizontalArrangement = Arrangement.spacedBy(4.dp)
+                horizontalArrangement = Arrangement.spacedBy(5.dp)
             ) {
                 repeat(EpdGridColumns) { col ->
                     val target = pageTargets.getOrNull(row * EpdGridColumns + col)
@@ -178,22 +213,23 @@ private fun EpdTargetCell(
             .background(if (selected) InkBlack else InkPaper)
             .border(1.dp, InkBlack)
             .inkClickable(onClick = onClick)
-            .padding(4.dp),
+            .padding(horizontal = 6.dp, vertical = 6.dp),
         contentAlignment = Alignment.Center
     ) {
         val density = LocalDensity.current
         val cellMin = min(constraints.maxWidth, constraints.maxHeight).toFloat()
+        // Medium icons: readable in a 4×3 grid without starving the bottom band.
         val iconDp = with(density) {
-            (cellMin * 0.42f).toDp().coerceIn(22.dp, 48.dp)
+            (cellMin * 0.42f).toDp().coerceIn(24.dp, 44.dp)
         }
         val labelSp = with(density) {
-            (cellMin * 0.12f).toSp().value.roundToInt().coerceIn(10, 13)
+            (cellMin * 0.11f).toSp().value.roundToInt().coerceIn(11, 14)
         }
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
             modifier = Modifier.fillMaxSize()
         ) {
-            Spacer(Modifier.weight(1f))
             when {
                 target.iconSvgPath != null -> MonochromeIcon(
                     drawable = null,
@@ -215,7 +251,7 @@ private fun EpdTargetCell(
                     cacheKey = "epd-fallback"
                 )
             }
-            Spacer(Modifier.weight(1f))
+            Spacer(Modifier.height(5.dp))
             Text(
                 text = target.label,
                 color = fg,
@@ -231,12 +267,13 @@ private fun EpdTargetCell(
 }
 
 /**
- * Mode grid fills remaining height: rows share space equally,
- * cards stay 3-line content without fake empty spacers inside.
+ * Fixed-height mode band. Wide: one row of 5–6 cards. Portrait: 2-col stack.
+ * Height is content-driven so cards never become empty billboards.
  */
 @Composable
 internal fun EpdPresetCardGrid(
     selected: EpdRefreshPreset?,
+    selectedFrequency: Int,
     showFollow: Boolean,
     followSelected: Boolean,
     columns: Int,
@@ -244,23 +281,25 @@ internal fun EpdPresetCardGrid(
     onSelectFollow: (() -> Unit)?,
     modifier: Modifier = Modifier
 ) {
-    val cols = columns.coerceIn(1, 3)
     val items: List<Any?> = buildList {
         if (showFollow) add(null)
         addAll(EpdRefreshPreset.entries)
     }
+    val cols = columns.coerceIn(1, 6)
     val rows = items.chunked(cols)
+    // Comfortable for title + meta + description; same family as frequency chips.
+    val rowHeight = if (cols >= 5) 92.dp else 96.dp
 
     Column(
         modifier = modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(4.dp)
+        verticalArrangement = Arrangement.spacedBy(5.dp)
     ) {
         rows.forEach { rowItems ->
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1f),
-                horizontalArrangement = Arrangement.spacedBy(4.dp)
+                    .height(rowHeight),
+                horizontalArrangement = Arrangement.spacedBy(5.dp)
             ) {
                 rowItems.forEach { item ->
                     if (item == null) {
@@ -273,9 +312,11 @@ internal fun EpdPresetCardGrid(
                         )
                     } else {
                         val preset = item as EpdRefreshPreset
+                        val isSelected = !followSelected && preset == selected
                         EpdPresetCard(
                             preset = preset,
-                            selected = !followSelected && preset == selected,
+                            frequency = if (isSelected) selectedFrequency else preset.frequency,
+                            selected = isSelected,
                             onClick = { onSelectPreset(preset) },
                             modifier = Modifier
                                 .weight(1f)
@@ -287,6 +328,78 @@ internal fun EpdPresetCardGrid(
                     repeat(cols - rowItems.size) {
                         Spacer(Modifier.weight(1f))
                     }
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Full-refresh threshold chips. Unit is partial-update count, not seconds.
+ * Sized as a peer control row to the mode cards above (not a thin footer).
+ *
+ * [followingGlobal] only changes the caption — chips stay interactive so an
+ * app can leave “跟随” by picking an interval.
+ */
+@Composable
+internal fun EpdFrequencyRow(
+    frequency: Int,
+    onSelect: (Int) -> Unit,
+    followingGlobal: Boolean = false,
+    modifier: Modifier = Modifier
+) {
+    val choices = EpdRefreshPreset.frequencyChoices(frequency)
+    val caption = if (followingGlobal) {
+        "跟随全局 · 每 ${frequency} 次局部 → 全屏 1 次 · 点选即独立"
+    } else {
+        "每 ${frequency} 次局部 → 全屏 1 次"
+    }
+    Column(modifier = modifier.fillMaxWidth()) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "全刷间隔",
+                color = InkBlack,
+                fontSize = 13.sp,
+                fontWeight = FontWeight.Black
+            )
+            Spacer(Modifier.width(10.dp))
+            Text(
+                text = caption,
+                color = InkDark,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Bold,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.weight(1f)
+            )
+        }
+        Spacer(Modifier.height(6.dp))
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(46.dp),
+            horizontalArrangement = Arrangement.spacedBy(5.dp)
+        ) {
+            choices.forEach { value ->
+                val selected = value == frequency
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight()
+                        .background(if (selected) InkBlack else InkPaper)
+                        .border(1.dp, InkBlack)
+                        .inkClickable(onClick = { onSelect(value) }),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = value.toString(),
+                        color = if (selected) InkWhite else InkBlack,
+                        fontSize = 15.sp,
+                        fontWeight = FontWeight.Black
+                    )
                 }
             }
         }
@@ -306,7 +419,7 @@ private fun EpdFollowCard(
             .background(if (selected) InkBlack else InkPaper)
             .border(1.dp, InkBlack)
             .inkClickable(onClick = onClick)
-            .padding(horizontal = 10.dp, vertical = 8.dp),
+            .padding(horizontal = 10.dp, vertical = 10.dp),
         verticalArrangement = Arrangement.Center
     ) {
         Text(
@@ -314,8 +427,10 @@ private fun EpdFollowCard(
             color = fg,
             fontSize = 15.sp,
             fontWeight = FontWeight.Black,
-            maxLines = 1
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
         )
+        Spacer(Modifier.height(2.dp))
         Text(
             text = "全局缺省波形与全刷",
             color = sub,
@@ -338,6 +453,7 @@ private fun EpdFollowCard(
 @Composable
 private fun EpdPresetCard(
     preset: EpdRefreshPreset,
+    frequency: Int,
     selected: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -349,7 +465,7 @@ private fun EpdPresetCard(
             .background(if (selected) InkBlack else InkPaper)
             .border(1.dp, InkBlack)
             .inkClickable(onClick = onClick)
-            .padding(horizontal = 10.dp, vertical = 8.dp),
+            .padding(horizontal = 10.dp, vertical = 10.dp),
         verticalArrangement = Arrangement.Center
     ) {
         Text(
@@ -357,10 +473,12 @@ private fun EpdPresetCard(
             color = fg,
             fontSize = 15.sp,
             fontWeight = FontWeight.Black,
-            maxLines = 1
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
         )
+        Spacer(Modifier.height(2.dp))
         Text(
-            text = "${preset.modeLabel} · 每${preset.frequency}次→全刷",
+            text = "${preset.modeLabel} · 每${frequency}次→全刷",
             color = sub,
             fontSize = 11.sp,
             fontWeight = FontWeight.Bold,

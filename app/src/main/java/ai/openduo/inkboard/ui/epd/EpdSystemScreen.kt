@@ -144,6 +144,18 @@ internal fun SystemEpdPage(
                     onSelect = { preset -> onProfileChange(preset.applyTo(active)) }
                 )
                 Spacer(Modifier.height(18.dp))
+                EpdFrequencyRow(
+                    frequency = active.refreshFrequency,
+                    onSelect = { next ->
+                        onProfileChange(
+                            active.copy(
+                                refreshEnabled = true,
+                                refreshFrequency = next
+                            )
+                        )
+                    }
+                )
+                Spacer(Modifier.height(12.dp))
                 EpdSystemNotice(
                     "${active.refreshMode.label} · 每完成 ${active.refreshFrequency} 次局部刷新后，自动执行 1 次全屏刷新。"
                 )

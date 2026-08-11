@@ -84,29 +84,36 @@ fun LauncherHome(
         refresh = actions.onRefreshEpdScreen
     )
 
+    val globalFrequency = state.systemEpdProfile?.refreshFrequency
+        ?: EpdRefreshPreset.CLEAN.frequency
+    val globalPreset = state.systemEpdProfile
+        ?.let { EpdRefreshPreset.fromProfile(it) }
+        ?: EpdRefreshPreset.CLEAN
+
     // Seed mode panel when system profile or selected app profile loads.
     LaunchedEffect(state.systemEpdProfile, selectedTargetId, epdRoute) {
         if (epdRoute == null || modeDirty) return@LaunchedEffect
         if (selectedTargetId == GLOBAL_ID) {
             state.systemEpdProfile?.let {
-                modeChoice = EpdModeChoice.of(
-                    EpdRefreshPreset.fromProfile(it) ?: EpdRefreshPreset.CLEAN
-                )
+                modeChoice = EpdModeChoice.fromProfile(it)
                 draftTargetId = GLOBAL_ID
             }
+        } else if (modeChoice.followGlobal) {
+            // Keep the inherited chip value in sync while still following.
+            modeChoice = EpdModeChoice.follow(globalFrequency)
         }
     }
 
-    LaunchedEffect(state.epdProfile, selectedTargetId, epdRoute) {
+    LaunchedEffect(state.epdProfile, selectedTargetId, epdRoute, globalFrequency) {
         if (epdRoute == null || modeDirty) return@LaunchedEffect
         if (selectedTargetId == GLOBAL_ID) return@LaunchedEffect
         val target = epdTargets.firstOrNull { it.id == selectedTargetId } ?: return@LaunchedEffect
         val pkg = target.packageName ?: return@LaunchedEffect
         val profile = state.epdProfile?.takeIf { it.packageName == pkg } ?: return@LaunchedEffect
         modeChoice = if (!profile.refreshEnabled) {
-            EpdModeChoice.follow()
+            EpdModeChoice.follow(globalFrequency)
         } else {
-            EpdModeChoice.of(EpdRefreshPreset.fromProfile(profile) ?: EpdRefreshPreset.CLEAN)
+            EpdModeChoice.fromProfile(profile)
         }
         draftTargetId = selectedTargetId
     }
@@ -120,7 +127,7 @@ fun LauncherHome(
                     packageName = "ai.openduo.inkboard.system-default",
                     refreshEnabled = true
                 )
-            actions.onApplySystemEpdProfile(preset.applyTo(base))
+            actions.onApplySystemEpdProfile(preset.applyTo(base, choice.frequency))
         } else {
             val app = target.app ?: AppInfo(
                 label = target.label,
@@ -132,7 +139,7 @@ fun LauncherHome(
                 actions.onRemoveAppFromEpdMode(app)
             } else {
                 val preset = choice.preset ?: EpdRefreshPreset.CLEAN
-                actions.onAssignAppToEpdMode(app, preset)
+                actions.onAssignAppToEpdMode(app, preset, choice.frequency)
             }
         }
     }
@@ -155,12 +162,13 @@ fun LauncherHome(
             draftTargetId = target.id
             // Reset choice until load arrives (avoid flashing wrong mode).
             modeChoice = if (target.isGlobal) {
-                EpdModeChoice.of(
-                    state.systemEpdProfile?.let { EpdRefreshPreset.fromProfile(it) }
-                        ?: EpdRefreshPreset.CLEAN
-                )
+                state.systemEpdProfile?.let { EpdModeChoice.fromProfile(it) }
+                    ?: EpdModeChoice.of(EpdRefreshPreset.CLEAN)
             } else {
-                EpdModeChoice.follow()
+                EpdModeChoice.follow(
+                    state.systemEpdProfile?.refreshFrequency
+                        ?: EpdRefreshPreset.CLEAN.frequency
+                )
             }
             if (!target.isGlobal) {
                 val pkg = target.packageName
@@ -235,6 +243,8 @@ fun LauncherHome(
                 modeDirty = true
                 draftTargetId = selectedTargetId
             },
+            globalPreset = globalPreset,
+            globalFrequency = globalFrequency,
             onRefreshScreen = actions.onRefreshEpdScreen,
             onBack = closeEpd,
             error = state.systemEpdError ?: state.epdError,
