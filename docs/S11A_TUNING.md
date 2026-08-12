@@ -96,7 +96,80 @@ adb shell settings put secure navigation_mode 2
 adb shell settings get secure navigation_mode   # 期望 2
 ```
 
-之后：左右缘向内滑返回，底缘上滑回主页。
+之后：左右缘向内滑返回，底缘上滑回主页。改完后建议 `adb shell am force-stop com.android.systemui`（或重启）让 SystemUI 立刻吃到状态。
+
+### 核对
+
+| 项 | 期望 |
+|----|------|
+| `settings get secure navigation_mode` | `2`（`0`=三键，`1`=两键，`2`=手势） |
+| `cmd overlay list --user 0 \| grep navbar` | `[x] …navbar.gestural`，其它 navbar 项为 `[ ]` |
+| SystemUI `mInGesturalMode` | `true` |
+
+### 常见故障：左右返回有了，底边上滑回桌面没有
+
+多半是 **导航模式/overlay 不完整**，或 **`policy_control` 把导航栏全局藏掉**（调试时常误开）。
+
+```bash
+# 现场必查
+adb shell settings get secure navigation_mode
+adb shell cmd overlay list --user 0 | grep navbar
+adb shell settings get global policy_control
+```
+
+若看到 `policy_control=immersive.nav=*`（或 `immersive.full=*`）：
+
+- 含义：对 **所有应用** 强制沉浸，隐藏导航栏 / 手势条区域
+- 来源：`dumpsys settings` 里 `pkg:` 常为 `com.android.shell`（某次 `adb shell settings put global policy_control …`）
+- 表现：边缘返回有时仍在，**底边上滑 Home 失效** 很常见
+
+修复（与上面开启手势一并做）：
+
+```bash
+adb shell settings delete global policy_control
+adb shell cmd overlay enable-exclusive --user 0 --category com.android.internal.systemui.navbar.gestural
+adb shell settings put secure navigation_mode 2
+adb shell am force-stop com.android.systemui
+```
+
+**不要** 把 `immersive.nav=*` 当成「隐藏三键导航栏」的日常手段；手势模式应靠 `navigation_mode=2` + gestural overlay，而不是全局 immersive。
+
+### 深度故障：返回好、上滑 Home 仍不行（SystemUI）
+
+在 `navigation_mode=2` 且 gestural overlay 已 `[x]` 时，若仍只有左右返回、底边上滑无效，本机（S11A / 2026-08 现场）实测是 **SystemUI 导航窗触摸区域为空**，不是启动器问题：
+
+```bash
+adb shell dumpsys input | grep -A1 "NavigationBar0"
+# 异常时可见：
+#   frame=[0,1326][1872,1404]   ← 底边条几何存在
+#   touchableRegion=<empty>     ← 触摸目标为空，事件落到应用窗口
+
+adb shell dumpsys window windows | grep -A25 "NavigationBar0" | grep -E 'touchable|mFrame|Requested'
+# touchable region=SkRegion()   ← 同上
+```
+
+对比：
+
+| 路径 | 机制 | 本机状态 |
+|------|------|----------|
+| 左右滑返回 | `EdgeBackGestureHandler` **独立** input gesture monitor | 正常（`mIsBackGestureAllowed=true`） |
+| 底边上滑 Home | 走 `NavigationBar0` 窗口触摸 / 手势条 | **失败**：`touchableRegion` 空，点按/上滑进不了导航窗 |
+| `adb shell input keyevent KEYCODE_HOME` | 直接注入 Home | **正常**（InkBoard 能回到前台） |
+
+其它旁证（加固判断，非唯一原因）：
+
+- `OverviewProxyService`：`quickStepIntent=…pkg=com.android.launcher3` 且 **`quickStepIntentResolved=false`**（机内 **没有** `com.android.launcher3` / QuickStep）
+- 预装桌面是 `com.yunsizhixue.eink.launcher`，**无** `QUICKSTEP_SERVICE`
+- `dumpsys activity recents` 里 `mRecentsComponent=null`；logcat 偶发 `TaskPersister: File error accessing recents directory`
+
+结论：这是 **厂商 SystemUI / 导航实现缺陷**（底栏不可点 + 无 QuickStep），**不是** InkBoard 设置，也不是「默认主屏幕」选错。  
+应用层无法用普通 API 改写 `NavigationBar0` 的 touchable region；可行缓解：
+
+1. 用物理键 / 应用内返回桌面入口 / `adb shell input keyevent KEYCODE_HOME`  
+2. 第三方「虚拟 Home 键」悬浮球（若可接受）  
+3. 等固件修复 SystemUI，或 root 后改 SystemUI（超出日常调优范围）
+
+切换三键时本机还曾出现导航条 `frame` 落在屏幕外 / `h=0`，三键 Home 触摸同样不可靠；以 `dumpsys input` 的 `touchableRegion` 为准。
 
 ---
 
