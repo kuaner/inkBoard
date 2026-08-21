@@ -137,10 +137,20 @@ enum class EpdRefreshPreset(
 
     companion object {
         const val MIN_FREQUENCY = 0
-        const val MAX_FREQUENCY = 100
+        /**
+         * Upper bound for Provider / `persist.vendor.fullmode_cnt`.
+         * SystemUI writes the value as-is; ActivityStack only substitutes when
+         * negative, using `persist.yitoa.app.settings.def_fullmode_cnt` (default 500).
+         * HWC passes atoi(property) to EBC ioctl with no userspace clamp — so 500
+         * is a safe app ceiling aligned with the vendor fallback, not an InkBoard guess.
+         */
+        const val MAX_FREQUENCY = 500
 
-        /** Common thresholds offered as one-tap chips (unit: partial updates). */
-        val FREQUENCY_CHOICES = listOf(10, 20, 30, 50, 70, 90)
+        /**
+         * One-tap thresholds (partial updates → 1 full frame).
+         * Sparse on purpose: values ≪100 full-refresh too often on this panel.
+         */
+        val FREQUENCY_CHOICES = listOf(50, 100, 200, 300, 500)
 
         fun fromProfile(profile: EpdProfile): EpdRefreshPreset? =
             entries.firstOrNull { it.matches(profile) }
@@ -301,7 +311,7 @@ class EpdSettingsRepository(
         val mode = readEinkMode()
         val frequency = readProperty("persist.vendor.fullmode_cnt", "20")
             .toIntOrNull()
-            ?.coerceIn(0, 100)
+            ?.coerceIn(EpdRefreshPreset.MIN_FREQUENCY, EpdRefreshPreset.MAX_FREQUENCY)
             ?: 20
         return EpdProfile(
             packageName = SYSTEM_CONTROL_PACKAGE,
@@ -366,7 +376,10 @@ class EpdSettingsRepository(
         put(COLUMN_DPI_ENABLED, dpiEnabled.asInt())
         put(COLUMN_REFRESH_ENABLED, refreshEnabled.asInt())
         put(COLUMN_REFRESH_MODE, refreshMode.value)
-        put(COLUMN_REFRESH_FREQUENCY, refreshFrequency.coerceIn(0, 100))
+        put(
+            COLUMN_REFRESH_FREQUENCY,
+            refreshFrequency.coerceIn(EpdRefreshPreset.MIN_FREQUENCY, EpdRefreshPreset.MAX_FREQUENCY)
+        )
         put(COLUMN_CONTRAST_ENABLED, contrastEnabled.asInt())
         put(COLUMN_CONTRAST, contrast.coerceIn(0, 80))
         // app_anim_filter is intentionally omitted: the vendor code reads it
@@ -385,7 +398,13 @@ class EpdSettingsRepository(
         refreshEnabled = int(COLUMN_REFRESH_ENABLED, fallback.refreshEnabled.asInt()) == 1,
         refreshMode = EpdRefreshMode.fromValue(int(COLUMN_REFRESH_MODE, fallback.refreshMode.value)),
         refreshFrequency = int(COLUMN_REFRESH_FREQUENCY, fallback.refreshFrequency)
-            .let { if (it < 0) fallback.refreshFrequency else it.coerceIn(0, 100) },
+            .let {
+                if (it < 0) {
+                    fallback.refreshFrequency
+                } else {
+                    it.coerceIn(EpdRefreshPreset.MIN_FREQUENCY, EpdRefreshPreset.MAX_FREQUENCY)
+                }
+            },
         contrastEnabled = int(COLUMN_CONTRAST_ENABLED, fallback.contrastEnabled.asInt()) == 1,
         contrast = int(COLUMN_CONTRAST, fallback.contrast).coerceIn(0, 80),
         bleachEnabled = int(COLUMN_BLEACH_ENABLED, fallback.bleachEnabled.asInt()) == 1,
