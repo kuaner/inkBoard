@@ -1,14 +1,14 @@
 # 云思智学 S11A / EB1004P 调优
 
-最后更新：2026-08-07
+最后更新：2026-09-11
 
-本文记录 **设备级** 操作：开 ADB、手势导航、刷机 / Loader、提取和修改 `vendor`、修复 U-Boot 读取限制、提取 `boot.img` 并 root、修改待机与开关机画面、改 logo 分区。
+本文记录 **设备级** 操作：开 ADB、手势导航、刷机 / Loader、提取和修改 `vendor`、修复 U-Boot 读取限制、提取 `boot.img` 并 root、修改待机与开关机画面、改 logo 分区、离线充电拔电关机图。
 
 与 InkBoard **屏幕刷新波形 / EPD Provider** 无关的内容放这里。
 
 | 文档 | 管什么 |
 |------|--------|
-| **本文** | 刷机、Loader、`vendor` 提取/修改/刷回、U-Boot 读取修复、`boot.img` / root、standby / poweroff 图、logo 分区、ADB / 手势 |
+| **本文** | 刷机、Loader、`vendor` 提取/修改/刷回、U-Boot 读取修复、`boot.img` / root、standby / poweroff 图、离线充电 `/res/images/charger` 图、logo 分区、ADB / 手势 |
 | [EPD_S11A.md](EPD_S11A.md) | 刷新模式、SystemUI EPD Provider、`persist.modify.eink.mode` |
 
 验证机：云思智学 **S11A**（内部代号 **EB1004P**）、RK3566、Android 11、物理分辨率 1404×1872。
@@ -175,22 +175,89 @@ adb shell dumpsys window windows | grep -A25 "NavigationBar0" | grep -E 'touchab
 
 ## 锁屏 / 待机 / 关机画面
 
-固件从以下路径读图（本次实测）：
+固件从以下路径读图（本次实测）。**不要把所有「关机」都当成 `/vendor/media`**：关机键走 vendor，关机后插电再拔走的是 system 上的 charger 图。
 
-| 画面 | 路径 | 格式说明 |
-|------|------|----------|
-| 锁屏 / 待机 | `/vendor/media/standby.png` | `1872×1404` **8-bit** 灰度 PNG |
-| 充电待机 | `/vendor/media/standby_charge.png` | 同上 |
-| 低电量待机 | `/vendor/media/standby_lowpower.png` | 同上 |
-| 关机 | `/vendor/media/poweroff.png` | `1872×1404` RGBA PNG |
-| 关机（无电源提示） | `/vendor/media/poweroff_nopower.png` | 同上 |
+| 画面 | 路径 | 分区 | 格式说明 |
+|------|------|------|----------|
+| 锁屏 / 待机 | `/vendor/media/standby.png` | `vendor` | `1872×1404` **8-bit** 灰度 PNG，横向 |
+| 充电待机 | `/vendor/media/standby_charge.png` | `vendor` | 同上 |
+| 低电量待机 | `/vendor/media/standby_lowpower.png` | `vendor` | 同上 |
+| 关机（电源键关机） | `/vendor/media/poweroff.png` | `vendor` | `1872×1404` RGBA PNG，横向 |
+| 关机（无电源提示） | `/vendor/media/poweroff_nopower.png` | `vendor` | 同上 |
+| **离线充电拔电 / 已关机** | **`/res/images/charger/battery_poweroff.png`** | **`system`** | **`1404×1872` RGB PNG，竖屏** |
+| 离线充电中 | `/res/images/charger/battery_charging.png` | `system` | 同上 |
+| 离线充电失败 | `/res/images/charger/battery_fail.png` | `system` | 小图，非全屏 |
+| 电量刻度 / 字体 | `/res/images/charger/battery_scale.png`、`font1.png` | `system` | charger 叠加用电量数字 |
+
+### 关键遗漏：离线充电拔电不是 vendor
+
+关机后插 USB 会进 `/system/bin/charger`（healthd charger 模式）。拔掉电源时显示的「云思智学 / 已关机」**不是** `/vendor/media/poweroff.png`，也不是 `logo` 分区、不是 `/odm/media/bootanimation.zip`，更不在 recovery / apk 里。
+
+实测路径：
+
+```text
+/res/images/charger/battery_poweroff.png
+```
+
+本机是 **system-as-root**：`/` 就是 `system` 逻辑分区（`/dev/block/dm-0`），所以 `/res/...` 在 **system** 镜像根目录，不在 `/system/res`。`find /system -name '*.png'` 找不到它。
+
+charger 二进制会读：
+
+```text
+/res/images/charger/battery_poweroff
+/res/images/charger/battery_charging
+/res/images/charger/battery_fail
+/res/images/charger/battery_scale
+/res/images/charger/font1
+```
+
+同目录原厂全屏图是竖屏 `1404×1872` RGB（和 vendor 的横向 `1872×1404` 不同）。不要把 vendor 待机图原样拷过去。
+
+不要和下面两张搞混：
+
+| 路径 | 实际用途 |
+|------|----------|
+| `/odm/media/bootanimation.zip` → `part0/poweron.png` | 开机动画，文案是「正在开机」，不是「已关机」 |
+| `/vendor/media/poweroff.png` | 系统内电源键关机；改完它，**充电拔电仍显示原版已关机图** |
+
+导出不需要 root（文件世界可读）：
+
+```bash
+adb exec-out cat /res/images/charger/battery_poweroff.png > battery_poweroff.png
+adb exec-out cat /res/images/charger/battery_charging.png > battery_charging.png
+```
+
+### 有 root 能不能直接改这张图？
+
+能 **读**，也能尝试 **remount 后写**，但本机 **不能指望 `cp` 成功**。
+
+```bash
+adb shell su -c 'id'                         # 期望 uid=0
+adb shell su -c 'mount -o remount,rw /'
+adb shell su -c 'ls -l /res/images/charger/'
+# 仅当新图不大于旧文件、或分区仍有空闲块时才可能：
+# adb push battery_poweroff.png /data/local/tmp/
+# adb shell su -c 'cp /data/local/tmp/battery_poweroff.png /res/images/charger/battery_poweroff.png'
+```
+
+现场限制（S11A / 2026-09）：
+
+- `system` 只读挂载，必须先 `mount -o remount,rw /`
+- `df /` 已是 **100% 满、Available=0**，和 `/vendor` 一样
+- 原厂 `battery_poweroff.png` 约 42 KiB；稍大的替换图会 `No space left on device`
+- 改完还要处理 SELinux（`u:object_r:system_file:s0` 一类），写坏 charger 资源会导致离线充电白屏
+
+因此：**有 root ≠ 可以直接覆盖。** 小图、同大小原位覆盖才有机会在机内完成；稳妥做法仍是抽 **整包 `system`（约 1.13 GiB）** → `debugfs` 离线替换 → Loader 按 `SYSTEM_LBA=1933312` / `SYSTEM_SECTORS=2323832` 刷回并整段 `cmp`。不要用 `wlx system`（GPT 里没有这个物理分区名）。
+
+Magisk 若已在跑，也可以做 **systemless overlay**（`$MODPATH/res/images/charger/battery_poweroff.png`），避免动 1.1 GiB 的 system 镜像；这和「改 vendor 不要走模块」是另一条路径，按你是否接受 Magisk 模块决定。
 
 ### 制作注意
 
-- 设备存储方向是 **横向** `1872×1404`。竖屏源图需先转到该方向再导出；按竖屏原图直接写入容易 **左右镜像**。
+- **vendor 待机/关机图** 存储方向是 **横向** `1872×1404`。竖屏源图需先转到该方向再导出；按竖屏原图直接写入容易 **左右镜像**。方向不对时再整体旋转 180° 试一次。
+- **charger 已关机图** 是 **竖屏** `1404×1872`，按竖屏看到的效果排版即可。
 - 三张待机图可统一成同一张内容（本机曾这样做）。
 - 待机图保留 **8-bit 灰度**，不需要降为 1-bit；这样能保留源图的灰度细节，最终墨色仍由设备的 EPD/HWC 灰度处理决定。
-- 本机 `/vendor` 常已满，**不能**简单 `cp` 覆盖大文件；需有可用写入手段（root 挂载、临时文件再替换等），写完务必回读校验。
+- 本机 `/vendor` 和 `/`（system）常已满，**不能**简单 `cp` 覆盖大文件；需有可用写入手段（root 挂载且空间足够、或离线改镜像再刷回），写完务必回读校验。
 
 ### 导出（需 root）
 
@@ -712,7 +779,7 @@ cmp "$BACKUP" /tmp/vendor.rollback.readback.img
 
 ## 修改启动图前：刷入已经准备好的 `boot`
 
-锁屏、待机、充电、低电量和关机画面都在系统启动后由 `/vendor/media` 等位置读取。要直接修改这些文件，先让 Android 获得 root；本项目已经准备好当前设备对应的原版 `boot` 和 Magisk 补丁版 `boot`。
+锁屏、待机、充电待机、低电量和 **电源键关机** 由 `/vendor/media` 读取。关机后插电再拔掉看到的「已关机」由 **system** 上的 `/res/images/charger/battery_poweroff.png` 读取，改 vendor 不会动它。要在运行中的 Android 里试写这些路径，先获得 root；本项目已经准备好当前设备对应的原版 `boot` 和 Magisk 补丁版 `boot`。有 root 仍可能因为分区已满而无法 `cp`，见上文「有 root 能不能直接改这张图」。
 
 在仓库根目录执行：
 
@@ -759,7 +826,7 @@ root 成功后，再按本文的 `/vendor/media` 路径替换启动相关图片�
 
 | 操作 | 是否必须装 InkBoard |
 |------|---------------------|
-| 开 ADB / 手势 / 换待机图 / logo / Loader | **否**，纯设备侧 |
+| 开 ADB / 手势 / 换待机图 / 离线充电已关机图 / logo / Loader | **否**，纯设备侧 |
 | SYSTEM EPD / 每应用 EPD UI | 是，且需 `persist.modify.eink.mode=true` |
 
 InkBoard 只消费系统 EPD Provider；不负责改 `/vendor/media` 或 `logo` 分区。
