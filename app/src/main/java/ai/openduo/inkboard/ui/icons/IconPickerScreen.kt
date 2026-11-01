@@ -104,6 +104,7 @@ internal fun IconPicker(
     slot: Int,
     onCategory: (KoboyoIconCategory) -> Unit,
     onPage: (Int) -> Unit,
+    onSearch: (String) -> Unit,
     onSelectIcon: (KoboyoIcon) -> Unit,
     onBack: () -> Unit,
     modifier: Modifier = Modifier
@@ -201,6 +202,7 @@ internal fun IconPicker(
                     picker = picker,
                     onSelectIcon = onSelectIcon,
                     onPage = onPage,
+                    onSearch = onSearch,
                     modifier = Modifier
                         .weight(0.76f)
                         .fillMaxHeight()
@@ -236,6 +238,7 @@ internal fun IconPicker(
                     picker = picker,
                     onSelectIcon = onSelectIcon,
                     onPage = onPage,
+                    onSearch = onSearch,
                     modifier = Modifier.weight(1f)
                 )
             }
@@ -373,8 +376,10 @@ private fun IconResultsPane(
     picker: ai.openduo.inkboard.data.IconPickerState,
     onSelectIcon: (KoboyoIcon) -> Unit,
     onPage: (Int) -> Unit,
+    onSearch: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    var query by rememberSaveable { mutableStateOf(picker.query) }
     Column(modifier = modifier) {
         Row(
             modifier = Modifier
@@ -384,7 +389,7 @@ private fun IconResultsPane(
         ) {
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = picker.category.key.uppercase(Locale.ROOT),
+                    text = if (picker.query.isNotBlank()) "搜索 · ${picker.query}" else picker.category.key.uppercase(Locale.ROOT),
                     color = InkBlack,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Black,
@@ -392,6 +397,53 @@ private fun IconResultsPane(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
+            }
+            Box(
+                modifier = Modifier
+                    .weight(1.2f)
+                    .height(42.dp)
+                    .border(1.5.dp, InkBlack)
+                    .padding(horizontal = 10.dp),
+                contentAlignment = Alignment.CenterStart
+            ) {
+                if (query.isEmpty()) {
+                    Text(
+                        text = "按文件名搜索",
+                        color = InkDark,
+                        fontSize = 14.sp
+                    )
+                }
+                BasicTextField(
+                    value = query,
+                    onValueChange = {
+                        query = it.take(40)
+                        onSearch(query)
+                    },
+                    singleLine = true,
+                    textStyle = TextStyle(
+                        color = InkBlack,
+                        fontSize = 15.sp,
+                        fontWeight = FontWeight.Bold
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(end = if (query.isNotEmpty()) 32.dp else 0.dp)
+                )
+                if (query.isNotEmpty()) {
+                    Text(
+                        text = "✕",
+                        color = InkBlack,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Black,
+                        modifier = Modifier
+                            .align(Alignment.CenterEnd)
+                            .inkClickable({
+                                query = ""
+                                onSearch("")
+                            })
+                            .padding(horizontal = 8.dp, vertical = 6.dp)
+                    )
+                }
             }
             if (picker.error != null) {
                 HeaderLink(text = "RETRY", onClick = { onPage(picker.page) })

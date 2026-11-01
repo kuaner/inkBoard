@@ -302,6 +302,7 @@ class LauncherViewModel(application: Application) : AndroidViewModel(application
         val slotCount = prefs.homeSlotCount.first()
         val keys = prefs.slotKeys.first().take(slotCount)
         val iconPaths = prefs.slotIconPaths.first().take(slotCount)
+        val labels = prefs.slotLabels.first().take(slotCount)
         val motto = prefs.motto.first()
         val needed = keys.filterNotNull().filter { appsByKey?.containsKey(it) != true }
         val resolved = if (needed.isEmpty()) {
@@ -312,7 +313,10 @@ class LauncherViewModel(application: Application) : AndroidViewModel(application
         val slots = keys.mapIndexed { index, key ->
             key?.let { packageKey ->
                 val base = appsByKey?.get(packageKey) ?: resolved[packageKey]
-                base?.copy(customIconPath = iconPaths.getOrNull(index))
+                base?.copy(
+                    customIconPath = iconPaths.getOrNull(index),
+                    label = labels.getOrNull(index) ?: base.label
+                )
             }
         }
         // Pad to slotCount if storage was shorter (should not happen with MAX keys).
@@ -423,6 +427,32 @@ class LauncherViewModel(application: Application) : AndroidViewModel(application
             // Also ensure it exists in the drawer catalog.
             if (appsFlow.value.none { it.key == appInfo.key }) {
                 appsFlow.value = appsFlow.value + appInfo
+            }
+        }
+    }
+
+    fun setSlotLabel(index: Int, label: String) {
+        viewModelScope.launch {
+            prefs.setSlotLabel(index, label)
+            publishResolvedHomeSlots(appsByKey = appsFlow.value.associateBy { it.key })
+        }
+    }
+
+    fun searchIcons(query: String, page: Int) {
+        val q = query.trim()
+        if (q.isEmpty()) {
+            loadIconPage(iconPickerFlow.value.category, 0)
+            return
+        }
+        val requestGeneration = ++iconLoadGeneration
+        viewModelScope.launch {
+            // Debounce typing so the e-ink grid is not redrawn on every keystroke.
+            if (page == 0) delay(250)
+            if (requestGeneration != iconLoadGeneration) return@launch
+            val loaded = runCatching { iconRepo.searchPage(q, page) }
+            if (requestGeneration != iconLoadGeneration) return@launch
+            iconPickerFlow.value = loaded.getOrElse {
+                iconPickerFlow.value.copy(loading = false, error = "无法加载图标", query = q)
             }
         }
     }

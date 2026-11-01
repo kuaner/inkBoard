@@ -59,6 +59,7 @@ class PreferencesRepository(private val context: Context) {
 
         fun slotKey(index: Int) = stringPreferencesKey("slot_$index")
         fun slotIconKey(index: Int) = stringPreferencesKey("slot_icon_$index")
+        fun slotLabelKey(index: Int) = stringPreferencesKey("slot_label_$index")
 
         fun normalizeSlotCount(raw: Int?): Int {
             if (raw == null) return DEFAULT_SLOT_COUNT
@@ -125,6 +126,20 @@ class PreferencesRepository(private val context: Context) {
         }
     }
 
+    val slotLabels: Flow<List<String?>> = context.dataStore.data.map { prefs ->
+        (0 until MAX_SLOT_COUNT).map { i ->
+            prefs[slotLabelKey(i)]?.takeIf { it.isNotBlank() }
+        }
+    }
+
+    suspend fun setSlotLabel(index: Int, label: String?) {
+        if (index !in 0 until MAX_SLOT_COUNT) return
+        context.dataStore.edit { prefs ->
+            val value = label?.trim().orEmpty()
+            if (value.isEmpty()) prefs.remove(slotLabelKey(index)) else prefs[slotLabelKey(index)] = value
+        }
+    }
+
     val motto: Flow<String> = context.dataStore.data.map { prefs ->
         val stored = prefs[MOTTO]?.trim().orEmpty()
         when {
@@ -138,6 +153,7 @@ class PreferencesRepository(private val context: Context) {
         if (index !in 0 until MAX_SLOT_COUNT) return
         context.dataStore.edit { prefs ->
             prefs.remove(slotIconKey(index))
+            prefs.remove(slotLabelKey(index))
             if (appKey.isNullOrBlank()) {
                 prefs.remove(slotKey(index))
             } else {

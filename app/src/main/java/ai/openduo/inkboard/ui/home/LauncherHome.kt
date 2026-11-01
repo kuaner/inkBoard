@@ -49,6 +49,7 @@ fun LauncherHome(
     var sender by rememberSaveable { mutableStateOf(false) }
     var mottoEditor by rememberSaveable { mutableStateOf(false) }
     var iconPicker by rememberSaveable { mutableStateOf(false) }
+    var renameEditor by rememberSaveable { mutableStateOf(false) }
     var editingSlot by rememberSaveable { mutableIntStateOf(0) }
     var drawerPage by rememberSaveable { mutableIntStateOf(0) }
     var launcherPage by rememberSaveable { mutableIntStateOf(0) }
@@ -209,11 +210,12 @@ fun LauncherHome(
 
     BackHandler(
         enabled = sender || showEpd || appLauncher || shortcutEditor ||
-            controls || mottoEditor || iconPicker
+            controls || mottoEditor || iconPicker || renameEditor
     ) {
         when {
             sender -> closeSender()
             showEpd -> closeEpd()
+            renameEditor -> renameEditor = false
             iconPicker -> iconPicker = false
             mottoEditor -> mottoEditor = false
             shortcutEditor -> shortcutEditor = false
@@ -251,11 +253,32 @@ fun LauncherHome(
             modifier = modifier
         )
 
+        renameEditor -> RenameEditor(
+            slot = editingSlot,
+            originalLabel = state.slots.getOrNull(editingSlot)?.let { slotApp ->
+                state.allApps.firstOrNull { it.key == slotApp.key }?.label ?: slotApp.label
+            }.orEmpty(),
+            initial = state.slots.getOrNull(editingSlot)?.label.orEmpty(),
+            onSave = { name ->
+                actions.onSetSlotLabel(editingSlot, name)
+                renameEditor = false
+            },
+            onBack = { renameEditor = false },
+            modifier = modifier
+        )
+
         iconPicker -> IconPicker(
             state = state,
             slot = editingSlot,
             onCategory = { category -> actions.onLoadIconPage(category, 0) },
-            onPage = { page -> actions.onLoadIconPage(state.iconPicker.category, page) },
+            onPage = { page ->
+                if (state.iconPicker.query.isNotBlank()) {
+                    actions.onSearchIcons(state.iconPicker.query, page)
+                } else {
+                    actions.onLoadIconPage(state.iconPicker.category, page)
+                }
+            },
+            onSearch = { q -> actions.onSearchIcons(q, 0) },
             onSelectIcon = { icon ->
                 actions.onSetSlotIcon(editingSlot, icon)
                 iconPicker = false
@@ -297,6 +320,7 @@ fun LauncherHome(
             },
             onAddShortcut = { app -> actions.onAssignSlot(editingSlot, app) },
             onClearSlot = { actions.onClearSlot(editingSlot) },
+            onRenameSlot = { renameEditor = true },
             onOpenIconPicker = {
                 iconPicker = true
                 actions.onLoadIconPage(state.iconPicker.category, 0)

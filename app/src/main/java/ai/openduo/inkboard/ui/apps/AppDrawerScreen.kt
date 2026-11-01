@@ -58,6 +58,7 @@ internal fun AppDrawer(
     onAddShortcut: (AppInfo) -> Unit,
     onClearSlot: () -> Unit,
     onOpenIconPicker: () -> Unit,
+    onRenameSlot: () -> Unit,
     page: Int,
     onPageChange: (Int) -> Unit,
     onBack: () -> Unit,
@@ -93,6 +94,7 @@ internal fun AppDrawer(
                     selectedSlot = selectedSlot,
                     onSelectSlot = onSelectSlot,
                     onOpenIconPicker = onOpenIconPicker,
+            onRenameSlot = onRenameSlot,
                     onClearSlot = onClearSlot,
                     modifier = Modifier.weight(1f)
                 )
@@ -119,6 +121,7 @@ internal fun AppDrawer(
                     selectedSlot = selectedSlot,
                     onSelectSlot = onSelectSlot,
                     onOpenIconPicker = onOpenIconPicker,
+                    onRenameSlot = onRenameSlot,
                     onClearSlot = onClearSlot,
                     modifier = Modifier.weight(1f)
                 )
@@ -148,6 +151,7 @@ private fun ShortcutPanel(
     selectedSlot: Int,
     onSelectSlot: (Int) -> Unit,
     onOpenIconPicker: () -> Unit,
+    onRenameSlot: () -> Unit,
     onClearSlot: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -215,6 +219,7 @@ private fun ShortcutPanel(
         ShortcutActionBar(
             app = selectedApp,
             onOpenIconPicker = onOpenIconPicker,
+                    onRenameSlot = onRenameSlot,
             onClearSlot = onClearSlot
         )
     }
@@ -384,6 +389,7 @@ private fun ShortcutSlotTile(
 private fun ShortcutActionBar(
     app: AppInfo?,
     onOpenIconPicker: () -> Unit,
+    onRenameSlot: () -> Unit,
     onClearSlot: () -> Unit
 ) {
     Row(
@@ -413,6 +419,8 @@ private fun ShortcutActionBar(
                 modifier = Modifier.weight(1f)
             )
             Spacer(Modifier.width(10.dp))
+            ShortcutActionButton(text = "重命名", onClick = onRenameSlot)
+            Spacer(Modifier.width(6.dp))
             ShortcutActionButton(text = "图标", onClick = onOpenIconPicker)
             Spacer(Modifier.width(6.dp))
             ShortcutActionButton(text = "移除", onClick = onClearSlot)
