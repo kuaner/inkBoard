@@ -139,3 +139,50 @@ internal fun MottoEditor(
         Spacer(Modifier.weight(1f))
     }
 }
+
+@Composable
+internal fun RenameEditor(
+    slot: Int,
+    originalLabel: String,
+    initial: String,
+    onSave: (String) -> Unit,
+    onBack: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    var draft by rememberSaveable { mutableStateOf(initial) }
+
+    PaperFrame(modifier) { wide ->
+        PageHeader(
+            title = "RENAME.",
+            meta = "SLOT 0${slot + 1}",
+            actionLabel = "SAVE",
+            onBack = onBack,
+            onAction = { onSave(draft) }
+        )
+        Spacer(Modifier.height(if (wide) 34.dp else 22.dp))
+        Text(
+            text = "显示名称 · 留空恢复原名「$originalLabel」",
+            color = InkBlack,
+            fontSize = 13.sp,
+            fontWeight = FontWeight.Bold
+        )
+        Spacer(Modifier.height(14.dp))
+        Hairline(thick = true)
+        BasicTextField(
+            value = draft,
+            onValueChange = { draft = it.take(24) },
+            singleLine = true,
+            textStyle = TextStyle(
+                color = InkBlack,
+                fontSize = 34.sp,
+                lineHeight = 42.sp,
+                fontWeight = FontWeight.Black
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 22.dp)
+        )
+        Hairline(thick = true)
+        Spacer(Modifier.weight(1f))
+    }
+}

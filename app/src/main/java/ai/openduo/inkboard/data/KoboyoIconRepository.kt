@@ -37,7 +37,9 @@ data class IconPickerState(
     val pageCount: Int = 1,
     val icons: List<KoboyoIcon> = emptyList(),
     val loading: Boolean = false,
-    val error: String? = null
+    val error: String? = null,
+    /** Non-empty while showing file-name search results. */
+    val query: String = ""
 )
 
 /**
@@ -139,6 +141,32 @@ class KoboyoIconRepository(private val context: Context) {
             icons = pageIcons
         )
     }
+
+    private var allSlugs: List<String>? = null
+
+    /** Case-insensitive file-name search across every bundled icon. */
+    suspend fun searchPage(query: String, requestedPage: Int): IconPickerState =
+        withContext(Dispatchers.IO) {
+            val slugs = allSlugs ?: (context.assets.list(SVG_DIR) ?: emptyArray())
+                .filter { it.endsWith(".svg") }
+                .map { it.removeSuffix(".svg") }
+                .sorted()
+                .also { allSlugs = it }
+            val q = query.trim().lowercase()
+            val hits = slugs.filter { it.lowercase().contains(q) }
+            val pageCount = maxOf(1, (hits.size + PAGE_SIZE - 1) / PAGE_SIZE)
+            val page = requestedPage.coerceIn(0, pageCount - 1)
+            val icons = hits.drop(page * PAGE_SIZE).take(PAGE_SIZE).map {
+                KoboyoIcon(slug = it, name = it, localPath = "$SVG_DIR/$it.svg")
+            }
+            IconPickerState(
+                category = IconPickerState().category,
+                page = page,
+                pageCount = pageCount,
+                icons = icons,
+                query = query
+            )
+        }
 
     /** Asset path for a bundled SVG, e.g. `koboyo/svg/fox.svg`. No I/O download. */
     fun resolveIconPath(icon: KoboyoIcon): String? {

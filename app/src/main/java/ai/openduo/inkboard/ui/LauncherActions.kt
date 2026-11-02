@@ -17,6 +17,8 @@ class LauncherActions(
     val onSetHomeSlotCount: (Int) -> Unit,
     val onLoadIconPage: (KoboyoIconCategory, Int) -> Unit,
     val onSetSlotIcon: (Int, KoboyoIcon) -> Unit,
+    val onSetSlotLabel: (Int, String) -> Unit,
+    val onSearchIcons: (String, Int) -> Unit,
     val onLoadEpdProfile: (String) -> Unit,
     val onSaveEpdProfile: (EpdProfile) -> Unit,
     val onApplyInkBoardEpdProfile: (EpdProfile) -> Unit,

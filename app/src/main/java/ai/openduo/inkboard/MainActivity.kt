@@ -48,6 +48,8 @@ class MainActivity : ComponentActivity() {
                             onSetHomeSlotCount = viewModel::setHomeSlotCount,
                             onLoadIconPage = viewModel::loadIconPage,
                             onSetSlotIcon = viewModel::setSlotIcon,
+                            onSetSlotLabel = viewModel::setSlotLabel,
+                            onSearchIcons = viewModel::searchIcons,
                             onLoadEpdProfile = viewModel::loadEpdProfile,
                             onSaveEpdProfile = viewModel::saveEpdProfile,
                             onApplyInkBoardEpdProfile = viewModel::applyInkBoardEpdProfile,
